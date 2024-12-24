@@ -1,0 +1,1 @@
+clear.bat & DEL *.pdf

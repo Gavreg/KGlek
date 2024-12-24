@@ -1,0 +1,91 @@
+\documentclass[tikz]{standalone}
+
+\usepackage{tikz}
+\usepackage{tikz-3dplot}
+\usepackage{amsmath} %математические формулы
+\usepackage[e]{esvect}  %Красивая стрелочка вектора
+
+
+\usepackage{polyglossia}
+\setdefaultlanguage{russian}
+\setotherlanguage{english}
+%\setkeys{russian}{babelshorthands=true}
+\usepackage{fontspec}
+\setmainfont{Times New Roman} [Script=Cyrillic, Mapping=tex-text,]
+\setsansfont{Arial} [Script=Cyrillic, Mapping=tex-text,]
+\setmonofont{Courier New} [Script=Cyrillic, Mapping=tex-text,]
+
+\usetikzlibrary{calc}
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{angles}
+
+
+
+\include{../tikzcom.tex}
+
+\begin{document}
+	
+    
+    \tdplotsetmaincoords{90}{0}
+     \begin{tikzpicture}[ scale=1, tdplot_main_coords]
+    	
+    	
+    	
+    	
+    	\VARPOINT{O}{0}{0}{0}		
+    	
+    	
+    	\VARPOINT{i}{1}{0}{0}
+    	\VARPOINT{j}{0}{1}{0}
+    	\VARPOINT{k}{0}{0}{1}
+    	
+    	
+    	
+    	
+    	\draw [-Latex, red] (-2,0,0) -- ($2*(i)$) node [above left] {$x_\text э$};
+    	%\draw [-Latex, green] (0,0,0) -- ($3*(j)$) node [right] {$y$};	
+    	\draw [-Latex, green] (0,0,-2) -- ($2*(k)$) node [below right] {$y_\text э$};
+    	
+    	\draw[tdplot_screen_coords, blue] circle  (0.1) [fill=white]; 
+    	\draw[tdplot_screen_coords, blue] circle  (0.5pt) [fill=blue]; 
+    	
+    	
+    	
+    	\VARPOINT{OR}{0.5}{1.5}{1}
+    	
+    	\renewcommand{\dotsize}{0.3pt}
+    	
+    	%\PROJECTILELINES{OR}{dashed, ultra thin}{black} 			
+    	
+    	\tdplotsetrotatedcoordsorigin{(OR)}
+    	
+    	\tdplotsetrotatedcoords{10}{30}{10}
+    	
+    	%\draw [-Latex, red, tdplot_rotated_coords] (0,0,0) -- (1,0,0) node [right] {$x^M$};
+    	%\draw [-Latex, green, tdplot_rotated_coords] (0,0,0) -- (0,1,0) node [above] {$y^M$};	
+    	%\draw [-Latex, blue, tdplot_rotated_coords] (0,0,0) -- (0,0,1) node [below left] {$z^M$};
+    	
+    	
+    	\draw [tdplot_rotated_coords] (0.3, 0.3, 0) -- (0.3, -0.3, 0)  -- (-0.3, -0.3, 0)  --(-0.3, 0.3, 0)  --cycle;    
+    	\draw [tdplot_rotated_coords]	(0.3, 0.3, 0 ) -- (0,0,0.5);
+    	\draw [tdplot_rotated_coords]	(0.3, -0.3, 0 ) -- (0,0,0.5);
+    	\draw [tdplot_rotated_coords]	(-0.3, -0.3, 0 ) -- (0,0,0.5);
+    	\draw [tdplot_rotated_coords]	(-0.3, 0.3, 0 ) -- (0,0,0.5);
+    	
+    	
+     	%\draw (2,0,2) -- (2,0,-2) -- (-2,0,-2) -- (-2,0,2) --cycle;
+    	
+   	
+
+
+   	
+    	
+    \end{tikzpicture} 
+    
+    
+
+
+
+
+	
+\end{document}

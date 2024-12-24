@@ -1,0 +1,11 @@
+\noindent \textbf {\Large Лекция 2~---~Математические основы компьютерной графики}\setcounter {SEC}{0}\par 
+\noindent \hspace {2ex}\hbox {\large \stepcounter {SEC}\theSEC ~ Вектор}\par 
+\noindent \hspace {6ex}\stepcounter {SUB}\theSUB ~ Вектора на плоскости\par 
+\noindent \hspace {6ex}\stepcounter {SUB}\theSUB ~ Вектора в пространстве\par 
+\noindent \hspace {2ex}\hbox {\large \stepcounter {SEC}\theSEC ~ Элементы аналитической геометрии}\par 
+\noindent \hspace {6ex}\stepcounter {SUB}\theSUB ~ Уравнение прямой\par 
+\noindent \hspace {6ex}\stepcounter {SUB}\theSUB ~ Плоскость\par 
+\noindent \hspace {6ex}\stepcounter {SUB}\theSUB ~ Поиск длины проекции\par 
+\noindent \hspace {6ex}\stepcounter {SUB}\theSUB ~ Поиск расстояния до плоскости\par 
+\noindent \hspace {6ex}\stepcounter {SUB}\theSUB ~ Повороты\par 
+\noindent \hspace {6ex}\stepcounter {SUB}\theSUB ~ Принадлежность точки треугольнику\par 

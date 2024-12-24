@@ -1,0 +1,271 @@
+\documentclass[svgnames, tikz]{standalone}
+
+
+\usepackage{tikz}
+\usepackage{tikz-3dplot}
+\usepackage{amsmath} %математические формулы
+\usepackage[e]{esvect}  %Красивая стрелочка вектора
+\usepackage{unicode-math}
+
+
+\usepackage{polyglossia}
+\setdefaultlanguage{russian}
+\setotherlanguage{english}
+%\setkeys{russian}{babelshorthands=true}
+\usepackage{fontspec}
+\setmainfont{Times New Roman} [Script=Cyrillic, Mapping=tex-text,]
+\setsansfont{Arial} [Script=Cyrillic, Mapping=tex-text,]
+\setmonofont{Courier New} [Script=Cyrillic, Mapping=tex-text,]
+
+\usetikzlibrary{calc}
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{angles}
+
+
+
+\include{../tikzcom.tex}
+
+\begin{document}
+	
+    
+\pgfdeclarelayer{background}
+\pgfdeclarelayer{foreground}
+\pgfsetlayers{background,main,foreground}
+
+
+\foreach \frame in {-1,0,1,2,...,8,9}{
+
+ \begin{tikzpicture}[ scale=1.5, remember picture]
+ 	
+	
+	\draw [black!0] (-1.5,-1.9) grid (4.5,1);
+	%\fill[red] circle(3pt);
+	
+	
+	\coordinate (A) at (0,0);
+	\coordinate (B) at ($(A)+(45:1)$);
+	\coordinate (C) at ($(B)+(0:1)$);
+	\coordinate (D) at ($(C)+(-45:1)$);
+	\coordinate (E) at ($(D)+(-90:1)$);
+	\coordinate (F) at ($(E)+(-135:1)$);
+	\coordinate (G) at ($(F)+(-180:1)$);
+	\coordinate (H) at ($(G)+(-225:1)$);
+	
+	\coordinate (P) at (-1,-0.5);
+	\coordinate (Q) at (3, 0.5);
+	
+	\draw (A) -- (B)  -- (C) -- (D) -- (E) -- (F) -- (G) -- (H)-- cycle;
+	\foreach \p in {A,...,H}{
+		%\draw (\p) node {\p};
+	}
+
+	\draw [-Latex] (P) -- (Q);
+	\fill (P) circle(1pt) node [below right] {$A$};
+	\fill (Q) circle(1pt) node [above left] {$B$};
+	
+	%\coordinate (N1) at (intersection of H--A and P--Q);
+	%\draw [-Latex] (N1) -- +(0:1);
+	
+	\ifthenelse{\frame=0}{
+		\fill [red] (P) circle(1.1pt) node[above]{$t_\text{вх}=0$};
+		
+	}{}
+	
+	\ifthenelse{\frame=1}{
+		\coordinate (R) at (intersection of P--Q and C--B);
+		\node[below, blue] at (R) {$t=1.1$};
+		\fill[blue] (R) circle(1pt);
+		
+		\draw[dashed, very thin] (C) -- (R);
+		\draw[dashed, very thin] (Q) -- (R);
+		
+		\draw[very thick, red!40!black] (C) -- (B);
+		
+		
+		\coordinate (XX) at ($(B)!0.5!(C)$);
+		\draw[-Latex]  (XX) -- ($(XX)!1!-90:(C)$) node [left] {$\vv n_1$};
+	}{}
+	
+	\ifthenelse{\frame=1}{
+		\coordinate (R) at (intersection of P--Q and C--B);
+		\fill [red] (P) circle(1.1pt) node[above]{$t_\text{вх}=0$};
+	
+	}{}
+	
+	\ifthenelse{\frame>-1 \AND \frame < 7 }{
+		\fill [blue] (Q) circle(1.1pt) node[below]{$t_\text{вых}=1$};	
+	}{}
+	
+	\ifthenelse{\frame=6}{
+		\coordinate (R) at (intersection of P--Q and E--F);
+		\node[below left, blue] at (R) {$t=1.15$};
+		\fill[blue] (R) circle(1pt);
+	}{}
+	
+	%переезд точки tвых
+	\ifthenelse{\frame=2}{
+		\coordinate (R) at (intersection of P--Q and A--B);
+		\fill [red] (R) circle(1.1pt) node[below right]{$t=0.1$};
+		\fill [red] (P) circle(1.1pt) node[above, rotate=20, xshift=3pt]{$t_\text{вх}=0$};
+		
+		
+		
+		\coordinate (TT) at ($(P)!0.5!(R)$);
+		
+		\draw[-Stealth] (P) .. controls ($(TT)!0.2cm!90:(R)$) .. (R);
+		
+	}{}
+	
+	\ifthenelse{\frame=2}{
+		\coordinate (R) at (intersection of P--Q and A--B);
+		
+		\draw[dashed, very thin] (A) -- (R);
+		\draw[very thick, red!40!black] (A) -- (B);
+				
+		\coordinate (XX) at ($(A)!0.5!(B)$);
+		\draw[-Latex]  (XX) -- ($(XX)!1!-90:(B)$) node [right, midway] {$\vv n_2$};
+	}{}
+	
+	
+	\ifthenelse{\frame=3}{
+		
+		
+		\coordinate (XX) at ($(H)!0.5!(A) - (0,0.2)$);
+		\draw[-Latex]  (XX) -- ($(XX)!1!-90:(A)$) node [below, midway] {$\vv n_3$};
+		\draw[very thick, red!40!black] (H) -- (A);
+	}{}
+	
+	%переезд точки tвх
+	\ifthenelse{\frame=3 }{
+		\coordinate (R) at (intersection of P--Q and A--H);
+		\coordinate (oldR) at (intersection of P--Q and A--B);
+		
+		\fill [red] (R) circle(1.1pt) node[below right]{$t=0.15$};
+		
+		\fill [red] (oldR) circle(1.1pt) node[above, rotate=20]{$t_\text{вх}=0.1$};
+		
+		\coordinate (TT) at ($(oldR)!0.5!(R)$);
+		
+		\draw[-Stealth] (oldR) .. controls ($(TT)!0.15cm!90:(R)$) .. (R);
+	}{}
+	
+	%финальная точка tвх
+	\ifthenelse{\frame>3 }{
+		\coordinate (R) at (intersection of P--Q and A--H);
+		
+		
+		\fill [red] (R) circle(1.1pt) node[below right]{$t_\text{вх}=0.15$};
+
+	}{}
+	
+	\ifthenelse{\frame=4}{
+		\coordinate (R) at (intersection of G--H and P--Q);
+		
+		\draw[dashed, very thin] (H) -- (R);
+		\draw[very thick, red!40!black] (G) -- (H);
+		
+		\coordinate (XX) at ($(H)!0.5!(G)$);
+		\draw[-Latex]  (XX) -- ($(XX)!1!-90:(H)$) node [below right, midway] {$\vv n_4$};
+		
+		\fill [red] (R) circle(1.1pt) node[above]{$t=0.09$};
+	}{}
+	
+	
+	\ifthenelse{\frame=5}{
+		\coordinate (R) at (intersection of F--G and P--Q);
+		
+		\draw[dashed, very thin, ->>>] (G) -- ($(G)!0.25!(R)$) node[text=red, above right] {$t=-2$};
+		\draw[very thick, red!40!black] (F) -- (G);
+		
+		\coordinate (XX) at ($(F)!0.5!(G)$);
+		\draw[-Latex]  (XX) -- ($(XX)!1!-90:(G)$) node [right, midway] {$\vv n_5$};
+	}{}
+	
+	
+	\ifthenelse{\frame=6}{
+		\coordinate (R) at (intersection of E--F and P--Q);
+		
+		\draw[dashed, very thin] (E) -- (R);
+		\draw[dashed, very thin] (Q) -- (R);
+		\draw[very thick, red!40!black] (E) -- (F);
+		
+		\coordinate (XX) at ($(E)!0.5!(F)$);
+		\draw[-Latex]  (XX) -- ($(XX)!1!-90:(F)$) node [left, midway] {$\vv n_6$};
+	}{}
+	
+	\ifthenelse{\frame=7}{
+		\coordinate (R) at (intersection of E--D and P--Q);
+		
+		\draw[dashed, very thin] (D) -- (R);
+		\draw[very thick, red!40!black] (E) -- (D);
+				
+		\coordinate (XX) at ($(E)!0.5!(D)$);
+		\draw[-Latex]  (XX) -- ($(XX)!1!-90:(E)$) node [below] {$\vv n_7$};
+	}{}
+	
+	%переезд точки tвых
+	\ifthenelse{\frame=7 }{
+		\coordinate (R) at (intersection of P--Q and D--E);
+		
+		
+		\fill [blue] (R) circle(1.1pt) node[below right]{$t=0.9$};
+		\fill [blue] (Q) circle(1.1pt) node[right]{$t_\text{вых}=1$};
+		
+		
+		
+		\coordinate (TT) at ($(Q)!0.5!(R)$);
+		
+		\draw[-Stealth] (Q) .. controls ($(TT)!0.15cm!90:(R)$) .. (R);
+	}{}
+	
+	\ifthenelse{\frame=8}{
+		
+		\coordinate (XX) at ($(C)!0.5!(D)$);
+		\draw[-Latex]  (XX) -- ($(XX)!1!-90:(D)$) node [below] {$\vv n_8$};
+		
+		\draw[very thick, red!40!black] (C) -- (D);
+	}{}
+	
+	%переезд точки tвх
+	\ifthenelse{\frame=8 }{
+		\coordinate (R) at (intersection of P--Q and C--D);
+		\coordinate (oldR) at (intersection of P--Q and D--E);
+		
+		\fill [blue] (R) circle(1.1pt) node[above left, xshift=-10pt]{$t=0.85$};
+		
+		
+		
+		\fill [blue] (oldR) circle(1.1pt) node[below right, xshift=0pt]{$t_\text{вых}=0.9$};
+		
+		\coordinate (TT) at ($(oldR)!0.5!(R)$);
+		
+		\draw[-Stealth] (oldR) .. controls ($(TT)!-0.10cm!90:(R)$) .. (R);
+	}{}
+	
+	\ifthenelse{\frame=9 }{
+		\coordinate (R) at (intersection of P--Q and C--D);
+		
+		
+		\fill [blue] (R) circle(1.1pt) node[below right, xshift=-10pt]{$t_\text{вых}=0.85$};
+		
+		
+	}{}
+	
+	
+	
+	
+	
+\end{tikzpicture} 
+
+}
+
+
+
+
+
+    
+   
+
+
+	
+\end{document}

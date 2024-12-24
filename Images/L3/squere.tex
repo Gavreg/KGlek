@@ -1,0 +1,81 @@
+\documentclass[tikz]{standalone}
+
+\usepackage{tikz}
+\usepackage{tikz-3dplot}
+\usepackage{amsmath} %математические формулы
+\usepackage[e]{esvect}  %Красивая стрелочка вектора
+
+
+\usepackage{polyglossia}
+\setdefaultlanguage{russian}
+\setotherlanguage{english}
+%\setkeys{russian}{babelshorthands=true}
+\usepackage{fontspec}
+\setmainfont{Times New Roman} [Script=Cyrillic, Mapping=tex-text,]
+\setsansfont{Arial} [Script=Cyrillic, Mapping=tex-text,]
+\setmonofont{Courier New} [Script=Cyrillic, Mapping=tex-text,]
+
+\usetikzlibrary{calc}
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{angles}
+
+
+
+\include{tikzcom.tex}
+
+\begin{document}
+	
+    
+	\def\frame{0}
+	%\foreach \frame in {0,1,...,1}
+	{
+	\tdplotsetmaincoords{60}{135}
+	\begin{tikzpicture}[scale=1.5, x=0.5cm, y=0.5cm ] %tdplot_main_coords
+		
+		
+	\draw[step=0.25cm,black!10,very thin] (-1,-1) grid (6,4);	
+	
+		
+	\VARPOINT{O}{0}{0}{0};
+	
+	\VARPOINT{A}{0}{0}{0};
+	\VARPOINT{B}{1}{0}{0};
+	\VARPOINT{C}{1}{1}{0};
+	\VARPOINT{D}{0}{1}{0};
+	
+	\draw[-latex, very thin] (0,-1) -- (0,4) node [below right] {$y$};
+	\draw[-latex, , very thin] (-1,0) -- (6,0) node [above left] {$x$};
+		
+	\draw (A) -- (B) --(C) -- (D) -- cycle;
+	
+	\def\a{1.5}
+	\def\b{2}
+	\def\c{3}
+	\def\d{0.5}
+	
+	\MATRIXROW{M}{a}{\a}{\c}{0}{0}
+	\MATRIXROW{M}{b}{\b}{\d}{0}{0}
+	\MATRIXROW{M}{c}{0}{0}{0}{0}
+	\MATRIXROW{M}{d}{0}{0}{0}{1}
+	
+	\foreach \p in {A,B,C,D}{
+		\MATRIXPOINTMULTIPLY{\p}{M}{\p};
+	}
+	
+	\draw[red] (A) -- (B) --(C) -- (D) -- cycle;
+	
+	\node at (1,0) [below] {1};
+	
+	\draw [very thin, dashed] (B) -- (Bx) node [below] {$a$};
+	\draw [very thin, dashed] (B) -- (By) node [left] {$b$};
+	\draw [very thin, dashed] (D) -- (Dx) node [below] {$c$};
+	\draw [very thin, dashed] (D) -- (Dy) node [left] {$d$};
+	\draw [very thin, dashed] (C) -- (Cx) node [below] {$a+c$};
+	\draw [very thin, dashed] (C) -- (Cy) node [left] {$b+d$};
+	
+	
+	
+		
+	\end{tikzpicture}}
+	
+\end{document}

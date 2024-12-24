@@ -1,0 +1,453 @@
+\documentclass[10pt]{beamer}
+
+%\documentclass[10pt, handout]{beamer}
+\setbeameroption{show notes}
+
+%\documentclass[10pt, a4paper]{article}
+%\usepackage{beamerarticle}
+
+\input{preambule.tex}
+
+
+\usepackage{media9}
+
+\graphicspath{{Images/}{Images/\jobname/}}
+
+\date{\today}
+
+
+\renewcommand{\LectionNumber}{13}
+\renewcommand{\LectionTheme}{рациональные кривые и поверхности}
+\title{Лекция \lecdni \\ \LectionTheme}
+\subtitle{Компьютерная графика}
+
+
+
+%\usepackage{standalone}
+
+\setbeamersize
+{
+	text margin left=0.5cm,
+	text margin right=0.5cm
+}
+
+\usepackage{comment}
+
+
+%	\transduration{2}
+%   \transfade
+
+\begin{document}
+ 		 
+\input{template.tex}
+
+\newcommand \abs[1] {\left| #1 \right|}
+
+\everymath{\displaystyle}
+
+    
+\begin{comment}
+\end{comment}
+
+
+    
+    
+    \QRFRAME	
+	
+
+	\frame{\maketitle}
+
+	
+	\begin{frame}\frametitle{План лекции}
+		\tableofcontents
+	\end{frame}
+	
+
+
+
+
+\section{Рациональные кривые}
+\frame {\sectionpage}
+
+
+\begin{frame}
+	\frametitle<1>{Рациональные кривые}
+	\frametitle<2>{Рациональные кривые живут в однородных координатах}
+	
+	\TC{0.55}
+	{
+		\only<2->{\animategraphics[autoplay,loop, nomouse, palindrome]{20}{Images/\jobname/nurbs3d}{0}{99}}
+		
+	}{			
+		\animategraphics[autoplay,loop, nomouse, palindrome]{20}{Images/\jobname/nurbs3d}{100}{199}
+		
+		~
+		
+		\onslide<2->{%
+			$A^w, B^w, C^w$ --- $(wx,wy,w)$.
+			
+			$A, B, C$ --- $(x,y,1)$.
+			
+			$A^w \to A: (wx,wy,w) \to $
+			
+			$\to (x,y,1) \to (x,y)$.				
+			
+			Если $w=0$, то $A^w = (0,0,0)$.
+		}%				
+	}%		
+	
+\end{frame} 
+
+
+
+\begin{frame}\frametitle{Как оно работает?}
+	\fontsize{8pt}{10pt}\selectfont
+	\begin{center}
+			\begin{tabular}{ccc}
+			было в 3D & & стало в 4D \\
+			$\vv P (t)=\sum_{i=0}^{n}\vv B_iN_{i,k}(t)$&  $\Rightarrow$  & $\vv {P^w} (t)=\sum_{i=0}^{n}\vv B^w_iN_{i,k}(t), $ \\
+			
+			$P(t), B_i \rightarrow (x,y,z)$&&$P(t)^w, B_i^w \rightarrow (wx,wy,wz,w)$
+		\end{tabular}
+	\end{center}
+	
+	\pause
+	
+	$\vv B^w_i = \vv B_iw_i$  $\Rightarrow$ $ P (t)=\dfrac{\displaystyle\sum_{i=0}^{n}\left[\vv B_i\rememb{n3}w_iN_{i,k}(t)\rememb{n4}\right]}{\displaystyle\rememb{n1}\sum_{i=0}^{n}\left[\vv w_iN_{i,k}(t)\right]\rememb{n2}}$
+	
+	\pause
+	\tikz[remember picture, overlay]{\draw[red] ($(n1.south west)-(0,2ex)$) rectangle ($(n2.north east)+(0,1.9ex)$);}
+	\tikz[remember picture, overlay]{\draw[red] ($(n3.south west)$) rectangle (n4.north east);}
+	
+	\begin{tikzpicture}[remember picture, overlay]
+		\coordinate (p1) at ($(n1.west)!0.5!(n4.west)+(2cm,0)$);
+		\draw (p1) node[right, red] (r)  {$R_{i,k}(t)$};
+		\draw[red,->] (n2.east) -- (r);
+		\draw[red,->] (n4.east) -- (r);
+	\end{tikzpicture}
+	
+	
+	\begin{center}		
+		\fbox{$\vv P (t)=\sum_{i=0}^{n}\vv B_iR_{i,k}(t)$, \quad $R_{i,k} (t)=\dfrac{w_iN_{i,k}(t)}{\displaystyle\rememb{n1}\sum_{j=0}^{n} w_jN_{j,k}(t)\rememb{n2}}$}
+	\end{center}
+
+	
+	
+\end{frame}
+
+
+\begin{frame}\frametitle{Веса рационального b-сплайна}
+
+	
+	\begin{center}
+		\includegraphics[page=1]{nurbs}		
+		\includegraphics[page=2]{nurbs}
+	\end{center}
+	
+
+	
+	\TC{0.5}
+	{
+		$\vv P (t)=\sum_{i=0}^{n}\vv B_iR_{i,k}(t)$
+		
+		$B={B_0, \dots, B_4}$
+		
+		$x=\{ 0,0,0,1,2,3,3,3\}$ (левый)
+		
+		$x= \{ 0,0,0,0,1,2,2,2,2\}$ (правый)
+	}{
+		{\color{Magenta} $w={1,1,3,1,1}$}
+		
+		{\color{blue} $w={1,1,1,1,1}$}
+		
+		{\color{green} $w={1,1,0.75,1,1}$}
+		
+		{\color{Magenta} $w={1,1,0,1,1}$}
+		
+	}
+	
+\end{frame}
+
+\begin{frame}\frametitle{Весовые функции рационального b-сплайна}
+	
+	\subtitle{3го-порядка}
+	
+	\TC{0.45}
+	{
+		\animategraphics[autoplay,loop, nomouse, palindrome]{15}{Images/\jobname/nurbs_anim1}{0}{99}
+		
+	}{
+		$P (t)=\sum_{i=0}^{4}\vv B_iR_{i,3}(t)$
+		
+		$x=\{ 0,0,0,1,2,3,3,3\}$ 
+		
+		\animategraphics[autoplay,loop, nomouse, palindrome]{15}{Images/\jobname/nurbs_weight_fun_anim1}{0}{99}
+		\begin{minipage}[b]{1cm}
+			{\color{red}$R_{0,3}$}\\
+			{\color{green}$R_{1,3}$}\\
+			{\color{blue}$R_{2,3}$}\\
+			{\color{Orange}$R_{3,3}$}\\
+			{\color{Magenta}$R_{4,3}$}\\
+		\end{minipage}
+
+	}	
+	
+\end{frame}
+
+\begin{frame}\frametitle{Весовые функции рационального b-сплайна}
+	
+	\subtitle{4го-порядка}
+	
+	\TC{0.5}
+	{
+		\animategraphics[autoplay,loop, nomouse, palindrome]{15}{Images/\jobname/nurbs_anim2}{0}{99}
+		
+	}{
+		$P (t)=\sum_{i=0}^{4}\vv B_iR_{i,4}(t)$
+		
+		$x= \{ 0,0,0,0,1,2,2,2,2\}$
+		
+		\animategraphics[autoplay,loop, nomouse, palindrome]{15}{Images/\jobname/nurbs_weight_fun_anim2}{0}{99}
+		\begin{minipage}[b]{1cm}		
+			{\color{red}$R_{0,4}$}\\
+			{\color{green}$R_{1,4}$}\\
+			{\color{blue}$R_{2,4}$}\\
+			{\color{Orange}$R_{3,4}$}\\
+			{\color{Magenta}$R_{4,4}$}\\
+		\end{minipage}
+	}	
+	
+\end{frame}
+
+
+
+\section{Параметрические поверхности}
+\frame {\sectionpage}
+
+\begin{frame}\frametitle{Поверхность Безье}
+	
+	\TC{0.5}
+	{
+		\includegraphics{bsurf.pdf}
+	}{
+		$\VV S(u, v) = \sum_{i=0}^n \sum_{j=0}^m B_{i,n}(u) \; B_{j,m}(v) \; \VV{P}_{ij}$
+	}
+	
+	
+	
+\end{frame}
+
+
+
+\begin{frame}\frametitle{Поверхность на основе b-сплайна}
+	
+	\TC{0.45}
+	{
+		\includegraphics[page=33]{nurbs_surf_order3}
+	}{
+		$\VV S(u,v) = \sum_{i=0}^n \sum_{j=0}^m N_{i,p}(u)N_{j,q}(v)\VV P_{ij}$
+		
+		$U=\{\rememb{n1}0, \dots{}, 0\rememb{n2},\rememb{n3}\dots{},i-p,\dots\rememb{n4}, \rememb{n5}p, \dots ,p  \rememb{n6}\}$
+		
+		\begin{tikzpicture}[overlay, remember picture]
+			
+			
+			\draw[decorate,decoration={brace,amplitude=5pt,mirror,raise=1ex}] (n1) -- (n2) node[below, midway, yshift=-1.5ex] {$[0,  p-1]$};
+			\draw[decorate,decoration={brace,amplitude=5pt,mirror,raise=1ex}] (n3) -- (n4) node[below, midway, yshift=-1.5ex] {$[p,  n]$};
+			\draw[decorate,decoration={brace,amplitude=5pt,mirror,raise=1ex}] (n5) -- (n6) node[below, midway, yshift=-1.5ex] {$[n+1,  n+p]$};
+			
+		\end{tikzpicture}
+		
+		\vspace{3ex}
+		
+		$V=\{\rememb{n1}0, \dots{}, 0\rememb{n2},\rememb{n3}\dots{},i-q,\dots\rememb{n4}, \rememb{n5}q, \dots ,q  \rememb{n6}\}$
+		
+		\begin{tikzpicture}[overlay, remember picture]
+		
+			\draw[decorate,decoration={brace,amplitude=5pt,mirror,raise=1ex}] (n1) -- (n2) node[below, midway, yshift=-1.5ex] {$[0,  q-1]$};
+			\draw[decorate,decoration={brace,amplitude=5pt,mirror,raise=1ex}] (n3) -- (n4) node[below, midway, yshift=-1.5ex] {$[q,  n]$};
+			\draw[decorate,decoration={brace,amplitude=5pt,mirror,raise=1ex}] (n5) -- (n6) node[below, midway, yshift=-1.5ex] {$[n+1,  n+q]$};
+			
+		\end{tikzpicture}
+		
+		
+
+	}
+	
+	
+\end{frame}
+
+\section{Параметрические рациональные поверхности}
+\frame{\sectionpage}
+
+\begin{frame}\frametitle{NURBS-поверхность}
+	
+	$\VV S(u,v) = \dfrac{\sum_{i=0}^n\sum_{j=0}^mN_{i,p}(u)N_{i,q}(v)w_{ij}\VV P_{ij}}
+						{\sum_{i=0}^n\sum_{j=0}^mN_{i,p}(u)N_{i,q}(v)w_{ij}}$, 
+						
+	
+	
+
+						
+	\vspace{1ex} \pause
+	
+	\begin{center}
+		\fbox{\parbox{0.6\textwidth}{\centering	$\VV S(u,v)=\sum_{i=0}^n\sum_{j=0}^mR_{i,j}^{p,q}(u,v)P_{i,j}$, $u,v\in [0,1]$\\%			
+			$R_{i,j}^{p,q}(u,v)=\dfrac{N_{i,p}(u)N_{i,q}(v)w_{ij}}{\sum_{i=0}^n\sum_{j=0}^mN_{i,p}(u)N_{i,q}(v)w_{ij}}$%
+		}}
+	\end{center}
+	
+	\pause
+	$U=\{\rememb{n1}0, \dots{}, 0\rememb{n2},\rememb{n3}\dots{},(i-p)/p,\dots\rememb{n4}, \rememb{n5}1, \dots ,1  \rememb{n6}\}$
+	
+	\begin{tikzpicture}[overlay, remember picture]
+		
+		
+		\draw[decorate,decoration={brace,amplitude=5pt,mirror,raise=1ex}] (n1) -- (n2) node[below, midway, yshift=-1.5ex] {$[0,  p-1]$};
+		\draw[decorate,decoration={brace,amplitude=5pt,mirror,raise=1ex}] (n3) -- (n4) node[below, midway, yshift=-1.5ex] {$[p,  n]$};
+		\draw[decorate,decoration={brace,amplitude=5pt,mirror,raise=1ex}] (n5) -- (n6) node[below, midway, yshift=-1.5ex] {$[n+1,  n+p]$};
+		
+	\end{tikzpicture}
+	
+	
+	
+	\vspace{2ex}
+	
+	$V=\{\rememb{n1}0, \dots{}, 0\rememb{n2},\rememb{n3}\dots{},(i-q)/q,\dots\rememb{n4}, \rememb{n5}1, \dots ,1  \rememb{n6}\}$
+	
+	\begin{tikzpicture}[overlay, remember picture]
+		
+		\draw[decorate,decoration={brace,amplitude=5pt,mirror,raise=1ex}] (n1) -- (n2) node[below, midway, yshift=-1.5ex] {$[0,  q-1]$};
+		\draw[decorate,decoration={brace,amplitude=5pt,mirror,raise=1ex}] (n3) -- (n4) node[below, midway, yshift=-1.5ex] {$[q,  n]$};
+		\draw[decorate,decoration={brace,amplitude=5pt,mirror,raise=1ex}] (n5) -- (n6) node[below, midway, yshift=-1.5ex] {$[n+1,  n+q]$};
+		
+	\end{tikzpicture}
+	
+
+						
+	
+	
+\end{frame}
+
+
+\begin{frame}\frametitle{Поверхность пятого порядка}
+	
+	
+	
+	\TC{0.5}
+	{
+		\animategraphics[autoplay,loop, nomouse]{15}{Images/\jobname/nurbs_surf_order5}{0}{71}
+	}{
+		$\VV S(u,v)=\sum_{i=0}^4\sum_{j=0}^4R_{i,j}^{5,5}(u,v)P_{i,j}$,
+		
+		$\{P_{i,j}\}=P_{5\times5}$,
+		
+		$\{w_{i,j}\}=w_{5\times5}=\{1\}_{5\times5}$,
+		
+		$U=V=\{0,0,0,0,0,1,1,1,1\}$.
+	}
+	
+\end{frame}
+
+\begin{frame}\frametitle{Поверхность четвертого порядка}
+	
+	
+	
+	\TC{0.5}
+	{
+		\animategraphics[autoplay,loop, nomouse]{15}{Images/\jobname/nurbs_surf_order4}{0}{71}
+	}{
+		$\VV S(u,v)=\sum_{i=0}^4\sum_{j=0}^4R_{i,j}^{4,4}(u,v)P_{i,j}$,
+		
+		$\{P_{i,j}\}=P_{5\times5}$,
+		
+		$\{w_{i,j}\}=w_{5\times5}=\{1\}_{5\times5}$,
+		
+		$U=V=\{0,0,0,0,1/2,1,1,1,1\}$.
+	}
+	
+\end{frame}
+
+\begin{frame}\frametitle{Поверхность третьего порядка}
+	
+	
+	
+	\TC{0.5}
+	{
+		\animategraphics[autoplay,loop, nomouse]{15}{Images/\jobname/nurbs_surf_order3}{0}{71}
+	}{
+		$\VV S(u,v)=\sum_{i=0}^4\sum_{j=0}^4R_{i,j}^{3,3}(u,v)P_{i,j}$,
+		
+		$\{P_{i,j}\}=P_{5\times5}$,
+		
+		$\{w_{i,j}\}=w_{5\times5}=\{1\}_{5\times5}$,
+		
+		$U=V=\{0,0,0,1/3,2/3,1,1,1\}$.
+	}
+	
+\end{frame} 
+
+\begin{frame}\frametitle{Поверхность второго порядка}
+	
+	
+	
+	\TC{0.5}
+	{
+		\animategraphics[autoplay,loop, nomouse]{15}{Images/\jobname/nurbs_surf_order2}{0}{71}
+	}{
+		$\VV S(u,v)=\sum_{i=0}^4\sum_{j=0}^4R_{i,j}^{2,2}(u,v)P_{i,j}$,
+		
+		$\{P_{i,j}\}=P_{5\times5}$,
+		
+		$\{w_{i,j}\}=w_{5\times5}=\{1\}_{5\times5}$,
+		
+		$U=V=\{0,0,1/4,2/4,3/4,1,1\}$.
+	}
+	
+\end{frame} 
+
+
+\begin{frame}\frametitle{Изменение веса вершин}
+	
+	\TC{0.5}
+	{
+		\animategraphics[autoplay,loop, nomouse]{15}{Images/\jobname/nurbs_surf_order3_anim}{0}{71}
+	}{
+		$\VV S(u,v)=\sum_{i=0}^4\sum_{j=0}^4R_{i,j}^{3,3}(u,v)P_{i,j}$,
+		
+		$\{P_{i,j}\}=P_{5\times5}$,
+		
+		\animategraphics[autoplay,loop, nomouse]{15}{Images/\jobname/nurbs_surf_order3_anim}{72}{143}
+		
+		$U=V=\{0,0,0,1/3,2/3,1,1,1\}$.
+	}
+	
+\end{frame}
+
+
+
+\begin{frame}\frametitle{Поверхность втор...етьего порядка}
+	
+	\TC{0.5}
+	{
+		\animategraphics[autoplay,loop, nomouse]{15}{Images/\jobname/nurbs_surf_order2-3}{0}{71}
+	}{
+		$\VV S(u,v)=\sum_{i=0}^4\sum_{j=0}^4R_{i,j}^{3,2}(u,v)P_{i,j}$,
+		
+		$\{P_{i,j}\}=P_{5\times5}$,
+		
+		$\{w_{i,j}\}=w_{5\times5}=\{1\}_{5\times5}$,
+		
+		$U=\{0,0,0,1/3,2/3,1,1,1\}$,
+		
+		$V=\{0,0,1/4,2/4,3/4,1,1\}$.
+	}
+	
+	
+\end{frame}
+
+
+
+\end{document}
+
+

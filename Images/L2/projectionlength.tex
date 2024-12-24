@@ -1,0 +1,44 @@
+\documentclass[tikz, class=scrreprt]{standalone}
+
+\usepackage{fp}
+\usepackage{tikz}
+\usepackage{tikz-3dplot}
+\usepackage{amsmath} %математические формулы
+\usepackage[e]{esvect}  %Красивая стрелочка вектора
+
+
+\usetikzlibrary{calc}
+\usetikzlibrary{arrows.meta}
+
+\include{tikzcom.tex}
+
+\begin{document}
+	
+
+	%\foreach \frame in {0,1,...,2}
+	{
+	%\tdplotsetmaincoords{70}{100}
+	%\begin{tikzpicture}[scale=1, tdplot_main_coords]
+	\begin{tikzpicture}	
+		
+		
+    \coordinate (O) at (0,0);
+	\coordinate (A) at (3,1);	
+	\coordinate (B) at (4,-1);
+	
+	\draw [-Latex] (O) -- (A) node [right] {$\vv{a}$};
+	\draw [-Latex] (O) -- (B)  node [right] {$\vv{b}$};	
+	
+	\coordinate (D) at ($(O)!(A)!(B)$);
+	
+	\draw [dashed] (A) -- (D);	
+	
+	\draw [very thin]  (D) -- ($(D)!6pt!90:(O)$);
+	\draw [very thin]  (O) -- ($(O)!6pt!-90:(D)$);
+	\draw [<->, very thin]  ($(D)!5pt!90:(O)$) -- ($(O)!5pt!-90:(D)$) node [midway, sloped, below] {$\mu$};
+	
+	\draw[very thin] ({atan2(-1,4)}:0.5) arc ({atan2(-1,4)}:{atan2(1,3)}:0.5) node [midway, right] {$\alpha$} ;
+		
+	\end{tikzpicture}}
+	
+\end{document}

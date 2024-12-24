@@ -1,0 +1,82 @@
+\documentclass[tikz]{standalone}
+
+\usepackage{tikz}
+\usepackage{tikz-3dplot}
+\usepackage{amsmath} %математические формулы
+\usepackage[e]{esvect}  %Красивая стрелочка вектора
+
+
+\usepackage{polyglossia}
+\setdefaultlanguage{russian}
+\setotherlanguage{english}
+%\setkeys{russian}{babelshorthands=true}
+\usepackage{fontspec}
+\setmainfont{Times New Roman} [Script=Cyrillic, Mapping=tex-text,]
+\setsansfont{Arial} [Script=Cyrillic, Mapping=tex-text,]
+\setmonofont{Courier New} [Script=Cyrillic, Mapping=tex-text,]
+
+\usetikzlibrary{calc}
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{angles}
+
+
+
+\include{../tikzcom.tex}
+
+\begin{document}
+	
+   				 \begin{tikzpicture}[scale=3]
+   	
+   	
+   	\begin{scope}[x=0.25mm]
+   		
+   		
+   		\clip (-10,-1.2) rectangle (110,1.3);
+   		
+   		\draw[ultra thin, gray] (-0,-2) grid[step=2.5mm] (200,2);
+   		
+   		\draw[-Latex] (-0.1,0) -- (105,0) node[above] {$z$};
+   		\draw[-Latex] (0,-1.2) -- (0,1.2) node[left] {$z^c$}; 	
+   		
+   		
+   		
+   		
+   		
+   		
+   		\edef\n{-1}
+   		\edef\f{-100}
+   		
+   		\edef\c{\fpeval{(\n+\f)/(\n-\f)}}
+   		\edef\d{\fpeval{2*\n*\f/(\n-\f)}}
+   		
+   		
+   		\draw[color=red, domain=1:100, samples=200, thick] plot[id=5] function{-(\c*x+\d)/x};
+   		
+   		\edef\n{-5}
+   		\edef\f{-100}
+   		
+   		\edef\c{\fpeval{(\n+\f)/(\n-\f)}}
+   		\edef\d{\fpeval{2*\n*\f/(\n-\f)}}
+   		
+   		
+   		\draw[color=blue, domain=1:100, samples=200, thick] plot[id=6] function{-(\c*x+\d)/x};
+   		
+   		
+   		
+   		\foreach \t in {10,20,...,100}{
+   			\draw (\t,0) node [below] {\small\t};
+   		}
+   		
+   		\foreach \t in {1,0.6,...,-1}{
+   			\edef\t{\fpeval{round(\t,1)}}
+   			\draw (0,\t) node [left] {\small\t};
+   		}
+   		
+   	\end{scope}
+   	
+   	
+   \end{tikzpicture}
+
+
+	
+\end{document}

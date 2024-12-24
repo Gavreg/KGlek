@@ -1,0 +1,77 @@
+\documentclass[tikz]{standalone}
+
+\usepackage{tikz}
+\usepackage[svgnames]{xcolor}
+\usepackage{tikz-3dplot}
+\usepackage{amsmath} %математические формулы
+\usepackage{amsfonts}
+
+\usepackage[e]{esvect}  %Красивая стрелочка вектора
+
+
+\usepackage{polyglossia}
+\setdefaultlanguage{russian}
+\setotherlanguage{english}
+%\setkeys{russian}{babelshorthands=true}
+\usepackage{fontspec}
+\setmainfont{Times New Roman} [Script=Cyrillic, Mapping=tex-text,]
+\setsansfont{Arial} [Script=Cyrillic, Mapping=tex-text,]
+\setmonofont{Courier New} [Script=Cyrillic, Mapping=tex-text,]
+
+\usetikzlibrary{calc}
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{angles}
+
+
+
+\include{../tikzcom.tex}
+
+\begin{document}
+	
+    \foreach \frame in {1,...,4}
+    {
+    
+	    \begin{tikzpicture}[ scale=1.2]
+	    	
+	   	\clip (-25mm,-25mm) rectangle (25mm,25mm);
+	
+		\ifthenelse{\frame>3}{
+			\draw [DarkGreen, fill=DarkGreen!50] circle (25mm);
+			\draw (0,20mm) node [align=center] {$\mathbb{R}$\\вещесвенные};
+		}{}
+	
+		\ifthenelse{\frame>2}{
+			\draw (0,-3mm) [blue, fill=blue!50] circle (20mm);
+			\draw (0,13mm) node [align=center] {$\mathbb{Q}$\\рациональные};
+		}{}
+	
+		\ifthenelse{\frame>1}{
+			\draw (0,-6mm) [red, fill=red!50] circle (15mm);
+			\draw (0,5mm) node [align=center] {$\mathbb{Z}$\\целые};
+		}{}
+		
+		\ifthenelse{\frame>0}{		
+			\draw (0,-9mm) [black, fill=white] circle (1cm);
+			\draw (0,-9mm) node [align=center] {$\mathbb{N}$\\натуральные};
+		}{}
+		
+
+			
+			
+			
+		
+	      \end{tikzpicture} 
+	}
+	
+	
+	
+	
+
+
+
+
+
+
+
+	
+\end{document}

@@ -1,0 +1,73 @@
+\documentclass[tikz]{standalone}
+
+\usepackage{tikz}
+\usepackage[svgnames]{xcolor}
+\usepackage{tikz-3dplot}
+\usepackage{amsmath} %математические формулы
+\usepackage[e]{esvect}  %Красивая стрелочка вектора
+
+
+\usepackage{polyglossia}
+\setdefaultlanguage{russian}
+\setotherlanguage{english}
+%\setkeys{russian}{babelshorthands=true}
+\usepackage{fontspec}
+\setmainfont{Times New Roman} [Script=Cyrillic, Mapping=tex-text,]
+\setsansfont{Arial} [Script=Cyrillic, Mapping=tex-text,]
+\setmonofont{Courier New} [Script=Cyrillic, Mapping=tex-text,]
+
+\usetikzlibrary{calc}
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{angles}
+
+
+
+
+
+\include{../tikzcom.tex}
+
+\begin{document}
+	
+	\foreach \frame in {0,1,...,99,99,99,99,99,99,99,99,99,99,99,99,99,99,99,99}{
+	\begin{tikzpicture}
+		
+		\clip (0.8,-0.5) rectangle (5.5,5.3);
+		\def\dirname{build_bspline_k2_anim}
+		
+		\input{\dirname/points_tikz.dat}
+		\input{\dirname/lp_tikz_frame\frame.dat}
+		\input{\dirname/t_tex_frame\frame.dat}
+		\input{\dirname/tpoints_latex_frame\frame.dat}
+		
+		\draw 	(P0) 	node[above right] {$P_0$} --
+			(P1) 	node[above] {$P_1$} --
+			(P2) 	node[right] {$P_2$} --
+			(P3) 	node[right] {$P_3$}--
+			(P4) 	node[below] {$P_4$}--
+			(P5) 	node[above] {$P_5$};
+		
+		\fill[red] (LP0) circle(1pt);
+		
+		\foreach \p in {0,...,5}{
+			\fill (P\p) circle(1pt);
+		}	
+		
+		\draw [red] plot file{\dirname/frame\frame.dat};
+		
+		\foreach \p in \tarr 
+		{
+			\fill[blue] \p circle(1pt);
+			%\node {\tarr};
+		}
+		
+		\pgfkeys{/pgf/number format/.cd,fixed,fixed zerofill,precision=2}
+		\draw[red] (LP0) node[right] {$t=\pgfmathprintnumber{\tval}$};
+		
+	\end{tikzpicture}}
+	
+
+	
+	
+	
+	
+\end{document}

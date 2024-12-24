@@ -1,0 +1,4 @@
+\selectlanguage *[]{russian}
+\beamer@sectionintoc {1}{Рациональные кривые}{4}{0}{1}
+\beamer@sectionintoc {2}{Параметрические поверхности}{13}{0}{2}
+\beamer@sectionintoc {3}{Параметрические рациональные поверхности}{16}{0}{3}

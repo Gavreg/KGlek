@@ -1,0 +1,826 @@
+\documentclass[tikz]{standalone}
+
+\usepackage{tikz}
+\usepackage{tikz-3dplot}
+\usepackage{amsmath} %математические формулы
+\usepackage[e]{esvect}  %Красивая стрелочка вектора
+
+
+\usepackage{polyglossia}
+\setdefaultlanguage{russian}
+\setotherlanguage{english}
+%\setkeys{russian}{babelshorthands=true}
+\usepackage{fontspec}
+\setmainfont{Times New Roman} [Script=Cyrillic, Mapping=tex-text,]
+\setsansfont{Arial} [Script=Cyrillic, Mapping=tex-text,]
+\setmonofont{Courier New} [Script=Cyrillic, Mapping=tex-text,]
+
+\usetikzlibrary{calc}
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{angles}
+
+
+
+\include{../tikzcom.tex}
+
+\newcommand{\setcube}[1]{
+	\VARPOINT{#1A}{0.5}{0.5}{-0.5}
+	\VARPOINT{#1B}{0.5}{-0.5}{-0.5}
+	\VARPOINT{#1C}{-0.5}{-0.5}{-0.5}
+	\VARPOINT{#1D}{-0.5}{0.5}{-0.5}
+	\VARPOINT{#1A1}{0.5}{0.5}{0.5}
+	\VARPOINT{#1B1}{0.5}{-0.5}{0.5}
+	\VARPOINT{#1C1}{-0.5}{-0.5}{0.5}
+	\VARPOINT{#1D1}{-0.5}{0.5}{0.5}
+	
+	\expandafter\xdef\csname #1points\endcsname{#1A, #1B, #1C, #1D, #1A1, #1B1, #1C1, #1D1}
+}
+
+\newcommand{\drawcube}[1]{
+	\draw [line join=round] (#1A) -- (#1B)-- (#1C) -- (#1D) --cycle;
+	\draw [line join=round]  (#1A1) -- (#1B1) -- (#1C1) -- (#1D1) --cycle;
+	\draw  [thick, line join=round] (#1B) -- (#1C) -- (#1C1) -- (#1B1) --cycle;
+	
+	\foreach \p in {A,B,C,D}{
+		\draw [line join=round] (#1\p) -- (#1\p 1) ;				
+	}
+}
+
+
+
+\newcommand{\setConnerCube}[1]{
+ 	\VARPOINT{#1A}{0.5}{0.5}{-0.5}
+ 	\VARPOINT{#1B}{0.5}{-0.5}{-0.5}
+ 	\VARPOINT{#1C}{-0.5}{-0.5}{-0.5}
+ 	\VARPOINT{#1D}{-0.5}{0.5}{-0.5}
+ 	
+ 	\VARPOINT{#1B1}{0.5}{-0.5}{0.5}
+ 	\VARPOINT{#1C1}{-0.5}{-0.5}{0.5}
+ 	\VARPOINT{#1D1}{-0.5}{0.5}{0.5}
+ 	
+ 	\VARPOINT{#1AA}{0.5}{0.5}{0}
+ 	\VARPOINT{#1AD}{0}{0.5}{0.5}
+ 	\VARPOINT{#1AB}{0.5}{0}{0.5}
+ 	
+ 	\expandafter\xdef\csname #1points\endcsname{#1A, #1B, #1C, #1D, #1B1, #1C1, #1D1, #1AA, #1AB, #1AD}
+ 	
+
+}
+
+\newcommand{\drawConnerCube}[1]{
+	
+	\draw (#1B1) -- (#1C1) -- (#1D1) -- (#1AD) -- (#1AB) -- cycle;
+	\draw [line join=round] (#1A) -- (#1B)-- (#1C) -- (#1D) --cycle;
+	\foreach \p in {B,C,D}{
+		\draw [line join=round] (#1\p) -- (#1\p 1);				
+	}
+	\draw (#1AB) -- (#1AA) -- (#1AD);
+	\draw (#1AA) -- (#1A);
+	
+}
+
+
+\begin{document}
+	
+    
+	\def\frame{0}
+	%\foreach \frame in {20,21,...,140}
+	{
+		
+	\tdplotsetmaincoords{70}{70}
+	\begin{tikzpicture}[ scale=1, tdplot_main_coords]
+		
+	
+		
+			
+			
+			
+			
+			\VARPOINT{O}{0}{0}{0}
+			
+		
+			\VARPOINT{i}{1}{0}{0}
+			\VARPOINT{j}{0}{1}{0}
+			\VARPOINT{k}{0}{0}{1}
+			
+			
+			
+			
+			\draw [-Latex, red] (-1,0,0) -- ($7*(i)$) node [above] {$x$};
+			\draw [-Latex, blue] ($8.2*(j)$) -- (0,-1,0) node [above] {$z$};	
+			\draw [-Latex, green] (0,0,-1) -- ($5*(k)$) node [right] {$y$};
+			
+			
+			
+			\MATRIXROW{M}{a}{0.3}{0}{0}{0}
+			\MATRIXROW{M}{b}{0}{0.3}{0}{0}
+			\MATRIXROW{M}{c}{0}{0}{0.3}{0}
+			\MATRIXROW{M}{d}{0}{0}{0}{1}
+		
+			
+		
+			\VARPOINT{A}{5}{6}{3}
+			\VARPOINT{B}{5}{6}{-3}
+			\VARPOINT{C}{-5}{6}{-3}
+			\VARPOINT{D}{-5}{6}{3}
+			
+			\draw [thick] (A) -- (B) -- (C) -- (D) -- cycle;
+			
+			\foreach \p in {A,B,C,D}{
+				\MATRIXPOINTMULTIPLY{\p \p}{M}{\p}
+				
+				\draw [thick] (\p) -- (\p \p);
+				
+				\draw [thin,dashed] (\p) -- (O);
+				
+			}
+			
+			\draw [thick] (AA) -- (BB)  node [right , pos=0.3]{$h$} --  (CC) -- (DD) -- cycle node [pos=0.7, above ]{$w$} ;
+			
+			\draw [<->, very thin] ($(0,\Ay,\Az)+(0,0,0.5)$) -- ($(0,0,\Az)+(0,0,0.5)$) node [above, pos=0.7] {$f$};
+			\draw [thin, dashed] (0,\Ay,\Az+1) -- (0,\Ay,-\Az-1);
+			
+			
+			\draw [<->, very thin] ($(0,\AAy,\AAz)+(0,0,0.5)$) -- ($(0,0,\AAz)+(0,0,0.5)$) node [above, pos=0.7] {$n$};
+			\draw [thin, dashed] (0,\AAy,-\AAz-0.6) -- (0,\AAy,\AAz+0.6);
+			
+			
+			
+			
+			
+	
+		
+		
+		
+		
+	\end{tikzpicture}  }
+
+
+
+	\tdplotsetmaincoords{90}{90}
+	\begin{tikzpicture}[ scale=1, tdplot_main_coords]
+		
+		
+		
+		
+		
+		\VARPOINT{O}{0}{0}{0}
+		
+		
+		\VARPOINT{i}{1}{0}{0}
+		\VARPOINT{j}{0}{1}{0}
+		\VARPOINT{k}{0}{0}{1}
+		
+		
+		
+		
+		%\draw [-Latex, red] (-1,0,0) -- ($4*(i)$) node [right] {$x$};
+		\draw [-Latex, blue] (0,-1,0) -- ($7.5*(j)$) node [above] {$z$};	
+		\draw [-Latex, green] (0,0,-2) -- ($4*(k)$) node [right] {$y$};
+		
+		
+		
+		\MATRIXROW{M}{a}{0.3}{0}{0}{0}
+		\MATRIXROW{M}{b}{0}{0.3}{0}{0}
+		\MATRIXROW{M}{c}{0}{0}{0.3}{0}
+		\MATRIXROW{M}{d}{0}{0}{0}{1}
+		
+		
+		
+		\VARPOINT{A}{5}{6}{3}
+		\VARPOINT{B}{5}{6}{-3}
+		\VARPOINT{C}{-5}{6}{-3}
+		\VARPOINT{D}{-5}{6}{3}
+		
+		\draw [thick] (A) -- (B) -- (C) -- (D) -- cycle;
+		
+		\foreach \p in {A,B,C,D}{
+			\MATRIXPOINTMULTIPLY{\p \p}{M}{\p}
+			
+			\draw [thick] (\p) -- (\p \p);
+			
+			\draw [thin,dashed] (\p) -- (O);
+			
+		}
+		
+		\draw [thick] (AA) -- (BB)  --  (CC) -- (DD)  -- cycle  ;
+		
+		\draw [very thin, dashed] (0,\BBy+0.5,\BBz) -- (0,\BBy,\BBz);
+		\draw [very thin,  <->] (0,\BBy+0.3,\BBz) -- (0,\BBy+0.3,0) node [midway, right] {$h/2$};
+		
+		\draw [<->,very thin] (0,0,-2) -- (0,6,-2) node [below, pos=0.3] {$f$};
+		
+		
+		\draw [<->,very thin] (0,0,-1.5) -- (0,\AAy,-1.5) node [above, pos=0.5] {$n$};
+		\draw [thin, dashed] (0,\BBy,\BBz-1) -- (0,\BBy,\BBz);
+
+		\draw  ( {atan2(\BBz,\BBy)}:1cm ) arc({atan2(\BBz,\BBy)}:{atan2(\AAz,\AAy)}:1cm) node[right, pos=0.7] {$\alpha$};	
+		
+		
+		\node (pp) at (0,2.5,3) {$y=\displaystyle\frac{h/2}{n}z$};
+		
+		\node  at (0,5,1) {$y^c=0..1$};
+		\node  at (0,5,3) {$y^c > 1$};
+		\node  at (0,5,-1) {$y^c=0..-1$};
+		\node  at (0,3.5,-2.5) {$y^c<-1$};
+		
+		\coordinate (p) at (0,3,{tan(atan2(\AAz,\AAy))*3+0.1});
+		
+		\draw [->] (pp) .. controls +(0,-0.5,-0.5) ..  (p);
+		
+		
+\end{tikzpicture} 	
+		
+
+	
+	\tdplotsetmaincoords{70}{40}
+	\begin{tikzpicture}[ scale=2.5, tdplot_main_coords]
+		
+		\VARPOINT{O}{0}{0}{0}
+		
+		
+		\VARPOINT{i}{1}{0}{0}
+		\VARPOINT{j}{0}{1}{0}
+		\VARPOINT{k}{0}{0}{1}
+		
+		
+		
+
+		
+		
+		\draw [-Latex, red] (-1.3,0,0) -- ($1.3*(i)$) node [right] {$x^{c}$};
+		\draw [-Latex, blue] (0,-1.3,0) -- ($1.3*(j)$) node [above right] {$z^{c}$};	
+		\draw [-Latex, green] (0,0,-1.3) -- ($1.3*(k)$) node [right] {$y^{c}$};
+		
+		
+		\VARPOINT{A}{-0.4}{0.1}{-0.3};
+		\VARPOINT{B}{0.3}{-0.3}{-0.4};
+		\VARPOINT{C}{0.1}{0.1}{0.4};
+		
+		
+
+		
+		\draw [thick] (A) --(B)--(C)--cycle;
+		
+		\draw ($(Axz)-(0,0.5,0)$) -- ($(Bxz)-(0,0.5,0)$) -- ($(Cxz)-(0,0.5,0)$) -- cycle;
+				
+		\foreach \p in {A,B,C}{
+			\draw[dashed] (\p) -- ($(\p xz)-(0,0.5,0)$);
+		}		
+		
+		\fill (0.5,0,0) circle(0.4pt) node [above] {$1$};
+		\fill (-0.5,0,0) circle(0.4pt);% node [above] {$-1$};
+		
+		\fill (0,0.5,0) circle(0.4pt) node [above] {$1$};
+		\fill (0,-0.5,0) circle(0.4pt);% node [above left] {$-1$};
+		
+		\fill (0,0,0.5) circle(0.4pt) node [right] {$1$};
+		\fill (0,-0,-0.5) circle(0.4pt);% node [left] {$-1$};
+		
+		
+		\setcube{cubeA};
+		\drawcube{cubeA};
+		
+	\end{tikzpicture} 
+	
+	
+	\begin{tikzpicture}
+		
+		\draw [Latex-, blue, thin] (0,0) -- (10,0) node [below, pos=0] {$z^V$};
+		
+		\draw [-Latex, blue, thin] (0,-2) -- (10,-2) node [above, pos=1] {$z^C$};
+		
+		
+		\coordinate (near) at (2,0) ;
+		\coordinate (far) at (9,0);
+		\coordinate (t) at (4,0);
+		
+		\fill (1,0) circle(1pt) node [above] {$0$};
+		\fill (near)  circle(1pt) node [above] {$-n$};		
+		\fill (far) circle(1pt) node [above] {$-f$};
+		
+		
+
+		
+		\coordinate (minone) at (3,-2);
+		\coordinate (one) at (7,-2);
+		\coordinate (zero) at (5,-2);
+		\coordinate (tt) at (4,-2);
+		
+		
+		\fill (minone)  circle(1pt) node [below] {$-1$};
+		\fill (zero)  circle(1pt) node [below] {$0$};
+		\fill (one)  circle(1pt) node [below] {$1$};
+		
+		
+		
+		
+	    \draw [-Latex] (near) .. controls +(270:1) .. (minone);
+	    \draw [-Latex] (far) .. controls +(270:1) .. (one);
+	    
+	    \fill (t)  circle(1pt) node [above] {$t$};
+	    \fill (tt)  circle(1pt) node [below] {$t'$};
+	    
+	    \draw [-Latex, dashed] (t) .. controls +(270:1) .. (tt);
+		%\draw [-Latex] (near) -- +(270:3);
+		
+		
+	\end{tikzpicture}
+	
+		\tdplotsetmaincoords{70}{70}
+		\begin{tikzpicture}[ scale=1, tdplot_main_coords]
+		
+		
+		
+		
+		
+		
+		
+		\VARPOINT{O}{0}{0}{0}
+		
+		
+		\VARPOINT{i}{1}{0}{0}
+		\VARPOINT{j}{0}{1}{0}
+		\VARPOINT{k}{0}{0}{1}
+		
+		
+		
+		
+		\draw [-Latex, red] (-1,0,0) -- ($7*(i)$) node [above] {$x$};
+		\draw [-Latex, blue] ($8.2*(j)$) -- (0,-1,0) node [above] {$z$};	
+		\draw [-Latex, green] (0,0,-1) -- ($5*(k)$) node [right] {$y$};
+		
+		
+		
+		\MATRIXROW{M}{a}{0.3}{0}{0}{0}
+		\MATRIXROW{M}{b}{0}{0.3}{0}{0}
+		\MATRIXROW{M}{c}{0}{0}{0.3}{0}
+		\MATRIXROW{M}{d}{0}{0}{0}{1}
+		
+		
+		
+		\VARPOINT{A}{5}{6}{3}
+		\VARPOINT{B}{5}{6}{-3}
+		\VARPOINT{C}{-5}{6}{-3}
+		\VARPOINT{D}{-5}{6}{3}
+		
+		\draw [thick] (A) -- (B) -- (C) -- (D) -- cycle;
+		
+		\foreach \p in {A,B,C,D}{
+			\MATRIXPOINTMULTIPLY{\p \p}{M}{\p}
+			
+			\draw [thick] (\p) -- (\p \p);
+			
+			\draw [thin,dashed] (\p) -- (O);
+			
+		}
+		
+	
+		\draw [thick] (AA) -- (BB)  --  (CC) -- (DD) -- cycle;
+		
+		
+		\setConnerCube{cubeA}
+		
+		\TRANSLATEMATRIX{TR}{0}{4}{0}
+		\SCALEMATRIX{SC}{2}{-2}{2}
+		
+		\GLUPERSPECTIVEY{PR}{1.3}{1}{1.7}{6}
+		
+		\foreach \p in \cubeApoints
+		{
+			
+			\MATRIXPOINTMULTIPLY{\p}{SC}{\p}
+			\MATRIXPOINTMULTIPLY{\p}{TR}{\p}
+		
+			
+		}
+		
+		\drawConnerCube{cubeA}
+		
+		%\foreach \p in \cubeApoints
+		%{			
+
+			%\MATRIXPOINTMULTIPLY{\p}{PR}{\p}
+			
+		%}
+		
+		
+		%\drawConnerCube{cubeA}
+		
+
+		
+		\node [scale=0.6, left, rotate=9,yshift=6pt, xshift=5pt, opacity=0.5]{\includegraphics{Icon_Camera.eps}};
+		
+		
+		
+		
+	\end{tikzpicture} 
+	
+	
+		\tdplotsetmaincoords{70}{30}
+	\begin{tikzpicture}[ scale=2.5, tdplot_main_coords]
+		
+		\VARPOINT{O}{0}{0}{0}
+		
+		
+		\VARPOINT{i}{1}{0}{0}
+		\VARPOINT{j}{0}{1}{0}
+		\VARPOINT{k}{0}{0}{1}
+		
+		
+		
+		
+		
+		
+		\draw [-Latex, red] (-1.3,0,0) -- ($1.3*(i)$) node [right] {$x^{c}$};
+		\draw [-Latex, blue] (0,-1.3,0) -- ($1.3*(j)$) node [above right] {$z^{c}$};	
+		\draw [-Latex, green] (0,0,-1.3) -- ($1.3*(k)$) node [right] {$y^{c}$};
+		
+		
+		\VARPOINT{A}{-0.4}{0.1}{-0.3};
+		\VARPOINT{B}{0.3}{-0.3}{-0.4};
+		\VARPOINT{C}{0.1}{0.1}{0.4};
+		
+		
+		
+		
+		\fill (1,0,0) circle(0.4pt) node [above] {$1$};
+		\fill (-1,0,0) circle(0.4pt);% node [above] {$-1$};
+		
+		\fill (0,1,0) circle(0.4pt) node [above] {$1$};
+		\fill (0,-1,0) circle(0.4pt);% node [above left] {$-1$};
+		
+		\fill (0,0,1) circle(0.4pt) node [right] {$1$};
+		\fill (0,-0,-1) circle(0.4pt);% node [left] {$-1$};
+		
+		
+		
+		
+		
+		\setcube{cubeB};
+		
+		\SCALEMATRIX{SC2}{2}{2}{2}
+		
+		\foreach \p in \cubeBpoints
+		{
+			
+			\MATRIXPOINTMULTIPLY{\p}{SC2}{\p}
+			
+			
+			
+		}
+		
+		\drawcube{cubeB};
+		
+		
+		\setConnerCube{cubeA}
+		
+		\TRANSLATEMATRIX{TR}{0}{3}{0}
+		\SCALEMATRIX{SC}{2}{-2}{2}
+		
+		\GLUPERSPECTIVEY{PR}{1.3}{1}{1.7}{6}
+		
+		\foreach \p in \cubeApoints
+		{
+			
+			\MATRIXPOINTMULTIPLY{\p}{SC}{\p}
+			\MATRIXPOINTMULTIPLY{\p}{TR}{\p}
+			
+			
+		}
+		
+		%\drawConnerCube{cubeA}
+		
+		\foreach \p in \cubeApoints
+		{			
+			
+			\MATRIXPOINTMULTIPLY{\p}{PR}{\p}
+			
+		}
+		
+		
+		\drawConnerCube{cubeA}
+		
+		
+	\end{tikzpicture} 
+	
+	
+			\tdplotsetmaincoords{90}{0}
+	\begin{tikzpicture}[ scale=2.5, tdplot_main_coords]
+		
+		\VARPOINT{O}{0}{0}{0}
+		
+		
+		\VARPOINT{i}{1}{0}{0}
+		\VARPOINT{j}{0}{1}{0}
+		\VARPOINT{k}{0}{0}{1}
+		
+		
+		
+		
+		
+		
+		\draw [-Latex, red] (-1.3,0,0) -- ($1.3*(i)$) node [right] {$x^{c}$};
+		%\draw [-Latex, blue] (0,-1.3,0) -- ($1.3*(j)$) node [above right] {$z^{c}$};	
+		\draw [-Latex, green] (0,0,-1.3) -- ($1.3*(k)$) node [right] {$y^{c}$};
+		
+		
+		\VARPOINT{A}{-0.4}{0.1}{-0.3};
+		\VARPOINT{B}{0.3}{-0.3}{-0.4};
+		\VARPOINT{C}{0.1}{0.1}{0.4};
+		
+		
+		
+		
+		%\fill (1,0,0) circle(0.4pt) node [above] {$1$};
+		%\fill (-1,0,0) circle(0.4pt);% node [above] {$-1$};
+		
+		%\fill (0,1,0) circle(0.4pt) node [above] {$1$};
+		%\fill (0,-1,0) circle(0.4pt);% node [above left] {$-1$};
+		
+		%\fill (0,0,1) circle(0.4pt) node [right] {$1$};
+		%\fill (0,-0,-1) circle(0.4pt);% node [left] {$-1$};
+		
+		
+		
+		
+		
+		\setcube{cubeB};
+		
+		\SCALEMATRIX{SC2}{2}{2}{2}
+		
+		\foreach \p in \cubeBpoints
+		{
+			
+			\MATRIXPOINTMULTIPLY{\p}{SC2}{\p}
+			
+			
+			
+		}
+		
+		\drawcube{cubeB};
+		
+		
+		\setConnerCube{cubeA}
+		
+		\TRANSLATEMATRIX{TR}{0}{3}{0}
+		\SCALEMATRIX{SC}{2}{-2}{2}
+		
+		\GLUPERSPECTIVEY{PR}{1.3}{1}{1.7}{6}
+		
+		\foreach \p in \cubeApoints
+		{
+			
+			\MATRIXPOINTMULTIPLY{\p}{SC}{\p}
+			\MATRIXPOINTMULTIPLY{\p}{TR}{\p}
+			
+			
+		}
+		
+		%\drawConnerCube{cubeA}
+		
+		\foreach \p in \cubeApoints
+		{			
+			
+			\MATRIXPOINTMULTIPLY{\p}{PR}{\p}
+			
+		}
+		
+		
+		\drawConnerCube{cubeA}
+		
+		
+	\end{tikzpicture} 
+	
+	
+		\tdplotsetmaincoords{70}{70}
+	\begin{tikzpicture}[ scale=1, tdplot_main_coords]
+		
+		
+		
+		
+		
+		
+		
+		\VARPOINT{O}{0}{0}{0}
+		
+		
+		\VARPOINT{i}{1}{0}{0}
+		\VARPOINT{j}{0}{1}{0}
+		\VARPOINT{k}{0}{0}{1}
+		
+		
+		
+		
+		\draw [-Latex, red] (-1,0,0) -- ($7*(i)$) node [above] {$x$};
+		\draw [-Latex, blue] ($8.2*(j)$) -- (0,-1,0) node [above] {$z$};	
+		\draw [-Latex, green] (0,0,-1) -- ($5*(k)$) node [right] {$y$};
+		
+		
+		
+		\MATRIXROW{M}{a}{0.3}{0}{0}{0}
+		\MATRIXROW{M}{b}{0}{0.3}{0}{0}
+		\MATRIXROW{M}{c}{0}{0}{0.3}{0}
+		\MATRIXROW{M}{d}{0}{0}{0}{1}
+		
+		
+		
+		\VARPOINT{A}{5}{6}{3}
+		\VARPOINT{B}{5}{6}{-3}
+		\VARPOINT{C}{-5}{6}{-3}
+		\VARPOINT{D}{-5}{6}{3}
+		
+		\draw [thick] (A) -- (B) -- (C) -- (D) -- cycle;
+		
+		\foreach \p in {A,B,C,D}{
+			\MATRIXPOINTMULTIPLY{\p \p}{M}{\p}
+			
+			\draw [thick] (\p) -- (\p \p);
+			
+			%\draw [thin,dashed] (\p) -- (O);
+			
+		}
+		
+		\draw [thin,dashed] (O) -- (Ayz);
+		\draw [thin,dashed] (O) -- (Byz);
+		
+		\tdplotdefinepoints(0,0,0)(0,\Ay,\Az)(0,\By,\Bz)
+		\tdplotdrawpolytopearc[thick]{1}{yshift=-0.7cm}{fovy}
+		
+		
+		
+		\draw [thick] (AA) -- (BB)  node [right , pos=0.3]{$h$} --  (CC) -- (DD) -- cycle node [pos=0.7, above ]{$w$} ;
+		
+		\draw [<->, very thin] ($(0,\Ay,\Az)+(0,0,0.5)$) -- ($(0,0,\Az)+(0,0,0.5)$) node [above, pos=0.7] {$f$};
+		\draw [thin, dashed] (0,\Ay,\Az+1) -- (0,\Ay,-\Az-1);
+		
+		
+		\draw [<->, very thin] ($(0,\AAy,\AAz)+(0,0,0.5)$) -- ($(0,0,\AAz)+(0,0,0.5)$) node [above, pos=0.7] {$n$};
+		\draw [thin, dashed] (0,\AAy,-\AAz-0.6) -- (0,\AAy,\AAz+0.6);
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	\end{tikzpicture}
+	
+	
+	
+	\tdplotsetmaincoords{70}{70}
+	\begin{tikzpicture}[ scale=1, tdplot_main_coords]
+		
+		
+		
+		
+		
+		
+		
+		\VARPOINT{O}{0}{0}{0}
+		
+		
+		\VARPOINT{i}{1}{0}{0}
+		\VARPOINT{j}{0}{1}{0}
+		\VARPOINT{k}{0}{0}{1}
+		
+		
+		
+		
+		\draw [-Latex, red] (-1,0,0) -- ($7*(i)$) node [above] {$x$};
+		\draw [-Latex, blue] ($8.2*(j)$) -- (0,-1,0) node [above] {$z$};	
+		\draw [-Latex, green] (0,0,-1) -- ($5*(k)$) node [right] {$y$};
+		
+		
+		
+		\setcube{cubeA}
+		
+		\SCALEMATRIX{SC}{5}{3}{3}
+		
+		\TRANSLATEMATRIX{TR}{0}{4}{0}
+		
+		\foreach \p in \cubeApoints {
+			\MATRIXPOINTMULTIPLY{\p}{SC}{\p}
+			\MATRIXPOINTMULTIPLY{\p}{TR}{\p}
+		}		
+		
+		
+		
+		\drawcube{cubeA}
+		
+		
+		\draw [<->, dashed] (cubeAA1yz) --  (cubeAA1y) node [midway, right] {$t$};
+		
+		\draw [<->, dashed] (cubeAAyz) --  (cubeAAy) node [midway, right] {$b$};
+		
+		
+		
+	    \draw [<->, dashed] (cubeABxy) --  (cubeABy) node [midway, below] {$r$};
+		\draw [<->, dashed] (cubeACxy) --  (cubeABy) node [midway, below] {$l$};
+		
+		\coordinate (T) at ($(cubeAB1)!0.5!(cubeAC1)$);
+		\coordinate (TT) at ($(cubeAD1)!0.5!(cubeAA1)$);
+		
+		\draw[dashed] (T) -- +(0,0,2);
+		\draw[dashed] (TT) -- +(0,0,2);
+		
+		\draw[<->,dashed] ($ (cubeAAy) + (0,0,3) $) -- ($(O)+(0,0,3)$) node [above, pos=0.3] {$f$};
+		\draw[<->,dashed] ($ (cubeABy) + (0,0,2.3) $) -- ($(O)+(0,0,2.3)$) node [above, pos=0.6] {$n$};
+
+		
+		
+	\end{tikzpicture}
+	
+	
+	
+	\tdplotsetmaincoords{90}{0}
+	\begin{tikzpicture}[ scale=2.5, tdplot_main_coords]
+		
+		\VARPOINT{O}{0}{0}{0}
+		
+		
+		\VARPOINT{i}{1}{0}{0}
+		\VARPOINT{j}{0}{1}{0}
+		\VARPOINT{k}{0}{0}{1}
+		
+		
+		
+		
+		
+		
+		\draw [-Latex, red] (-1.3,0,0) -- ($1.3*(i)$) node [right] {$x^{c}$};
+		%\draw [-Latex, blue] (0,-1.3,0) -- ($1.3*(j)$) node [above right] {$z^{c}$};	
+		\draw [-Latex, green] (0,0,-1.3) -- ($1.3*(k)$) node [right] {$y^{c}$};
+		
+		
+		\VARPOINT{A}{-0.4}{0.1}{-0.3};
+		\VARPOINT{B}{0.3}{-0.3}{-0.4};
+		\VARPOINT{C}{0.1}{0.1}{0.4};
+		
+		
+		
+		
+		%\fill (1,0,0) circle(0.4pt) node [above] {$1$};
+		%\fill (-1,0,0) circle(0.4pt);% node [above] {$-1$};
+		
+		%\fill (0,1,0) circle(0.4pt) node [above] {$1$};
+		%\fill (0,-1,0) circle(0.4pt);% node [above left] {$-1$};
+		
+		%\fill (0,0,1) circle(0.4pt) node [right] {$1$};
+		%\fill (0,-0,-1) circle(0.4pt);% node [left] {$-1$};
+		
+		
+		
+		
+		
+		\setcube{cubeB};
+		
+		\SCALEMATRIX{SC2}{2}{2}{2}
+		
+		\foreach \p in \cubeBpoints
+		{
+			
+			\MATRIXPOINTMULTIPLY{\p}{SC2}{\p}
+			
+			
+			
+		}
+		
+		\drawcube{cubeB};
+		
+		
+		\setConnerCube{cubeA}
+		
+		\TRANSLATEMATRIX{TR}{0}{3}{0}
+		\SCALEMATRIX{SC}{1.4}{-1.4}{1.4}
+		
+		\GLUPERSPECTIVEY{PR}{1.3}{1}{1.7}{6}
+		
+		\foreach \p in \cubeApoints
+		{
+			
+			\MATRIXPOINTMULTIPLY{\p}{SC}{\p}
+			\MATRIXPOINTMULTIPLY{\p}{TR}{\p}
+			
+			
+		}
+		
+		%\drawConnerCube{cubeA}
+		
+		\foreach \p in \cubeApoints
+		{			
+			
+			%\MATRIXPOINTMULTIPLY{\p}{PR}{\p}
+			
+		}
+		
+		
+		\drawConnerCube{cubeA}
+		
+		
+	\end{tikzpicture} 
+	
+\end{document}

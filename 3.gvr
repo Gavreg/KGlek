@@ -1,0 +1,16 @@
+\noindent \textbf {\Large Лекция 3~---~Преобразования точек на плоскости}\setcounter {SEC}{0}\par 
+\noindent \hspace {2ex}\hbox {\large \stepcounter {SEC}\theSEC ~ Матрицы}\par 
+\noindent \hspace {2ex}\hbox {\large \stepcounter {SEC}\theSEC ~ Проекции и их виды}\par 
+\noindent \hspace {6ex}\stepcounter {SUB}\theSUB ~ Виды проекций\par 
+\noindent \hspace {6ex}\stepcounter {SUB}\theSUB ~ Перспективные проекции\par 
+\noindent \hspace {6ex}\stepcounter {SUB}\theSUB ~ Вычисление центральной проекции\par 
+\noindent \hspace {2ex}\hbox {\large \stepcounter {SEC}\theSEC ~ Двумерные преобразования}\par 
+\noindent \hspace {6ex}\stepcounter {SUB}\theSUB ~ Перенос\par 
+\noindent \hspace {6ex}\stepcounter {SUB}\theSUB ~ Масштабирование\par 
+\noindent \hspace {6ex}\stepcounter {SUB}\theSUB ~ Поворот\par 
+\noindent \hspace {6ex}\stepcounter {SUB}\theSUB ~ Общий вид матрицы преобразования\par 
+\noindent \hspace {2ex}\hbox {\large \stepcounter {SEC}\theSEC ~ Однородные координаты и матричные операции}\par 
+\noindent \hspace {6ex}\stepcounter {SUB}\theSUB ~ Понятие однородных координат\par 
+\noindent \hspace {6ex}\stepcounter {SUB}\theSUB ~ Проецирование в однородных координатах\par 
+\noindent \hspace {6ex}\stepcounter {SUB}\theSUB ~ Матричные представления двумерных преобразований\par 
+\noindent \hspace {6ex}\stepcounter {SUB}\theSUB ~ Общий вид матрицы преобразования\par 

@@ -1,0 +1,168 @@
+\documentclass[tikz]{standalone}
+
+\usepackage{tikz}
+\usepackage{tikz-3dplot}
+\usepackage{amsmath} %математические формулы
+\usepackage[e]{esvect}  %Красивая стрелочка вектора
+
+
+\usepackage{polyglossia}
+\setdefaultlanguage{russian}
+\setotherlanguage{english}
+%\setkeys{russian}{babelshorthands=true}
+\usepackage{fontspec}
+\setmainfont{Times New Roman} [Script=Cyrillic, Mapping=tex-text,]
+\setsansfont{Arial} [Script=Cyrillic, Mapping=tex-text,]
+\setmonofont{Courier New} [Script=Cyrillic, Mapping=tex-text,]
+
+\usetikzlibrary{calc}
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{angles}
+
+
+
+\include{../tikzcom.tex}
+
+\begin{document}
+	
+    
+	\def\frame{0}
+	%\foreach \frame in {20,21,...,140}
+	{
+		
+	\tdplotsetmaincoords{70}{70}
+	\begin{tikzpicture}[ scale=1, tdplot_main_coords]
+		
+	
+		
+	
+			
+			\VARPOINT{O}{0}{0}{0}
+			
+		
+			\VARPOINT{i}{1}{0}{0}
+			\VARPOINT{j}{0}{1}{0}
+			\VARPOINT{k}{0}{0}{1}
+			
+			
+			
+			
+			\draw [-Latex, red] (-1,0,0) -- ($7*(i)$) node [above] {$x$};
+			\draw [-Latex, blue] (0,-1,0) -- ($8.2*(j)$) node [above] {$z$};	
+			\draw [-Latex, green] (0,0,-1) -- ($5*(k)$) node [right] {$y$};
+			
+			
+			
+			\MATRIXROW{M}{a}{0.3}{0}{0}{0}
+			\MATRIXROW{M}{b}{0}{0.3}{0}{0}
+			\MATRIXROW{M}{c}{0}{0}{0.3}{0}
+			\MATRIXROW{M}{d}{0}{0}{0}{1}
+		
+			
+		
+			\VARPOINT{A}{5}{6}{3}
+			\VARPOINT{B}{5}{6}{-3}
+			\VARPOINT{C}{-5}{6}{-3}
+			\VARPOINT{D}{-5}{6}{3}
+			
+			\draw [thick] (A) -- (B) -- (C) -- (D) -- cycle;
+			
+			\foreach \p in {A,B,C,D}{
+				\MATRIXPOINTMULTIPLY{\p \p}{M}{\p}
+				
+				\draw [thick] (\p) -- (\p \p);
+				
+				\draw [thin,dashed] (\p) -- (O);
+				
+			}
+			
+			\draw [thick] (AA) -- (BB)  node [right , pos=0.3]{$h$} --  (CC) -- (DD) -- cycle node [pos=0.7, above ]{$w$} ;
+			
+			\draw [<->, very thin] ($(0,\Ay,\Az)+(0,0,0.5)$) -- ($(0,0,\Az)+(0,0,0.5)$) node [above, pos=0.7] {$f$};
+			\draw [thin, dashed] (0,\Ay,\Az+1) -- (0,\Ay,-\Az-1);
+			
+			
+			\draw [<->, very thin] ($(0,\AAy,\AAz)+(0,0,0.5)$) -- ($(0,0,\AAz)+(0,0,0.5)$) node [above, pos=0.7] {$n$};
+			\draw [thin, dashed] (0,\AAy,-\AAz-0.6) -- (0,\AAy,\AAz+0.6);
+			
+			
+			
+			
+			
+	
+		
+		
+		
+		
+	\end{tikzpicture}  }
+
+
+
+	\tdplotsetmaincoords{0}{90}
+	\begin{tikzpicture}[ scale=1, tdplot_main_coords]
+		
+		
+		
+		
+		
+		\VARPOINT{O}{0}{0}{0}
+		
+		
+		\VARPOINT{i}{1}{0}{0}
+		\VARPOINT{j}{0}{1}{0}
+		\VARPOINT{k}{0}{0}{1}
+		
+		
+		
+		
+		\draw [-Latex, red] (-1,0,0) -- ($4*(i)$) node [right] {$x$};
+		\draw [-Latex, blue] (0,-1,0) -- ($7.5*(j)$) node [above] {$z$};	
+		%\draw [-Latex, green] (0,0,-1) -- ($5*(k)$) node [right] {$y$};
+		
+		
+		
+		\MATRIXROW{M}{a}{0.3}{0}{0}{0}
+		\MATRIXROW{M}{b}{0}{0.3}{0}{0}
+		\MATRIXROW{M}{c}{0}{0}{0.3}{0}
+		\MATRIXROW{M}{d}{0}{0}{0}{1}
+		
+		
+		
+		\VARPOINT{A}{5}{6}{3}
+		\VARPOINT{B}{5}{6}{-3}
+		\VARPOINT{C}{-5}{6}{-3}
+		\VARPOINT{D}{-5}{6}{3}
+		
+		\draw [thick] (A) -- (B) -- (C) -- (D) -- cycle;
+		
+		\foreach \p in {A,B,C,D}{
+			\MATRIXPOINTMULTIPLY{\p \p}{M}{\p}
+			
+			\draw [thick] (\p) -- (\p \p);
+			
+			\draw [thin,dashed] (\p) -- (O);
+			
+		}
+		
+		\draw [thick] (AA) -- (BB)  --  (CC) -- (DD) -- cycle node [pos=0.2, right ]{$w/2$} ;
+		
+		
+		\draw [<->,very thin] (3,0,0) -- (3,6,0) node [below, pos=0.3] {$f$};
+		
+		
+		\draw [<->,very thin] (2.5,0,0) -- (2.5,\AAy,0) node [above, pos=0.5] {$n$};
+		\draw [thin, dashed] (\AAx,\AAy,0) -- (\AAx+1.2,\AAy,0);
+
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	\end{tikzpicture} 
+	
+\end{document}

@@ -1,0 +1,107 @@
+\documentclass[svgnames, tikz]{standalone}
+
+
+\usepackage{tikz}
+\usepackage{tikz-3dplot}
+\usepackage{amsmath} %математические формулы
+\usepackage[e]{esvect}  %Красивая стрелочка вектора
+\usepackage{unicode-math}
+
+
+\usepackage{polyglossia}
+\setdefaultlanguage{russian}
+\setotherlanguage{english}
+%\setkeys{russian}{babelshorthands=true}
+\usepackage{fontspec}
+\setmainfont{Times New Roman} [Script=Cyrillic, Mapping=tex-text,]
+\setsansfont{Arial} [Script=Cyrillic, Mapping=tex-text,]
+\setmonofont{Courier New} [Script=Cyrillic, Mapping=tex-text,]
+
+\usetikzlibrary{calc}
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{angles}
+
+
+
+\include{../tikzcom.tex}
+
+\begin{document}
+	
+    
+\pgfdeclarelayer{background}
+\pgfdeclarelayer{foreground}
+\pgfsetlayers{background,main,foreground}
+
+
+\foreach \frame in {1,2,3}{
+
+ \begin{tikzpicture}[ scale=1]
+ 	
+
+	\coordinate (B) at (5,3);
+	\coordinate (A) at (0,0);
+	
+	\coordinate (C) at (-1,1);
+	\coordinate (D) at (5,1);
+	
+	\coordinate (F) at ($(C)!0.8!(D)$);
+	
+	\draw (F) node [below] {$F$};	
+	\fill (F) circle(2pt);
+	
+	\draw (D) node [above] {$f$};
+	
+	\coordinate (E) at (intersection of A--B and C--D);
+	
+	\draw[thick, -Latex] (A) node [left] {$A$} -- (B) node [right] {$B$};
+	\fill (A) circle (2pt) (B) circle(2pt);
+	
+	\draw[thick] (C) -- (D);	
+	\draw[-Latex] (E) -- +(up:1) node [right] {$\vv n$};
+	
+	\ifthenelse{\frame>1}{
+	\draw (A) node[text=red, xshift=3pt, right] {$P(0)$};
+	
+	\draw (B) node[text=red, xshift=-3pt, yshift=-3pt, below] {$P(1)$};
+	
+	}{}
+	
+	\ifthenelse{\frame>2}{
+		
+		\coordinate (S1) at ($(A)!0.2!(B)$);
+		\coordinate (S2) at ($(A)!0.5!(B)$);
+		
+		\begin{pgfonlayer}{foreground}
+			\fill (S1) circle(1pt) (S2) circle(1pt);
+			
+			\draw [-Latex, red, thick] (F) -- (S1) node [left, xshift=-3pt] {$P(t_1)$};
+			\draw [-Latex, red, thick] (F) -- (S2) node [above, xshift=-3pt] {$P(t_3)$};
+			
+			\draw [-Latex, red, thick] (F) -- (E) node [above left] {$P(t_2)$};
+			
+			
+			
+		\end{pgfonlayer}
+		
+	
+	}{}
+	
+	
+
+	
+	
+	
+\end{tikzpicture} 
+
+}
+
+
+
+
+
+    
+   
+
+
+	
+\end{document}

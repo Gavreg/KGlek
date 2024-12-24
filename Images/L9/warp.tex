@@ -1,0 +1,53 @@
+\documentclass[tikz]{standalone}
+
+\usepackage{tikz}
+\usepackage[svgnames]{xcolor}
+\usepackage{tikz-3dplot}
+\usepackage{amsmath} %математические формулы
+\usepackage[e]{esvect}  %Красивая стрелочка вектора
+
+
+\usepackage{polyglossia}
+\setdefaultlanguage{russian}
+\setotherlanguage{english}
+%\setkeys{russian}{babelshorthands=true}
+\usepackage{fontspec}
+\setmainfont{Times New Roman} [Script=Cyrillic, Mapping=tex-text,]
+\setsansfont{Arial} [Script=Cyrillic, Mapping=tex-text,]
+\setmonofont{Courier New} [Script=Cyrillic, Mapping=tex-text,]
+
+\usetikzlibrary{calc}
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{angles}
+
+
+
+\include{../tikzcom.tex}
+
+\begin{document}
+	
+    
+ \begin{tikzpicture}[scale=2]
+	
+	\draw[-Latex] (-1.7,0) -- (1.7,0) node[below] {$\widehat{\vv l, \vv n}$};
+	\draw[-Latex] (0,-0.2) -- (0,1.2) node[left] {$I$}; 	
+	
+	\draw (1.55,0) node[below left] {$180^\circ$};	
+	\draw (-1.55,0) node[below] {$-180^\circ$};
+	
+	\draw[color=orange, domain=-3.14:3.14, samples=100, xscale=0.5] plot[id=1] function{(cos(x)+1)/(1+1)} ;
+	
+	\draw[color=blue, domain=-3.14:3.14, samples=100, xscale=0.5] plot[id=2] function{(cos(x)+2)/(1+2)} ;
+	
+	\draw[color=red, domain=-3.14:3.14, samples=100, xscale=0.5] plot[id=3] function{(cos(x)+3)/(1+3)};
+	
+	\draw[align=left] (1.2,1)node {  {\color{orange}$f=1$}\\
+		{\color{blue}$f=5$}\\
+		{\color{red}$f=10$}};
+\end{tikzpicture}
+
+
+
+
+	
+\end{document}

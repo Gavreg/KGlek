@@ -1,0 +1,55 @@
+\documentclass[tikz]{standalone}
+
+\usepackage{tikz}
+\usepackage[svgnames]{xcolor}
+\usepackage{tikz-3dplot}
+\usepackage{amsmath} %математические формулы
+\usepackage[e]{esvect}  %Красивая стрелочка вектора
+
+
+\usepackage{polyglossia}
+\setdefaultlanguage{russian}
+\setotherlanguage{english}
+%\setkeys{russian}{babelshorthands=true}
+\usepackage{fontspec}
+\setmainfont{Times New Roman} [Script=Cyrillic, Mapping=tex-text,]
+\setsansfont{Arial} [Script=Cyrillic, Mapping=tex-text,]
+\setmonofont{Courier New} [Script=Cyrillic, Mapping=tex-text,]
+
+\usetikzlibrary{calc}
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{angles}
+
+
+
+\include{../tikzcom.tex}
+
+\begin{document}
+	
+    
+ \begin{tikzpicture}[scale=2]
+	
+	\draw[-Latex] (-1.7,0) -- (1.7,0) node[below] {$x$};
+	\draw[-Latex] (0,-1.5) -- (0,1.5) node[left] {$y$}; 	
+	
+	
+
+	
+	\draw[color=red, domain=-1.0:1.0, samples=100,] plot[id=1] function{x*x};
+	\draw[color=blue, domain=0.8:8, samples=100, xscale=0.2] plot[id=2] function{1/x};
+	\draw[color=blue, domain=-8:-0.8, samples=100, xscale=0.2] plot[id=2a] function{1/x};
+	\draw[color=green, domain=-1.5:1.5, samples=100,] plot[id=3] function{sin(x)};
+	
+	\draw[color=green, domain=-1.5:1.5, samples=100,] plot[id=3] function{sin(x)};
+	
+	\draw[color=Orange, domain=0:2*3.1415, samples=100] plot[id=4, parametric] function{0.5*sin(t),0.5*cos(t)};
+	
+	
+
+\end{tikzpicture}
+
+
+
+
+	
+\end{document}

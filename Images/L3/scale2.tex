@@ -1,0 +1,77 @@
+\documentclass[tikz]{standalone}
+
+\usepackage{tikz}
+\usepackage{tikz-3dplot}
+\usepackage{amsmath} %математические формулы
+\usepackage[e]{esvect}  %Красивая стрелочка вектора
+
+
+\usepackage{polyglossia}
+\setdefaultlanguage{russian}
+\setotherlanguage{english}
+%\setkeys{russian}{babelshorthands=true}
+\usepackage{fontspec}
+\setmainfont{Times New Roman} [Script=Cyrillic, Mapping=tex-text,]
+\setsansfont{Arial} [Script=Cyrillic, Mapping=tex-text,]
+\setmonofont{Courier New} [Script=Cyrillic, Mapping=tex-text,]
+
+\usetikzlibrary{calc}
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{angles}
+
+
+
+\include{tikzcom.tex}
+
+\begin{document}
+	
+    
+	\def\frame{0}
+	%\foreach \frame in {0,1,...,1}
+	{
+	\tdplotsetmaincoords{60}{135}
+	\begin{tikzpicture}[scale=1, x=0.4cm, y=0.4cm ] %tdplot_main_coords
+		
+	\VARPOINT{A}{2}{2}{0};	
+	\VARPOINT{C}{4}{2}{0};
+	\VARPOINT{B}{2}{5}{0};
+	\VARPOINT{S}{3}{2}{0};	
+	
+	\POINTCOMPMULTIPLY{AA}{A}{S}
+	\POINTCOMPMULTIPLY{BB}{B}{S}
+	\POINTCOMPMULTIPLY{CC}{C}{S}
+	
+		
+	\draw[step=.4cm,black!10,very thin] (-1,-1) grid (12,12);	
+	
+		\foreach \x in {1,2,...,10}{
+		\draw (\x,0) node [below] {\small \x};
+	}
+	
+	\foreach \y in {1,2,...,10}{
+		\draw (0,\y) node [left ] {\small \y};
+	}
+	
+	\draw [-Latex] (-1,0) -- (12,0) node [below left] {$x$};	
+	\draw [-Latex] (0,-1) -- (0,12) node [below left] {$y$};	
+	
+	%\draw [thin,black!70, dashed] (A) -- (Ax);
+	
+	\draw (A) -- (B)  -- (C) -- cycle;
+	\draw (AA) -- (BB)  -- (CC) -- cycle;
+	
+	\fill [] (A) circle [radius=1pt] node [left] {$A$};	
+	\fill [] (B) circle [radius=1pt] node [left] {$B$};	
+	\fill [] (C) circle [radius=1pt] node [right] {$C$};
+	
+	\fill [] (AA) circle [radius=1pt] node [above right] {$A'$};	
+	\fill [] (BB) circle [radius=1pt] node [left] {$B'$};	
+	\fill [] (CC) circle [radius=1pt] node [below left] {$C'$};	
+	
+	\draw [-Latex] (0,0) -- (S) node [midway, right, xshift=10pt] {$\vv{s}(3,2)$};
+	
+	
+		
+	\end{tikzpicture}}
+	
+\end{document}

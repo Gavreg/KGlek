@@ -1,0 +1,74 @@
+\documentclass[tikz]{standalone}
+
+\usepackage{tikz}
+\usepackage[svgnames]{xcolor}
+\usepackage{tikz-3dplot}
+\usepackage{amsmath} %математические формулы
+\usepackage[e]{esvect}  %Красивая стрелочка вектора
+
+
+\usepackage{polyglossia}
+\setdefaultlanguage{russian}
+\setotherlanguage{english}
+%\setkeys{russian}{babelshorthands=true}
+\usepackage{fontspec}
+\setmainfont{Times New Roman} [Script=Cyrillic, Mapping=tex-text,]
+\setsansfont{Arial} [Script=Cyrillic, Mapping=tex-text,]
+\setmonofont{Courier New} [Script=Cyrillic, Mapping=tex-text,]
+
+\usetikzlibrary{calc}
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{angles}
+
+
+
+\include{../tikzcom.tex}
+
+\begin{document}
+	
+ \foreach \t in {0,...,99}{    
+	\begin{tikzpicture}[scale=1.5]		
+		\coordinate (P1) at (0.5,0.5);
+		\coordinate (P2) at (3,2);
+		\coordinate (O) at (0,0);
+		
+		\clip (-0.6,-0.6) rectangle (4,2.5);
+		
+		\draw (P1) node [below left] {$P_1$};
+		\draw (P2) node [above right] {$P_2$};
+		
+		\fill (P1) circle (1pt) (P2) circle (1pt);
+		
+		\edef\VAL{\fpeval{\t / 100}}
+		
+		\coordinate (P) at ($(P1)!\VAL!(P2)$);
+		\draw[red] (P1) -- (P);
+		
+		\fill (P) circle (1pt);
+		
+		\edef\V{\fpeval{round(\VAL,2)}};
+		
+		\draw (P) node [below right] {$t=$\V};
+		
+		\draw [-Latex] (0,0) -- (3.3,0);	
+		\draw [-Latex] (0,0) -- (0,2.3);
+		
+		\draw[dashed] (P) -- (P |- O) node [below]{$x$};		
+		\draw[dashed] (P) -- (P -| O)node  [left]{$y$};	
+		
+		\fill (P |- O) circle(1pt) (P -| O)	circle(1pt);	
+		
+		\draw[dashed] (P1) -- (P1 |- O) node [below]{$x_1$} ;		
+		\draw[dashed] (P1) -- (P1 -| O) node  [left]{$y_1$};	;
+		
+		\draw[dashed] (P2) -- (P2 |- O) node [below]{$x_2$};		
+		\draw[dashed] (P2) -- (P2 -| O) node  [left]{$y_2$};	;				
+			
+	
+	\end{tikzpicture}
+}
+
+
+
+	
+\end{document}

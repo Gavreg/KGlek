@@ -1,0 +1,101 @@
+\documentclass[tikz]{standalone}
+
+\usepackage{tikz}
+\usepackage{tikz-3dplot}
+\usepackage{amsmath} %математические формулы
+\usepackage[e]{esvect}  %Красивая стрелочка вектора
+
+
+\usepackage{polyglossia}
+\setdefaultlanguage{russian}
+\setotherlanguage{english}
+%\setkeys{russian}{babelshorthands=true}
+\usepackage{fontspec}
+\setmainfont{Times New Roman} [Script=Cyrillic, Mapping=tex-text,]
+\setsansfont{Arial} [Script=Cyrillic, Mapping=tex-text,]
+\setmonofont{Courier New} [Script=Cyrillic, Mapping=tex-text,]
+
+\usetikzlibrary{calc}
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{angles}
+
+
+
+\include{../tikzcom.tex}
+
+\begin{document}
+	
+    
+    \tdplotsetmaincoords{60}{120}
+     \begin{tikzpicture}[ scale=1, tdplot_main_coords]
+    	
+    	
+    	
+    	
+    	\VARPOINT{O}{0}{0}{0}		
+    	
+    	
+    	\VARPOINT{i}{1}{0}{0}
+    	\VARPOINT{j}{0}{1}{0}
+    	\VARPOINT{k}{0}{0}{1}
+    	
+    	
+    	
+    	
+    	\draw [-Latex, red] (0,0,0) -- ($3*(i)$) node [left] {$x$};
+    	\draw [-Latex, green] (0,0,0) -- ($3*(j)$) node [right] {$y$};	
+    	\draw [-Latex, blue] (0,0,0) -- ($3.5*(k)$) node [right] {$z$};
+    	
+    	
+    	
+    	\VARPOINT{OR}{1.2}{1.5}{2}
+    	
+    	\renewcommand{\dotsize}{0.3pt}
+    	
+    	%\PROJECTILELINES{OR}{dashed, ultra thin}{black} 			
+    	
+    	\tdplotsetrotatedcoordsorigin{(OR)}
+    	
+    	\tdplotsetrotatedcoords{0}{10}{30}
+    	
+    	\draw [-Latex, red, tdplot_rotated_coords] (0,0,0) -- (1,0,0) node [right] {$x^M$};
+    	\draw [-Latex, green, tdplot_rotated_coords] (0,0,0) -- (0,1,0) node [above] {$y^M$};	
+    	\draw [-Latex, blue, tdplot_rotated_coords] (0,0,0) -- (0,0,1) node [below left] {$z^M$};
+    	
+    	
+    	\draw [tdplot_rotated_coords] (0.3, 0.3, 0) -- (0.3, -0.3, 0)  -- (-0.3, -0.3, 0)  --(-0.3, 0.3, 0)  --cycle;    
+    	\draw [tdplot_rotated_coords]	(0.3, 0.3, 0 ) -- (0,0,0.5);
+    	\draw [tdplot_rotated_coords]	(0.3, -0.3, 0 ) -- (0,0,0.5);
+    	\draw [tdplot_rotated_coords]	(-0.3, -0.3, 0 ) -- (0,0,0.5);
+    	\draw [tdplot_rotated_coords]	(-0.3, 0.3, 0 ) -- (0,0,0.5);
+    	
+    	
+    
+    	
+    	
+    	\node [xshift=-14pt, yshift=4pt] [tdplot_screen_coords] at (-2,0) {
+	    	\tdplotsetmaincoords{60}{60}
+	    	\begin{tikzpicture}[ scale=1, tdplot_main_coords]    			
+	    		\node[rotate=20, xshift=-10pt, yshift=6pt]{\includegraphics{Icon_Camera.eps}};
+	    		\draw [-Latex, red, ] (0,0,0) -- (1,0,0) node [right] {$x^V$};
+	    		\draw [-Latex, blue, ] (0,0.5,0) -- (0,-1.5,0) node [below] {$z^V$};	
+	    		\draw [-Latex, green, ] (0,0,0) -- (0,0,1) node [below left] {$y^V$};
+	    	\end{tikzpicture}
+    	}; 	
+    	
+    	\draw [tdplot_screen_coords, dashed] (-2,0) -- +(40:3);
+    	\draw [tdplot_screen_coords, dashed] (-2,0) -- +(-10:3);
+    	
+
+
+   	
+    	
+    \end{tikzpicture} 
+    
+    
+
+
+
+
+	
+\end{document}

@@ -1,0 +1,322 @@
+\documentclass[tikz]{standalone}
+
+\usepackage{tikz}
+\usepackage[svgnames]{xcolor}
+\usepackage{tikz-3dplot}
+\usepackage{amsmath} %математические формулы
+\usepackage[e]{esvect}  %Красивая стрелочка вектора
+
+
+\usepackage{polyglossia}
+\setdefaultlanguage{russian}
+\setotherlanguage{english}
+%\setkeys{russian}{babelshorthands=true}
+\usepackage{fontspec}
+\setmainfont{Times New Roman} [Script=Cyrillic, Mapping=tex-text,]
+\setsansfont{Arial} [Script=Cyrillic, Mapping=tex-text,]
+\setmonofont{Courier New} [Script=Cyrillic, Mapping=tex-text,]
+
+\usetikzlibrary{calc}
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{angles}
+
+
+
+
+
+\include{../tikzcom.tex}
+
+\tikzset{every node/.style={inner sep=0.5mm, outer sep=0.5mm}}
+
+\begin{document}
+
+
+\begin{tikzpicture}
+	
+	
+	
+	\input{b_spline_tikz_points.dat}
+	
+	
+	\draw (P0) 
+	\foreach \t in {1,2,3,4,5}
+	{	-- (P\t) } ;
+	
+	
+	
+
+
+	
+	\draw [red] plot file{b_spline_k1_points.dat};	
+	\draw [ForestGreen] plot file{b_spline_k2_points.dat};
+	\draw [blue] plot file{b_spline_k3_points.dat};
+	\draw [Magenta] plot file{b_spline_k4_points.dat};
+	\draw [Gold] plot file{b_spline_k5_points.dat};	
+		
+	\foreach \p in {0,...,5}
+	{\fill (P\p) circle(1pt);}
+	
+	\draw (P0) node[left] {$P_0$};
+	\draw (P1) node[left] {$P_1$};
+	\draw (P2) node[above] {$P_2$};
+	\draw (P3) node[left] {$P_3$};
+	\draw (P4) node[below] {$P_4$};
+	\draw (P5) node[below] {$P_5$};
+
+	
+
+\end{tikzpicture}
+
+
+
+\begin{tikzpicture}[x={(4cm,0)},y={(0,1.5cm)}]	
+	
+	\clip (-0.4cm,-0.5cm) rectangle (4.5cm,2cm);
+	\draw[step={(0.25cm,0.25cm)}, ultra thin, gray] (0,0) grid (1,1);
+	
+	\draw [red] plot file{N05.dat};
+	\draw [ForestGreen] plot file{N15.dat};
+	\draw [blue] plot file{N25.dat};
+	\draw [Orange] plot file{N35.dat};
+	\draw [Magenta] plot file{N45.dat};
+	\draw [DeepSkyBlue] plot file{N55.dat};
+	
+	\draw[-latex] (0,0) -- (0,1.1) node [right] {$N_{i,5}$};
+	\draw[-latex] (0,0) -- (1.1,0) node [above] {$u$};
+	
+	\draw (1,0) node [below] {1};
+	\draw (0,1) node [left]  {1};
+	
+\end{tikzpicture}
+
+
+
+\begin{tikzpicture}[x={(2cm,0)},y={(0,1.5cm)}]	
+	
+	\clip (-0.4cm,-0.5cm) rectangle (4.5cm,2cm);
+	\draw[step={(0.25cm,0.25cm)}, ultra thin, gray] (0,0) grid (2,1);
+	
+	\draw [red] plot file{N04.dat};
+	\draw [ForestGreen] plot file{N14.dat};
+	\draw [blue] plot file{N24.dat};
+	\draw [Orange] plot file{N34.dat};
+	\draw [Magenta] plot file{N44.dat};
+	\draw [DeepSkyBlue] plot file{N54.dat};
+	
+	\draw[-latex] (0,0) -- (0,1.1) node [right] {$N_{i,4}$};;
+	\draw[-latex] (0,0) -- (2.1,0) node [above] {$u$};
+	
+	\draw (1,0) node [below] {1};
+	\draw (2,0) node [below] {2};
+	\draw (0,1) node [left]  {1};
+	
+\end{tikzpicture}
+
+
+
+
+\begin{tikzpicture}[x={(1.333cm,0)},y={(0,1.5cm)}]	
+	
+	\clip (-0.4cm,-0.5cm) rectangle (4.5cm,2cm);
+	\draw[step={(0.25cm,0.25cm)}, ultra thin, gray] (0,0) grid (3,1);
+	
+	\draw [red] plot file{N03.dat};
+	\draw [ForestGreen] plot file{N13.dat};
+	\draw [blue] plot file{N23.dat};
+	\draw [Orange] plot file{N33.dat};
+	\draw [Magenta] plot file{N43.dat};
+	\draw [DeepSkyBlue] plot file{N53.dat};
+	
+	\draw[-latex] (0,0) -- (0,1.1) node [right] {$N_{i,3}$}; ;
+	\draw[-latex] (0,0) -- (3.1,0) node [above] {$u$};
+	
+	\draw (1,0) node [below] {1};
+	\draw (2,0) node [below] {2};
+	\draw (3,0) node [below] {3};
+	\draw (0,1) node [left]  {1};
+	
+\end{tikzpicture}
+
+
+
+\begin{tikzpicture}[x={(1cm,0)},y={(0,1.5cm)}]	
+	
+	\clip (-0.4cm,-0.5cm) rectangle (4.5cm,2cm);
+	\draw[step={(0.25cm,0.25cm)}, ultra thin, gray] (0,0) grid (4,1);
+	
+	\draw [red] plot file{N02.dat};
+	\draw [ForestGreen] plot file{N12.dat};
+	\draw [blue] plot file{N22.dat};
+	\draw [Orange] plot file{N32.dat};
+	\draw [Magenta] plot file{N42.dat};
+	\draw [DeepSkyBlue] plot file{N52.dat};
+	
+	\draw[-latex] (0,0) -- (0,1.1) node [right] {$N_{i,2}$};
+	\draw[-latex] (0,0) -- (4.1,0) node [above] {$u$};
+	
+	\draw (1,0) node [below] {1};
+	\draw (2,0) node [below] {2};
+	\draw (3,0) node [below] {3};
+	\draw (4,0) node [below] {4};
+	\draw (0,1) node [left]  {1};
+	
+\end{tikzpicture}
+
+\begin{tikzpicture}[x={(0.8cm,0)},y={(0,1.5cm)}]	
+	
+	\clip (-0.4cm,-0.5cm) rectangle (4.5cm,2cm);
+	\draw[step={(0.25cm,0.25cm)}, ultra thin, gray] (0,0) grid (5,1);
+	
+	\draw [red] plot file{N01.dat};
+	\draw [ForestGreen] plot file{N11.dat};
+	\draw [blue] plot file{N21.dat};
+	\draw [Orange] plot file{N31.dat};
+	\draw [Magenta] plot file{N41.dat};
+	\draw [DeepSkyBlue] plot file{N51.dat};
+	
+	\draw[-latex] (0,0) -- (0,1.1) node [right] {$N_{i,1}$};
+	\draw[-latex] (0,0) -- (5.1,0) node [above] {$u$};
+	
+	\draw (1,0) node [below] {1};
+	\draw (2,0) node [below] {2};
+	\draw (3,0) node [below] {3};
+	\draw (4,0) node [below] {4};
+	\draw (5,0) node [below] {5};
+	\draw (0,1) node [left]  {1};
+	
+\end{tikzpicture}
+
+\begin{tikzpicture}[x={(0.666cm,0)},y={(0,1.5cm)}]	
+	
+	\clip (-0.4cm,-0.5cm) rectangle (4.5cm,2cm);
+	\draw[step={(0.25cm,0.25cm)}, ultra thin, gray] (0,0) grid (6,1);
+	
+	\draw [red,opacity=0.9] plot file{N00.dat};
+	\draw [ForestGreen,opacity=0.9] plot file{N10.dat};
+	\draw [blue,opacity=0.9] plot file{N20.dat};
+	\draw [Orange,opacity=0.9] plot file{N30.dat};
+	\draw [Magenta,opacity=0.9] plot file{N40.dat};
+	\draw [DeepSkyBlue,opacity=0.9] plot file{N50.dat};
+	
+	\draw[-latex] (0,0) -- (0,1.1) node [right] {$N_{i,0}$};
+	\draw[-latex] (0,0) -- (6.1,0) node [above] {$u$};
+	
+	\draw (1,0) node [below] {1};
+	\draw (2,0) node [below] {2};
+	\draw (3,0) node [below] {3};
+	\draw (4,0) node [below] {4};
+	\draw (5,0) node [below] {5};
+	\draw (6,0) node [below] {6};
+	\draw (0,1) node [left]  {1};
+	
+\end{tikzpicture}
+
+
+
+\begin{tikzpicture}	
+			
+			\draw [Cyan, line width=0.5pt] plot file{spline4_6.dat};
+			\draw [Magenta, line width=0.5pt] plot file{spline4_5.dat};
+			\draw [Orange, line width=0.5pt] plot file{spline4_4.dat};
+			\draw [blue, line width=0.5pt] plot file{spline4_3.dat};
+			\draw [ForestGreen, line width=0.5pt] plot file{spline4_2.dat};
+			\draw [red, line width=0.5pt] plot file{spline4_1.dat};	
+			\draw[ultra thin] plot[mark=*] file{points.dat};
+	
+\end{tikzpicture}
+
+\begin{tikzpicture}
+	
+	
+	\usetikzlibrary{plotmarks}
+
+	\draw [Orange, line width=0.5pt] plot file{spline4_7.dat};
+	\draw [red, draw=none, mark=star] plot file{spline4_7_in_knots.dat};
+	
+	\draw node [above] {$(0,0)$};
+	
+	\draw[ultra thin] plot[mark=*] file{points.dat};
+	
+\end{tikzpicture}
+
+
+
+
+\begin{tikzpicture}[scale=1.5]
+	
+	\draw[step={(0.25,0.25)}, ultra thin, gray] (0,0) grid (7,1);
+	
+	\draw [red] plot file{spline4_5_N71.dat};	
+	\draw [ForestGreen] plot file{spline4_5_N72.dat};
+	\draw [blue] plot file{spline4_5_N73.dat};
+	\draw [Orange] plot file{spline4_5_N74.dat};
+	\draw [Magenta] plot file{spline4_5_N75.dat};
+	
+	
+	\draw[-latex] (0,0) -- (0,1.1) node [right] {$N(3,i)$};
+	\draw[-latex] (0,0) -- (7.1,0) node [above] {$t$};
+	
+	\draw (1,0) node [below] {1};
+	\draw (2,0) node [below] {2};
+	\draw (3,0) node [below] {3};
+	\draw (4,0) node [below] {4};
+	\draw (5,0) node [below] {5};
+	\draw (6,0) node [below] {6};
+	\draw (7,0) node [below] {7};
+	\draw (0,1) node [left]  {1};
+	
+\end{tikzpicture}
+
+
+
+
+
+\begin{tikzpicture}
+	
+	\draw plot[mark=*] file{points.dat};
+	
+
+	
+	\draw (2, 1) node[left]{$B_0$};
+	\draw (1, 4) node[left]{$B_1$};
+	\draw (5, 5) node[below]{$B_2$};
+	\draw (3, 3) node[left]{$B_3$};
+	\draw (5, 1) node[left]{$B_4$};
+	
+	
+	\draw [red] plot file{spline3.dat};
+	
+	
+\end{tikzpicture}
+
+\begin{tikzpicture}
+	
+	\draw plot[mark=*, draw=none] file{points.dat};
+	
+	\draw (2, 1) node[left]{$B_0$};
+	\draw (1, 4) node[left]{$B_1$};
+	\draw (5, 5) node[below]{$B_2$};
+	\draw (3, 3) node[left]{$B_3$};
+	\draw (5, 1) node[left]{$B_4$};
+	
+	\draw [ForestGreen] plot file{spline2.dat};
+	
+	
+\end{tikzpicture}
+
+\begin{tikzpicture}
+	
+	\draw plot[mark=*, draw=none] file{points.dat};
+	
+	\draw (2, 1) node[left]{$B_0$};
+	\draw (1, 4) node[left]{$B_1$};
+	\draw (5, 5) node[below]{$B_2$};
+	\draw (3, 3) node[left]{$B_3$};
+	\draw (5, 1) node[left]{$B_4$};
+	
+	\draw [Magenta] plot file{spline0.dat};
+	
+	
+\end{tikzpicture}
+
+\end{document}

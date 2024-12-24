@@ -1,0 +1,230 @@
+\documentclass[tikz, class=scrreprt]{standalone}
+
+\usepackage{fp}
+\usepackage{tikz}
+\usepackage{tikz-3dplot}
+\usepackage{amsmath} %математические формулы
+\usepackage[e]{esvect}  %Красивая стрелочка вектора
+
+
+\usetikzlibrary{calc}
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{angles}
+
+\include{tikzcom.tex}
+
+\begin{document}
+	
+    
+	\def\frame{100}
+	\foreach \frame in {0,1,...,1}
+	{
+	\tdplotsetmaincoords{70}{100}
+	\begin{tikzpicture}[scale=1]
+		
+		%\draw[step=1, white] (-2,-2) grid (4,4);
+		
+		\VARPOINT{A}{0}{2}{0}
+		\VARPOINT{B}{3}{0.3}{0}
+		\VARPOINT{C}{2}{3}{0}
+		
+		\VARPOINT{Q}{0}{0}{0}
+		
+		\VARPOINT{T}{1}{1}{0}
+		
+		
+		\draw [-Latex] (-2,0) -- (4.3,0);
+		\draw [-Latex] (0,-0.5) -- (0,4);
+		
+		\ifthenelse{\frame>0}{
+				
+				\ROTATEPLANAR{A}{-.3};
+				\ROTATEPLANAR{B}{-0.3};
+				\ROTATEPLANAR{C}{-0.3};
+				\ROTATEPLANAR{Q}{-0.3};
+				
+				\VARPOINT{A}{\Ax+\Tx}{\Ay+\Ty}{0}
+				\VARPOINT{B}{\Bx+\Tx}{\By+\Ty}{0}
+				\VARPOINT{C}{\Cx+\Tx}{\Cy+\Ty}{0}
+				\VARPOINT{Q}{\Qx+\Tx}{\Qy+\Ty}{0}
+				
+				
+		}{
+		   
+		}		
+		
+		\draw (A) node [above left] {$A$};
+		\draw (B) node [below left] {$B$};
+		\draw (C) node [above] {$C$};
+		\draw (Q) node [above right] {$Q$};		
+		\draw (A) -- (B) -- (C) -- cycle;
+		\fill [] (Q) circle [radius=1pt];
+		
+		
+		
+		%\ROTATEPLANAR{A}{5*3.1415/180}
+		
+		%\draw [red] (0,0) -- (A);
+
+		
+	\end{tikzpicture}}
+
+
+\foreach \frame in {0,1,...,1}
+{
+  \tdplotsetmaincoords{70}{100}
+  \begin{tikzpicture}[scale=1]
+		
+		%\draw[step=1, white] (-2,-2) grid (4,4);
+		
+		\VARPOINT{A}{-2}{0.2}{0}
+		\VARPOINT{B}{0}{1.5}{0}
+		\VARPOINT{C}{1}{-0.4}{0}
+		
+		\VARPOINT{Q}{0}{0}{0}
+		
+		\VARPOINT{T}{1}{1}{0}
+		
+		
+		\draw [-Latex] (-3,0) -- (3.3,0);
+		\draw [-Latex] (0,-1.5) -- (0,3);
+		
+		\ifthenelse{\frame>0}{
+			
+			\ROTATEPLANAR{A}{-.3};
+			\ROTATEPLANAR{B}{-0.3};
+			\ROTATEPLANAR{C}{-0.3};
+			\ROTATEPLANAR{Q}{-0.3};
+			
+			\VARPOINT{A}{\Ax+\Tx}{\Ay+\Ty}{0}
+			\VARPOINT{B}{\Bx+\Tx}{\By+\Ty}{0}
+			\VARPOINT{C}{\Cx+\Tx}{\Cy+\Ty}{0}
+			\VARPOINT{Q}{\Qx+\Tx}{\Qy+\Ty}{0}
+			
+			
+		}{
+			
+		}
+				
+		
+		\draw (A) node [above left] {$A$};
+		\draw (B) node [above left] {$B$};
+		\draw (C) node [below right] {$C$};
+		\draw (Q) node [above right] {$Q$};		
+		\draw (A) -- (B) -- (C) -- cycle;
+		\fill [] (Q) circle [radius=1pt];
+		
+		
+		
+		%\ROTATEPLANAR{A}{5*3.1415/180}
+		
+		%\draw [red] (0,0) -- (A);
+		
+		
+\end{tikzpicture}}
+
+%\foreach \frame in {0,1,...,1}
+{
+	\tdplotsetmaincoords{70}{100}
+	\begin{tikzpicture}[scale=1]
+		
+		%\draw[step=1, white] (-2,-2) grid (4,4);
+		
+		\VARPOINT{A}{-2}{0.2}{0}
+		\VARPOINT{B}{0}{1.5}{0}
+		\VARPOINT{C}{1}{-0.4}{0}
+		
+		\VARPOINT{Q}{0}{0}{0}
+		
+		\VARPOINT{T}{1}{1}{0}
+		
+		
+		\draw [-Latex] (-1.5,0) -- (3.3,0);
+		\draw [-Latex] (0,-0.5) -- (0,3);
+		
+		\ifthenelse{\frame>0}{
+			
+			\ROTATEPLANAR{A}{-.3};
+			\ROTATEPLANAR{B}{-0.3};
+			\ROTATEPLANAR{C}{-0.3};
+			\ROTATEPLANAR{Q}{-0.3};
+			
+			\VARPOINT{A}{\Ax+\Tx}{\Ay+\Ty}{0}
+			\VARPOINT{B}{\Bx+\Tx}{\By+\Ty}{0}
+			\VARPOINT{C}{\Cx+\Tx}{\Cy+\Ty}{0}
+			\VARPOINT{Q}{\Qx+\Tx}{\Qy+\Ty}{0}
+			
+			
+		}{
+			
+		}
+		
+		
+		\draw (A) node [above left] {$A$};
+		\draw (B) node [above left] {$B$};
+		\draw (C) node [below right] {$C$};
+		\draw (Q) node [above right] {$Q$};		
+		\draw (A) -- (B) -- (C) -- cycle;
+		\fill [] (Q) circle [radius=1pt];
+		
+		\draw [red,densely dashed, thick] (1,0) -- (0,1) -- (0,0) -- cycle;
+		\draw (0,0) node [below left, red] {$A'$};
+		\draw (0,1) node [left, red] {$B'$};
+		\draw (1,0) node [below right, red] {$C'$};
+		
+		\fill [red] (0.6, 0.1) circle [radius=1pt];
+		\draw (0.6, 0.1) node [below, red] {$Q'$};
+		
+		
+		%\ROTATEPLANAR{A}{5*3.1415/180}
+		
+		%\draw [red] (0,0) -- (A);
+		
+		
+\end{tikzpicture}}
+
+
+%\foreach \frame in {0,1,...,1}
+{
+	\tdplotsetmaincoords{70}{100}
+	\begin{tikzpicture}[scale=1]
+		
+		%\draw[step=1, white] (-2,-2) grid (4,4);
+		
+		\VARPOINT{A}{-2}{0.2}{0}
+		\VARPOINT{B}{0}{1.5}{0}
+		\VARPOINT{C}{1}{-0.4}{0}
+		
+		\VARPOINT{Q}{0}{0}{0}
+		
+		\VARPOINT{T}{1}{1}{0}
+		
+		
+		\draw [-Latex] (-1.5,0) -- (3.3,0);
+		\draw [-Latex] (0,-0.5) -- (0,3);
+		
+			
+		\draw (A) node [above left] {$A$};
+		\draw (B) node [above left] {$B$};
+		\draw (C) node [below right] {$C$};
+		\draw (Q) node [above right] {$Q$};		
+		\draw (A) -- (B) -- (C) -- cycle;
+		\fill [] (Q) circle [radius=1pt];
+		
+		\draw [red,densely dashed, thick] (1,0) -- (0,1) -- (0,0) -- cycle;
+		\draw (0,0) node [below left, red] {$A'$};
+		\draw (0,1) node [left, red] {$B'$};
+		\draw (1,0) node [below right, red] {$C'$};
+		
+		\fill [red] (0.6, 0.1) circle [radius=1pt];
+		\draw (0.6, 0.1) node [below, red] {$Q'$};
+		
+		
+		%\ROTATEPLANAR{A}{5*3.1415/180}
+		
+		%\draw [red] (0,0) -- (A);
+		
+		
+\end{tikzpicture}}
+	
+\end{document}

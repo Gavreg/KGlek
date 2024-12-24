@@ -1,0 +1,105 @@
+\documentclass[svgnames, tikz]{standalone}
+
+
+\usepackage{tikz}
+\usepackage{tikz-3dplot}
+\usepackage{amsmath} %математические формулы
+\usepackage[e]{esvect}  %Красивая стрелочка вектора
+\usepackage{unicode-math}
+
+
+\usepackage{polyglossia}
+\setdefaultlanguage{russian}
+\setotherlanguage{english}
+%\setkeys{russian}{babelshorthands=true}
+\usepackage{fontspec}
+\setmainfont{Times New Roman} [Script=Cyrillic, Mapping=tex-text,]
+\setsansfont{Arial} [Script=Cyrillic, Mapping=tex-text,]
+\setmonofont{Courier New} [Script=Cyrillic, Mapping=tex-text,]
+
+\usetikzlibrary{calc}
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{angles}
+
+
+\usepackage{xinttools}% for \xintForpair loop 
+
+
+\include{../tikzcom.tex}
+
+\begin{document}
+	
+    
+\pgfdeclarelayer{background}
+\pgfdeclarelayer{foreground}
+\pgfsetlayers{background,main,foreground}
+
+\usetikzlibrary{math}
+
+\foreach \frame in {1,...,45}{
+
+ \begin{tikzpicture}[ scale=0.2]
+ 	
+
+	\edef\W{1}
+	\edef\H{1}
+	
+	\VARPOINT{A}{0}{0}{0}
+	\VARPOINT{B1}{24}{0}{0}
+	
+	
+	\ROTATEPLANAR{B}{B1}{\frame*3.1415/180}
+
+	
+	\draw [ultra thin] (-3,-3) grid (30,20);
+	
+	\edef\xs{\fpeval{round(\Ax,0)}}
+	\edef\ys{\fpeval{round(\Ay,0)}}
+	
+	\edef\xe{\fpeval{round(\Bx,0)}}
+	\edef\ye{\fpeval{round(\By,0)}}
+	
+	\edef\L{\fpeval{max(\xe - \xs, \ye - \ys)+1}}
+	
+	\edef\dx{\fpeval{(\xe-\xs)/\L}}
+	\edef\dy{\fpeval{(\ye-\ys)/\L}}
+	
+	\edef\x{\Ax}
+	\edef\y{\Ay}
+	
+	\edef\rx{\fpeval{round(\x,0)}}
+	\edef\ry{\fpeval{round(\y,0)}}
+	\fill [red,opacity=0.5] (\rx,\ry) rectangle({\rx+1},{\ry+1});
+	
+	\foreach \i in {1,2,...,\L}{
+		\xdef\x{\fpeval{ \x + \dx  }}
+		\xdef\y{\fpeval{ \y + \dy  }}
+		
+		\edef\rx{\fpeval{round(\x,0)}}
+		\edef\ry{\fpeval{round(\y,0)}}
+		
+		\fill [red,opacity=0.5] (\rx,\ry) rectangle({\rx+1},{\ry+1});		
+	}
+	
+	
+
+	\draw [thick] (A) -- (B);
+	\node [left] at (A) {$A$};
+	\node [right] at (B) {$B$};
+
+
+	
+\end{tikzpicture} 
+
+
+}
+
+
+
+
+    
+   
+
+
+	
+\end{document}

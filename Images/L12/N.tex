@@ -1,0 +1,280 @@
+\documentclass[tikz]{standalone}
+
+\usepackage{tikz}
+\usepackage[svgnames]{xcolor}
+\usepackage{tikz-3dplot}
+\usepackage{amsmath} %математические формулы
+\usepackage[e]{esvect}  %Красивая стрелочка вектора
+
+
+\usepackage{polyglossia}
+\setdefaultlanguage{russian}
+\setotherlanguage{english}
+%\setkeys{russian}{babelshorthands=true}
+\usepackage{fontspec}
+\setmainfont{Times New Roman} [Script=Cyrillic, Mapping=tex-text,]
+\setsansfont{Arial} [Script=Cyrillic, Mapping=tex-text,]
+\setmonofont{Courier New} [Script=Cyrillic, Mapping=tex-text,]
+
+\usetikzlibrary{calc}
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{angles}
+\usetikzlibrary{positioning}
+
+
+
+
+
+\include{../tikzcom.tex}
+
+\begin{document}
+
+
+
+
+
+\begin{tikzpicture}[every node/.style={minimum width=5ex, inner sep=1pt}] 
+	
+	
+	\node (N20) {$N_{0,1}$};
+	\foreach \i in {1,...,5}{
+		\node (N2\i) [right=5pt of N2\fpeval{\i-1}]   {$N_{\i,1}$};
+	}
+	
+	\foreach \j in {1}{
+		\node (N\j0) [below=5pt of N\fpeval{\j+1}0] {$N_{\fpeval{\j-1},0}$};
+		\foreach \i in {1,...,\fpeval{7-\j}}{
+			\node (N\j\i) [right=5pt of N\j\fpeval{\i-1}]   {$N_{\i,\fpeval{\j-1}}$};
+		}
+	}
+	
+	\node (x0) [below = 5pt of N10] {$u_0$};
+	\foreach \i in {1,...,7}{
+		\node (x\i) [right=5pt of x\fpeval{\i-1}] {$u_{\i}$};
+	}
+	
+	\foreach \j in {2}{
+		\foreach \i in {0,...,\fpeval{7-\j}}{
+			\draw (N\j\i.270) -- (N\fpeval{\j-1}\i);
+			\draw (N\j\i.280) -- (N\fpeval{\j-1}\fpeval{\i+1});
+		}
+	}
+	
+	\foreach \i in {0,...,6}
+	{
+		\draw (N1\i.270) -- (x\i);
+		\draw (N1\i.280) -- (x\fpeval{\i+1});
+	}
+	
+	\node [below=0pt of x0] {0};
+	\node [below=0pt of x1] {0};
+	\node [below=0pt of x2] {1};
+	\node [below=0pt of x3] {2};
+	\node [below=0pt of x4] {3};
+	\node [below=0pt of x5] {4};
+	\node [below=0pt of x6] {5};
+	\node [below=0pt of x7] {5};
+	
+	
+\end{tikzpicture}
+
+
+
+\begin{tikzpicture}[every node/.style={minimum width=5ex, inner sep=1pt}] 
+	
+	
+	\node (N30) {$N_{0,2}$};
+	\foreach \i in {1,...,5}{
+		\node (N3\i) [right=5pt of N3\fpeval{\i-1}]   {$N_{\i,2}$};
+	}
+	
+	\foreach \j in {2,1}{
+		\node (N\j0) [below=5pt of N\fpeval{\j+1}0] {$N_{0,\fpeval{\j-1}}$};
+		\foreach \i in {1,...,\fpeval{8-\j}}{
+			\node (N\j\i) [right=5pt of N\j\fpeval{\i-1}]   {$N_{\i,\fpeval{\j-1}}$};
+		}
+	}
+	
+	\node (x0) [below = 5pt of N10] {$u_0$};
+	\foreach \i in {1,...,8}{
+		\node (x\i) [right=5pt of x\fpeval{\i-1}] {$u_{\i}$};
+	}
+	
+	\foreach \j in {3,2}{
+		\foreach \i in {0,...,\fpeval{8-\j}}{
+			\draw (N\j\i.270) -- (N\fpeval{\j-1}\i);
+			\draw (N\j\i.280) -- (N\fpeval{\j-1}\fpeval{\i+1});
+		}
+	}
+	
+	\foreach \i in {0,...,7}
+	{
+		\draw (N1\i.270) -- (x\i);
+		\draw (N1\i.280) -- (x\fpeval{\i+1});
+	}
+	
+	\node [below=0pt of x0] {0};
+	\node [below=0pt of x1] {0};
+	\node [below=0pt of x2] {0};
+	\node [below=0pt of x3] {1};
+	\node [below=0pt of x4] {2};
+	\node [below=0pt of x5] {3};
+	\node [below=0pt of x6] {4};
+	\node [below=0pt of x7] {4};
+	\node [below=0pt of x8] {4};
+	
+	
+
+\end{tikzpicture}
+
+\begin{tikzpicture}[every node/.style={minimum width=5ex, inner sep=1pt}] 
+	
+	
+	\node (N40) {$N_{0,3}$};
+	\foreach \i in {1,...,5}{
+		\node (N4\i) [right=5pt of N4\fpeval{\i-1}]   {$N_{\i,3}$};
+	}
+	
+	\foreach \j in {3,2,1}{
+		\node (N\j0) [below=5pt of N\fpeval{\j+1}0] {$N_{0,\fpeval{\j-1}}$};
+		\foreach \i in {1,...,\fpeval{9-\j}}{
+			\node (N\j\i) [right=5pt of N\j\fpeval{\i-1}]   {$N_{\i,\fpeval{\j-1}}$};
+		}
+	}
+	
+	\node (x0) [below = 5pt of N10] {$u_0$};
+	\foreach \i in {1,...,9}{
+		\node (x\i) [right=5pt of x\fpeval{\i-1}] {$u_{\i}$};
+	}
+	
+	\foreach \j in {4,3,2}{
+		\foreach \i in {0,...,\fpeval{9-\j}}{
+			\draw (N\j\i.270) -- (N\fpeval{\j-1}\i);
+			\draw (N\j\i.280) -- (N\fpeval{\j-1}\fpeval{\i+1});
+		}
+	}
+	
+	\foreach \i in {0,...,8}
+	{
+		\draw (N1\i.270) -- (x\i);
+		\draw (N1\i.280) -- (x\fpeval{\i+1});
+	}
+	
+	\node [below=0pt of x0] {0};
+	\node [below=0pt of x1] {0};
+	\node [below=0pt of x2] {0};
+	\node [below=0pt of x3] {0};
+	\node [below=0pt of x4] {1};
+	\node [below=0pt of x5] {2};
+	\node [below=0pt of x6] {3};
+	\node [below=0pt of x7] {3};
+	\node [below=0pt of x8] {3};
+	\node [below=0pt of x9] {3};
+	
+	
+	
+\end{tikzpicture}
+
+\begin{tikzpicture}[every node/.style={minimum width=5ex, inner sep=1pt}] 
+	
+	
+	\node (N50) {$N_{0,4}$};
+	\foreach \i in {1,...,5}{
+		\node (N5\i) [right=5pt of N5\fpeval{\i-1}]   {$N_{\i,4}$};
+	}
+	
+	\foreach \j in {4,3,2,1}{
+		\node (N\j0) [below=5pt of N\fpeval{\j+1}0] {$N_{0,\fpeval{\j-1}}$};
+		\foreach \i in {1,...,\fpeval{10-\j}}{
+			\node (N\j\i) [right=5pt of N\j\fpeval{\i-1}]   {$N_{\i,\fpeval{\j-1}}$};
+		}
+	}
+	
+	\node (x0) [below = 5pt of N10] {$u_0$};
+	\foreach \i in {1,...,10}{
+		\node (x\i) [right=5pt of x\fpeval{\i-1}] {$u_{\i}$};
+	}
+	
+	\foreach \j in {5,4,3,2}{
+		\foreach \i in {0,...,\fpeval{10-\j}}{
+			\draw (N\j\i.270) -- (N\fpeval{\j-1}\i);
+			\draw (N\j\i.280) -- (N\fpeval{\j-1}\fpeval{\i+1});
+		}
+	}
+	
+	\foreach \i in {0,...,9}
+	{
+		\draw (N1\i.270) -- (x\i);
+		\draw (N1\i.280) -- (x\fpeval{\i+1});
+	}
+	
+	\node [below=0pt of x0] {0};
+	\node [below=0pt of x1] {0};
+	\node [below=0pt of x2] {0};
+	\node [below=0pt of x3] {0};
+	\node [below=0pt of x4] {0};
+	\node [below=0pt of x5] {1};
+	\node [below=0pt of x6] {2};
+	\node [below=0pt of x7] {2};
+	\node [below=0pt of x8] {2};
+	\node [below=0pt of x9] {2};
+	\node [below=0pt of x10] {2};
+	
+	
+	
+\end{tikzpicture}
+
+
+
+\begin{tikzpicture}[every node/.style={minimum width=5ex, inner sep=1pt}] 
+	
+	
+	\node (N60) {$N_{0,5}$};
+	\foreach \i in {1,...,5}{
+		\node (N6\i) [right=5pt of N6\fpeval{\i-1}]   {$N_{\i,5}$};
+	}
+	
+	\foreach \j in {5,4,3,2,1}{
+		\node (N\j0) [below=5pt of N\fpeval{\j+1}0] {$N_{0,\fpeval{\j-1}}$};
+		\foreach \i in {1,...,\fpeval{11-\j}}{
+			\node (N\j\i) [right=5pt of N\j\fpeval{\i-1}]   {$N_{\i,\fpeval{\j-1}}$};
+		}
+	}
+	
+	\node (x0) [below = 5pt of N10] {$u_0$};
+	\foreach \i in {1,...,11}{
+		\node (x\i) [right=5pt of x\fpeval{\i-1}] {$u_{\i}$};
+	}
+	
+	\foreach \j in {6,5,4,3,2}{
+		\foreach \i in {0,...,\fpeval{11-\j}}{
+			\draw (N\j\i.270) -- (N\fpeval{\j-1}\i);
+			\draw (N\j\i.280) -- (N\fpeval{\j-1}\fpeval{\i+1});
+		}
+	}
+	
+	\foreach \i in {0,...,10}
+	{
+		\draw (N1\i.270) -- (x\i);
+		\draw (N1\i.280) -- (x\fpeval{\i+1});
+	}
+	
+	\node [below=0pt of x0] {0};
+	\node [below=0pt of x1] {0};
+	\node [below=0pt of x2] {0};
+	\node [below=0pt of x3] {0};
+	\node [below=0pt of x4] {0};
+	\node [below=0pt of x5] {0};
+	\node [below=0pt of x6] {1};
+	\node [below=0pt of x7] {1};
+	\node [below=0pt of x8] {1};
+	\node [below=0pt of x9] {1};
+	\node [below=0pt of x10] {1};
+	\node [below=0pt of x11] {1};
+	
+\end{tikzpicture}
+
+
+
+	
+\end{document}

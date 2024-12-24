@@ -1,0 +1,119 @@
+\documentclass[tikz, class=scrreprt]{standalone}
+
+\usepackage{fp}
+\usepackage{tikz}
+\usepackage{tikz-3dplot}
+\usepackage{amsmath} %математические формулы
+\usepackage[e]{esvect}  %Красивая стрелочка вектора
+
+
+\usetikzlibrary{calc}
+\usetikzlibrary{arrows.meta}
+
+\include{tikzcom.tex}
+
+\begin{document}
+	
+    
+	\def\frame{100}
+	%\foreach \frame in {0,1,...,2}
+	{
+	\tdplotsetmaincoords{70}{100}
+	\begin{tikzpicture}[scale=1, tdplot_main_coords]
+		
+		
+		%\draw[step=.5cm,black!10,very thin] (-1.5,-1.5) grid (5,5);
+		
+		%\draw[-latex, thick] (-1,0) -- (5,0);
+		%\draw[-latex, thick] (0,-1) -- (0,5);
+		
+		\coordinate (O) at (0,0);
+		
+		%\draw (O) node [left,yshift=5pt] {$O$};
+		
+		% A(1,1)   B(3,1)
+		% C(1,3)  D(3,3) 
+		% n=(2,1,3)
+		%
+		%
+		%
+		%
+		%
+		
+		\VARPOINT{N}{0.5}{0.5}{3};
+		
+		
+		
+		\coordinate (i) at (1,0,0);
+		\coordinate (j) at (0,1,0);
+		\coordinate (k) at (0,0,1);
+		
+		\draw [-Latex, red] (O) -- ($5*(i)$);
+		\draw [-Latex, green] (O) -- ($4*(j)$);
+		\draw [blue] (O) -- ($2*(k)$);
+		
+		
+		%\coordinate (A) at (1,1,3);
+		%\coordinate (B) at (0.5,4,4);
+		%\coordinate (C) at (4,1.5);
+		
+		\VARPOINT{tA}{-1}{-1}{0};  % 2 4 2		
+		\VARPOINT{tB}{3}{-1}{0};
+		\VARPOINT{tC}{-1}{3}{0};
+		\VARPOINT{tD}{3}{3}{0};
+				
+	    \CALCZ{tA}{N}{6}{\zA}
+	    \CALCZ{tB}{N}{6}{\zB}
+	    \CALCZ{tC}{N}{6}{\zC}
+	    \CALCZ{tD}{N}{6}{\zD}	    
+
+	    \VARPOINT{A}{\tAx}{\tAy}{\zA};  % 2 4 2		
+	    \VARPOINT{B}{\tDx}{\tBy}{\zB};
+	    \VARPOINT{C}{\tCx}{\tCy}{\zC};
+	    \VARPOINT{D}{\tDx}{\tDy}{\zD};
+
+	    
+	    
+	  
+          
+	    %\expandafter\edef\noexpand\Nlen{\fpeval{\Nx*\Nx + \Ny*\Ny + \Nz*\Nz}}
+	    
+	    \edef\Nlen{\fpeval{sqrt(\Nx*\Nx + \Ny*\Ny + \Nz*\Nz)}}
+	    
+	    \VARPOINT{NN}{\Nx / \Nlen } {\Ny / \Nlen } {\Nz / \Nlen }
+	    \edef\X{\fpeval{6 / \Nlen}}
+	    
+	    \renewcommand{\dotsize}{0.5pt}
+	    \PROJECTILELINESXY{A}{dashed, very thin, black!50}{black!50}
+	    \PROJECTILELINESXY{B}{dashed, very thin, black!50}{black!50}
+	    \PROJECTILELINESXY{C}{dashed, very thin, black!50}{black!50}
+	    \PROJECTILELINESXY{D}{dashed, very thin, black!50}{black!50}
+		
+		\VARPOINT{NNN}{\X*\NNx}{\X*\NNy}{\X*\NNz}
+		
+		\draw[-] (O) -- (NNN);
+		
+		%\draw (O) -- (6*\NNx,6*\NNy,6*\NNz);		
+		
+		
+		\draw[dashed, very thin, black!50] ;
+		
+		
+	
+		\filldraw[red, fill=red!50, opacity=0.5] (A) -- (B) -- (D) -- (C) -- cycle;
+			
+		\draw[-Latex] (NN) -- (NNN) node [right] {$\vv{n}$};
+		
+		%\fill [] (E) circle [radius=1pt];
+
+        
+		\draw (C) node [above left] {$\alpha$};	
+
+		\fill [blue] (0,0,2) circle [radius=0.5pt];
+		\fill [] (NN) circle [radius=1pt] node [right] {$\vv{x}$};
+		
+		\draw [-Latex, blue] (0,0,2) -- ($3*(k)$);
+		
+	\end{tikzpicture}}
+	
+\end{document}

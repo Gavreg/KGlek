@@ -1,0 +1,361 @@
+\documentclass[10pt]{beamer}
+
+%\documentclass[10pt, handout]{beamer}
+\setbeameroption{show notes}
+
+%\documentclass[10pt, a4paper]{article}
+%\usepackage{beamerarticle}
+
+\include{preambule.tex}
+
+\graphicspath{{Images/}{Images/\jobname/}}
+
+\date{\today}
+
+
+
+\renewcommand{\LectionNumber}{11}
+\renewcommand{\LectionTheme}{Наложение специальных текстур}
+\title{Лекция \lecdni \\ \LectionTheme}
+\subtitle{Компьютерная графика}
+
+
+
+%\usepackage{standalone}
+
+\setbeamersize
+{
+	text margin left=0.5cm,
+	text margin right=0.5cm
+}
+
+\usepackage{comment}
+
+
+%	\transduration{2}
+%   \transfade
+
+ \begin{document}
+ 		 
+\input{template.tex}
+
+\newcommand \abs[1] {\left| #1 \right|}
+
+\everymath{\displaystyle}
+
+    
+    \QRFRAME	
+	
+
+	\frame{\maketitle}
+
+	
+	\begin{frame}{План лекции}
+		%\tableofcontents
+	\end{frame}
+	
+
+\begin{frame}{Displacement mapping}
+	
+	\TC{0.5}
+	{
+		\IG{Displacement_Mapping.jpg}
+	}{
+		\IG{dm_3_small.jpg}
+		
+		~
+		
+		~
+		
+		\IG{dm_small.jpg}
+	}
+	
+	
+	
+\end{frame}
+	
+\begin{frame}{Bump mapping}
+	
+	\TC{0.5}
+	{
+		\animategraphics[autoplay,loop, nomouse, width=\textwidth]{20}{Images/\jobname/bump_anim/bump}{0001}{0150}
+	}{
+		\centering\IG{stonebrick.png}
+	}
+\end{frame}	
+
+\begin{frame}{Карта высот}
+	
+	\centering\IG[0.9]{StandardShaderHeightmapTexture.png}
+	
+\end{frame}
+
+\begin{frame}{Рельеф то не настоящий!}
+	
+	\centering\animategraphics[autoplay,loop, nomouse, width=0.6\textwidth]{20}{Images/\jobname/bump2/bump2}{0001}{0150}
+	
+\end{frame}
+
+
+\begin{frame}{Где "живет" нормаль?}
+	
+	\TC{0.5}
+	{
+		\IG{1493389010153817205.jpg}
+	}{
+		Карта высот --- $f(x,y,z)=\mathrm{const}$.
+		$\vv n_f = \nabla f = \left( \dfrac{\partial f}{\partial x},\dfrac{\partial f}{\partial y},\dfrac{\partial f}{\partial z} \right)$
+		
+		$f(x,y,z) = h(x,y) -z=0$
+		
+		~
+		
+		$\vv n(x,y) = \left( \dfrac{\partial f}{\partial x},\dfrac{\partial f}{\partial y},-1 \right)$
+	}
+	$\vv n(x,y) = \left(\dfrac{h(x+1,y)-h(x-1,y) }{2},\dfrac{h(x,y+1)-h(x,y-1) }{2}, -1  \right) $
+\end{frame}
+	
+\begin{frame}{Касательное пространство (tangent space)}
+	
+	\TC{0.4}
+	{
+		\centering
+		
+		\only<1>{\includegraphics[page=1]{TNB.pdf}}%
+		\only<2->{\includegraphics[page=2]{TNB.pdf}}%
+		
+		
+		\includegraphics[page=3]{TNB.pdf}
+		
+	}{
+		
+		$\begin{array}{l}
+			\vv e_1 = P_2-P_1 \\
+			\vv e_2 = P_3-P_2 \\
+		\end{array}$
+		\pause $\Rightarrow$
+		$\begin{array}{l}
+			\vv e_1 = \Delta u_1\vv T+ \Delta v_1\vv B \\
+			\vv  e_2 = \Delta u_2\vv T+ \Delta v_2\vv B\\
+		\end{array}$
+		
+		\pause
+		
+		или так:
+		
+		$\begin{pmatrix}
+			\vv e_1 \\
+			\vv e_2
+		\end{pmatrix}
+		=
+		\begin{pmatrix}
+			\Delta u_1 & \Delta v_1\\
+			\Delta u_2 & \Delta v_2
+		\end{pmatrix}
+		\begin{pmatrix}
+			\vv T \\
+			\vv B
+		\end{pmatrix}
+		$
+		
+		~ \pause
+		
+		~
+		
+		$	
+		\begin{pmatrix}
+			\vv T \\
+			\vv B
+		\end{pmatrix}
+		=
+		\begin{pmatrix}
+			\Delta u_1 & \Delta v_1\\
+			\Delta u_2 & \Delta v_2
+		\end{pmatrix} ^ {-1}
+		\begin{pmatrix}
+			\vv e_1 \\
+			\vv e_2
+		\end{pmatrix}
+		$
+		
+		$	
+		\begin{pmatrix}
+			\vv T \\
+			\vv B
+		\end{pmatrix}
+		=
+		\dfrac{
+			\begin{pmatrix}
+				\Delta v_1 & -\Delta v_1\\
+				-\Delta u_2 & \Delta u_2
+			\end{pmatrix}
+		}
+		{	
+			\Delta u_1 \Delta v_2 - \Delta v_1 \Delta u_2
+		}	
+		\begin{pmatrix}
+			\vv e_1 \\
+			\vv e_2
+		\end{pmatrix}
+		$
+		
+		~
+		
+		\pause$
+		\mathbf M_{TBN}=
+		\begin{pmatrix}
+			\vv T\\
+			\vv B\\
+			\vv N\\
+		\end{pmatrix}
+		=
+		\begin{pmatrix}
+			T_x & T_y & T_z\\
+			B_x & B_y & B_z\\
+			N_x & N_y & N_z\\
+		\end{pmatrix}
+		$	
+		
+		$\mathbf A^\text{мир} = \mathbf M_{TBN} \mathbf A^\text{кас}, \ $
+		$\mathbf A^\text{кас} = {\mathbf M _{TBN}}^{-1} \mathbf A^\text{мир}$
+		
+	}
+	
+	
+	
+\end{frame}	
+
+\begin{frame}{Normal mapping}
+		
+		\centering
+		
+		\IG[1]{0cppvtgpjw48at0r2crvdy3omfg.png}
+		
+		\IG[1]{kay_684wpm4mpkko92gl1nemjh4.png}
+
+\end{frame}
+	
+\begin{frame}{Карта нормалей}
+	
+	\centering
+	\TC{0.5}
+	{
+		\IG{8620ac5aaca576891aaa13188c1d3a75.jpg}	
+	}{
+	    \IG{c4ef222ce73d3cd29b0b055cec587c6b.jpg}	
+	}
+
+	
+\end{frame}
+	
+\begin{frame}{Виды карт нормалей}
+	
+	\IG{vtf_botw_8tazlodtepbgp0zyvk.png}
+	
+\end{frame}
+
+\begin{frame}{Результат наложения карты нормалей}
+	\TC{0.5}
+	{
+		\animategraphics[autoplay,loop, nomouse, width=\textwidth]{25}{Images/\jobname/nm_anim/}{0001}{0150}
+	}{
+		\IG{nm2.png}
+	}
+	
+\end{frame}
+
+
+
+\begin{frame}{Создание карт нормалей}	
+	
+	\TC{0.5}
+	{
+		\IG{e4ebbbb943f8a3ad71016ee396bc55bb.jpg}
+		
+		\IG{2565084f33aaafaedfb752e7b5c01b89}
+		
+	}{
+		\IG{72c48753443123074b3b0170ee04e7e8}
+	}
+	
+\end{frame}
+
+\begin{frame}{Lowpoly и highpoly модели}
+	
+	\IG[0.95]{5b3d7c86fc1fe61040b1b7b0292b24572ecebc6f-1.jpg}
+	
+	
+\end{frame}
+	
+
+\begin{frame}{Paralax mapping}
+	
+	\TC{0.4}
+	{
+		\IG{iinoiejzmk64kssow31hqnm4bd4}
+	}{
+		\IG{uubupwg7tnqbjpv3rhf2p5xjw4y}
+	}
+	
+	\HREF{https://cpetry.github.io/NormalMap-Online/}{Демонстрация}
+	
+	
+\end{frame}
+
+\begin{frame}{Основная идея}
+	
+	\IG {rwabtldbgzyc-rsarcgipyteab0.png}
+	
+	\IG [0.48] {p7kazlkvcdvy53_r05zpmwedros.png} \IG[0.48]{mbbqtsva5kzyzpj8ettleqrdxr4.png}
+	
+\end{frame}
+
+\begin{frame}{На основе карты грубин}
+	
+	\IG{oqzry5trs2lyfbwhe6puu0u04y8.png}
+	
+	\begin{tikzpicture}[overlay, remember picture]
+		\draw (current page.center) node[xshift=-4cm, yshift=1.3cm]  {\includegraphics[width=3cm]{bricks2_disp.jpg}};
+		
+	\end{tikzpicture}
+	
+\end{frame}
+
+\begin{frame}{Что для всего этого нужно}
+	
+	\TC{0.5}
+	{
+		\IG{uubupwg7tnqbjpv3rhf2p5xjw4y}
+		
+	}{
+		\centering
+		\IG[0.45]{bricks2.jpg}
+		\IG[0.45]{bricks2_disp.jpg}
+		\IG[0.45]{bricks2_normal.jpg}
+	}
+	
+\end{frame}
+
+
+
+\begin{frame}{Трассировка луча}
+	
+	\IG{Screenshot 2024-10-02 212545.png}
+	
+\end{frame}
+
+\begin{frame}{Сравнение технологий}
+	
+	\IG{StandardShaderParallaxMap}
+	
+\end{frame}
+
+
+
+ 
+\begin{comment}
+	
+\end{comment}
+ 
+
+\end{document}

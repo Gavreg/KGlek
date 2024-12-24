@@ -1,0 +1,74 @@
+\documentclass[tikz]{standalone}
+
+\usepackage{tikz}
+\usepackage[svgnames]{xcolor}
+\usepackage{tikz-3dplot}
+\usepackage{amsmath} %математические формулы
+\usepackage[e]{esvect}  %Красивая стрелочка вектора
+
+
+\usepackage{polyglossia}
+\setdefaultlanguage{russian}
+\setotherlanguage{english}
+%\setkeys{russian}{babelshorthands=true}
+\usepackage{fontspec}
+\setmainfont{Times New Roman} [Script=Cyrillic, Mapping=tex-text,]
+\setsansfont{Arial} [Script=Cyrillic, Mapping=tex-text,]
+\setmonofont{Courier New} [Script=Cyrillic, Mapping=tex-text,]
+
+\usetikzlibrary{calc}
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{angles}
+
+
+
+\include{../tikzcom.tex}
+
+\begin{document}
+	
+    \foreach \frame in {1,...,2}
+    {
+    
+	     \begin{tikzpicture}[ scale=1]
+	
+		%\node {Test};
+		
+		%\clip (-3,-2) rectangle (3.3,2.3);
+				
+		\draw[-Latex] (-2,0) -- (2,0);	
+		
+		\draw (2,0) node [above left] {Re};
+		\draw (0,2) node [left] {Im};
+		\draw[-Latex] (0,-1.7) -- (0,2);
+		\fill (0,0) circle(1pt) node[below left] {$0$};
+		
+			
+		\fill (1,0) circle (1pt) node [below] {$z_1=\bar z_1$};
+		\fill (-1,0) circle (1pt) node [below] {$-z_1$};
+		
+		\ifthenelse{\frame > 1}{
+			
+			\fill (0,1) circle(1pt) node[left] {$z_2$};
+			\fill (0,-1) circle(1pt) node[left] {$-z_2=\bar z_2$};
+		
+		}
+			
+			
+
+			
+		
+	    \end{tikzpicture} 
+	}
+	
+	
+	
+	
+
+
+
+
+
+
+
+	
+\end{document}

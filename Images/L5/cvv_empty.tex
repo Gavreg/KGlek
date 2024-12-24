@@ -1,0 +1,265 @@
+\documentclass[tikz]{standalone}
+
+\usepackage{tikz}
+\usepackage{tikz-3dplot}
+\usepackage{amsmath} %математические формулы
+\usepackage[e]{esvect}  %Красивая стрелочка вектора
+
+
+\usepackage{polyglossia}
+\setdefaultlanguage{russian}
+\setotherlanguage{english}
+%\setkeys{russian}{babelshorthands=true}
+\usepackage{fontspec}
+\setmainfont{Times New Roman} [Script=Cyrillic, Mapping=tex-text,]
+\setsansfont{Arial} [Script=Cyrillic, Mapping=tex-text,]
+\setmonofont{Courier New} [Script=Cyrillic, Mapping=tex-text,]
+
+\usetikzlibrary{calc}
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{angles}
+
+
+
+\include{../tikzcom.tex}
+
+\newcommand{\setcube}[1]{
+	\VARPOINT{#1A}{0.5}{0.5}{-0.5}
+	\VARPOINT{#1B}{0.5}{-0.5}{-0.5}
+	\VARPOINT{#1C}{-0.5}{-0.5}{-0.5}
+	\VARPOINT{#1D}{-0.5}{0.5}{-0.5}
+	\VARPOINT{#1A1}{0.5}{0.5}{0.5}
+	\VARPOINT{#1B1}{0.5}{-0.5}{0.5}
+	\VARPOINT{#1C1}{-0.5}{-0.5}{0.5}
+	\VARPOINT{#1D1}{-0.5}{0.5}{0.5}
+	
+	\expandafter\xdef\csname #1points\endcsname{#1A, #1B, #1C, #1D, #1A1, #1B1, #1C1, #1D1}
+}
+
+\newcommand{\drawcube}[1]{
+	\draw [line join=round] (#1A) -- (#1B)-- (#1C) -- (#1D) --cycle;
+	\draw [line join=round]  (#1A1) -- (#1B1) -- (#1C1) -- (#1D1) --cycle;
+	\draw  [thick, line join=round] (#1B) -- (#1C) -- (#1C1) -- (#1B1) --cycle;
+	
+	\foreach \p in {A,B,C,D}{
+		\draw [line join=round] (#1\p) -- (#1\p 1);				
+	}
+}
+
+
+
+\newcommand{\setConnerCube}[1]{
+ 	\VARPOINT{#1A}{0.5}{0.5}{-0.5}
+ 	\VARPOINT{#1B}{0.5}{-0.5}{-0.5}
+ 	\VARPOINT{#1C}{-0.5}{-0.5}{-0.5}
+ 	\VARPOINT{#1D}{-0.5}{0.5}{-0.5}
+ 	
+ 	\VARPOINT{#1B1}{0.5}{-0.5}{0.5}
+ 	\VARPOINT{#1C1}{-0.5}{-0.5}{0.5}
+ 	\VARPOINT{#1D1}{-0.5}{0.5}{0.5}
+ 	
+ 	\VARPOINT{#1AA}{0.5}{0.5}{0}
+ 	\VARPOINT{#1AD}{0}{0.5}{0.5}
+ 	\VARPOINT{#1AB}{0.5}{0}{0.5}
+ 	
+ 	\expandafter\xdef\csname #1points\endcsname{#1A, #1B, #1C, #1D, #1B1, #1C1, #1D1, #1AA, #1AB, #1AD}
+ 	
+
+}
+
+\newcommand{\drawConnerCube}[1]{
+	
+	\draw (#1B1) -- (#1C1) -- (#1D1) -- (#1AD) -- (#1AB) -- cycle;
+	\draw [line join=round] (#1A) -- (#1B)-- (#1C) -- (#1D) --cycle;
+	\foreach \p in {B,C,D}{
+		\draw [line join=round] (#1\p) -- (#1\p 1);				
+	}
+	\draw (#1AB) -- (#1AA) -- (#1AD);
+	\draw (#1AA) -- (#1A);
+	
+}
+
+
+\begin{document}
+	
+    
+	
+		\tdplotsetmaincoords{70}{70}
+		\begin{tikzpicture}[ scale=1, tdplot_main_coords]
+		
+		
+		
+		
+		
+		
+		
+		\VARPOINT{O}{0}{0}{0}
+		
+		
+		\VARPOINT{i}{1}{0}{0}
+		\VARPOINT{j}{0}{1}{0}
+		\VARPOINT{k}{0}{0}{1}
+		
+		
+		
+		
+		\draw [-Latex, red] (-1,0,0) -- ($7*(i)$) node [above] {$x$};
+		\draw [-Latex, blue] ($8.2*(j)$) -- (0,-1,0) node [above] {$z$};	
+		\draw [-Latex, green] (0,0,-1) -- ($5*(k)$) node [right] {$y$};
+		
+		
+		
+		\MATRIXROW{M}{a}{0.3}{0}{0}{0}
+		\MATRIXROW{M}{b}{0}{0.3}{0}{0}
+		\MATRIXROW{M}{c}{0}{0}{0.3}{0}
+		\MATRIXROW{M}{d}{0}{0}{0}{1}
+		
+		
+		
+		\VARPOINT{A}{5}{6}{3}
+		\VARPOINT{B}{5}{6}{-3}
+		\VARPOINT{C}{-5}{6}{-3}
+		\VARPOINT{D}{-5}{6}{3}
+		
+		\draw [thick] (A) -- (B) -- (C) -- (D) -- cycle;
+		
+		\foreach \p in {A,B,C,D}{
+			\MATRIXPOINTMULTIPLY{\p \p}{M}{\p}
+			
+			\draw [thick] (\p) -- (\p \p);
+			
+			\draw [thin,dashed] (\p) -- (O);
+			
+		}
+		
+	
+		\draw [thick] (AA) -- (BB)  --  (CC) -- (DD) -- cycle;
+		
+		
+		\setConnerCube{cubeA}
+		
+		\TRANSLATEMATRIX{TR}{0}{4}{0}
+		\SCALEMATRIX{SC}{2}{-2}{2}
+		
+		\GLUPERSPECTIVEY{PR}{1.3}{1}{1.7}{6}
+		
+		\foreach \p in \cubeApoints
+		{
+			
+			\MATRIXPOINTMULTIPLY{\p}{SC}{\p}
+			\MATRIXPOINTMULTIPLY{\p}{TR}{\p}
+		
+			
+		}
+		
+	%	\drawConnerCube{cubeA}
+		
+		%\foreach \p in \cubeApoints
+		%{			
+
+			%\MATRIXPOINTMULTIPLY{\p}{PR}{\p}
+			
+		%}
+		
+		
+		%\drawConnerCube{cubeA}
+		
+
+		
+		\node [scale=0.6, left, rotate=9,yshift=6pt, xshift=5pt, opacity=0.5]{\includegraphics{Icon_Camera.eps}};
+		
+		
+		
+		
+	\end{tikzpicture} 
+	
+	
+		\tdplotsetmaincoords{70}{30}
+	\begin{tikzpicture}[ scale=2.5, tdplot_main_coords]
+		
+		\VARPOINT{O}{0}{0}{0}
+		
+		
+		\VARPOINT{i}{1}{0}{0}
+		\VARPOINT{j}{0}{1}{0}
+		\VARPOINT{k}{0}{0}{1}
+		
+		
+		
+		
+		
+		
+		\draw [-Latex, red] (-1.3,0,0) -- ($1.3*(i)$) node [right] {$x^{c}$};
+		\draw [-Latex, blue] (0,-1.3,0) -- ($1.3*(j)$) node [above right] {$z^{c}$};	
+		\draw [-Latex, green] (0,0,-1.3) -- ($1.3*(k)$) node [right] {$y^{c}$};
+		
+		
+		\VARPOINT{A}{-0.4}{0.1}{-0.3};
+		\VARPOINT{B}{0.3}{-0.3}{-0.4};
+		\VARPOINT{C}{0.1}{0.1}{0.4};
+		
+		
+		
+		
+		\fill (1,0,0) circle(0.4pt) node [above] {$1$};
+		\fill (-1,0,0) circle(0.4pt);% node [above] {$-1$};
+		
+		\fill (0,1,0) circle(0.4pt) node [above] {$1$};
+		\fill (0,-1,0) circle(0.4pt);% node [above left] {$-1$};
+		
+		\fill (0,0,1) circle(0.4pt) node [right] {$1$};
+		\fill (0,-0,-1) circle(0.4pt);% node [left] {$-1$};
+		
+		
+		
+		
+		
+		\setcube{cubeB};
+		
+		\SCALEMATRIX{SC2}{2}{2}{2}
+		
+		\foreach \p in \cubeBpoints
+		{
+			
+			\MATRIXPOINTMULTIPLY{\p}{SC2}{\p}
+			
+			
+			
+		}
+		
+		\drawcube{cubeB};
+		
+		
+		\setConnerCube{cubeA}
+		
+		\TRANSLATEMATRIX{TR}{0}{3}{0}
+		\SCALEMATRIX{SC}{2}{-2}{2}
+		
+		\GLUPERSPECTIVEY{PR}{1.3}{1}{1.7}{6}
+		
+		\foreach \p in \cubeApoints
+		{
+			
+			\MATRIXPOINTMULTIPLY{\p}{SC}{\p}
+			\MATRIXPOINTMULTIPLY{\p}{TR}{\p}
+			
+			
+		}
+		
+		%\drawConnerCube{cubeA}
+		
+		\foreach \p in \cubeApoints
+		{			
+			
+			\MATRIXPOINTMULTIPLY{\p}{PR}{\p}
+			
+		}
+		
+		
+		%\drawConnerCube{cubeA}
+		
+		
+	\end{tikzpicture} 
+	
+	
+\end{document}

@@ -1,0 +1,362 @@
+\documentclass[10pt]{beamer}
+
+%\documentclass[10pt, handout]{beamer}
+\setbeameroption{show notes}
+
+%\documentclass[10pt, a4paper]{article}
+%\usepackage{beamerarticle}
+
+\input{preambule.tex}
+
+\graphicspath{{Images/}{Images/\jobname/}}
+
+\date{\today}
+
+
+
+\renewcommand{\LectionNumber}{10}
+\renewcommand{\LectionTheme}{Наложение текстур}
+\title{Лекция \lecdni \\ \LectionTheme}
+\subtitle{Компьютерная графика}
+
+
+
+%\usepackage{standalone}
+
+\setbeamersize
+{
+	text margin left=0.5cm,
+	text margin right=0.5cm
+}
+
+\usepackage{comment}
+
+
+%	\transduration{2}
+%   \transfade
+
+ \begin{document}
+ 		 
+\input{template.tex}
+
+\newcommand \abs[1] {\left| #1 \right|}
+
+\everymath{\displaystyle}
+
+    
+    \QRFRAME	
+	
+
+	\frame{\maketitle}
+
+	
+	\begin{frame}{План лекции}
+		\tableofcontents
+	\end{frame}
+	
+	\begin{frame}
+		\TC{0.6}
+		{
+			\IG{widen_1220x0-768x377.jpg}
+		}
+		{
+			\IG{Screenshot_5.png}
+		}
+		
+		\IG{watermelon.png}
+	\end{frame}
+	
+	\section{Виды текстур}
+	
+	\begin{frame}{Пример использования различных видов текстур}
+		
+	{
+		\centering
+		\IG[0.7]{image001.png}
+		
+		А – карта диффузного отражения, Б – карта нормалей, В – карта смещений.
+	}
+		
+	\end{frame}	
+	
+	\section{Текстурные координаты}
+	
+	\begin{frame} {Текстурные координаты}
+		
+		\centering
+		\IG[0.7]{intro2.jpg}
+		
+	\end{frame}
+	
+	\begin{frame}{А что за пределами текстурных координат?}
+		
+		\def\p{0.33}
+		\centering
+		\IG[\p]{Wrap-Addressing-Mode1}
+		\IG[\p]{Mirror-Addressing-Mode1}
+		\IG[\p]{Clamp-Addressing-Mode1}
+		\IG[\p]{Border-Addressing-Mode}
+		
+		
+	\end{frame}
+	
+	\begin{frame}{Наложение текстур}
+		
+		\IG{textureoverview.jpg}
+		
+		
+	\end{frame}
+	
+	\begin{frame}{Наложение текстур}
+		\centering\IG[0.8]{Screenshot 2024-09-25 204444.png}		
+	\end{frame}
+	
+     \begin{frame}{Наложение текстур на объекты}
+     	\TC{0.5}
+     	{
+     		\IG{dice_unity.png}
+     	}
+     	{
+     		\IG{dice_unwrap.png}
+     	}
+     	
+     \end{frame}
+     
+     \begin{frame}{UV развертка}
+     
+     \centering\IG[0.9]{lol_a.jpg}
+     	
+     \end{frame}
+     
+	 \section{Фильтрация текстур}
+     
+     \begin{frame}{Mip-mapping}
+     	
+     	\centering{Multum In Parvo — «много в малом»}
+     	
+     	~
+     	
+     	\TC{0.4}
+     	{
+     		\IG{Original-image-left-and-quadtree-MIP-map-of-the-same-image-right-Empty-tiles-are-not.png}
+     	}{
+     		\IG{786px-Mip_colors_chadwick.jpg}
+     	}
+     	
+     	
+     \end{frame}
+     
+     \begin{frame}{Mip-mapping }
+     	
+     	
+     	
+     	\TC{0.5}
+     	{
+     		\IG{mip4.png}
+     	}
+     	{
+     		\IG{mip2.jpg}
+     	}
+     	
+     	\centering
+     	
+     	\IG[0.7]{Screenshot 2024-09-25 224251.png}
+     	
+     	
+     \end{frame}
+     
+     \begin{frame}{Отображение текстуры на экране}
+     	
+     	\centering\fbox{\IG[0.8]{c3e96f30ec61cdb9f6f166de3299115c.png}}
+     	
+     	Как совместить тексили и пиксели?
+     	
+     \end{frame}
+     
+     \begin{frame}{Фильтрация текстур}
+     	
+     	
+     \centering\IG[0.85]{33065527_8464b3b085d2d9561e4298209210dbff_800.jpg}
+     	
+    \end{frame}	
+     
+
+     
+      \begin{frame}{Point Sample}
+     	
+     	\TC{0.6}
+     	{
+     		\includegraphics[page=1]{filtering.pdf}
+     	}
+     	{
+     		Дано: текстура $3 \times 3$,\\ где
+     		$T_{ij}$ --- цвет текселя $(i,j)$
+     		
+     		Найти: цвет пикселя $T_{uv}, u,v \in \mathbb R$
+     		
+     		~ \pause
+     		
+     		$u := \mathrm{int}(u) $
+     		
+     		$v := \mathrm{int}(v) $
+     		
+     		$\mathrm{return} \ T_{uv}$
+     		
+     	}
+     	
+     \end{frame}	
+     	
+     	
+      \begin{frame}{Point Sample}
+     		
+     		\TC{0.5}
+     		{
+     			\IG{brick-pointsample.png}
+     		}{
+     			\IG{grid-pointsample.png}
+     		}
+     \end{frame}	
+     
+      \begin{frame}{Линейная фильтрация}
+     	
+     	\TC{0.6}
+     	{
+     		\only<1>{\includegraphics[page=1]{filtering.pdf}}%
+     		\only<2->{\includegraphics[page=2]{filtering.pdf}}%
+     	}
+     	{
+     		Дано: текстура $3 \times 3$,\\ где
+     		$T_{ij}$ --- цвет текселя $(i,j)$
+     		
+     		Найти: цвет пикселя $T_{uv}, u,v \in \mathbb R$
+     		
+     		~ \pause
+     		
+     		$x := \mathrm{int}(u) $
+     		
+     		$y := \mathrm{int}(v) $
+     		
+     		~
+     		
+     	
+     		
+     		$\alpha := u-0.5-x $
+     		
+     		~
+     		
+     		$T_{uv}=\alpha T_{xy}+(1-\alpha)T_{(x+1)y}$
+     		
+     		~
+     		
+     		$\mathrm{return} \ T_{uv}$
+     		
+     	}
+     	
+     \end{frame}	
+     
+         \begin{frame}{Билинейная фильтрация}
+     	
+     	\TC{0.6}
+     	{
+     		\only<1>{\includegraphics[page=1]{filtering.pdf}}%
+     		\only<2->{\includegraphics[page=3]{filtering.pdf}}%
+     	}
+     	{
+     		Дано: текстура $3 \times 3$,\\ где
+     		$T_{ij}$ --- цвет текселя $(i,j)$
+     		
+     		Найти: цвет пикселя $T_{uv}, u,v \in \mathbb R$
+     		
+     		~ \pause
+     		
+     	    $x := \mathrm{int}(u) $
+     		
+     		$y := \mathrm{int}(v) $
+     		
+     		
+     	
+     		
+     		~
+     		
+     			$\alpha := u-0.5-x $
+     		$\beta := v-0.5- y $
+
+     		
+     		~ \pause
+	     	
+	     	$T_{uv}=$
+	     	
+     		$\begin{array}{ll}
+     			        &	 {}=\alpha\beta T_{xy} + {} \\
+     					&    {}+(1-\alpha)\beta T_{(x+1)y} + {} \\
+     					&	 {}+\alpha(1-\beta) T_{x(y+1)} + {} \\
+     					&	 {}+(1-\alpha)(1-\beta) T_{(x+1)(y+1)}
+     		\end{array}$
+     		
+     		~
+     		
+     		$\mathrm{return} \ T_{uv}$
+     		
+     	}
+     	
+     \end{frame}	
+     
+     
+     \begin{frame}{Билинейная фильтрация}
+     	
+     	\centering
+     	
+     	\IG[0.32]{bilinear-fig7a}
+     	\IG[0.32]{bilinear-fig7b} 	
+     	\IG[0.32]{bilinear-fig7c}
+     	
+     \end{frame}
+     
+     
+     \begin{frame}{Билинейная фильтрация}
+     	\centering\IG[0.5]{Screenshot 2024-09-25 223349}
+     \end{frame}
+     
+     \begin{frame}{Трилинейная фильтрация}
+     	
+     	\centering
+     	
+     	\IG[0.6]{trilinearfilter}
+     	
+     \end{frame}
+     
+          
+     \begin{frame}{Трилинейная фильтрация}
+     	
+     	\centering
+     	
+     	\IG[0.9]{Screenshot 2024-09-25 223603}
+     	
+     \end{frame}
+     
+     
+     \begin{frame}{Анизотропная фильтрация}
+     	\IG{Mipmap-Filtering}
+     	
+     	
+     	
+     	
+     \end{frame}
+     
+     
+     \begin{frame} {Анизотропная фильтрация}
+     	
+     	
+     	\begin{center}
+     		\centering 	\IG[0.6]{Screenshot 2024-09-26 063729}
+     	\end{center}
+     	     	
+     	\HREF{https://www.reddit.com/r/Shadron/comments/6p0764/comparison_of_texture_filtering_modes/}{Примеры}
+     \end{frame}
+ 
+\begin{comment}
+	
+\end{comment}
+ 
+
+\end{document}

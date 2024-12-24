@@ -1,0 +1,456 @@
+\documentclass[svgnames, tikz]{standalone}
+
+
+\usepackage{tikz}
+\usepackage{tikz-3dplot}
+\usepackage{amsmath} %математические формулы
+\usepackage[e]{esvect}  %Красивая стрелочка вектора
+\usepackage{unicode-math}
+
+
+\usepackage{polyglossia}
+\setdefaultlanguage{russian}
+\setotherlanguage{english}
+%\setkeys{russian}{babelshorthands=true}
+\usepackage{fontspec}
+\setmainfont{Times New Roman} [Script=Cyrillic, Mapping=tex-text,]
+\setsansfont{Arial} [Script=Cyrillic, Mapping=tex-text,]
+\setmonofont{Courier New} [Script=Cyrillic, Mapping=tex-text,]
+
+\usetikzlibrary{calc}
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{angles}
+
+
+
+\include{../tikzcom.tex}
+
+\begin{document}
+	
+    
+ \begin{tikzpicture}[ scale=0.5]
+	
+	
+	
+	\VARPOINT{A}{-4}{-2}{0}
+	\VARPOINT{B}{4}{-2}{0}
+	\VARPOINT{C}{4}{2}{0}
+	\VARPOINT{D}{-4}{2}{0}
+	
+	
+	\draw[dashed] ($(A)!-2cm!(B)$) node [below right]{$y_{min}$} -- ($(B)!-2cm!(A)$);
+	\draw[dashed] ($(C)!-2cm!(D)$)  -- ($(D)!-2cm!(C)$) node [above right]{$y_{max}$};
+	
+	\draw[dashed] ($(A)!-2cm!(D)$) node [above right]{$x_{min}$} -- ($(D)!-2cm!(A)$);
+	\draw[dashed] ($(C)!-2cm!(B)$) -- ($(B)!-2cm!(C)$) node [above left]{$x_{max}$};
+	
+	\draw[thick] (A) -- (B) -- (C) -- (D) --cycle;
+	
+	
+	
+	\node at (-5,	-3) 	{ {\color{Red}1}{\color{Green}0}{\color{Blue}1}{\color{Fuchsia}0}};
+	\node at (-5,	0) 		{ {\color{Red}1}{\color{Green}0}{\color{Blue}0}{\color{Fuchsia}0}};
+	\node at (-5,	3) 		{ {\color{Red}1}{\color{Green}0}{\color{Blue}0}{\color{Fuchsia}1}};
+	
+	\node at (0,	-3) 	{ {\color{Red}0}{\color{Green}0}{\color{Blue}1}{\color{Fuchsia}0}};
+	\node at (0,	0) 		{ {\color{Red}0}{\color{Green}0}{\color{Blue}0}{\color{Fuchsia}0}};
+	\node at (0,	3) 		{ {\color{Red}0}{\color{Green}0}{\color{Blue}0}{\color{Fuchsia}1}};
+	
+	\node at (5,	-3) 	{ {\color{Red}0}{\color{Green}1}{\color{Blue}1}{\color{Fuchsia}0}};
+	\node at (5,	0) 		{ {\color{Red}0}{\color{Green}1}{\color{Blue}0}{\color{Fuchsia}0}};
+	\node at (5,	3) 		{ {\color{Red}0}{\color{Green}1}{\color{Blue}0}{\color{Fuchsia}1}};
+	
+	
+	
+\end{tikzpicture} 
+
+
+ \begin{tikzpicture}[ scale=0.6]
+	
+	
+	
+	\VARPOINT{A}{-4}{-2}{0}
+	\VARPOINT{B}{4}{-2}{0}
+	\VARPOINT{C}{4}{2}{0}
+	\VARPOINT{D}{-4}{2}{0}
+	
+	
+	\draw[dashed] ($(A)!-2cm!(B)$) node [below right]{$y_{min}$} -- ($(B)!-2cm!(A)$);
+	\draw[dashed] ($(C)!-2cm!(D)$)  -- ($(D)!-2cm!(C)$) node [above right]{$y_{max}$};
+	
+	\draw[dashed] ($(A)!-2cm!(D)$) node [above right]{$x_{min}$} -- ($(D)!-2cm!(A)$);
+	\draw[dashed] ($(C)!-2cm!(B)$) -- ($(B)!-2cm!(C)$) node [above left]{$x_{max}$};
+	
+	\draw[thick] (A) -- (B) -- (C) -- (D) --cycle;
+	
+	
+	
+	\node at (-5,	-3) 	{ {\color{Red}1}{\color{Green}0}{\color{Blue}1}{\color{Fuchsia}0}};
+\node at (-5,	0) 		{ {\color{Red}1}{\color{Green}0}{\color{Blue}0}{\color{Fuchsia}0}};
+\node at (-5,	3) 		{ {\color{Red}1}{\color{Green}0}{\color{Blue}0}{\color{Fuchsia}1}};
+
+\node at (0,	-3) 	{ {\color{Red}0}{\color{Green}0}{\color{Blue}1}{\color{Fuchsia}0}};
+\node at (0,	0) 		{ {\color{Red}0}{\color{Green}0}{\color{Blue}0}{\color{Fuchsia}0}};
+\node at (0,	3) 		{ {\color{Red}0}{\color{Green}0}{\color{Blue}0}{\color{Fuchsia}1}};
+
+\node at (5,	-3) 	{ {\color{Red}0}{\color{Green}1}{\color{Blue}1}{\color{Fuchsia}0}};
+\node at (5,	0) 		{ {\color{Red}0}{\color{Green}1}{\color{Blue}0}{\color{Fuchsia}0}};
+\node at (5,	3) 		{ {\color{Red}0}{\color{Green}1}{\color{Blue}0}{\color{Fuchsia}1}};
+	
+	
+	\VARPOINT{A1}{-3}{-1.5}{0}	
+	\VARPOINT{B1}{2}{-1}{0}
+	
+	
+	\path (A1) circle(2pt)[fill]  edge node[auto]{1} (B1)  (B1) circle (2pt)[fill];
+	
+	
+	\VARPOINT{A1}{-3}{2.5}{0}	
+	\VARPOINT{B1}{2.3}{2.5}{0}
+	
+	\path (A1) circle(2pt)[fill]  edge node[auto, pos=0.3]{2} (B1)  (B1) circle (2pt)[fill];
+	
+	
+	
+	\VARPOINT{A1}{-4.5}{-1}{0}	
+	\VARPOINT{B1}{-4.5}{-2.5}{0}
+	
+	\path (A1) circle(2pt)[fill]  edge node[auto, pos=0.3]{3} (B1)  (B1) circle (2pt)[fill];
+	
+	
+	
+\end{tikzpicture} 
+
+
+
+
+ \begin{tikzpicture}[ scale=0.6]
+	
+	
+	
+	\VARPOINT{A}{-4}{-2}{0}
+	\VARPOINT{B}{4}{-2}{0}
+	\VARPOINT{C}{4}{2}{0}
+	\VARPOINT{D}{-4}{2}{0}
+	
+	
+	\draw[dashed] ($(A)!-2cm!(B)$) node [below right]{$y_{min}$} -- ($(B)!-2cm!(A)$);
+	\draw[dashed] ($(C)!-2cm!(D)$)  -- ($(D)!-2cm!(C)$) node [above right]{$y_{max}$};
+	
+	\draw[dashed] ($(A)!-2cm!(D)$) node [above right]{$x_{min}$} -- ($(D)!-2cm!(A)$);
+	\draw[dashed] ($(C)!-2cm!(B)$) -- ($(B)!-2cm!(C)$) node [above left]{$x_{max}$};
+	
+	\draw[thick] (A) -- (B) -- (C) -- (D) --cycle;
+	
+	
+	
+	\node at (-5,	-3) 	{ {\color{Red}1}{\color{Green}0}{\color{Blue}1}{\color{Fuchsia}0}};
+	\node at (-5,	0) 		{ {\color{Red}1}{\color{Green}0}{\color{Blue}0}{\color{Fuchsia}0}};
+	\node at (-5,	3) 		{ {\color{Red}1}{\color{Green}0}{\color{Blue}0}{\color{Fuchsia}1}};
+	
+	\node at (0,	-3) 	{ {\color{Red}0}{\color{Green}0}{\color{Blue}1}{\color{Fuchsia}0}};
+	\node at (0,	0) 		{ {\color{Red}0}{\color{Green}0}{\color{Blue}0}{\color{Fuchsia}0}};
+	\node at (0,	3) 		{ {\color{Red}0}{\color{Green}0}{\color{Blue}0}{\color{Fuchsia}1}};
+	
+	\node at (5,	-3) 	{ {\color{Red}0}{\color{Green}1}{\color{Blue}1}{\color{Fuchsia}0}};
+	\node at (5,	0) 		{ {\color{Red}0}{\color{Green}1}{\color{Blue}0}{\color{Fuchsia}0}};
+	\node at (5,	3) 		{ {\color{Red}0}{\color{Green}1}{\color{Blue}0}{\color{Fuchsia}1}};
+	
+	
+	\VARPOINT{A1}{1.5}{3}{0}	
+	\VARPOINT{B1}{2}{-1}{0}
+	
+	
+	\draw (A1)  circle(2pt)[fill]  edge  (B1) node [left] {$A$} (B1) circle (2pt)[fill] node [left] {$B$};
+	
+
+	
+	
+	
+	
+\end{tikzpicture} 
+
+ \begin{tikzpicture}[ scale=0.6]
+	
+	
+	
+	\VARPOINT{A}{-4}{-2}{0}
+	\VARPOINT{B}{4}{-2}{0}
+	\VARPOINT{C}{4}{2}{0}
+	\VARPOINT{D}{-4}{2}{0}
+	
+	
+	\draw[dashed] ($(A)!-2cm!(B)$) node [below right]{$y_{min}$} -- ($(B)!-2cm!(A)$);
+	\draw[dashed] ($(C)!-2cm!(D)$)  -- ($(D)!-2cm!(C)$) node [above right]{$y_{max}$};
+	
+	\draw[dashed] ($(A)!-2cm!(D)$) node [above right]{$x_{min}$} -- ($(D)!-2cm!(A)$);
+	\draw[dashed] ($(C)!-2cm!(B)$) -- ($(B)!-2cm!(C)$) node [above left]{$x_{max}$};
+	
+	\draw[thick] (A) -- (B) -- (C) -- (D) --cycle;
+	
+	
+	
+	\node at (-5,	-3) 	{ {\color{Red}1}{\color{Green}0}{\color{Blue}1}{\color{Fuchsia}0}};
+	\node at (-5,	0) 		{ {\color{Red}1}{\color{Green}0}{\color{Blue}0}{\color{Fuchsia}0}};
+	\node at (-5,	3) 		{ {\color{Red}1}{\color{Green}0}{\color{Blue}0}{\color{Fuchsia}1}};
+	
+	\node at (0,	-3) 	{ {\color{Red}0}{\color{Green}0}{\color{Blue}1}{\color{Fuchsia}0}};
+	\node at (0,	0) 		{ {\color{Red}0}{\color{Green}0}{\color{Blue}0}{\color{Fuchsia}0}};
+	\node at (0,	3) 		{ {\color{Red}0}{\color{Green}0}{\color{Blue}0}{\color{Fuchsia}1}};
+	
+	\node at (5,	-3) 	{ {\color{Red}0}{\color{Green}1}{\color{Blue}1}{\color{Fuchsia}0}};
+	\node at (5,	0) 		{ {\color{Red}0}{\color{Green}1}{\color{Blue}0}{\color{Fuchsia}0}};
+	\node at (5,	3) 		{ {\color{Red}0}{\color{Green}1}{\color{Blue}0}{\color{Fuchsia}1}};
+	
+	
+	\VARPOINT{A1}{1.5}{3}{0}	
+	\VARPOINT{B1}{2}{-1}{0}
+	
+	
+	\draw (A1)  circle(2pt)[fill]  edge  (B1) node [left] {$A$} (B1) circle (2pt)[fill] node [left] {$B$};
+	
+	\coordinate (P) at (intersection of A1--B1 and D--C);
+	
+	\fill [red] (P) circle(2pt) node [below right] {$P$};
+	
+	\draw [-stealth, dashed] (A1) .. controls +(-30:0.5) .. ($(P)+(45:3pt)$);	
+
+	
+	
+	
+\end{tikzpicture} 
+
+
+\foreach \frame in {1,2,3}{
+
+ \begin{tikzpicture}[ scale=0.6]
+	
+	
+	
+	\VARPOINT{A}{-4}{-2}{0}
+	\VARPOINT{B}{4}{-2}{0}
+	\VARPOINT{C}{4}{2}{0}
+	\VARPOINT{D}{-4}{2}{0}
+	
+	
+	\draw[dashed] ($(A)!-2cm!(B)$) node [below right]{$y_{min}$} -- ($(B)!-2cm!(A)$);
+	\draw[dashed] ($(C)!-2cm!(D)$)  -- ($(D)!-2cm!(C)$) node [above right]{$y_{max}$};
+	
+	\draw[dashed] ($(A)!-2cm!(D)$) node [above right]{$x_{min}$} -- ($(D)!-2cm!(A)$);
+	\draw[dashed] ($(C)!-2cm!(B)$) -- ($(B)!-2cm!(C)$) node [above left]{$x_{max}$};
+	
+	\draw[thick] (A) -- (B) -- (C) -- (D) --cycle;
+	
+	
+	
+	\node at (-5,	-3) 	{ {\color{Red}1}{\color{Green}0}{\color{Blue}1}{\color{Fuchsia}0}};
+	\node at (-5,	0) 		{ {\color{Red}1}{\color{Green}0}{\color{Blue}0}{\color{Fuchsia}0}};
+	\node at (-5,	3) 		{ {\color{Red}1}{\color{Green}0}{\color{Blue}0}{\color{Fuchsia}1}};
+	
+	\node at (0,	-3) 	{ {\color{Red}0}{\color{Green}0}{\color{Blue}1}{\color{Fuchsia}0}};
+	\node at (0,	0) 		{ {\color{Red}0}{\color{Green}0}{\color{Blue}0}{\color{Fuchsia}0}};
+	\node at (0,	3) 		{ {\color{Red}0}{\color{Green}0}{\color{Blue}0}{\color{Fuchsia}1}};
+	
+	\node at (5,	-3) 	{ {\color{Red}0}{\color{Green}1}{\color{Blue}1}{\color{Fuchsia}0}};
+	\node at (5,	0) 		{ {\color{Red}0}{\color{Green}1}{\color{Blue}0}{\color{Fuchsia}0}};
+	\node at (5,	3) 		{ {\color{Red}0}{\color{Green}1}{\color{Blue}0}{\color{Fuchsia}1}};
+	
+	
+	\VARPOINT{A1}{5}{2.5}{0}	
+	\VARPOINT{B1}{1.7}{-3.3}{0}
+	
+	
+	\draw (A1)  circle(2pt)[fill]  edge  (B1) node  [right] (a) {$A$} (B1) circle (2pt)[fill] node [left] (b) {$B$};
+	
+	
+	
+
+	\ifthenelse{\frame>1}{
+		\coordinate (AA) at (intersection of A1--B1 and B--C);
+		\fill[red] (AA) circle(2pt) node [right] (aa) {$A_1$};
+		
+		\draw [dashed, -stealth] (a) -- (aa);
+	}{	}
+	
+	
+	\ifthenelse{\frame>2}{
+	
+	\coordinate (BB) at (intersection of A1--B1 and B--A);
+	
+	\fill[red] (BB) circle(2pt) node [above left] (bb) {$B_1$};
+	
+	\draw[dashed, -stealth] (b) -- (bb);
+	
+	}{}
+	
+	
+	
+\end{tikzpicture} 
+
+}
+
+
+
+\foreach \frame in {1,2}{
+	
+	\begin{tikzpicture}[ scale=0.6]
+		
+		\clip (-7,-5) rectangle + (9,10);
+		
+		
+		\VARPOINT{A}{-4}{-2}{0}
+		\VARPOINT{B}{4}{-2}{0}
+		\VARPOINT{C}{4}{2}{0}
+		\VARPOINT{D}{-4}{2}{0}
+		
+		
+		\draw[dashed] ($(A)!-2cm!(B)$)  -- ($(B)!-2cm!(A)$);
+		\draw[dashed] ($(C)!-2cm!(D)$)  -- ($(D)!-2cm!(C)$) ;
+		
+		\draw[dashed] ($(A)!-2cm!(D)$)  -- ($(D)!-2cm!(A)$);
+		\draw[dashed] ($(C)!-2cm!(B)$) -- ($(B)!-2cm!(C)$) ;
+		
+		\draw[thick] (A) -- (B) -- (C) -- (D) --cycle;
+		
+		
+		
+		\node at (-5,	-3) 	{ {\color{Red}1}{\color{Green}0}{\color{Blue}1}{\color{Fuchsia}0}};
+		\node at (-5,	0) 		{ {\color{Red}1}{\color{Green}0}{\color{Blue}0}{\color{Fuchsia}0}};
+		\node at (-5,	3) 		{ {\color{Red}1}{\color{Green}0}{\color{Blue}0}{\color{Fuchsia}1}};
+		
+		\node at (0,	-3) 	{ {\color{Red}0}{\color{Green}0}{\color{Blue}1}{\color{Fuchsia}0}};
+		\node at (0,	0) 		{ {\color{Red}0}{\color{Green}0}{\color{Blue}0}{\color{Fuchsia}0}};
+		\node at (0,	3) 		{ {\color{Red}0}{\color{Green}0}{\color{Blue}0}{\color{Fuchsia}1}};
+		
+		\node at (5,	-3) 	{ {\color{Red}0}{\color{Green}1}{\color{Blue}1}{\color{Fuchsia}0}};
+		\node at (5,	0) 		{ {\color{Red}0}{\color{Green}1}{\color{Blue}0}{\color{Fuchsia}0}};
+		\node at (5,	3) 		{ {\color{Red}0}{\color{Green}1}{\color{Blue}0}{\color{Fuchsia}1}};
+		
+		
+		\VARPOINT{A1}{-3.5}{-4}{0}	
+		\VARPOINT{B1}{-6}{2.5}{0}
+		
+		
+		\draw (A1)  circle(2pt)[fill]  edge  (B1) node  [left] (a) {$A$} (B1) circle (2pt)[fill] node [left] (b) {$B$};
+		
+		
+		
+		
+		\ifthenelse{\frame>1}{
+			\coordinate (AA) at (intersection of A1--B1 and A--B);
+			\fill[red] (AA) circle(2pt) node [above left] (aa) {$A_1$};
+			
+			\draw [dashed, -stealth] (a) -- (aa);
+		}{	}
+		
+		
+		\ifthenelse{\frame>2}{
+			
+			\coordinate (BB) at (intersection of A1--B1 and B--A);
+			
+			%\fill[red] (BB) circle(2pt) node [above left] (bb) {$B_1$};
+			
+			%\draw[dashed, ->] (b) -- (bb);
+			
+		}{}
+		
+		
+		
+	\end{tikzpicture} 
+	
+}
+
+
+
+
+\foreach \frame in {1,2,3,4}{
+	
+	\begin{tikzpicture}[ scale=0.6]
+		
+		\clip (-7,-5) rectangle + (9,10);
+		
+		
+		\VARPOINT{A}{-4}{-2}{0}
+		\VARPOINT{B}{4}{-2}{0}
+		\VARPOINT{C}{4}{2}{0}
+		\VARPOINT{D}{-4}{2}{0}
+		
+		
+		\draw[dashed] ($(A)!-2cm!(B)$)  -- ($(B)!-2cm!(A)$);
+		\draw[dashed] ($(C)!-2cm!(D)$)  -- ($(D)!-2cm!(C)$) ;
+		
+		\draw[dashed] ($(A)!-2cm!(D)$)  -- ($(D)!-2cm!(A)$);
+		\draw[dashed] ($(C)!-2cm!(B)$) -- ($(B)!-2cm!(C)$) ;
+		
+		\draw[thick] (A) -- (B) -- (C) -- (D) --cycle;
+		
+		
+		
+		\node at (-5,	-3) 	{ {\color{Red}1}{\color{Green}0}{\color{Blue}1}{\color{Fuchsia}0}};
+		\node at (-5,	0) 		{ {\color{Red}1}{\color{Green}0}{\color{Blue}0}{\color{Fuchsia}0}};
+		\node at (-5,	3) 		{ {\color{Red}1}{\color{Green}0}{\color{Blue}0}{\color{Fuchsia}1}};
+		
+		\node at (0,	-3) 	{ {\color{Red}0}{\color{Green}0}{\color{Blue}1}{\color{Fuchsia}0}};
+		\node at (0,	0) 		{ {\color{Red}0}{\color{Green}0}{\color{Blue}0}{\color{Fuchsia}0}};
+		\node at (0,	3) 		{ {\color{Red}0}{\color{Green}0}{\color{Blue}0}{\color{Fuchsia}1}};
+		
+		\node at (5,	-3) 	{ {\color{Red}0}{\color{Green}1}{\color{Blue}1}{\color{Fuchsia}0}};
+		\node at (5,	0) 		{ {\color{Red}0}{\color{Green}1}{\color{Blue}0}{\color{Fuchsia}0}};
+		\node at (5,	3) 		{ {\color{Red}0}{\color{Green}1}{\color{Blue}0}{\color{Fuchsia}1}};
+		
+		
+		\VARPOINT{A1}{-4.3}{-4}{0}	
+		\VARPOINT{B1}{-2}{3}{0}
+		
+		
+		\draw (A1)  circle(2pt)[fill]  edge  (B1) node  [below right] (a) {$A$} (B1) circle (2pt)[fill] node [left] (b) {$B$};
+		
+		
+		
+		
+		\ifthenelse{\frame>1}{
+			\coordinate (AA) at (intersection of A1--B1 and A--D);
+			\fill[red] (AA) circle(2pt) node [right] (aa) {$A_1$};
+			
+			\draw [dashed, -stealth] (a) -- (aa);
+		}{	}
+		
+		
+		\ifthenelse{\frame>2}{
+			
+			\coordinate (AA) at (intersection of A1--B1 and A--B);
+			\fill[red] (AA) circle(2pt) node [above right] (aaa) {$A_2$};
+			
+			\draw [dashed, -stealth] (aa) -- (aaa);
+			
+			%\fill[red] (BB) circle(2pt) node [above left] (bb) {$B_1$};
+			
+			%\draw[dashed, ->] (b) -- (bb);
+			
+		}{}
+		
+		\ifthenelse{\frame>3}{
+			
+			\coordinate (AA) at (intersection of A1--B1 and C--D);
+			\fill[red] (AA) circle(2pt) node [below left] (bb) {$B_1$};
+			
+			%\fill[red] (BB) circle(2pt) node [above left] (bb) {$B_1$};
+			
+			\draw[dashed, -stealth] (b) -- (bb);
+			
+		}{}
+		
+		
+		
+	\end{tikzpicture} 
+	
+}
+
+
+
+    
+   
+
+
+	
+\end{document}

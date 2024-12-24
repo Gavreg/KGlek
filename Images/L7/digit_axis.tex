@@ -1,0 +1,102 @@
+\documentclass[tikz]{standalone}
+
+\usepackage{tikz}
+\usepackage[svgnames]{xcolor}
+\usepackage{tikz-3dplot}
+\usepackage{amsmath} %математические формулы
+\usepackage[e]{esvect}  %Красивая стрелочка вектора
+
+
+\usepackage{polyglossia}
+\setdefaultlanguage{russian}
+\setotherlanguage{english}
+%\setkeys{russian}{babelshorthands=true}
+\usepackage{fontspec}
+\setmainfont{Times New Roman} [Script=Cyrillic, Mapping=tex-text,]
+\setsansfont{Arial} [Script=Cyrillic, Mapping=tex-text,]
+\setmonofont{Courier New} [Script=Cyrillic, Mapping=tex-text,]
+
+\usetikzlibrary{calc}
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{angles}
+
+
+
+\include{../tikzcom.tex}
+
+\begin{document}
+	
+    \foreach \frame in {1,...,4}
+    {
+    
+	     \begin{tikzpicture}[ scale=1]
+	
+			%\draw (0,-1) -- (0, 1);
+			
+			\clip (-5.5,-0.5) rectangle (5.5,1);
+			
+			\draw [-Latex] (-5.5,0) -- (5.5,0);
+			
+			\foreach \t in {1,...,5}{
+				\node [below] at (\t, 0) {\t};
+				\fill (\t,0) circle (1pt);
+			}
+			
+			\ifthenelse{\frame>1}{
+				\foreach \t in {-5,...,0}{
+					\node [below, color=red] at (\t, 0) {\t};
+					\fill[red] (\t,0) circle (1pt);
+				}
+			}{}
+			
+			
+			\ifthenelse{\frame>2}{
+				\node [above, color=blue] at (1/2, 0) {$\dfrac{1}{2}$};
+				\fill[blue] (1/2,0) circle (1pt);
+				
+				\node [above, color=blue] at (-4/3, 0) {$-\dfrac{4}{3}$};
+				\fill[blue]  (-4/3,0) circle (1pt);
+				
+				
+				\node [above, color=blue] at (14/5, 0) {$\dfrac{14}{5}$};
+				\fill[blue]  (14/5,0) circle (1pt);
+				
+				\node [above, color=blue] at (-4.7, 0) {$-4.7$};
+				\fill[blue]  (-4.7,0) circle (1pt);
+			}{}
+			
+			
+			
+			\ifthenelse{\frame>3}{
+				\node [above, color=DarkGreen] at (1.4, 0) {$\sqrt{2}$};
+				\fill[DarkGreen]  (1.4,0) circle (1pt);
+				
+				\node [above, color=DarkGreen] at (-2.2, 0) {$-\sqrt{5}$};
+				\fill[DarkGreen]  (-2.2,0) circle (1pt);
+				
+				\node [above, color=DarkGreen] at (3.14, 0) {$\pi$};
+				\fill[DarkGreen]  (3.14,0) circle (1pt);
+				
+				\node [above, color=DarkGreen,xshift=-5pt] at (2.7, 0) {$e$};
+				\fill[DarkGreen]  (2.7,0) circle (1pt);
+			}{}
+			
+			
+			
+			
+		
+	    \end{tikzpicture} 
+	}
+	
+	
+	
+	
+
+
+
+
+
+
+
+	
+\end{document}

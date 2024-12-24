@@ -1,0 +1,95 @@
+\documentclass[tikz]{standalone}
+
+\usepackage{tikz}
+\usepackage{tikz-3dplot}
+\usepackage{amsmath} %математические формулы
+\usepackage[e]{esvect}  %Красивая стрелочка вектора
+
+
+\usepackage{polyglossia}
+\setdefaultlanguage{russian}
+\setotherlanguage{english}
+%\setkeys{russian}{babelshorthands=true}
+\usepackage{fontspec}
+\setmainfont{Times New Roman} [Script=Cyrillic, Mapping=tex-text,]
+\setsansfont{Arial} [Script=Cyrillic, Mapping=tex-text,]
+\setmonofont{Courier New} [Script=Cyrillic, Mapping=tex-text,]
+
+\usetikzlibrary{calc}
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{angles}
+
+
+
+\include{tikzcom.tex}
+
+\begin{document}
+	
+    
+	\def\frame{0}
+	\foreach \frame in {1,2,3}
+	{
+		
+	\tdplotsetmaincoords{60}{120}
+	\begin{tikzpicture}[ scale=1.2, tdplot_main_coords]
+		
+	
+				
+			
+			\VARPOINT{O}{0}{0}{0}		
+			
+			
+			\VARPOINT{i}{1}{0}{0}
+			\VARPOINT{j}{0}{1}{0}
+			\VARPOINT{k}{0}{0}{1}
+			
+			
+			
+			
+			\draw [-Latex, red] (0,0,0) -- ($3*(i)$) ;
+			\draw [-Latex, green] (0,0,0) -- ($3*(j)$);	
+			\draw [-Latex, blue] (0,0,0) -- ($3*(k)$) ;
+			
+			\VARPOINT{A}{0.5}{0.5}{-0.5}
+			\VARPOINT{B}{-0.5}{0.5}{-0.5}	
+			\VARPOINT{C}{-0.5}{-0.5}{-0.5}	
+			\VARPOINT{D}{0.5}{-0.5}{-0.5}
+			\VARPOINT{E}{0}{0}{0.5}		
+			
+			\ifthenelse{\frame > 1}{
+			
+						\foreach \p in {A,B,C,D,E}{
+						\ROTATE{\p}{\p}{j}{3.1415/4}
+						
+						
+			}
+			
+			}{}
+			
+
+			\ifthenelse{\frame > 2}{
+	
+				\foreach \p in {A,B,C,D,E}{
+				\ROTATE{\p}{\p}{i}{3.1415/6}
+				
+				
+			}
+				
+			}{}
+			
+			\ifthenelse{\frame = 2}{\draw (0,1,2) node {$\mathbf R_y(45^\circ)$};}{}
+            \ifthenelse{\frame = 3}{\draw (0,1,2) node {$\mathbf R_x(30^\circ)\mathbf R_y(45^\circ)$};}{}
+
+					
+			
+			\draw [cyan, thick] (A) -- (B);
+			\draw [magenta, thick] (B) -- (C);
+			\draw [orange, thick] (C) -- (D);
+			\draw [olive, thick] (D) -- (A);
+			\draw [ thick] (A) -- (E) (B) -- (E) (C) -- (E) (D) -- (E);
+		
+		
+		
+	\end{tikzpicture}  }
+	
+\end{document}

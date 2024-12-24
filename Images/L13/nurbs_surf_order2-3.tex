@@ -1,0 +1,57 @@
+\documentclass[tikz]{standalone}
+
+\usepackage{tikz}
+\usepackage[svgnames]{xcolor}
+\usepackage{tikz-3dplot}
+\usepackage{amsmath} %математические формулы
+\usepackage[e]{esvect}  %Красивая стрелочка вектора
+
+
+\usepackage{polyglossia}
+\setdefaultlanguage{russian}
+\setotherlanguage{english}
+%\setkeys{russian}{babelshorthands=true}
+\usepackage{fontspec}
+\setmainfont{Times New Roman} [Script=Cyrillic, Mapping=tex-text,]
+\setsansfont{Arial} [Script=Cyrillic, Mapping=tex-text,]
+\setmonofont{Courier New} [Script=Cyrillic, Mapping=tex-text,]
+
+\usetikzlibrary{calc}
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{angles}
+
+
+
+\include{../tikzcom.tex}
+
+\begin{document}
+
+
+
+
+\foreach \t in {0,5,...,359}{
+\tdplotsetmaincoords{60}{\t}
+\begin{tikzpicture}[tdplot_main_coords]
+
+\clip[tdplot_screen_coords] (-3,-2.5) rectangle (3,3.1);
+
+\input{nurbs_surf_order2-3_skelet.tex}
+\input{nurbs_surf_order2-3_points.tex}
+
+
+\draw[-latex, red]   (-2.5,0,0) -- (2.5,0,0);	
+\draw[-latex, green] (0,-2.5,0) -- (0,2.5,0);	
+\draw[-latex, blue]  (0,0,-2.5) -- (0,0,2.5);	
+
+
+%\input{bsurfpoints_p.tex}
+
+\end{tikzpicture}
+}
+
+
+
+
+
+	
+\end{document}

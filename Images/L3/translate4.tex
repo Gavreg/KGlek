@@ -1,0 +1,107 @@
+\documentclass[tikz]{standalone}
+
+\usepackage{tikz}
+\usepackage{tikz-3dplot}
+\usepackage{amsmath} %математические формулы
+\usepackage[e]{esvect}  %Красивая стрелочка вектора
+
+
+\usepackage{polyglossia}
+\setdefaultlanguage{russian}
+\setotherlanguage{english}
+%\setkeys{russian}{babelshorthands=true}
+\usepackage{fontspec}
+\setmainfont{Times New Roman} [Script=Cyrillic, Mapping=tex-text,]
+\setsansfont{Arial} [Script=Cyrillic, Mapping=tex-text,]
+\setmonofont{Courier New} [Script=Cyrillic, Mapping=tex-text,]
+
+\usetikzlibrary{calc}
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{angles}
+
+\usepackage{comment}
+
+\include{tikzcom.tex}
+
+\begin{document}
+	
+    
+	
+\begin{tikzpicture}[scale=1, x=0.4cm, y=0.4cm ] %tdplot_main_coords
+	
+		
+	%\draw[step=.4cm,black!10,very thin] (-1,-1) grid (10,10);	
+	
+	\draw [-Latex] (-2,0) -- (4,0) node [below left] {$x$};	
+	\draw [-Latex] (0,-2) -- (0,4) node [below left] {$y$};
+	
+	\node{\LARGE ѭ};
+	
+	
+	
+\end{tikzpicture}
+
+\begin{tikzpicture}[scale=1, x=0.4cm, y=0.4cm ] %tdplot_main_coords
+	
+	
+	%\draw[step=.4cm,black!10,very thin] (-1,-1) grid (10,10);	
+	
+	\draw [-Latex] (-2,0) -- (4,0) node [below left] {$x$};	
+	\draw [-Latex] (0,-2) -- (0,4) node [below left] {$y$};
+	
+	\node [rotate=45] {\LARGE ѭ};
+	
+	\draw[->] (20:2) arc (20:65:2);
+	
+	
+	
+\end{tikzpicture}
+
+\begin{tikzpicture}[scale=1, x=0.4cm, y=0.4cm ] %tdplot_main_coords
+	
+	
+	%\draw[step=.4cm,black!10,very thin] (-1,-1) grid (10,10);	
+	
+	\draw [-Latex] (-2,0) -- (4,0) node [below left] {$x$};	
+	\draw [-Latex] (0,-2) -- (0,4) node [below left] {$y$};
+	
+	\node at (2,0) [rotate=45] {\LARGE ѭ};
+	
+	\draw[->] (0.5,1) -- (1.5,1);
+	
+\end{tikzpicture}
+
+\begin{tikzpicture}[scale=1, x=0.4cm, y=0.4cm ] %tdplot_main_coords
+	
+	
+	%\draw[step=.4cm,black!10,very thin] (-1,-1) grid (10,10);	
+	
+	\draw [-Latex] (-2,0) -- (4,0) node [below left] {$x$};	
+	\draw [-Latex] (0,-2) -- (0,4) node [below left] {$y$};
+	
+	\node at (2,0)  {\LARGE ѭ};
+	
+	\draw[->] (0.5,1) -- (1.5,1);
+	
+	
+	
+\end{tikzpicture}
+
+\begin{tikzpicture}[scale=1, x=0.4cm, y=0.4cm ] %tdplot_main_coords
+	
+	
+	%\draw[step=.4cm,black!10,very thin] (-1,-1) grid (10,10);	
+	
+	\draw [-Latex] (-2,0) -- (4,0) node [below left] {$x$};	
+	\draw [-Latex] (0,-2) -- (0,4) node [below left] {$y$};
+	
+	\node at (45:2) [rotate=45] {\LARGE ѭ};
+	\draw[->] (0:2) arc (0:35:2);
+	
+	
+\end{tikzpicture}
+
+
+
+	
+\end{document}

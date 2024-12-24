@@ -1,0 +1,196 @@
+\documentclass[tikz]{standalone}
+
+\usepackage{tikz}
+\usepackage{tikz-3dplot}
+\usepackage{amsmath} %математические формулы
+\usepackage[e]{esvect}  %Красивая стрелочка вектора
+
+
+\usepackage{polyglossia}
+\setdefaultlanguage{russian}
+\setotherlanguage{english}
+%\setkeys{russian}{babelshorthands=true}
+\usepackage{fontspec}
+\setmainfont{Times New Roman} [Script=Cyrillic, Mapping=tex-text,]
+\setsansfont{Arial} [Script=Cyrillic, Mapping=tex-text,]
+\setmonofont{Courier New} [Script=Cyrillic, Mapping=tex-text,]
+
+\usetikzlibrary{calc}
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{angles}
+
+
+
+\include{../tikzcom.tex}
+
+
+
+\begin{document}
+				\tdplotsetmaincoords{60}{120}
+	\begin{tikzpicture}[tdplot_main_coords, scale=2]
+		
+		
+		
+		\VARPOINT{i}{1}{0}{0}
+		\VARPOINT{j}{0}{1}{0}
+		\VARPOINT{k}{0}{0}{1}
+		
+		
+		
+		
+		\draw [-Latex, red, very thin] (0,0,0) -- ($1*(i)$) node [above] {$x$};
+		\draw [-Latex, green, very thin] (0,0,0) -- ($1*(j)$)  node [above] {$y$};	
+		\draw [-Latex, blue, very thin] (0,0,0) -- ($1*(k)$) node [right] {$z$};
+		
+		
+		
+		
+		
+		\tdplotsetrotatedcoords{40}{30}{10};
+		\coordinate (orig) at (1,1,1.7);
+		\tdplotsetrotatedcoordsorigin{(orig)};
+		
+		\begin{scope}[tdplot_rotated_coords]
+			
+			\begin{scope} [transform shape, canvas is xy plane at z=0]
+				
+%				\draw node [above right, inner sep=0pt,outer sep = 0pt, opacity=0.4] {\includegraphics[width=10mm]{0012-scaled.jpg}};
+				
+				\draw (0.2,0.2) node [above right, inner sep=0pt, outer sep = 0pt] {\tikz[] 
+					{
+						\clip (0.2,0.2) -- (1,0.5) -- (0.4,0.9) -- cycle;
+						\draw node [above right, inner sep=0pt] {\includegraphics[width=10mm]{0012-scaled.jpg}};
+						\draw (0.2,0.2) -- (1,0.5) -- (0.4,0.9) -- cycle;	
+						
+				}};
+				
+			\end{scope}
+			
+			\draw ($(0.2,0.2)!0.5!(1,0.5)$) node [below] {$\vv e_1$};
+			\draw ($(1,0.5)!0.5!(0.4,0.9)$) node [right] {$ \vv e_2$};
+			
+%			\draw [-Latex, red] (0,0,0) -- (1,0,0) node [left] {$\vv T$};
+%			\draw [-Latex, green] (0,0,0) -- (0,1,0)  node [above] {$\vv B$};	
+			\draw [-Latex, blue] (0.2,0.2,0) -- (0.2,0.2,1) node [right] {$\vv N$};
+			\draw [-Latex, blue, opacity=0] (0,0,0) -- (0,0,1) node [right] {$\vv N$};
+			
+			\draw[canvas is xy plane at z=0] (0.2,0.2) node [left] {$P_1$};
+			\draw[canvas is xy plane at z=0]  (1,0.5) node [below] {$P_2$};
+			\draw[canvas is xy plane at z=0]  (0.4,0.9) node [right] {$P_3$};			
+			
+			
+			
+		\end{scope}	
+		
+		
+		
+		
+	\end{tikzpicture} 
+
+			\tdplotsetmaincoords{60}{120}
+			\begin{tikzpicture}[tdplot_main_coords, scale=2]
+			
+			
+			
+			\VARPOINT{i}{1}{0}{0}
+			\VARPOINT{j}{0}{1}{0}
+			\VARPOINT{k}{0}{0}{1}
+			
+			
+			
+			
+			\draw [-Latex, red, very thin] (0,0,0) -- ($1*(i)$) node [above] {$x$};
+			\draw [-Latex, green, very thin] (0,0,0) -- ($1*(j)$)  node [above] {$y$};	
+			\draw [-Latex, blue, very thin] (0,0,0) -- ($1*(k)$) node [right] {$z$};
+			
+			
+						
+
+			
+			\tdplotsetrotatedcoords{40}{30}{10};
+			\coordinate (orig) at (1,1,1.7);
+			\tdplotsetrotatedcoordsorigin{(orig)};
+			
+			\begin{scope}[tdplot_rotated_coords]
+			
+				\begin{scope} [transform shape, canvas is xy plane at z=0]
+					
+					\draw node [above right, inner sep=0pt,outer sep = 0pt, opacity=0.4] {\includegraphics[width=10mm]{0012-scaled.jpg}};
+					
+					\draw (0.2,0.2) node [above right, inner sep=0pt, outer sep = 0pt] {\tikz[] 
+						{
+							\clip (0.2,0.2) -- (1,0.5) -- (0.4,0.9) -- cycle;
+							\draw node [above right, inner sep=0pt] {\includegraphics[width=10mm]{0012-scaled.jpg}};
+							\draw (0.2,0.2) -- (1,0.5) -- (0.4,0.9) -- cycle;	
+							
+						}};
+					
+				\end{scope}
+				
+				\draw ($(0.2,0.2)!0.5!(1,0.5)$) node [below] {$\vv e_1$};
+				\draw ($(1,0.5)!0.5!(0.4,0.9)$) node [right] {$\vv e_2$};
+				
+				\draw [-Latex, red] (0,0,0) -- (1,0,0) node [left] {$\vv T$};
+				\draw [-Latex, green] (0,0,0) -- (0,1,0)  node [above] {$\vv B$};	
+				\draw [-Latex, blue] (0,0,0) -- (0,0,1) node [right] {$\vv N$};
+				
+				\draw[canvas is xy plane at z=0] (0.2,0.2) node [left] {$P_1$};
+				\draw[canvas is xy plane at z=0]  (1,0.5) node [below] {$P_2$};
+				\draw[canvas is xy plane at z=0]  (0.4,0.9) node [right] {$P_3$};			
+			
+			
+				
+			\end{scope}	
+
+			
+			
+			
+	\end{tikzpicture} 
+	
+	\begin{tikzpicture}[scale=2, font=\small]			
+				
+				\draw node [above right, inner sep=0pt,outer sep = 0pt, opacity=0.4] {\includegraphics[width=20mm]{0012-scaled.jpg}};
+				
+				\draw (0.2,0.2) node [above right, inner sep=0pt, outer sep = 0pt] {\tikz[scale=2] 
+					{
+						\clip (0.2,0.2) -- (1,0.5) -- (0.4,0.9) -- cycle;
+						\draw node [above right, inner sep=0pt] {\includegraphics[width=20mm]{0012-scaled.jpg}};
+						\draw (0.2,0.2) -- (1,0.5) -- (0.4,0.9) -- cycle;	
+						
+				}};
+				
+			
+			
+			\draw [-Latex, red] (0,0,0) -- (1.3,0,0) node [below] {$u$};
+			\draw [-Latex, green] (0,0,0) -- (0,1.3,0)  node [left] {$v$};	
+			
+			\draw (0.2,0.2) node [below left] {$(u_1,v_1)$};
+			\draw (1,0.5) node [right] {$(u_2,v_2)$};
+			\draw  (0.4,0.9) node [above] {$(u_3,v_3)$};	
+			
+			
+			
+			
+			\draw [dashed] (0.2,0.2) -- (0.2,0);
+			\draw [dashed] (1,0.5) -- (1,0);
+			\fill (0.2,0) circle (0.5pt) (1,0) circle (0.5pt);
+			\draw (0.6,0) node[below] {$\Delta u_1$};
+			
+			\draw [dashed] (0.2,0.2) -- (0,0.2);
+			\draw [dashed] (1,0.5) -- (0,0.5);
+			\fill (0,0.2) circle (0.5pt) (0,0.5) circle (0.5pt);
+			\draw (0,0.4) node[left] {$\Delta v_1$};
+			
+			\draw ($(0.2,0.2)!0.5!(1,0.5)$) node [below] {$\vv e_1$};
+			\draw ($(1,0.5)!0.5!(0.4,0.9)$) node [above] {$\vv e_2$};
+		
+		
+	\end{tikzpicture}
+	
+	
+
+
+		
+		
+	
+\end{document}

@@ -1,0 +1,65 @@
+\documentclass[tikz, class=scrreprt]{standalone}
+
+\usepackage{fp}
+\usepackage{tikz}
+\usepackage{tikz-3dplot}
+\usepackage{amsmath} %математические формулы
+\usepackage[e]{esvect}  %Красивая стрелочка вектора
+
+
+\usetikzlibrary{calc}
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{angles}
+
+\include{../tikzcom.tex}
+
+\begin{document}
+	
+    
+	\def\frame{100}
+	%\foreach \frame in {0,1,...,2}
+	{
+	\tdplotsetmaincoords{70}{100}
+	\begin{tikzpicture}[scale=1, tdplot_main_coords]
+		
+		
+		
+		\coordinate (O) at (0,0);
+		
+		
+		
+		\coordinate (i) at (1,0,0);
+		\coordinate (j) at (0,1,0);
+		\coordinate (k) at (0,0,1);
+		
+		\draw [-Latex, red] (O) -- ($3*(i)$);
+		\draw [-Latex, green] (O) -- ($3*(j)$);
+		\draw [-Latex, blue] (O) -- ($3*(k)$);
+		
+		
+		\VARPOINT{V}{1}{2}{2};
+		
+		\VARPOINT{B}{1.5}{1.5}{1.5};
+		
+		
+		
+		\draw[-Latex] (O) -- (V);
+		\draw[ultra thin, dashed] (V) -- (Vxy) -- (O);
+		\node[right] at (V) {$\vv v$};
+		
+		\ROTATE{B}{B}{V}{-1};
+	    \ROTATE{BB}{B}{V}{3.1415};
+	    \ROTATE{BBB}{B}{V}{3.1415/1.1};
+	    
+	    
+	    \VARPOINT{VB}{0.5*\Bx+0.5*\BBx}{0.5*\By+0.5*\BBy}{0.5*\Bz+0.5*\BBz}
+	    
+	    \tdplotdefinepoints(\VBx,\VBy,\VBz)(\Bx,\By,\Bz)(\BBBx,\BBBy,\BBBz)		
+	    \tdplotdrawpolytopearc[thick, -stealth]{0.5}{below left, }{$\theta $}
+	    
+	
+
+		
+	\end{tikzpicture}}
+	
+\end{document}

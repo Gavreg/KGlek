@@ -1,0 +1,57 @@
+\documentclass[tikz, class=scrreprt]{standalone}
+
+\usepackage{fp}
+\usepackage{tikz}
+\usepackage{tikz-3dplot}
+\usepackage{amsmath} %математические формулы
+\usepackage[e]{esvect}  %Красивая стрелочка вектора
+
+
+\usetikzlibrary{calc}
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{angles}
+
+\include{../tikzcom.tex}
+
+\begin{document}
+	
+    
+	\def\frame{100}
+	%\foreach \frame in {0,1,...,2}
+	{
+	\tdplotsetmaincoords{70}{135}
+	\begin{tikzpicture}[scale=1, tdplot_main_coords]
+		
+		
+		
+		\coordinate (O) at (0,0);
+		
+		
+		
+		\coordinate (i) at (1,0,0);
+		\coordinate (j) at (0,1,0);
+		\coordinate (k) at (0,0,1);
+		
+		\draw [-Latex, red] (O) -- ($3*(i)$);
+		\draw [-Latex, green] (O) -- ($3*(j)$);
+		\draw [-Latex, blue] (O) -- ($3*(k)$);
+		
+		\tdplotdefinepoints(2,0,0)(2,0,-1)(2,0.1,1)		
+		\tdplotdrawpolytopearc[thick, red, -stealth]{0.4}{below right, }{$\alpha$}
+		
+		\tdplotdefinepoints(0,2,0)(0,2,-1)(0.1,2,1)		
+		\tdplotdrawpolytopearc[thick, green, stealth-]{0.4}{below left, }{$\beta $}
+		
+		\tdplotdefinepoints(0,0,2)(0,-1,2)(0.1,1,2)		
+		\tdplotdrawpolytopearc[thick, blue, -stealth]{0.4}{below left, }{$\gamma $}
+		
+		
+		\VARPOINT{A}{1}{1}{1};
+		\VARPOINT{B}{4}{2.3}{2};
+		
+		
+
+		
+	\end{tikzpicture}}
+	
+\end{document}

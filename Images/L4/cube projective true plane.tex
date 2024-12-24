@@ -1,0 +1,140 @@
+\documentclass[tikz]{standalone}
+
+\usepackage{tikz}
+\usepackage{tikz-3dplot}
+\usepackage{amsmath} %математические формулы
+\usepackage[e]{esvect}  %Красивая стрелочка вектора
+
+
+\usepackage{comment}
+
+\usepackage{polyglossia}
+\setdefaultlanguage{russian}
+\setotherlanguage{english}
+%\setkeys{russian}{babelshorthands=true}
+\usepackage{fontspec}
+\setmainfont{Times New Roman} [Script=Cyrillic, Mapping=tex-text,]
+\setsansfont{Arial} [Script=Cyrillic, Mapping=tex-text,]
+\setmonofont{Courier New} [Script=Cyrillic, Mapping=tex-text,]
+
+\usetikzlibrary{calc}
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{angles}
+
+
+
+\include{../tikzcom.tex}
+
+\begin{document}
+	
+    
+	\def\frame{0}
+	%\foreach \frame in {20,21,...,140,139,138,...,20}
+	{
+		
+	\tdplotsetmaincoords{90}{0}
+	\begin{tikzpicture}[ scale=1.2, tdplot_main_coords]
+		
+	
+		
+			%\draw[step=.5cm,black!10,very thin] (-1.5,-1.5) grid (5,5);
+			
+			%\draw[-latex, thick] (-1,0) -- (5,0);
+			%\draw[-latex, thick] (0,-1) -- (0,5);
+			
+			\VARPOINT{O}{0}{0}{0}
+			
+			%\draw (O) node [left,yshift=5pt] {$O$};
+			
+			% A(1,1)   B(3,1)
+			% C(1,3)  D(3,3) 
+			% n=(2,1,3)
+			
+			
+			
+			\VARPOINT{i}{1}{0}{0}
+			\VARPOINT{j}{0}{1}{0}
+			\VARPOINT{k}{0}{0}{1}
+			
+			
+			
+			
+			\draw [-Latex, red] (-2,0,0) -- ($2*(i)$) node [above] {$x$};
+			%\draw [-Latex, blue] (0,-1,0) -- ($10*(j)$);	
+			\draw [-Latex, green] (0,0,-1) -- ($3*(k)$) node [right] {$y$};
+			
+			
+			
+			\MATRIXROW{MART}{a}{1}{0}{0}{0}
+			\MATRIXROW{MART}{b}{0}{1}{0}{0}
+			\MATRIXROW{MART}{c}{0}{0}{1}{0}
+			\MATRIXROW{MART}{d}{0}{0.2}{0}{1}
+			
+			
+			\MATRIXROW{MART2}{a}{1}{0}{0}{0}
+			\MATRIXROW{MART2}{b}{0}{0}{0}{0}
+			\MATRIXROW{MART2}{c}{0}{0}{1}{0}
+			\MATRIXROW{MART2}{d}{0}{0}{0}{1}
+			
+			
+			\MATRIXROW{TRANS}{a}{3}{0}{0}{0}
+			\MATRIXROW{TRANS}{b}{0}{3}{0}{6}
+			\MATRIXROW{TRANS}{c}{0}{0}{3}{2}			
+			\MATRIXROW{TRANS}{d}{0}{0}{0}{1}
+			
+			
+			
+			\VARPOINT{A}{0.5}{0.5}{-0.5}
+			\VARPOINT{B}{0.5}{-0.5}{-0.5}
+			\VARPOINT{C}{-0.5}{-0.5}{-0.5}
+			\VARPOINT{D}{-0.5}{0.5}{-0.5}
+			\VARPOINT{A1}{0.5}{0.5}{0.5}
+			\VARPOINT{B1}{0.5}{-0.5}{0.5}
+			\VARPOINT{C1}{-0.5}{-0.5}{0.5}
+			\VARPOINT{D1}{-0.5}{0.5}{0.5}
+			
+			\foreach \p in {A,B,C,D,A1,B1,C1,D1}{
+				\MATRIXPOINTMULTIPLY{\p}{TRANS}{\p}
+			}	
+			
+
+			
+			
+			
+			\foreach \p in {A,B,C,D,A1,B1,C1,D1}{
+				\MATRIXPOINTMULTIPLY{\p}{MART}{\p}
+			}		
+			
+			
+			
+			\draw (Axz) -- (Bxz)-- (Cxz) -- (Dxz) --cycle;
+			\draw (A1xz) -- (B1xz) -- (C1xz) -- (D1xz) --cycle;
+			\draw [thick] (Bxz) -- (Cxz) -- (C1xz) -- (B1xz) --cycle;
+			
+			\foreach \p in {A,B,C,D}{
+				\draw (\p xz) -- (\p 1xz);				
+			}
+			
+			
+			
+			\foreach \p in {A,B,C,D,A1,B1,C1,D1}{
+				\draw[dashed, ultra thin] (\p) -- (\p xz);
+			}
+			
+				
+			
+			
+		    
+			
+			
+			
+			
+			
+
+		
+		
+		
+		
+	\end{tikzpicture}  }
+	
+\end{document}

@@ -1,0 +1,789 @@
+\documentclass[10pt]{beamer}
+
+%\documentclass[10pt, handout]{beamer}
+\setbeameroption{show notes}
+
+%\documentclass[10pt, a4paper]{article}
+%\usepackage{beamerarticle}
+
+\input{preambule.tex}
+
+
+\usepackage{media9}
+
+\graphicspath{{Images/}{Images/\jobname/}}
+
+\date{\today}
+
+
+\renewcommand{\LectionNumber}{12}
+\renewcommand{\LectionTheme}{Представление кривых и поверхностей}
+\title{Лекция \lecdni \\ \LectionTheme}
+\subtitle{Компьютерная графика}
+
+
+
+%\usepackage{standalone}
+
+\setbeamersize
+{
+	text margin left=0.5cm,
+	text margin right=0.5cm
+}
+
+\usepackage{comment}
+
+
+%	\transduration{2}
+%   \transfade
+
+
+
+
+\begin{document}
+ 		 
+\input{template.tex}
+
+
+
+\newcommand \abs[1] {\left| #1 \right|}
+
+\everymath{\displaystyle}
+
+    
+\begin{comment}
+\end{comment}
+
+
+    
+    
+    \QRFRAME	
+	
+
+	\frame{\maketitle}
+
+	
+	\begin{frame}\frametitle{План лекции}
+		\tableofcontents
+	\end{frame}
+	
+
+\section{Неявное представление кривых}
+\frame{\sectionpage}
+
+\begin{frame}\frametitle{Неявное представление}
+	
+	\TC{0.6}
+	{
+		\includegraphics{function}
+		
+	}{
+		
+		Явное: 	$y=f(x)$
+		
+		~
+		
+		{\color{red}$y=x^2$}
+		
+		{\color{green}$y=\sin x$}
+		
+		{\color{blue}$y=\dfrac{1}{x}$}
+		
+		~ \pause
+		
+		Неявное: {\color{orange}$f(x,y) = 0$}
+		
+	}
+	
+\end{frame}
+
+\begin{frame}\frametitle{Неявные уравнения второй степени}
+	
+	\centering
+	$ax^2+2bxy+cy^2+2dx+2ey+f=0$
+	\IG[0.6]{Screenshot 2024-10-15 164404.jpg}
+	
+	
+\end{frame}
+
+\begin{frame}\frametitle{Параметрическое представление}
+	
+	\TC{0.5}
+	{
+		
+		\animategraphics[autoplay,loop, nomouse]{15}{Images/\jobname/line}{0}{100}
+		
+	}{
+		$
+		f(t)=
+		\begin{cases}
+		x=x(t),\\
+		y=y(t),	
+		\end{cases}
+		$
+		
+		~
+		
+		$
+		\vv P(t)=\left[x(t),y(t)\right].
+		$
+		
+		~
+		
+		
+		Для прямой:
+		
+		$\vv P(t) = \vv P_1+(\vv P_2-\vv P_1)t$,
+		
+		$x(t)=x_1+(x_2-x_1)t$,
+		
+		$y(t)=y_1+(y_2-y_1)t$.
+	}
+	
+\end{frame}
+
+\section{Параметрическое представление}
+\frame{\sectionpage}
+
+\begin{frame}\frametitle{Параметрическое представление окружности}
+	\TC{0.4}
+	{
+		\animategraphics[autoplay,loop, nomouse]{15}{Images/\jobname/circle}{0}{99}
+		
+		$
+		f(t)=
+		\begin{cases}
+			x(t)=\cos(t),\\
+			y(t)=\sin(t),
+		\end{cases}
+		$
+		
+		$
+		t \in [0, 2\pi].
+		$
+		
+	}{
+		\animategraphics[autoplay,loop, nomouse]{15}{Images/\jobname/circle}{100}{199}
+	}
+		
+	
+\end{frame}
+
+\begin{frame}\frametitle{Аффинные преобразования}
+	
+	\TC{0.5}
+	{
+		\animategraphics[autoplay,loop, nomouse]{15}{Images/\jobname/parabola/parabola}{0}{100}	
+	}{
+		$
+		f(t)=
+		\begin{cases}
+			x(t)=t,\\
+			y(t)=t^2+t-0.5.
+		\end{cases}
+		$
+		
+		\vspace{2ex}
+		
+		$
+		\mathbf R(\varphi)=
+		\begin{pmatrix}
+			\cos\varphi & -\sin\varphi \\
+			\sin\varphi &  \cos\varphi
+		\end{pmatrix}.
+		$
+		
+		\vspace{2ex}	
+
+	}
+	\TC{0.3}
+	{
+		
+	}{
+	
+	$
+	\begin{pmatrix}
+		\cos\varphi & -\sin\varphi \\
+		\sin\varphi &  \cos\varphi
+	\end{pmatrix}
+	\begin{pmatrix}
+		x(t)\\
+		y(t)
+	\end{pmatrix}
+	=
+	\begin{pmatrix}
+		x(t)\cos\varphi - y(t)\sin\varphi  \\
+		x(t)\sin\varphi  + y(t)\cos\varphi
+	\end{pmatrix}.
+	$
+		
+	}
+	
+
+	
+\end{frame}
+
+\begin{frame}\frametitle{Параметрическое представление эллипса}
+
+\TC{0.4}
+{
+	\includegraphics{elipce/elipce}
+}{
+	$
+	f(t)=
+	\begin{cases}
+		x(t)=a\cos(t),\\
+		y(t)=b\sin(t),
+	\end{cases}
+	a\neq b.
+	$
+}	
+
+
+
+	
+\end{frame}
+
+\section{Кривые Безье}
+\frame{\sectionpage}
+
+\begin{frame}\frametitle{Кривые Безье}
+	
+	\TC{0.5}
+	{
+		
+		\animategraphics[autoplay,loop, nomouse]{15}{Images/\jobname/build_bezier_anim}{0}{99}
+		
+	}{
+		\fbox{$\VV C(t)=\sum_{i=0}^nB_{i,n}(t)\VV P_i, t\in[0,1]$},
+		
+		для кривой, проходящей через $n+1$ точку. Где
+		
+		$B_{i,n}(t) = 
+		\begin{pmatrix}
+			n\\
+			i
+		\end{pmatrix}
+		t^i(1-t)^{n-i},$
+		
+		$\begin{pmatrix}
+			n\\
+			i
+		\end{pmatrix}
+		=
+		\dfrac{n!}{i!(n-i)!}.$
+	}
+	
+	
+\end{frame}
+
+\begin{frame}\frametitle{Линейные кривые Безье}
+	
+	\TC{0.5}
+	{
+		\animategraphics[autoplay,loop, nomouse]{15}{Images/\jobname/build_bezier_anim_n2}{0}{114}
+	}{
+		\begin{center}
+			\includegraphics[page=1]{bezierfunctions}
+		\end{center}
+		$\VV C(t)=\sum_{i=0}^1B_{i,1}(t)\VV P_i$,
+		$\VV C(t) = B_{0,1}(t) \VV P_0+B_{1,1}(t) \VV P_1$,
+		
+		\fbox{$\VV C(t)= \VV P_0(1-t)+\VV P_1t$}.
+	}
+	
+\end{frame}
+
+\begin{frame}\frametitle{Квадратичные кривые Безье}
+
+	\TC{0.5}
+	{
+		\animategraphics[autoplay,loop, nomouse]{15}{Images/\jobname/build_bezier_anim_n3}{0}{114}
+	}{
+		\begin{center}
+			\includegraphics[page=2]{bezierfunctions}
+		\end{center}
+		
+		$\VV C(t)=\sum_{i=0}^2B_{i,2}(t)\VV P_i$,
+		
+		$\VV C(t) = B_{0,2}(t) \VV P_0+B_{1,2}(t) \VV P_1+B_{2,2}(t) \VV P_2$,
+		
+		\fbox{$\VV C(t)=(1-t^2)\VV P_0+2t(1-t)\VV P_1 + t^2\VV P_2$}.
+	}	
+	
+\end{frame}
+
+\begin{frame}\frametitle{Кубические кривые Безье}
+	\TC{0.6}
+	{
+		\animategraphics[autoplay,loop, nomouse]{15}{Images/\jobname/build_bezier_anim_n4}{0}{114}
+	}{
+		\begin{center}
+			\includegraphics[page=3]{bezierfunctions}
+		\end{center}
+		
+		~
+		
+		$\VV C(t)=\sum_{i=0}^3B_{i,3}(t)\VV P_i$,
+
+	}
+	
+	$\VV C(t) = B_{0,3}(t) \VV P_0+B_{1,3}(t) \VV P_2+B_{2,3}(t) \VV P_3+B_{3,3}(t) \VV P_1$,
+	
+	\fbox{$\VV C(t) = (1-t)^3\VV {P}_0 + 3t(1-t)^2\VV{P}_1 + 3t^2(1-t)\VV{P}_2 + t^3\VV{P}_3$}.
+	
+\end{frame}
+
+\begin{frame}\frametitle{Куби-кубическая или ква-ква-квадратичная кривая}
+	
+	\centering
+	\animategraphics[autoplay,loop, nomouse]{15}{Images/\jobname/build_bezier_anim_n6}{0}{114}
+	
+\end{frame}
+
+
+\begin{frame}\frametitle{Рекурсивное определение кривых Безье (алгоритм де Кастельжо)}
+	
+{
+			\centering
+			\animategraphics[autoplay,loop, nomouse,scale=0.9, palindrome]{15}{Images/\jobname/recursive_bezier_anim_n3}{0}{198}%
+			\animategraphics[autoplay,loop, nomouse,scale=0.9,palindrome]{15}{Images/\jobname/recursive_bezier_anim_n4}{0}{198}
+}
+
+	\vspace{-1.5ex}
+	$\VV C(t)=\sum_{i=0}^nB_{i,n}(t)\VV P_i \quad \Rightarrow \quad \VV C(t) = \VV\beta_0^{(n)}(t)$,
+	
+	$\VV\beta_i^{(j)} = \VV\beta_i^{(j-1)}(t) [1-t] + \VV\beta_{i+1}^{(j-1)}(t) t\;, \quad j= n,\ldots,1\;, \ i = 0,\ldots,n-j\;$,
+	
+	$\VV\beta_i^{(0)}(t)=\VV P_i, \forall t$.
+	
+\end{frame}
+
+
+\begin{frame}\frametitle{Весовые функции кривых Безье}
+	
+	\includegraphics[page=1]{bezierfunctions}
+	\includegraphics[page=2]{bezierfunctions}
+	\includegraphics[page=3]{bezierfunctions}
+	\includegraphics[page=4]{bezierfunctions}
+	\includegraphics[page=5]{bezierfunctions}
+	\includegraphics[page=6]{bezierfunctions}
+	
+\end{frame}
+
+\begin{frame}\frametitle{Движение начальной точки}
+	
+	%C:/Users/gavre/OneDrive/Преподство/Материалы/графика/НоваяПрограмма/Лекции/Images/L12/build_bezier_p0_anim_n6.tex
+		\centering
+	\animategraphics[autoplay,loop, nomouse, palindrome]{15}{Images/\jobname/build_bezier_p0_anim_n6}{0}{99}
+	
+\end{frame}
+
+\begin{frame}\frametitle{Движение промежуточной точки}
+	
+	%C:/Users/gavre/OneDrive/Преподство/Материалы/графика/НоваяПрограмма/Лекции/Images/L12/build_bezier_p0_anim_n6.tex
+	\centering
+	\animategraphics[autoplay,loop, nomouse, palindrome]{15}{Images/\jobname/build_bezier_p3_anim_n6}{0}{99}
+	
+\end{frame}
+
+\begin{frame}\frametitle{Безье и матрицы}
+	
+	$\VV C(t)=\sum_{i=0}^3 B_{i,3}(t) \VV P_i , t\in[0,1]$,
+	
+	$\VV C(t)=\VV P_0B_{0,3}+\VV P_BB_{1,3}+\VV P_2B_{2,3}+\VV P_3B_{3,3}$=
+	
+	\hfill$=(1-t)^3\VV P_0+3t(1-t)^2\VV P_1+3t^2(1-t)\VV P_2+t^3\VV P_3$
+	
+	\pause
+	$C(t)=
+	\begin{bmatrix}
+		(1-t) & 3t(1-t)^2 & 3t^2(1-t) & t^3
+	\end{bmatrix}
+	\begin{bmatrix}
+		P_0\\
+		P_1\\
+		P_2\\
+		P_3
+	\end{bmatrix}$,
+	$
+	C(t)=
+	\begin{bmatrix}
+		t^3 & t^2 & t & 1
+	\end{bmatrix}
+	\begin{bmatrix}
+		-1& 3& -3&1  \\
+		3& -6& 3& 0  \\
+		-3& 3&0 &0  \\
+		1&0 &0 &0  \\
+	\end{bmatrix}
+	\begin{bmatrix}
+		P_0\\
+		P_1\\
+		P_2\\
+		P_3
+	\end{bmatrix}
+	=\mathbf{TNG},
+	$
+	
+	\pause
+	$
+	\overset{n=4}{C(t)}=
+	\begin{bmatrix}
+		t^4 & t^3 & t^2 & t & 1
+	\end{bmatrix}
+	$
+	$\footnotesize 
+	\begin{bmatrix}
+		1& -4& 6& -4 &1  \\
+		-4& 12& -12& 4 &0 \\
+		6& -12& 6 &0 & 0 \\
+		-4& 4 &0 &0& 0  \\
+		1&0&0&0&0
+	\end{bmatrix}
+	\begin{bmatrix}
+		B_0\\
+		B_1\\
+		B_2\\
+		B_3\\
+		B_4
+	\end{bmatrix}.
+	$
+	
+	
+	
+\end{frame}
+
+\begin{frame}\frametitle{Матрицы в общем виде}
+	
+	
+	$\VV C(t)=\mathbf{TNG}$
+	
+	$\mathbf T = \begin{bmatrix}
+		t^n & t^{n-1} & \dots & t & 1
+	\end{bmatrix}$
+	
+	$\mathbf G = \begin{bmatrix}
+		P_0 & P_{1} & \dots & P_n
+	\end{bmatrix}^T$
+	
+	\pause
+	
+	$\mathbf N =
+	\begin{bmatrix}
+		\left(\begin{smallmatrix}
+		n \\ 0
+		\end{smallmatrix}\right)
+		\left(\begin{smallmatrix}
+			n \\ n
+		\end{smallmatrix}\right)
+		(-1)^n
+		&
+		\left(\begin{smallmatrix}
+			n \\ 1
+		\end{smallmatrix}\right)
+		\left(\begin{smallmatrix}
+			n-1 \\ n-1
+		\end{smallmatrix}\right)
+		(-1)^{n-1}
+		&
+		\dots
+		&
+		\left(\begin{smallmatrix}
+			n \\ n
+		\end{smallmatrix}\right)
+		\left(\begin{smallmatrix}
+			n-n \\ n-n
+		\end{smallmatrix}\right)
+		(-1)^0
+		\\
+		\left(\begin{smallmatrix}
+			n \\ 0
+		\end{smallmatrix}\right)
+		\left(\begin{smallmatrix}
+			n \\ n-1
+		\end{smallmatrix}\right)
+		(-1)^{n-1}
+		&
+		\left(\begin{smallmatrix}
+			n \\ 1
+		\end{smallmatrix}\right)
+		\left(\begin{smallmatrix}
+			n-1 \\ n-2
+		\end{smallmatrix}\right)
+		(-1)^{n-2}
+		&
+		\dots
+		&
+		0 
+		\\
+		\vdots & \vdots & \ddots & \vdots \\
+		\left(\begin{smallmatrix}
+			n \\ 0
+		\end{smallmatrix}\right)
+		\left(\begin{smallmatrix}
+			n \\ 1
+		\end{smallmatrix}\right)
+		(-1)^{1}
+		&
+		\left(\begin{smallmatrix}
+			n \\ 1
+		\end{smallmatrix}\right)
+		\left(\begin{smallmatrix}
+			n-1 \\ 0
+		\end{smallmatrix}\right)
+		(-1)^{0}
+		&
+		\dots
+		&
+		0
+		\\
+		\left(\begin{smallmatrix}
+			n \\ 0
+		\end{smallmatrix}\right)
+		\left(\begin{smallmatrix}
+			n \\ 0
+		\end{smallmatrix}\right)
+		(-1)^{0}
+		&
+		0
+		&
+		\dots
+		&
+		0
+		
+	\end{bmatrix}
+	$
+	
+	$
+	(N_{i,j})_{i,j=0}^n =
+	\begin{cases}
+		\big(
+		\begin{smallmatrix}
+			n\\
+			j
+		\end{smallmatrix} 
+		\big)
+		\big(
+		\begin{smallmatrix}
+			n-j\\
+			j-i-j
+		\end{smallmatrix}
+		\big)
+		(-1)^{n-i-j},  &  i + j \leq n,	\\
+		0      & \text{иначе.}
+	\end{cases}
+	$
+
+	
+\end{frame}
+
+\begin{frame}\frametitle{Сплайны из кривых Безье}
+	
+	\TC{0.5}
+	{
+		\IG{Screenshot 2024-10-30 190714.jpg}
+	}{
+		\IG{Screenshot 2024-10-30 190838.jpg}
+	}
+	
+\end{frame}
+
+\section{Би-сплайны}
+\frame{\sectionpage}
+
+
+\begin{frame}\frametitle{Би-сплайны (B-spline)}
+	
+	$
+	\vv C(t) = \sum_{i=0}^{n}N_{i,k}(u)\vv P_i, \ \ u\in [u_\text{min}, u_\text{max}], \ \ k=(1,2,\dots{},n-1).
+	$
+	
+	\vspace{1ex}
+	$N_{i,k}=\dfrac{t-u_i}{u_{i+k}-u_i}N_{i,k-1}(u)+
+	         \dfrac{u_{i+k}-t}{u_{i+k+1}-u_{i+1}}N_{i+1,k-1}(u)$
+	
+	\vspace{1ex}
+	$U=\{u_0, u_1, \dots  \ u_{n+k+1} \}, \ u_i \leq u_{i+1} $
+	
+	\vspace{1ex}
+	$N_{i,0}(u)=
+	\begin{cases}
+		1 & u_i\leq t < u_{i+1} \\
+		0 & \text{иначе}.
+	\end{cases}
+	$
+	
+	
+	
+	
+\end{frame}
+
+ 
+ \begin{frame}\frametitle{Открытые b-сплайны различного порядка}
+ 	
+ 	\TC{0.4}
+ 	{
+ 		\includegraphics[page=0]{bspline.pdf}
+ 	}{
+ 		
+ 		Открытый неравномерный вектор узлов:
+ 		
+ 		$U=\{u_0, u_1, \ldots, u_{k+n+2}\}$
+ 		
+ 				
+ 		$u_i=
+ 		\begin{cases}
+ 			0, & 0 \leq i \leq k-1,\\
+ 			i-p, & p \leq n,\\
+ 			n-k+1, & \text{иначе}.
+ 		\end{cases}$
+ 		
+ 		 		
+
+		\vspace{1ex}
+ 		$n=5$
+ 		
+ 		{\color{DarkGoldenrod}$k=5 \quad U = \{ 0,0,0,0,0,0,1,1,1,1,1,1\}$}
+ 		
+ 		{\color{Magenta}$k=4 \quad U = \{ 0,0,0,0,0,1,2,2,2,2,2\}$}
+ 		
+ 		{\color{Blue}$k=3 \quad U = \{ 0,0,0,0,1,2,3,3,3,3\}$}
+ 		
+ 		{\color{ForestGreen}$k=2 \quad U = \{ 0,0,0,1,2,3,4,4,4\}$}
+ 		
+ 		{\color{red}$k=1 \quad U = \{ 0,0,1,2,3,4,5,5\}$}
+ 		
+ 		
+ 	}
+ 	
+ \end{frame}
+ 
+   \begin{frame}\frametitle{B-сплайн первой степени}
+ 	
+ 	\TC{0.4}
+ 	{
+ 		\animategraphics[autoplay,loop, nomouse, palindrome]{15}{Images/\jobname/build_bspline_k1_anim}{0}{114}
+ 	}{
+ 		
+ 		$\vv C(t) = \sum_{i=0}^{1}N_{i,1}(u)\vv P_i,$
+ 		
+ 		\includegraphics[page=6,]{bspline.pdf}
+ 		
+ 		\includegraphics[page=1,width=\textwidth]{N.pdf}
+ 		
+ 	}
+ 	
+ \end{frame}
+ 
+  \begin{frame}\frametitle{B-сплайн второй степени}
+ 	
+ 	\TC{0.4}
+ 	{
+ 		\animategraphics[autoplay,loop, nomouse, palindrome]{15}{Images/\jobname/build_bspline_k2_anim}{0}{114}
+ 	}{
+ 		
+ 		$\vv C(t) = \sum_{i=0}^{2}N_{i,2}(u)\vv P_i,$
+ 		
+ 		\includegraphics[page=5,]{bspline.pdf}
+ 		
+ 		\includegraphics[page=2,width=\textwidth]{N.pdf}
+ 		
+ 	}
+ 	
+ \end{frame}
+ 
+   \begin{frame}\frametitle{B-сплайн третьей степени}
+ 	
+ 	\TC{0.4}
+ 	{
+ 		\animategraphics[autoplay,loop, nomouse, palindrome]{15}{Images/\jobname/build_bspline_k3_anim}{0}{114}
+ 	}{
+ 		
+ 		$\vv C(t) = \sum_{i=0}^{3}N_{i,3}(u)\vv P_i,$
+ 		
+ 		\includegraphics[page=4,]{bspline.pdf}
+ 		
+ 		\includegraphics[page=3,width=\textwidth]{N.pdf}
+ 		
+ 	}
+ 	
+ \end{frame}
+ 
+   \begin{frame}\frametitle{B-сплайн четвертой степени}
+ 	
+ 	\TC{0.4}
+ 	{
+ 		\animategraphics[autoplay,loop, nomouse, palindrome]{15}{Images/\jobname/build_bspline_k4_anim}{0}{114}
+ 	}{
+ 		
+ 		$\vv C(t) = \sum_{i=0}^{4}N_{i,4}(u)\vv P_i,$
+ 		
+ 		\includegraphics[page=3,]{bspline.pdf}
+ 		
+ 		\includegraphics[page=4,width=\textwidth]{N.pdf}
+ 		
+ 	}
+ 	
+ \end{frame}
+ 
+   \begin{frame}\frametitle{B-сплайн пятой степени}
+ 	
+ 	\TC{0.4}
+ 	{
+ 		\animategraphics[autoplay,loop, nomouse, palindrome]{15}{Images/\jobname/build_bspline_k5_anim}{0}{114}
+ 	}{
+ 		
+ 		$\vv C(t) = \sum_{i=0}^{5}N_{i,5}(u)\vv P_i,$
+ 		
+ 		\includegraphics[page=5,]{bspline.pdf}
+ 		
+ 		\includegraphics[page=5,width=\textwidth]{N.pdf}
+ 		
+ 	}
+ 	
+ \end{frame}
+ 
+ 
+ \begin{frame}[squeeze]\frametitle{Весовые функции открытых b-сплайнов}
+ 	
+ 	\edef\s{0.85}
+	\centering
+			\includegraphics[page=2,scale=\s]{bspline.pdf}
+			\includegraphics[page=3,scale=\s]{bspline.pdf}
+			\includegraphics[page=4,scale=\s]{bspline.pdf}
+			\includegraphics[page=5,scale=\s]{bspline.pdf}
+			\includegraphics[page=6,scale=\s]{bspline.pdf}
+			\includegraphics[page=7,scale=\s]{bspline.pdf}
+
+	 {\color{red}$N_{0,k}$} \		 
+	{\color{ForestGreen}$N_{1,k}$}\ 		
+	{\color{blue}$N_{2,k}$} \		
+	{\color{Orange}$N_{3,k}$}\ 		
+	{\color{Magenta}$N_{4,k}$}\ 		
+	{\color{DeepSkyBlue}$N_{4,k}$}
+ 
+ 	\TC{0.5}
+ 	{
+% 		 {$N_{i,4} \quad x = \{ 0,0,0,0,0,0,1,1,1,1,1,1\}$}
+% 		
+% 		{$N_{i,3} \quad x = \{ 0,0,0,0,0,1,2,2,2,2,2\}$}
+% 		
+% 		{$N_{i,2} \quad x = \{ 0,0,0,0,1,2,3,3,3,3\}$}
+% 		
+% 		{$N_{i,1}) \quad x = \{ 0,0,0,1,2,3,4,4,4\}$}
+% 		
+% 		 {$N_{i,1}) \quad x = \{ 0,0,1,2,3,4,5,5\}$}
+ 	}{
+
+ 	}
+ 	
+
+ 	
+ \end{frame}
+ 
+
+ 
+\end{document}
+
+

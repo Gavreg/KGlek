@@ -1,0 +1,53 @@
+\documentclass[tikz]{standalone}
+
+\usepackage{tikz}
+\usepackage[svgnames]{xcolor}
+\usepackage{tikz-3dplot}
+\usepackage{amsmath} %математические формулы
+\usepackage[e]{esvect}  %Красивая стрелочка вектора
+
+
+\usepackage{polyglossia}
+\setdefaultlanguage{russian}
+\setotherlanguage{english}
+%\setkeys{russian}{babelshorthands=true}
+\usepackage{fontspec}
+\setmainfont{Times New Roman} [Script=Cyrillic, Mapping=tex-text,]
+\setsansfont{Arial} [Script=Cyrillic, Mapping=tex-text,]
+\setmonofont{Courier New} [Script=Cyrillic, Mapping=tex-text,]
+
+\usetikzlibrary{calc}
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{angles}
+
+
+
+\include{../tikzcom.tex}
+
+\begin{document}
+	
+    
+ \begin{tikzpicture}[scale=2]
+	
+	\draw[-Latex] (-1.7,0) -- (1.7,0) node[below] {$\widehat{\vv h, \vv n}$};
+	\draw[-Latex] (0,-0.2) -- (0,1.2) node[above] {$I_s$}; 	
+	
+	\draw (1.55,0) node[below left] {$90^\circ$};	
+	\draw (-1.55,0) node[below] {$-90^\circ$};
+	
+	\draw[color=orange, domain=-1.55:1.55, samples=100] plot[id=1] function{exp(-1*(1-cos(x)*cos(x))/(cos(x)*cos(x)))} ;
+	
+	\draw[color=blue, domain=-1.5:1.5, samples=100] plot[id=2] function{exp(-10*(1-cos(x)*cos(x))/(cos(x)*cos(x)))} ;
+	
+	\draw[color=red, domain=-1.5:1.5, samples=100] plot[id=3] function{exp(-5*(1-cos(x)*cos(x))/(cos(x)*cos(x)))} ;
+	
+	\draw[align=left] (1.2,1)node {  {\color{orange}$k=1$}\\
+		{\color{red}$k=5$}\\
+		{\color{blue}$k=10$}};
+\end{tikzpicture}
+
+
+
+
+	
+\end{document}

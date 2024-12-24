@@ -1,0 +1,48 @@
+\documentclass[tikz]{standalone}
+
+\usepackage{tikz}
+\usepackage[svgnames]{xcolor}
+\usepackage{tikz-3dplot}
+\usepackage{amsmath} %математические формулы
+\usepackage[e]{esvect}  %Красивая стрелочка вектора
+
+
+\usepackage{polyglossia}
+\setdefaultlanguage{russian}
+\setotherlanguage{english}
+%\setkeys{russian}{babelshorthands=true}
+\usepackage{fontspec}
+\setmainfont{Times New Roman} [Script=Cyrillic, Mapping=tex-text,]
+\setsansfont{Arial} [Script=Cyrillic, Mapping=tex-text,]
+\setmonofont{Courier New} [Script=Cyrillic, Mapping=tex-text,]
+
+\usetikzlibrary{calc}
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{angles}
+
+
+
+\include{../tikzcom.tex}
+
+\begin{document}
+
+
+\tdplotsetmaincoords{60}{150}
+\begin{tikzpicture}[tdplot_main_coords]
+
+\draw[-latex, red] (0,0,0) -- (4,0,0);	
+\draw[-latex, green] (0,0,0) -- (0,4,0);	
+\draw[-latex, blue] (0,0,0) -- (0,0,2);	
+
+\input{bsurfpoints.tex}
+\input{bsurfpoints_p.tex}
+
+\end{tikzpicture}
+
+
+
+
+
+
+	
+\end{document}

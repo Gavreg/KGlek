@@ -1,0 +1,148 @@
+\documentclass[tikz]{standalone}
+
+\usepackage{tikz}
+\usepackage[svgnames]{xcolor}
+\usepackage{tikz-3dplot}
+\usepackage{amsmath} %математические формулы
+\usepackage[e]{esvect}  %Красивая стрелочка вектора
+
+
+\usepackage{polyglossia}
+\setdefaultlanguage{russian}
+\setotherlanguage{english}
+%\setkeys{russian}{babelshorthands=true}
+\usepackage{fontspec}
+\setmainfont{Times New Roman} [Script=Cyrillic, Mapping=tex-text,]
+\setsansfont{Arial} [Script=Cyrillic, Mapping=tex-text,]
+\setmonofont{Courier New} [Script=Cyrillic, Mapping=tex-text,]
+
+\usetikzlibrary{calc}
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{angles}
+
+
+
+
+
+\include{../tikzcom.tex}
+
+\begin{document}
+	
+	
+	\foreach \frame in {99,...,0}{
+		
+		\tdplotsetmaincoords{70}{70}
+		\begin{tikzpicture}[tdplot_main_coords, scale=1.2] 
+			
+			\clip[tdplot_screen_coords] (-1,-1.4) rectangle (4.5,3.9);
+			
+			\edef\f{\fpeval{\frame/99}};
+			
+			\draw [-latex] (0,0,0) -- (4,0,0) node [right] {$x$};
+			\draw [-latex] (0,0,0) -- (0,4,0) node [above] {$y$};
+			\draw [] (0,0,0) -- (0,0,1);
+			
+			
+			\coordinate (A) at (2,0,3);
+			\coordinate (C) at (0,2,3);			
+			\coordinate (B) at ($(0,0,0)!\f!(3,3,3)$);
+			
+			\coordinate (A1) at (0.666,0,1);
+			\coordinate (C1) at (0,0.666,1);
+			\coordinate (B1) at ($(0.333,0.333,1)!\f!(1,1,1)$);
+		
+			
+			\fill (A) circle (1pt);
+			\fill (B) circle (1pt);
+			\fill (C) circle (1pt);
+			
+			
+			
+			\draw (A) node [above] {$A^w$};
+			\draw (B) node [above] {$B^w$};
+			\draw (C) node [above] {$C^w$};
+			
+			\draw (A1) node [above] {$A$};
+			\draw (1,1,1) node [right] {$B$};
+			\draw (C1) node [above] {$C$};
+			
+			
+			
+			\draw[very thin, gray] (0,0,0) -- (A);
+			\draw[very thin, gray] (0,0,0) -- (B);
+			\draw[very thin, gray] (1,1,1) -- (B);
+			\draw[very thin, gray] (0,0,0) -- (C);
+			
+			
+			%\fill [green!20!white, opacity=0.7] (-0.5,-0.5,1) -- (2,-0.5,1) -- (2,2,1) -- (-0.5,2,1) -- cycle;
+			\draw [green!80!white, opacity=0.7] (-0.5,-0.5,1) -- (2,-0.5,1) -- (2,2,1) -- (-0.5,2,1) -- cycle;
+			
+			\draw (0,0,1.4) node [left] {$w=1$};
+			
+			\fill (A1) circle (1pt);
+			\fill (1,1,1) circle (1pt);
+			\fill (C1) circle (1pt);
+			
+			\draw[blue] (A)  .. controls  (B) .. (C);
+			\draw[red] (A1) .. controls (B1) .. (C1);
+			
+			
+			
+			
+			\draw [-latex] (0,0,1) -- (0,0,4) node [right] {$w$};
+
+			
+			
+		\end{tikzpicture}
+	}
+	
+	
+
+\foreach \frame in {99,...,0}{
+	
+	\tdplotsetmaincoords{70}{70}
+	\begin{tikzpicture}
+		
+	
+		
+		\edef\f{\fpeval{\frame/99}};
+		
+		\draw [-latex] (0,0) -- (2,0) node [right] {$x$};
+		\draw [-latex] (0,0) -- (0,2) node [above] {$y$};
+
+		
+		\coordinate (A1) at (0.666,0);
+		\coordinate (C1) at (0,0.666);
+		\coordinate (B1) at ($(0.333,0.333)!\f!(1,1)$);
+		
+	
+		
+		\draw (A1) node [below] {$A$};
+		\draw (1,1) node [right] {$B$};
+		\draw (C1) node [left] {$C$};
+		
+		
+		
+		\fill (A1) circle (1pt);
+		\fill (1,1) circle (1pt);
+		\fill (C1) circle (1pt);
+		
+
+		\draw[red] (A1) .. controls (B1) .. (C1);
+		
+		
+
+		
+		
+		
+	\end{tikzpicture}
+}
+	
+	
+	
+	
+	
+	
+	
+	
+\end{document}

@@ -1,0 +1,238 @@
+\documentclass[tikz]{standalone}
+
+\usepackage{tikz}
+\usepackage[svgnames]{xcolor}
+\usepackage{tikz-3dplot}
+\usepackage{amsmath} %математические формулы
+\usepackage[e]{esvect}  %Красивая стрелочка вектора
+
+
+\usepackage{polyglossia}
+\setdefaultlanguage{russian}
+\setotherlanguage{english}
+%\setkeys{russian}{babelshorthands=true}
+\usepackage{fontspec}
+\setmainfont{Times New Roman} [Script=Cyrillic, Mapping=tex-text,]
+\setsansfont{Arial} [Script=Cyrillic, Mapping=tex-text,]
+\setmonofont{Courier New} [Script=Cyrillic, Mapping=tex-text,]
+
+\usetikzlibrary{calc}
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{angles}
+
+
+
+\include{../tikzcom.tex}
+
+\begin{document}
+	
+    
+\begin{tikzpicture}
+	\usetikzlibrary{calc}
+	
+	\fill[cyan!30!white, draw=black] circle [x radius = 2cm, y radius=1cm];
+	
+	\coordinate (sun) at (-2,3);
+	\coordinate (eye) at (3,3);
+	\coordinate (sun2) at (2,3);
+	
+	\foreach \t in {45,90,...,360}{
+		\draw (sun) -- +(\t:0.35);
+	}
+	\fill[orange, draw=black] (sun) circle (0.2);
+	
+	
+	
+	\scoped[shift=(eye), rotate=220]{			
+		\draw (0,0) -- +(20:0.5);
+		\draw (0,0) -- +(-20:0.5);
+		\draw (-30:0.4)  arc(-30:30:0.4);
+		\fill (0.34,0) circle[x radius=0.05, y radius=0.1];	
+		\fill[white] (0.33,0.05) circle(0.6pt);				
+	};
+	
+	\draw[-Latex, thick] (0,0) -- (0,30mm) node[left]{$\vv n$};
+	\draw[-Latex, thick] (0,0) -- ($(0,0)!30mm!(sun)$) node[right]{$\vv l$};
+	\draw[-Latex, thick] (0,0) -- ($(0,0)!30mm!(eye)$) node[above]{$\vv v$};
+	\draw[-Latex] (0,0) -- ($(0,0)!30mm!(sun2)$) node[above]{$\vv r$};
+	
+	\draw[-Latex] (0,0) -- ($(0,0)!30mm!($(sun)+(eye)$)$) node[above]{$\vv h$};
+	
+	
+\end{tikzpicture}
+
+\begin{tikzpicture}
+	\usetikzlibrary{calc}
+	
+	\fill[cyan!30!white, draw=black] circle [x radius = 2cm, y radius=1cm];
+	
+	\coordinate (sun) at (-2,3);
+	\coordinate (eye) at (3,3);
+	\coordinate (sun2) at (2,3);
+	
+	\foreach \t in {45,90,...,360}{
+		\draw (sun) -- +(\t:0.35);
+	}
+	\fill[orange, draw=black] (sun) circle (0.2);
+	
+	
+	
+	\scoped[shift=(eye), rotate=220]{			
+		\draw (0,0) -- +(20:0.5);
+		\draw (0,0) -- +(-20:0.5);
+		\draw (-30:0.4)  arc(-30:30:0.4);
+		\fill (0.34,0) circle[x radius=0.05, y radius=0.1];	
+		\fill[white] (0.33,0.05) circle(0.6pt);				
+	};
+	
+	\draw[-Latex, thick] (0,0) -- (0,30mm) node[left]{$\vv n$};
+	\draw[-Latex, thick] (0,0) -- ($(0,0)!30mm!(sun)$) node[right]{$\vv l$};
+
+	
+	
+\end{tikzpicture}
+
+
+\begin{tikzpicture}
+	\usetikzlibrary{calc}
+	
+	\fill[cyan!30!white, draw=black] circle [x radius = 2cm, y radius=1cm];
+	
+	\coordinate (sun) at (-2,3);
+	\coordinate (eye) at (3,3);
+	\coordinate (sun2) at (2,3);
+	
+	\foreach \t in {45,90,...,360}{
+		\draw (sun) -- +(\t:0.35);
+	}
+	\fill[orange, draw=black] (sun) circle (0.2);
+	
+	
+	
+	\scoped[shift=(eye), rotate=220]{			
+		\draw (0,0) -- +(20:0.5);
+		\draw (0,0) -- +(-20:0.5);
+		\draw (-30:0.4)  arc(-30:30:0.4);
+		\fill (0.34,0) circle[x radius=0.05, y radius=0.1];	
+		\fill[white] (0.33,0.05) circle(0.6pt);				
+	};
+	
+	\draw[-Latex, thick] (0,0) -- (0,30mm) node[left]{$\vv n$};
+	\draw[-Latex, thick, orange] (0,0) -- ($(0,0)!30mm!(sun)$) node[right]{$\vv l$};
+	\draw[-Latex, thick] (0,0) -- ($(0,0)!30mm!(eye)$) node[above]{$\vv v$};
+	\draw[-Latex, orange] (0,0) -- ($(0,0)!30mm!(sun2)$) node[above]{$\vv r$};
+	
+		
+	
+\end{tikzpicture}
+
+
+\begin{tikzpicture}
+	\usetikzlibrary{calc}
+	
+	\fill[cyan!30!white, draw=black] circle [x radius = 2cm, y radius=1cm];
+	
+	\coordinate (sun) at (-2,3);
+	\coordinate (eye) at (3,3);
+	\coordinate (sun2) at (2,3);
+	
+	\foreach \t in {45,90,...,360}{
+		\draw (sun) -- +(\t:0.35);
+	}
+	\fill[orange, draw=black] (sun) circle (0.2);
+	
+	
+	
+	\scoped[shift=(eye), rotate=220]{			
+		\draw (0,0) -- +(20:0.5);
+		\draw (0,0) -- +(-20:0.5);
+		\draw (-30:0.4)  arc(-30:30:0.4);
+		\fill (0.34,0) circle[x radius=0.05, y radius=0.1];	
+		\fill[white] (0.33,0.05) circle(0.6pt);				
+	};
+	
+	\draw[-Latex, thick] (0,0) -- (0,30mm) node[left]{$\vv n$};
+	\draw[-Latex, thick] (0,0) -- ($(0,0)!30mm!(sun)$) node[right]{$\vv l$};
+	\draw[-Latex, thick] (0,0) -- ($(0,0)!30mm!(eye)$) node[above]{$\vv v$};
+	\draw[-Latex, dashed] (0,0) -- ($(0,0)!30mm!(sun2)$) node[above]{$\vv r$};
+	
+	\draw[-Latex] (0,0) -- ($(0,0)!30mm!($(sun)+(eye)$)$) node[above]{$\vv h$};
+	
+	
+\end{tikzpicture}
+
+\begin{tikzpicture}
+	\usetikzlibrary{calc}
+	
+	\fill[cyan!30!white, draw=black] circle [x radius = 2cm, y radius=1cm];
+	
+	\coordinate (sun) at (-2,3);
+	\coordinate (eye) at (3,3);
+	\coordinate (sun2) at (2,3);
+	
+	\foreach \t in {45,90,...,360}{
+		\draw (sun) -- +(\t:0.35);
+	}
+	\fill[orange, draw=black] (sun) circle (0.2);
+	
+	
+	
+	\scoped[shift=(eye), rotate=220]{			
+		\draw (0,0) -- +(20:0.5);
+		\draw (0,0) -- +(-20:0.5);
+		\draw (-30:0.4)  arc(-30:30:0.4);
+		\fill (0.34,0) circle[x radius=0.05, y radius=0.1];	
+		\fill[white] (0.33,0.05) circle(0.6pt);				
+	};
+	
+	\draw[-Latex, thick] (0,0) -- (0,30mm) node[left]{$\vv n$};
+	\draw[-Latex, thick] (0,0) -- ($(0,0)!30mm!(sun)$) node[right]{$\vv l$};
+	\draw[-Latex, thick] (0,0) -- ($(0,0)!30mm!(eye)$) node[above]{$\vv v$};
+		
+	\draw[-Latex] (0,0) -- ($(0,0)!30mm!($(sun)+(eye)$)$) node[above]{$\vv h$};
+	
+	
+\end{tikzpicture}
+
+
+\begin{tikzpicture}
+	\usetikzlibrary{calc}
+	
+	\fill[cyan!30!white, draw=black] circle [x radius = 2cm, y radius=1cm];
+	
+	\coordinate (sun) at (-2,3);
+	\coordinate (eye) at (3,3);
+	\coordinate (sun2) at (2,3);
+	
+	\foreach \t in {45,90,...,360}{
+		\draw (sun) -- +(\t:0.35);
+	}
+	\fill[orange, draw=black] (sun) circle (0.2);
+	
+	
+	
+	\scoped[shift=(eye), rotate=220]{			
+		\draw (0,0) -- +(20:0.5);
+		\draw (0,0) -- +(-20:0.5);
+		\draw (-30:0.4)  arc(-30:30:0.4);
+		\fill (0.34,0) circle[x radius=0.05, y radius=0.1];	
+		\fill[white] (0.33,0.05) circle(0.6pt);				
+	};
+	
+	\draw[-Latex, thick] (0,0) -- (0,30mm) node[left]{$\vv n$};
+	\draw[-Latex, thick] (0,0) -- ($(0,0)!30mm!(sun)$) node[right]{$\vv l$};
+	\draw[-Latex, thick] (0,0) -- ($(0,0)!30mm!(eye)$) node[above]{$\vv v$};
+	%\draw[-Latex] (0,0) -- ($(0,0)!30mm!(sun2)$) node[above]{$\vv r$};
+	
+	%\draw[-Latex] (0,0) -- ($(0,0)!30mm!($(sun)+(eye)$)$) node[above]{$\vv h$};
+	
+	
+	
+	
+\end{tikzpicture}
+
+
+
+
+	
+\end{document}

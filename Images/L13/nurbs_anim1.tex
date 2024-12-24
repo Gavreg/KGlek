@@ -1,0 +1,63 @@
+\documentclass[tikz]{standalone}
+
+\usepackage{tikz}
+\usepackage[svgnames]{xcolor}
+\usepackage{tikz-3dplot}
+\usepackage{amsmath} %математические формулы
+\usepackage[e]{esvect}  %Красивая стрелочка вектора
+
+
+\usepackage{polyglossia}
+\setdefaultlanguage{russian}
+\setotherlanguage{english}
+%\setkeys{russian}{babelshorthands=true}
+\usepackage{fontspec}
+\setmainfont{Times New Roman} [Script=Cyrillic, Mapping=tex-text,]
+\setsansfont{Arial} [Script=Cyrillic, Mapping=tex-text,]
+\setmonofont{Courier New} [Script=Cyrillic, Mapping=tex-text,]
+
+\usetikzlibrary{calc}
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{angles}
+
+
+
+
+
+\include{../tikzcom.tex}
+
+\begin{document}
+
+
+\foreach \frame in {0,...,99}{
+\begin{tikzpicture}
+	
+	\draw plot[mark=*] file{points.dat};
+	
+	\draw [Magenta] plot file{nurbs_n4_k3_anim/nurbs_n4_k3_frame\frame.dat};
+	
+	\draw (2, 1) node[left]{$B_0$};
+	\draw (1, 4) node[left]{$B_1$};
+	\draw (5, 5) node[below]{$B_2$};
+	\draw (3, 3) node[left]{$B_3$};
+	\draw (5, 1) node[left]{$B_4$};
+	
+	
+	\edef\w{\fpeval{round(5*\frame*\frame/99/99,2)}}
+	
+     \pgfkeys{/pgf/number format/.cd,fixed,fixed zerofill,precision=2}
+	 \draw (2,5) node {$w=\{1, 1, \pgfmathprintnumber{\w}, 1, 1\}$};
+	
+	
+\end{tikzpicture}
+}
+
+
+
+
+
+
+
+
+	
+\end{document}

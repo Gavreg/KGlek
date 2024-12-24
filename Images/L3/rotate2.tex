@@ -1,0 +1,167 @@
+\documentclass[tikz]{standalone}
+
+\usepackage{tikz}
+\usepackage{tikz-3dplot}
+\usepackage{amsmath} %математические формулы
+\usepackage[e]{esvect}  %Красивая стрелочка вектора
+
+
+\usepackage{polyglossia}
+\setdefaultlanguage{russian}
+\setotherlanguage{english}
+%\setkeys{russian}{babelshorthands=true}
+\usepackage{fontspec}
+\setmainfont{Times New Roman} [Script=Cyrillic, Mapping=tex-text,]
+\setsansfont{Arial} [Script=Cyrillic, Mapping=tex-text,]
+\setmonofont{Courier New} [Script=Cyrillic, Mapping=tex-text,]
+
+\usetikzlibrary{calc}
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{angles}
+
+\usepackage{comment}
+
+\include{tikzcom.tex}
+
+\begin{document}
+	
+    
+	\def\frame{0}
+	%\foreach \frame in {0,1,...,1}
+	{
+	\tdplotsetmaincoords{60}{135}
+	\begin{tikzpicture}[scale=1, x=0.4cm, y=0.4cm ] %tdplot_main_coords
+		
+	\VARPOINT{O}{0}{0}{0};	
+
+	\VARPOINT{B}{3}{3}{0}
+	\VARPOINT{vecA}{3}{4}{0}
+	\POINTCOMPSUM{A}{B}{vecA}
+	\VECTOR{BA}{B}{A}
+	\ROTATEPLANAR{rotBA}{BA}{3.1415/3}
+	\POINTCOMPSUM{AA}{B}{rotBA}
+	\VECTOR{BAA}{B}{AA}
+	
+	
+	%\draw[step=.4cm,black!10,very thin] (-1,-1) grid (12,12);	
+	
+	\draw [-Latex] (-4,0) -- (8,0) node [below left] {$x$};	
+	\draw [-Latex] (0,-1) -- (0,10) node [below left] {$y$};
+	
+	\fill [] (B) circle [radius=1pt] node [ right] {$B$};
+	\fill [] (A) circle [radius=1pt] node [above right] {$A$};
+	\fill [] (AA) circle [radius=1pt] node [above] {$A'$};
+	
+	\draw[-latex, thin] (A) arc ({atan2(\BAy,\BAx)}:{atan2(\BAAy,\BAAx)}:\BAr);
+	
+	\draw[thin] ($(B)!10pt!(A)$) arc ({atan2(\BAy,\BAx)}:{atan2(\BAAy,\BAAx)}:10pt);
+	\draw[thin] ($(B)!12pt!(A)$) arc ({atan2(\BAy,\BAx)}:{atan2(\BAAy,\BAAx)}:12pt) node [midway, above] {$\alpha$};
+	
+	\draw[thin] (B) -- (A);
+	\draw[thin] (B) -- (AA);
+	
+	
+	\end{tikzpicture}}
+
+
+\begin{tikzpicture}[scale=1, x=0.4cm, y=0.4cm ] %tdplot_main_coords
+	
+	\VARPOINT{O}{0}{0}{0};	
+	
+	\VARPOINT{B}{0}{0}{0}
+	\VARPOINT{vecA}{3}{4}{0}
+	\POINTCOMPSUM{A}{B}{vecA}
+	\VECTOR{BA}{B}{A}
+	\ROTATEPLANAR{rotBA}{BA}{3.1415/3}
+	\POINTCOMPSUM{AA}{B}{rotBA}
+	\VECTOR{BAA}{B}{AA}
+	
+	
+	%\draw[step=.4cm,black!10,very thin] (-1,-1) grid (12,12);	
+	
+	\draw [-Latex] (-4,0) -- (8,0) node [below left] {$x$};	
+	\draw [-Latex] (0,-1) -- (0,10) node [below left] {$y$};
+	
+	\fill [] (B) circle [radius=1pt] node [ above left] {$B$};
+	\fill [] (A) circle [radius=1pt] node [above right] {$A$};
+	%\fill [] (AA) circle [radius=1pt] node [above] {$A'$};
+	
+	%\draw[-latex, thin] (A) arc ({atan2(\BAy,\BAx)}:{atan2(\BAAy,\BAAx)}:\BAr);
+	
+	%\draw[thin] ($(B)!10pt!(A)$) arc ({atan2(\BAy,\BAx)}:{atan2(\BAAy,\BAAx)}:10pt);
+	%\draw[thin] ($(B)!12pt!(A)$) arc ({atan2(\BAy,\BAx)}:{atan2(\BAAy,\BAAx)}:12pt) node [midway, above] {$\alpha$};
+	
+	\draw[thin] (B) -- (A);
+	%\draw[thin] (B) -- (AA);
+	
+	
+\end{tikzpicture}
+
+
+\begin{tikzpicture}[scale=1, x=0.4cm, y=0.4cm ] %tdplot_main_coords
+	
+	\VARPOINT{O}{0}{0}{0};	
+	
+	\VARPOINT{B}{0}{0}{0}
+	\VARPOINT{vecA}{3}{4}{0}
+	\POINTCOMPSUM{A}{B}{vecA}
+	\VECTOR{BA}{B}{A}
+	\ROTATEPLANAR{rotBA}{BA}{3.1415/3}
+	\POINTCOMPSUM{AA}{B}{rotBA}
+	\VECTOR{BAA}{B}{AA}
+	
+	
+	%\draw[step=.4cm,black!10,very thin] (-1,-1) grid (12,12);	
+	
+	\draw [-Latex] (-4,0) -- (8,0) node [below left] {$x$};	
+	\draw [-Latex] (0,-1) -- (0,10) node [below left] {$y$};
+	
+	\fill [] (B) circle [radius=1pt] node [ below right, yshift=3pt] {$B$};
+	\fill [] (A) circle [radius=1pt] node [above right] {$A$};
+	\fill [] (AA) circle [radius=1pt] node [above] {$A'$};
+	
+	\draw[-latex, thin] (A) arc ({atan2(\BAy,\BAx)}:{atan2(\BAAy,\BAAx)}:\BAr);
+	
+	\draw[thin] ($(B)!10pt!(A)$) arc ({atan2(\BAy,\BAx)}:{atan2(\BAAy,\BAAx)}:10pt);
+	\draw[thin] ($(B)!12pt!(A)$) arc ({atan2(\BAy,\BAx)}:{atan2(\BAAy,\BAAx)}:12pt) node [midway, above] {$\alpha$};
+	
+	\draw[thin] (B) -- (A);
+	\draw[thin] (B) -- (AA);
+	
+	
+\end{tikzpicture}
+
+	\begin{tikzpicture}[scale=1, x=0.4cm, y=0.4cm ] %tdplot_main_coords
+	
+	\VARPOINT{O}{0}{0}{0};	
+	
+	\VARPOINT{B}{3}{3}{0}
+	\VARPOINT{vecA}{3}{4}{0}
+	\POINTCOMPSUM{A}{B}{vecA}
+	\VECTOR{BA}{B}{A}
+	\ROTATEPLANAR{rotBA}{BA}{3.1415/3}
+	\POINTCOMPSUM{AA}{B}{rotBA}
+	\VECTOR{BAA}{B}{AA}
+	
+	
+	%\draw[step=.4cm,black!10,very thin] (-1,-1) grid (12,12);	
+	
+	\draw [-Latex] (-4,0) -- (8,0) node [below left] {$x$};	
+	\draw [-Latex] (0,-1) -- (0,10) node [below left] {$y$};
+	
+	\fill [] (B) circle [radius=1pt] node [ right] {$B$};
+	\fill [] (A) circle [radius=1pt] node [above right] {$A$};
+	\fill [] (AA) circle [radius=1pt] node [above] {$A'$};
+	
+	\draw[-latex, thin,  dashed] (A) arc ({atan2(\BAy,\BAx)}:{atan2(\BAAy,\BAAx)}:\BAr);
+	
+	\draw[thin] ($(B)!10pt!(A)$) arc ({atan2(\BAy,\BAx)}:{atan2(\BAAy,\BAAx)}:10pt);
+	\draw[thin] ($(B)!12pt!(A)$) arc ({atan2(\BAy,\BAx)}:{atan2(\BAAy,\BAAx)}:12pt) node [midway, above] {$\alpha$};
+	
+	\draw[thin, dashed] (B) -- (A);
+	\draw[thin] (B) -- (AA);
+	
+	
+\end{tikzpicture}
+	
+\end{document}

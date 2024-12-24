@@ -1,0 +1,57 @@
+\documentclass[tikz]{standalone}
+
+\usepackage{tikz}
+\usepackage[svgnames]{xcolor}
+\usepackage{tikz-3dplot}
+\usepackage{amsmath} %математические формулы
+\usepackage[e]{esvect}  %Красивая стрелочка вектора
+
+
+\usepackage{polyglossia}
+\setdefaultlanguage{russian}
+\setotherlanguage{english}
+%\setkeys{russian}{babelshorthands=true}
+\usepackage{fontspec}
+\setmainfont{Times New Roman} [Script=Cyrillic, Mapping=tex-text,]
+\setsansfont{Arial} [Script=Cyrillic, Mapping=tex-text,]
+\setmonofont{Courier New} [Script=Cyrillic, Mapping=tex-text,]
+
+\usetikzlibrary{calc}
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{angles}
+
+
+
+
+
+\include{../tikzcom.tex}
+
+\begin{document}
+
+
+\foreach \frame in {0,...,99}
+{
+	\begin{tikzpicture}[scale=1.5]
+		
+		\draw[step={(0.25,0.25)}, ultra thin, gray] (0,0) grid (3,1);
+		
+			\draw [red] plot file{nurbs_n4_k3_anim/nurbs_n4_k3_N0_frame\frame.dat};
+			\draw [green] plot file{nurbs_n4_k3_anim/nurbs_n4_k3_N1_frame\frame.dat};
+			\draw [blue] plot file{nurbs_n4_k3_anim/nurbs_n4_k3_N2_frame\frame.dat};
+			\draw [Orange] plot file{nurbs_n4_k3_anim/nurbs_n4_k3_N3_frame\frame.dat};
+			\draw [Magenta] plot file{nurbs_n4_k3_anim/nurbs_n4_k3_N4_frame\frame.dat};
+		
+		
+		\draw[-latex] (0,0) -- (0,1.1) node [right] {$R_{i,3}$}; 
+		\draw[-latex] (0,0) -- (3.1,0) node [above] {$t$};
+		
+		\draw (1,0) node [below] {1};
+		\draw (2,0) node [below] {2};
+		\draw (3,0) node [below] {3};
+		\draw (0,1) node [left]  {1};
+		
+\end{tikzpicture}
+}
+
+	
+\end{document}

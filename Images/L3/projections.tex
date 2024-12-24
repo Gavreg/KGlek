@@ -1,0 +1,45 @@
+\documentclass[class=scrreprt]{standalone}
+
+
+\usepackage{polyglossia}
+
+\usepackage{amsmath} %математические формулы
+\usepackage[e]{esvect}  %Красивая стрелочка вектора
+
+\usepackage[edges]{forest}
+\setdefaultlanguage{russian}
+\setotherlanguage{english}
+%\setkeys{russian}{babelshorthands=true}
+\usepackage{fontspec}
+\setmainfont{Times New Roman} [Script=Cyrillic, Mapping=tex-text,]
+\setsansfont{Arial} [Script=Cyrillic, Mapping=tex-text,]
+\setmonofont{Courier New} [Script=Cyrillic, Mapping=tex-text,]
+
+
+
+\begin{document}
+	
+\begin{forest}	
+	for tree={draw, minimum height=0.6cm}	
+	[Плоские геометрические проекции
+		[Центральные (перспектива)
+			[Одноточечная, rotate=90, anchor=east]
+			[Двуточечная, rotate=90, anchor=east]
+			[Трехточечная, rotate=90, anchor=east]
+		]
+		[Паралельные
+			[Ортографические
+				[Аксонометрические
+					[Изометрические]
+				]
+			]
+			[Косоугольные
+					[Кавалье]
+					[Кабинетная]
+			]			
+		]
+	]
+\end{forest}
+
+	
+\end{document}

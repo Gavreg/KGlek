@@ -1,0 +1,66 @@
+\documentclass[tikz, class=scrreprt]{standalone}
+
+\usepackage{fp}
+\usepackage{tikz}
+\usepackage{tikz-3dplot}
+\usepackage{amsmath} %математические формулы
+\usepackage[e]{esvect}  %Красивая стрелочка вектора
+
+
+\usetikzlibrary{calc}
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{angles}
+
+\include{tikzcom.tex}
+
+\begin{document}
+	
+    
+	\def\frame{100}
+	%\foreach \frame in {0,1,...,2}
+	{
+	\tdplotsetmaincoords{70}{100}
+	\begin{tikzpicture}[scale=1]
+		
+		%\draw[step=1] (-2,-2) grid (4,4);
+		
+		\VARPOINT{A}{0}{0}{0}
+		\VARPOINT{B}{2}{2}{0}
+		\VARPOINT{C}{3}{-2}{0}
+		
+		\coordinate (AB) at ($(A)!0.5!(B)$);
+		\coordinate (AC) at ($(A)!0.5!(C)$);
+		\coordinate (BC) at ($(C)!0.5!(B)$);
+		
+	
+		
+		\draw [-Implies, double distance=2pt] (AB) -- ($(AB)!25pt!-90:(A)$) ;
+		\draw [-Implies, double distance=2pt] (AC) -- ($(AC)!25pt!90:(A)$);
+		\draw [-Implies, double distance=2pt] (BC) -- ($(BC)!25pt!-90:(B)$);
+		
+		\draw (A) -- (B) -- (C) --cycle;
+		
+		\draw (A) -- ($(A)!-15pt!(B)$);
+		\draw (B) -- ($(B)!-15pt!(A)$);
+		\draw (B) -- ($(B)!-15pt!(C)$);
+		\draw (C) -- ($(C)!-15pt!(B)$);
+		\draw (C) -- ($(C)!-15pt!(A)$);
+		\draw (A) -- ($(A)!-15pt!(C)$);
+		
+		\draw (A) node [left, xshift=-3pt] {$A$};
+		\draw (B) node [right] {$B$};
+		\draw (C) node [right, yshift=3pt] {$C$};
+		
+		\fill [] (A) circle [radius=0.7pt];
+		\fill [] (B) circle [radius=0.7pt];
+		\fill [] (C) circle [radius=0.7pt];
+		
+		\draw (0.5,1) node [shape=circle,draw, inner sep=0] {\tiny $-$};
+		\draw (3,1) node [shape=circle,draw, inner sep=0] {\tiny $-$};
+		\draw (0.5,-1) node [shape=circle,draw, inner sep=0] {\tiny $-$};
+		\draw (1.5,0) node [shape=circle,draw, inner sep=0] {\tiny $+$};
+
+		
+	\end{tikzpicture}}
+	
+\end{document}

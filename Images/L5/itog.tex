@@ -1,0 +1,64 @@
+\documentclass[tikz]{standalone}
+
+\usepackage{tikz}
+\usepackage{tikz-3dplot}
+\usepackage{amsmath} %математические формулы
+\usepackage[e]{esvect}  %Красивая стрелочка вектора
+
+
+\usepackage{polyglossia}
+\setdefaultlanguage{russian}
+\setotherlanguage{english}
+%\setkeys{russian}{babelshorthands=true}
+\usepackage{fontspec}
+\setmainfont{Times New Roman} [Script=Cyrillic, Mapping=tex-text,]
+\setsansfont{Arial} [Script=Cyrillic, Mapping=tex-text,]
+\setmonofont{Courier New} [Script=Cyrillic, Mapping=tex-text,]
+
+\usetikzlibrary{calc}
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{angles}
+\usetikzlibrary{positioning}
+
+%\include{../tikzcom.tex}
+
+\begin{document}
+	
+    \usetikzlibrary {matrix}
+
+     \begin{tikzpicture}[ scale=1]
+    
+    		
+    	\matrix[row sep=12]{     
+    		\node[draw] (n1) {Локальные координаты (объекта/модели)}; & \node(m1){$A^L$}; \\
+    		&\\
+    		\node[draw] (n2) {Мировые координаты};  & \node(m2){$A$};   \\
+    		&\\
+    		\node[draw] (n3) {Видовые координаты};  & \node(m3){$A^V$}; \\
+    		&\\
+    		\node[draw] (n4) {Нормализованные координаты устройства}; & \node(m4){$A^C$}; \\
+    		&\\
+    		\node[draw] (n5) {Оконные координаты}; & \node(m5){$A^{vp}$};\\
+    	 };		
+    	 	
+    	 	
+    \node [above = 7pt of m1] {glVertex3d($A^L$)};	 	
+    
+    \draw[-Latex] (n1) -- (n2) ;
+    \draw[-Latex] (n2) -- (n3);
+    \draw[-Latex] (n3) -- (n4);
+    \draw[-Latex] (n4) -- (n5);
+    
+    \draw[->] (m1) -- (m2) node [midway, right, align = left] 
+    	{\hbox{\footnotesize $(x,y,z) \rightarrow (x,y,z,w=1)$ }\\$\mathbf M^M$};
+    \draw[->] (m2) -- (m3) node [midway, right, align = left] {$\mathbf M^V$};
+    \draw[->] (m3) -- (m4) node [midway, right, align = left]
+    	 {$\mathbf P$\\[-1ex] \hbox{\footnotesize отсечение} \\[-1ex] \hbox{\footnotesize $(x,y,z,w)\rightarrow(x/w,y/w,z/w) $}};
+    \draw[->] (m4) -- (m5) node [midway, right, align = left]
+    	 {\hbox{\footnotesize $(x,y,z) \rightarrow(x',y')$}};
+   		
+   	\end{tikzpicture} 
+
+
+	
+\end{document}

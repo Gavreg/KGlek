@@ -1,0 +1,311 @@
+
+
+
+\mode<article>{
+	
+	\usepackage{hyperref}
+	
+}
+\mode<presentation>{
+	
+	\usetheme{Antibes}
+	\usefonttheme{professionalfonts} 
+	\usefonttheme{serif} % default family is serif
+	
+	%\usecolortheme{spruce} %зеленая, плохой цвет в заголовках 
+	%\usecolortheme{albatross} %синяя, пхоло виден черный цвет
+	
+}
+
+\newcommand{\MP}[1]{\mode<presentation>{#1} }
+\newcommand{\MA}[1]{\mode<article>{#1} }
+
+\newcommand{\ABS}[1]{\left| #1 \right|}
+%\newcommand{\ABS}[1]{\mid #1 \mid}
+
+\newcommand{\HREF}[2]{{\color{blue}\underline{\href{#1}{#2}}}}
+
+\setbeamertemplate{caption}[numbered]
+
+
+%\usepackage[T2A]{fontenc}
+%\usepackage[utf8]{inputenc}
+%\usepackage[russian]{babel}
+%\usepackage{amsmath} %математические формулы
+
+
+
+\usepackage{ifthen}
+
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{calc}
+\usetikzlibrary{decorations}
+\usetikzlibrary{decorations.pathreplacing}
+\newcommand{\rememb}[1]{\tikz[remember picture,baseline=-0.5ex]{\draw node[inner sep=0pt, outer sep=0pt] (#1){\strut};}}
+
+
+
+\usepackage{fp}
+\usepackage{tikz-3dplot}
+\usepackage{environ}
+\usepackage{animate}
+
+
+
+
+
+\usepackage{xcolor}
+%\usepackage[left=20mm,right=20mm,top=20mm,bottom=20mm,a4paper]{geometry} %поля
+
+\usepackage{amsmath} %математические формулы
+%\usepackage{amsfonts} %математические шрифты
+
+
+\usepackage[e]{esvect}  %Красивая стрелочка вектора
+%\let\oldvv\vv
+\newcommand{\VV}[1]{\vv{#1\mathstrut}}
+
+
+
+\usepackage{graphicx} %работа с каритнками
+
+
+%\usepackage{multimedia}
+%\usepackage{movie15}
+
+%Для XeLatex/+
+\usepackage{polyglossia}
+\setdefaultlanguage{russian}
+\setotherlanguage{english}
+%\setkeys{russian}{babelshorthands=true} 
+
+
+\usepackage{fontspec}
+
+\setmainfont{Times New Roman} [Script=Cyrillic, Mapping=tex-text,]
+\setsansfont{Arial} [Script=Cyrillic, Mapping=tex-text,]
+%\setmonofont{Courier New} [Script=Cyrillic, Mapping=tex-text,]
+\newfontfamily{\cyrillicfonttt}{Courier New}
+
+
+%\usepackage{unicode-math}
+%\setmathfont{TeX Gyre Termes Math}
+
+%\setmainfont{CMU Serif}[Script=Cyrillic, Mapping=tex-text,]
+%\setsansfont{CMU Sans Serif}[Script=Cyrillic, Mapping=tex-text,]
+%\setmonofont{CMU Typewriter Text}[Script=Cyrillic, Mapping=tex-text,]
+
+
+%-----------------
+
+
+%\usepackage{caption}
+%\DeclareCaptionLabelSeparator{dot}{~---~}            %Разделитель номер рисунка
+%\captionsetup[figure]{justification=centering,labelsep=dot, format=plain}                        %Подпись рис. центр
+%\captionsetup[table]{justification=raggedleft,labelsep=dot, format=plain, singlelinecheck=false} %Подпись табл. слева
+%\captionsetup[lstlisting]{justification=raggedleft,labelsep=dot, format=plain, singlelinecheck=false}                     %Подпись рис. центр
+
+\usepackage{indentfirst} %отступ первой строки
+
+
+\usepackage[svgnames]{xcolor}
+
+
+\usepackage{hyperref}
+
+%\usepackage{showframe}
+
+
+%\usepackage{tikz}
+
+%\usepackage[hidelinks]{hyperref}%ссылки внутри документа \ref
+
+
+\setlength\abovecaptionskip{-2pt}
+%\setlength\belowcaptionskip{-14pt}
+
+\setbeamerfont{caption}{size=\scriptsize}
+
+
+\def\sectionname{Раздел}
+\def\subsectionname{Подраздел}
+
+
+\newcommand{\TC}[3]
+{
+	
+	
+	\begin{columns}
+		\begin{column}{#1\textwidth}
+			#2
+		\end{column}
+		\begin{column}{\fpeval{1-#1}\textwidth}
+			#3
+		\end{column}
+	\end{columns}
+}
+
+\newcommand{\TCT}[3]
+{
+	
+	\begin{columns}[T]
+		\begin{column}{#1\textwidth}
+			#2
+		\end{column}
+		\begin{column}{\fpeval{1-#1}\textwidth}
+			#3
+		\end{column}
+	\end{columns}
+}
+
+
+\newcommand{\FRAME}[2]{
+	\begin{frame}
+		\frametitle{#1}
+		#2
+	\end{frame}
+}
+
+\newcommand{\FIG}[3]
+{
+	\begin{figure}
+		\centering
+		\includegraphics[width=#3]{#1}
+		\caption{#2}
+	\end{figure}
+}
+
+\newcommand{\vect}[1]{\overrightarrow{#1}}
+
+
+\usepackage{qrcode}
+
+\newcommand{\LECADDR}{https://clck.ru/3D3Efj}
+
+
+\usepackage{newfile}
+
+\edef\LectionNumber{0}
+\edef\LectionTheme{0}
+
+\let\oldsection\section
+\let\oldsubsection\subsection
+
+
+\AtBeginDocument
+{
+	\newoutputstream{CONTENT}
+	\openoutputfile{\LectionNumber .gvr}{CONTENT}
+	
+	\expandafter\addtostream{CONTENT}{\noindent\textbf{\Large Лекция \LectionNumber~---~\LectionTheme}\unexpanded{\setcounter{SEC}{0}}\par}
+}
+
+\renewcommand{\section}[1]{
+	\oldsection{#1}
+	\expandafter\addtostream{CONTENT}{\noindent\hspace{2ex}\unexpanded{\hbox{\large\stepcounter{SEC}\theSEC ~ #1}}\par}
+}
+
+\renewcommand{\subsection}[1]{
+	\oldsubsection{#1}
+	\expandafter\addtostream{CONTENT}{\noindent\hspace{6ex}\unexpanded{\stepcounter{SUB}\theSUB ~ #1}\par}
+}
+
+
+%\renewcommand{\section}[1]{\MMM{#1}}
+
+%\edef\subsection#1
+{
+	%\noexpand\subsection{#1}
+	%
+}
+
+
+\newfontfamily\dnifamily[Scale = 0.795]{DniFont.TTF}
+
+\newcommand{\dni}[1]{%
+	{\dnifamily%
+		\ifthenelse{#1=0}{0}{}%
+		\ifthenelse{#1=1}{1}{}%
+		\ifthenelse{#1=2}{2}{}%
+		\ifthenelse{#1=3}{3}{}%
+		\ifthenelse{#1=4}{4}{}%
+		\ifthenelse{#1=5}{5}{}%
+		\ifthenelse{#1=6}{6}{}%
+		\ifthenelse{#1=7}{7}{}%
+		\ifthenelse{#1=8}{8}{}%
+		\ifthenelse{#1=9}{9}{}%
+		\ifthenelse{#1=10}{)}{}%
+		\ifthenelse{#1=11}{!}{}%
+		\ifthenelse{#1=12}{@}{}%
+		\ifthenelse{#1=13}{\#}{}%
+		\ifthenelse{#1=14}{\$}{}%
+		\ifthenelse{#1=15}{\%}{}%
+		\ifthenelse{#1=16}{\^{}}{}%
+		\ifthenelse{#1=17}{\&}{}%
+		\ifthenelse{#1=18}{*}{}%
+		\ifthenelse{#1=19}{(}{}%
+		\ifthenelse{#1=20}{[}{}%
+		\ifthenelse{#1=21}{]}{}%
+		\ifthenelse{#1=22}{\textbackslash{}}{}%
+		\ifthenelse{#1=23}{\{}{}%
+		\ifthenelse{#1=24}{\}}{}%
+		\ifthenelse{#1=25}{|}{}}%
+}%
+
+\newcommand{\toDni}[1]{%	
+	\ifthenelse{#1=0}{}{%
+		 \ifthenelse{#1=25}{%
+		 	\expandafter\dni{#1}}{%
+		 	\expandafter\toDni{\fpeval{floor(#1/25)}}%
+		 \expandafter\dni{\fpeval{(#1/25 - floor(#1/25))/0.04}}}}%
+}%
+
+
+
+\newcommand{\Strut}{{\Large\strut}}
+
+\newcommand\scb[1]{\left( #1 \right)}
+
+\newcommand{\LINK}[2]{%
+	\qrcode[height=1cm]{#1}\  \HREF{#1}{\parbox{0.8\textwidth}{#2}} \\[0.5em]
+}
+
+\NewDocumentCommand{\lecdni}{}{\toDni{\LectionNumber}}
+\author{Гаврилов Андрей Геннадьевич}
+\newcommand{\regals}{кандидат технических наук, доцент}
+\institute{Кафедра Информационных технологий и вычислительных систем \\МГТУ~<<СТАНКИН>>}
+\lecture{История компьютерной графики}{kghistory}\subtitle{Компьютерная графика}
+
+
+\makeatletter
+\newcommand*{\overlaynumber}{\number\beamer@slideinframe}
+\makeatother
+
+
+
+\usepackage{cprotect}
+
+\newcommand{\QRFRAME}{%
+    \begin{frame}[plain, noframenumbering]    	
+	
+	\centering
+	Трансляция презентации (во время очных лекций)    
+	
+	~
+	
+	{\Large \ttfamily  https://clck.ru/3D3Efj  }
+	
+	~
+	
+	\tikz\node[inner sep=0pt,rounded corners=5mm, clip]{\qrcode[height=0.45\textwidth]{\LECADDR}}; 
+	
+	~	
+	{\small
+	При просмотре презентации в PDF для отображения анимаций на слайдах необходимо использовать Acrobat Reader, KDE Okular, PDF-XChange, Foxit Reader, браузер Firefox. Для браузеров на движке Chrome (Edge, Яндекс, Opera,~\dots) необходимо использовать \HREF{https://chromewebstore.google.com/detail/pdf-viewer/oemmndcbldboiebfnladdacbdfmadadm?hl=ru&utm_source=ext_sidebar}{PDF.js} c опцией <<Enable active content (JavaScript) in PDFs>>. }
+	
+	\end{frame}%
+}
+
+\newcommand{\IG}[2][1]{\includegraphics[width=#1\textwidth]{#2}}
+

@@ -1,0 +1,85 @@
+\documentclass[tikz]{standalone}
+
+\usepackage{tikz}
+\usepackage[svgnames]{xcolor}
+\usepackage{tikz-3dplot}
+\usepackage{amsmath} %математические формулы
+\usepackage[e]{esvect}  %Красивая стрелочка вектора
+
+
+\usepackage{polyglossia}
+\setdefaultlanguage{russian}
+\setotherlanguage{english}
+%\setkeys{russian}{babelshorthands=true}
+\usepackage{fontspec}
+\setmainfont{Times New Roman} [Script=Cyrillic, Mapping=tex-text,]
+\setsansfont{Arial} [Script=Cyrillic, Mapping=tex-text,]
+\setmonofont{Courier New} [Script=Cyrillic, Mapping=tex-text,]
+
+\usetikzlibrary{calc}
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{angles}
+
+
+
+
+
+\include{../tikzcom.tex}
+
+\begin{document}
+	
+	\foreach \frame in {0,1,...,198}{
+	\begin{tikzpicture}
+		
+		%\clip (-1,-0.5) rectangle (4.5,4.5);
+		
+		\clip (-1.5,-0.8) rectangle (5.5,3.4);
+		
+		\input{recursive_bezier_anim_n4/tikz.dat}
+		\input{recursive_bezier_anim_n4/lp_frame\frame.dat}
+		\input{recursive_bezier_anim_n4/p_frame\frame.dat}
+		
+		\draw 	(P0) 	node[left] {$P_0(\beta^{(0)}_0)$} --
+		(P1) 	node[left] {$P_1(\beta^{(0)}_1)$} --
+		(P2) 	node[right] {$P_2(\beta^{(0)}_2)$}--
+		(P3) 	node[right] {$P_3(\beta^{(0)}_3)$};
+		
+		
+		
+		\foreach \p in {0,...,3}{
+			\fill (P\p) circle(1pt);
+		}	
+		
+		\draw[very thin, ForestGreen] (PP10) -- (PP11);
+		\draw[very thin, ForestGreen] (PP11) -- (PP12);
+		\foreach \p in {0,...,2}{
+			\fill[ForestGreen] (PP1\p) circle(1pt);
+		}	
+
+		
+		\draw[very thin, blue] (PP20) -- (PP21);
+		\foreach \p in {0,...,1}{
+			\fill[blue] (PP2\p) circle(1pt);
+		}	
+		
+		\draw [red] plot file{recursive_bezier_anim_n4/curve_frame\frame.dat};
+		\fill[red] (LP0) circle(1pt);
+		
+		\draw[ForestGreen] (PP10) node[left] {$\beta^{(1)}_0$};
+		\draw[ForestGreen] (PP11) node[above] {$\beta^{(1)}_1$};
+		\draw[ForestGreen] (PP12) node[right] {$\beta^{(1)}_2$};
+		\draw[blue] (PP20) node[below] {$\beta^{(2)}_0$};
+		\draw[blue] (PP21) node[below] {$\beta^{(2)}_1$};
+		\draw[red] (LP0) node[below] {$\beta^{(3)}_0$};
+		
+	%	\pgfkeys{/pgf/number format/.cd,fixed,fixed zerofill,precision=2}
+	%	\draw (LP0) node[right] {$t=\pgfmathprintnumber{\fpeval{\frame/99}}$};
+		
+	\end{tikzpicture}}
+	
+
+	
+	
+	
+	
+\end{document}

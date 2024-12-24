@@ -1,0 +1,80 @@
+\documentclass[tikz]{standalone}
+
+\usepackage{tikz}
+\usepackage[svgnames]{xcolor}
+\usepackage{tikz-3dplot}
+\usepackage{amsmath} %математические формулы
+\usepackage[e]{esvect}  %Красивая стрелочка вектора
+
+
+\usepackage{polyglossia}
+\setdefaultlanguage{russian}
+\setotherlanguage{english}
+%\setkeys{russian}{babelshorthands=true}
+\usepackage{fontspec}
+\setmainfont{Times New Roman} [Script=Cyrillic, Mapping=tex-text,]
+\setsansfont{Arial} [Script=Cyrillic, Mapping=tex-text,]
+\setmonofont{Courier New} [Script=Cyrillic, Mapping=tex-text,]
+
+\usetikzlibrary{calc}
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{angles}
+
+
+
+\include{../../tikzcom.tex}
+
+\begin{document}
+	
+
+\begin{tikzpicture}[scale=1.5]		
+		\coordinate (O) at (0,0);
+		\coordinate (O) at (0,0);		
+		\draw [-Latex] (-1.3,0) -- (1.3,0);	
+		\draw [-Latex] (0,-1.3) -- (0,1.3);
+		
+		\xdef\xo{1}
+		\xdef\yo{0}
+		\xdef\dFi{\fpeval{3.1415/16}}
+		\xdef\co{\fpeval{cos(\dFi)}}
+		\xdef\si{\fpeval{sin(\dFi)}}
+		
+		\foreach \t in {0,...,31}
+		{
+			\xdef\xi{\fpeval{\xo*\co-2*\yo*\si}}
+			\xdef\yi{\fpeval{0.5*\xo*\si+\yo*\co}}
+			
+			\fill (\xi,\yi) circle(0.5pt);
+			
+			\xdef\xo{\xi}
+			\xdef\yo{\yi}
+		}		
+\end{tikzpicture}
+
+\begin{tikzpicture}[scale=1.5]		
+	\coordinate (O) at (0,0);
+	\coordinate (O) at (0,0);		
+	\draw [-Latex] (-1.3,0) -- (1.3,0);	
+	\draw [-Latex] (0,-1.3) -- (0,1.3);
+	
+	\xdef\xo{1}
+	\xdef\yo{0}
+	\xdef\dFi{\fpeval{3.1415/8}}
+	\xdef\co{\fpeval{cos(\dFi)}}
+	\xdef\si{\fpeval{sin(\dFi)}}
+	
+	\foreach \t in {0,...,16}
+	{
+		\xdef\xi{\fpeval{cos(\t*\dFi)}}
+		\xdef\yi{\fpeval{0.2*sin(\t*\dFi)}}
+		
+		\fill (\xi,\yi) circle(0.5pt);
+		
+		\xdef\xo{\xi}
+		\xdef\yo{\yi}
+	}		
+\end{tikzpicture}
+
+
+	
+\end{document}

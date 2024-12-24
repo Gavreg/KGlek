@@ -1,0 +1,7 @@
+\noindent Лекция 1 \\История компьютерной графики\GenericError {               }{LaTeX Error: No counter 'SEC' defined}{See the LaTeX manual or LaTeX Companion for explanation.}{Your command was ignored.\MessageBreak Type  I <command> <return>  to replace it with another command,\MessageBreak or  <return>  to continue without it.}\par 
+\noindent \hspace {1ex}\stepcounter {SEC}\theSEC Структура курса\par 
+\noindent \hspace {1ex}\stepcounter {SEC}\theSEC История компьютерной графики\par 
+\noindent \hspace {2ex}\stepcounter {SUB}\theSUB Предпосылки\par 
+\noindent \hspace {2ex}\stepcounter {SUB}\theSUB Первые динозвары\par 
+\noindent \hspace {2ex}\stepcounter {SUB}\theSUB Персональные компьютеры и не только\par 
+\noindent \hspace {2ex}\stepcounter {SUB}\theSUB 3D в каждый дом!\par 

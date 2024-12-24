@@ -1,0 +1,82 @@
+\documentclass[tikz, class=scrreprt]{standalone}
+
+\usepackage{fp}
+\usepackage{tikz}
+\usepackage{tikz-3dplot}
+\usepackage{amsmath} %математические формулы
+\usepackage[e]{esvect}  %Красивая стрелочка вектора
+
+
+\usetikzlibrary{calc}
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{angles}
+
+\include{tikzcom.tex}
+
+\begin{document}
+	
+    
+	\def\frame{100}
+	%\foreach \frame in {0,1,...,2}
+	{
+	\tdplotsetmaincoords{70}{100}
+	\begin{tikzpicture}[scale=1, tdplot_main_coords]
+		
+		
+		%\draw[step=.5cm,black!10,very thin] (-1.5,-1.5) grid (5,5);
+		
+		%\draw[-latex, thick] (-1,0) -- (5,0);
+		%\draw[-latex, thick] (0,-1) -- (0,5);
+		
+		\coordinate (O) at (0,0);
+		
+		%\draw (O) node [left,yshift=5pt] {$O$};
+		
+		% A(1,1)   B(3,1)
+		% C(1,3)  D(3,3) 
+		% n=(2,1,3)
+
+		
+		\VARPOINT{N}{0.5}{0.5}{3};
+		
+		
+		
+		\coordinate (i) at (1,0,0);
+		\coordinate (j) at (0,1,0);
+		\coordinate (k) at (0,0,1);
+		
+		\draw [-Latex, red] (O) -- ($5*(i)$);
+		\draw [-Latex, green] (O) -- ($4*(j)$);
+		\draw [-Latex, blue] (O) -- ($3*(k)$);
+		
+		\VARPOINT{A}{1.5}{3}{2.5}
+		\VARPOINT{Z}{0}{0}{3}
+		
+		%\PROJECTILELINES{A}{dashed, very thin, black!50}{black!50}
+		\draw[dashed, very thin, black!50]  (A) -- (Axy) -- (O);
+		
+		\draw [-Latex] (O) -- (A) node [right] {$\vv{p}(p_1,p_2,p_3)$};
+		
+		%\draw pic [draw,blue,thick,angle radius=1cm] {angle = A--O--k};
+		%\draw pic [draw,green,thick,angle radius=0.8cm] {angle = j--O--A};
+		%\draw pic [draw,red,thick,angle radius=0.3cm] {angle = i--O--A};
+		
+		
+		\tdplotdefinepoints(0,0,0)(0,0,1)(\Ax, \Ay, \Az)		
+		\tdplotdrawpolytopearc[thick, blue]{1}{anchor=west}{$\alpha_z$}
+		
+		
+		\tdplotdefinepoints(0,0,0)(0,1,0)(\Ax, \Ay, \Az)		
+		\tdplotdrawpolytopearc[thick, green]{1.5}{right}{$\alpha_y$}
+
+		\tdplotdefinepoints(0,0,0)(1,0,0)(\Ax, \Ay, \Az)		
+		\tdplotdrawpolytopearc[thick, red]{1.3}{below right, yshift=-5pt}{$\alpha_x$}		
+				
+	%	\node [right, yshift=-12pt]  {$\alpha_x$};
+		%\node [xshift=30pt, yshift=10pt]  {$\alpha_y$}
+		%\node [xshift=18pt, yshift=30pt]  {$\alpha_z$}
+	
+		
+	\end{tikzpicture}}
+	
+\end{document}

@@ -1,0 +1,494 @@
+\documentclass[10pt]{beamer}
+%\documentclass[10pt, handout]{beamer}
+\setbeameroption{show notes}
+
+%\documentclass[10pt, a4paper]{article}
+%\usepackage{beamerarticle}
+
+\input{preambule.tex}
+
+\graphicspath{{Images/}{Images/\jobname/}}
+
+\date{\today}
+
+
+
+\renewcommand{\LectionNumber}{6}
+\renewcommand{\LectionTheme}{Отсечение отрезков и растеризация}
+\title{Лекция \lecdni \\ \LectionTheme}
+\subtitle{Компьютерная графика}
+
+
+
+%\usepackage{standalone}
+
+\setbeamersize
+{
+	text margin left=0.5cm,
+	text margin right=0.5cm
+}
+
+\usepackage{comment}
+
+
+%	\transduration{2}
+%   \transfade
+
+ \begin{document}
+ 		 
+\input{template.tex}
+
+\newcommand \abs[1] {\left| #1 \right|}
+
+%\everymath{\displaystyle}
+
+\begin{comment}
+\end{comment}
+
+    
+    \QRFRAME	
+	
+	
+	\frame{\maketitle}
+	
+	
+	
+	\begin{frame}{План лекции}
+		\tableofcontents
+	\end{frame}
+	
+
+	
+	\section{Отчесение отрезков}	
+	\frame{\sectionpage}
+	
+	
+	\begin{frame}{Постановка задачи}
+		
+		\begin{center}
+			\TC{0.55}
+			{
+				\includegraphics[page=1]{line_slise.pdf}
+			}
+			{
+				~ \\
+				
+				1 --- отрисуется полностью
+				
+				2 --- $AB \rightarrow (AP, PB)$ 
+				
+				\ \ $AB$ --- отрисуется,
+				
+				\ \ $PB$ --- отбрасывается
+				
+				
+				3 --- должен быть отброшен
+			
+			}
+			
+		\end{center}
+		
+		$\dfrac{B_y-A_y}{B_x-A_x} = \dfrac{P_y-A_y}{P_x-A_x}$
+		~$\Rightarrow$~ 
+		\fbox {$ P_x = \dfrac{B_x-A_x}{B_y-A_y}(y_{max}-A_y)+A_x 	$}
+		
+
+		
+		
+	\end{frame}
+	
+	
+	\subsection{Алгоритм Коэна-Сазерленда}		
+	
+    \frame{\subsectionpage}
+	
+	\begin{frame}{Алгоритм Коэна-Сазерленда}
+		
+		\TCT{0.55}
+		{
+			\includegraphics[page=1]{koen-saz.pdf}
+		}{
+				4х битный код  ${\color{Red}b_0}{\color{Green}b_1}{\color{Blue}b_2}{\color{Fuchsia}b_3}$:
+		
+		
+				$
+				{\color{Red}b_0}= \begin{cases}
+					0, & x \geq x_{min} \\
+					1, & x < x_{min} \\
+				\end{cases}
+				$ 
+				
+				$
+				{\color{Green}b_1}= \begin{cases}
+					0, & x \leq x_{max} \\
+					1, & x > x_{max} \\
+				\end{cases}
+				$ 
+				
+				$
+				{\color{Blue}b_2}= \begin{cases}
+					0, & y \geq y_{min} \\
+					1, & y < y_{min} \\
+				\end{cases}
+				$  
+				
+				$
+				{\color{Fuchsia}b_3}= \begin{cases}
+					0, & y \leq y_{max} \\
+					1, & y > y_{max} \\
+				\end{cases}
+				$  
+		}
+		
+	\end{frame}
+	
+	
+	
+	\begin{frame}{Тривиальные случаи}
+
+		
+			\begin{center}
+				\includegraphics[page=2]{koen-saz.pdf}
+			\end{center}
+			
+			1: Побитовое ИЛИ кодов концов отрезка == 0 --- отрезок видим ($\odot$).
+			
+			2 и 3: Побитовое И концов отрезка == 1 --- отрезок не видим($\otimes$).
+			
+			В остальных ситуациях ($\circledast$) требуется сведение к $\odot$ или  $\otimes$.
+		
+		
+		
+	\end{frame}
+	
+	\begin{frame}{Нетривиальные случаи (1)}
+		\TC{0.6}{
+			\only<1>{\includegraphics[page=3]{koen-saz.pdf}
+			}\only<2->{\includegraphics[page=4]{koen-saz.pdf}}
+			}
+		{
+			$A=0001, \ B=0000$
+			
+			$ A\vee B \neq 0,\ A \wedge B = 0$ --- $\circledast$. \footnotemark \\ ~ \\
+			
+			\pause
+			
+			$A \rightarrow P, \ P = 0000$ 
+			
+					
+			$B \vee P = 0$ --- $\odot$
+		}
+		
+		\footnotetext[1]{$\wedge$ --- конъюнкция, логическое И, умножение	\\		
+			\ \ \ \ \ \ \	$\vee$ --- дизъюнкция, логическое ИЛИ, сложение}
+	\end{frame}
+	
+	
+	\begin{frame}{Нетривиальный случай (2)}
+		\TC{0.62}
+		{
+			\only<1>{\includegraphics[page=5]{koen-saz.pdf}
+			}\only<2>{\includegraphics[page=6]{koen-saz.pdf}
+			}\only<3>{\includegraphics[page=7]{koen-saz.pdf}
+			}
+		}
+		{
+			$A = 0101, \ B=0010$ 
+			
+			$A \vee B \neq 0, \ A \wedge B = 0$ --- $\circledast$ \\ ~ \\
+			
+			\pause
+			
+			$A \rightarrow A_1, A_1 = 0000$
+			
+			$A_1 \vee B \neq 0, \ A_1 \wedge B = 0$ --- $\circledast$ \\ ~ \\
+			
+			\pause
+			
+			$B \rightarrow B_1, B_1 = 0000$
+			
+			$A_1 \vee B_1 = 0$ --- $\odot$.
+			
+		}
+	\end{frame}
+	
+	
+	\begin{frame}{Нетривиальный случай (3)}
+		\TC{0.5}
+		{
+			\only<1>{\includegraphics[page=8]{koen-saz.pdf}
+			}\only<2>{\includegraphics[page=9]{koen-saz.pdf}
+			}\
+		}
+		{
+			$A = 0010, \ B=1001$ 
+			
+			$A \vee B \neq 0, \ A \wedge B = 0$ --- $\circledast$ \\ ~ \\
+			
+			\pause
+			
+			$A \rightarrow A_1, A_1 = 1000$
+			
+			$A_1 \vee B \neq 0, \ A_1 \wedge B = 1$ --- $\otimes$ \\ ~ \\
+			
+			
+		}
+		
+	\end{frame}
+	
+	\begin{frame}{Нетривиальный случай (4)}
+		\TC{0.5}
+		{
+			\only<1>{\includegraphics[page=10]{koen-saz.pdf}
+			}\only<2>{\includegraphics[page=11]{koen-saz.pdf}
+			}\only<3>{\includegraphics[page=12]{koen-saz.pdf}
+			}\only<4>{\includegraphics[page=13]{koen-saz.pdf}
+			}
+		}
+		{
+			$A = 1010, \ B=0001$ 
+			
+			$A \vee B \neq 0, \ A \wedge B = 0$ --- $\circledast$ \\ ~ \\
+			
+			\pause
+			
+			$A \rightarrow A_1, A_1 = 0010$
+			
+			$A_1 \vee B \neq 0, \ A_1 \wedge B = 0$ --- $\circledast$ \\ ~ \\
+			
+			
+			\pause
+			
+			$A_1 \rightarrow A_2, A_2 = 0000$
+			
+			$A_2 \vee B \neq 0, \ A_2 \wedge B = 0$ --- $\circledast$ \\ ~ \\
+			
+			\pause
+			
+			$B \rightarrow B_1, B_1 = 0000$
+			
+			$A_2 \vee B_1 = 0$ --- $\odot$ \\ ~ \\
+			
+			
+		}
+		
+	\end{frame}
+	
+	\subsection{Алгоритм средней точки}
+	\frame{\subsectionpage}
+	
+	\begin{frame}{Алгоритм средней точки}
+		
+		\TC{0.4}
+		{
+			\foreach \fr in {1,2,3,4,5,6}{
+			\only<\fr>{\includegraphics[page=\fr]{mid point.pdf}}
+			}
+			
+			$(A,B)$ --- $\circledast$ \\ ~ \\
+		}
+		{
+			
+			\pause
+			
+			$P1 = \dfrac{A+B}{2}$ $\rightarrow$ $(A,P_1),(P_1,B)$
+			
+			$(A,P_1)$ --- $\circledast$ , $(P_1,B)$ --- $\circledast$ 	\\ ~ \\
+			
+			\pause
+			
+			$(A,P_1): \ P_2=\dfrac{P_1+A}{2}$
+			
+			$(A,P_2)$ --- $\otimes$,	$(P_1,P_2)$ --- $\circledast$ \\~\\
+			
+			\pause
+			
+			$(P_1,P_2): \ P_3=\dfrac{P_1+P_2}{2}$
+			
+			$(P_1,P_3)$ --- $\odot$,	$(P_3,P_2)$ --- $\circledast$ \\~\\
+			
+			\pause
+			
+			$(P_2,P_3): \ P_4=\dfrac{P_2+P_3}{2}$ \\
+			
+			\fbox{$P_4 \in x_{max}$}, $(P_4,P_2)$ --- $\otimes$, $(P_3,P_4)$ --- $\odot$	\\~\\
+			
+			\pause
+			
+			
+			$(P_1,B) \rightarrow$  \fbox{$P_5 \in y_{min}$}
+		}
+		
+	\end{frame}
+	
+	
+
+	\subsection{Алгоритм Кируса-Бека}	
+	\frame{\subsectionpage}
+	
+	\begin{frame}{Поиск пересечения отрезков}
+		\TC{0.55}
+		{
+			\only<1>{\includegraphics[page=1]{cirus_case1.pdf}
+			}\only<2>{\includegraphics[page=2]{cirus_case1.pdf}
+			}\only<3->{\includegraphics[page=3]{cirus_case1.pdf}
+			}	
+		}
+		{
+			Дано: $\vv{AB}$, $f$: $(\vv n \perp f$, $F \in f)$ \\ ~ \\
+			Найти: $\vv{AB} \cap f$ \\ ~ \\ \pause
+			
+			$AB \equiv P(t) = A + (B-A)t,$\\
+			\hfill $ t \in [0, \dots, 1]$ \pause
+		}
+		
+		$\VV{FP(t_1)}\cdot\VV n < 0$, \ \ $\VV{FP(t_3)}\cdot\VV n > 0$, \ \ $\VV{FP(t_2)}\cdot\VV n = 0$ \\[0.5em] \pause
+		
+		$(\VV{P(t)}-\VV{F})\cdot\vv n = 0$ \ $\Rightarrow$ \  $(\VV A+(\VV B-\VV A)t-\VV F)\cdot\VV n = 0$ \\[0.5em] \pause
+		
+		$(A-F)\cdot \VV n + (B-A)t \cdot \VV n = 0$  \ $\Rightarrow$ \  
+		$t=-\dfrac{(\VV B-\VV A)\cdot\VV n}{(\VV A-\VV F)\cdot\VV n} =  \boxed{-\dfrac{(\VV{AB}\cdot\VV n )}{(\VV{FA}\cdot\VV n)} }$ 
+		
+				
+		
+	\end{frame}
+	
+	\begin{frame}{Направление выхода отрезка через сторону многоуг.}
+		\TC{0.5}
+		{
+			\centering
+			\includegraphics{cirus_case2.pdf}
+			
+			$\VV{AB}\cdot\VV n > 0 $, так как $\alpha \in \left( -\dfrac{\pi}{2},\dfrac{\pi}{2}\right)$ \\[0.5em]
+			
+			$\VV{BA}\cdot\VV n < 0 $, так как $\beta \in \left( \dfrac{\pi}{2},\dfrac{3\pi}{2}\right)$
+		}
+		{
+			$f_i$ --- $i$-ая грань  многоугольника.
+			
+			$\vv n_i$ --- внутренняя нормаль к  $f_i$ \\ ~ \\
+			
+			$\VV{AB} \cdot \VV n_i = \abs{\VV{AB}} \abs{\VV n_i} \cos \widehat{\VV{AB}\,\VV n_i}={}$\\			
+			\hfill $=\VV{AB}_x \VV{n_i}\,_x+\VV{AB}_y\VV{n_i}\,_y$ \\ ~ \\
+			
+			Если $\VV{AB} \cdot \VV n_i > 0$ --- $AB$ в\textbf{Х}одит через $f_i$ \\~\\
+			Если $\VV{AB} \cdot \VV n_i < 0$ --- $AB$ в\textbf{Ы}ходит через $f_i$ \\ ~ \\
+			Если $\VV{AB} \cdot \VV n_i = 0$ --- $AB \parallel f_i$ 
+		}
+	\end{frame}
+
+	\begin{frame}{Алгоритм Кируса-Бека}
+		\small
+		
+		\TC{0.65}
+		{
+			\foreach \fr in {1,2,...,11}{\only<\fr>{\includegraphics[page=\fr]{cirus.pdf}}}
+			\pause
+			$AB \equiv P(t) = A + (B-A)t, t \in [0, \dots, 1]$
+			\begin{enumerate}
+				\item<+-> $t_\text{вх}:=0, \ t_\text{вых}:=1$ 
+				\item<+-> $\VV{AB}\cdot\VV n_1 < 0 \; \text{и} \; t \not< t_\text{вых}  \Rightarrow $ \\ $\Rightarrow t_\text{вых}\text{ не измен.} $
+				\item<+-> $\VV{AB}\cdot\VV n_2 > 0 \; \text{и} \; t> t_\text{вх} \Rightarrow $ \\ $\Rightarrow t_\text{вх}:=t $
+			\end{enumerate}
+			
+		}
+		{
+							
+			\begin{enumerate}
+				\setcounter{enumi}{4}
+				\item<+-> $\VV{AB}\cdot\VV n_3 > 0 \; \text{и} \; t> t_\text{вх} \Rightarrow$ \\ $\Rightarrow t_\text{вх}:=t $
+				\item<+-> $\VV{AB}\cdot\VV n_4 > 0 \; \text{и} \; t \not> t_\text{вх} \Rightarrow$ \\  $\Rightarrow t_\text{вх}\text{ не измен.} $
+				\item<+-> $\VV{AB}\cdot\VV n_5 > 0 \; \text{и} \; t \not> t_\text{вх} \Rightarrow$ \\  $\Rightarrow t_\text{вх}\text{ не измен.} $
+				\item<+-> $\VV{AB}\cdot\VV n_6 < 0 \; \text{и} \; t \not< t_\text{вых}  \Rightarrow$ \\  $\Rightarrow t_\text{вых}\text{ не измен.} $
+				\item<+-> $\VV{AB}\cdot\VV n_7 < 0 \; \text{и} \; t < t_\text{вых}  \Rightarrow$ \\  $\Rightarrow t_\text{вых}:=t $
+				\item<+-> $\VV{AB}\cdot\VV n_7 < 0 \; \text{и} \; t < t_\text{вых}  \Rightarrow$ \\  $\Rightarrow t_\text{вых}:=t $
+				\item<+-> $t_\text{вх}<t_\text{вых} \Rightarrow$ \\
+				 $\Rightarrow P(t_\text{вх})P(t_\text{вых}) $ --- $\odot$
+			\end{enumerate}
+		}
+		
+		
+		
+	\end{frame}
+
+	
+	\section{Алгоритмы растеризации}
+	
+	\frame{\sectionpage}
+	
+	\subsection{Цифровой дифференциальный анализатор}
+	
+	\begin{frame}{Алгоритм ЦДА (цифровой дифференциальный анализатор)}
+		\TC{0.53}
+		{
+			\animategraphics[autoplay,loop,palindrome, nomouse]{15}{Images/\jobname/raster1}{0}{45}
+		}
+		{
+			\small
+			\begin{enumerate}
+				\item<+-> $x_1:=\text{round}(A_x)$, $x_2:=\text{round}(B_x)$\\				
+					  $y_1:=\text{round}(A_y)$, $y_2:=\text{round}(B_y)$\\
+					  
+					  
+				\item<+-> $L:=\max(|x_2-x_1|,|y_2-y_1|)$
+				
+				\item<+-> $dx:=(x_2-x_1)/L$\\
+				      $dy:=(y_2-y_1)/L$
+				      
+				\item <+->	$x:=x_1,\ y:=y_1$\\						
+						$\text{for }i:=1 \text{ to } L$\\
+						\quad $\text{draw}(\text{round}(x),\text{round}(y))$\\
+						\quad $x:=x+dx$, $y:=y+dy$ \\
+						
+			\end{enumerate}
+		}
+	\end{frame}
+	
+	\subsection{Алгоритм Брезенхэма}
+	
+	\begin{frame}{Алгоритм Брезенхэма}
+		\TC{0.52}
+		{
+			\animategraphics[autoplay,loop,palindrome, nomouse]{15}{Images/\jobname/raster2}{0}{45}
+		}
+		{
+			\small
+			\begin{center}
+				\animategraphics[autoplay,loop, nomouse, width=0.7\textwidth]{1.5}{Images/\jobname/raster2.1}{0}{10}
+			\end{center} ~\\[-3em]
+			
+			\begin{enumerate}
+				\item<+-> 	$x_1:=\text{round}(A_x)$, $x_2:=\text{round}(B_x)$\\				
+						$y_1:=\text{round}(A_y)$, $y_2:=\text{round}(B_y)$\\
+						
+				\item<+->  	$dx:=|x_2-x_1|, \ dy:=|y_2-y_1|$\\	
+						$e:=0, \ de:=(dy+1)/(dx+1) $
+						
+						
+				\item<+->  	$y:=y_1$\\
+						$\text{for }x:=x_1\text{ to }x_2$\\
+						\quad$\text{draw}(x,y)$\\
+						\quad$e:=e+de$\\
+						\quad $\text{if}(e \geq 1)\text{ then}$\\
+						\quad\quad$y:=y+1$\\
+						\quad\quad$e:=e-1$ 
+			\end{enumerate}
+		}
+	\end{frame}
+	
+	\begin{frame}{ЦДА vs Брезенхэм}
+		\centering
+		\animategraphics[autoplay,loop,palindrome, nomouse]{15}{Images/\jobname/raster3}{0}{45}
+		
+	\end{frame}
+	
+	\subsection{Прочие алгоритмы}
+	
+	\begin{frame}{Алгоритм Ву}
+		\includegraphics[width=\textwidth]{Screenshot 2024-05-04 011143.png}
+	\end{frame}
+
+\begin{comment}
+\end{comment}
+
+\end{document}

@@ -1,0 +1,112 @@
+\documentclass[tikz]{standalone}
+
+\usepackage{tikz}
+\usepackage[svgnames]{xcolor}
+\usepackage{tikz-3dplot}
+\usepackage{amsmath} %математические формулы
+\usepackage[e]{esvect}  %Красивая стрелочка вектора
+
+
+\usepackage{polyglossia}
+\setdefaultlanguage{russian}
+\setotherlanguage{english}
+%\setkeys{russian}{babelshorthands=true}
+\usepackage{fontspec}
+\setmainfont{Times New Roman} [Script=Cyrillic, Mapping=tex-text,]
+\setsansfont{Arial} [Script=Cyrillic, Mapping=tex-text,]
+\setmonofont{Courier New} [Script=Cyrillic, Mapping=tex-text,]
+
+\usetikzlibrary{calc}
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{angles}
+
+
+
+\include{../tikzcom.tex}
+
+\begin{document}
+	
+    
+	     \begin{tikzpicture}[ scale=1]
+	     	
+	      \draw[-Latex, very thin] (-2,0) -- (2,0) node[below] {$x$};
+		  \draw[-Latex, very thin] (0,-2) -- (0,2) node[below left] {$y$};
+		  
+		  \VARPOINT{A}{1}{0}{0}
+	      \VARPOINT{B}{0.3}{1}{0}
+	      \VARPOINT{C}{-1}{-1}{0}
+	      
+	      
+	      \draw (A) -- (B)-- (C) -- cycle;
+	      
+	      \ROTATEPLANAR{A}{A}{1};
+	      \ROTATEPLANAR{B}{B}{1};
+	      \ROTATEPLANAR{C}{C}{1};
+	      
+	      \draw [densely dashed] (A) -- (B)-- (C) -- cycle;
+	      
+	      
+	      \tdplotdrawarc[-latex, very thin]{(0,0)}{1.3}{10}{70}{right}{$\varphi$}
+		
+	    \end{tikzpicture} 
+	
+	
+		\begin{tikzpicture}[scale=0.8]
+			\draw [-Latex] (-0.3,0) -- (9.5,0) node [below left] {$\varphi$};
+			
+			\edef\UG{0.1};
+			
+			
+			
+			\edef\UG{0.02};
+			
+			\foreach \t in {0,60,...,450}{
+				\draw (\UG*\t,0) node [below] {$\footnotesize\t^\circ$};
+				\fill (\t*\UG,0) circle(1pt);
+				
+			}
+		\end{tikzpicture}
+		
+		\begin{tikzpicture}
+			      \draw[-Latex, very thin] (-3.5,0) -- (3.5,0) node[below] {$x$};
+			\draw[-Latex, very thin] (0,-3) -- (0,3) node[below left] {$y$};
+			
+			\draw circle (1);
+			
+			\foreach \t in {300,0,60}{
+				\edef\bIf{\fpeval{\t>90 && \t<270}}								
+				\draw (\t:1) node [rotate=\t, right] {$\footnotesize\t^\circ$};
+			    \draw (\t:1.9) node [rotate=\t,right] {$\footnotesize\fpeval{\t+360}^\circ$};
+			    \draw (\t:2.6) node [rotate=\t,right] {$\dots$};
+			    
+				\fill (\t:1) circle(1pt);
+				
+			}
+			
+			\foreach \t in {120,180,240}{
+					\edef\bIf{\fpeval{\t>90 && \t<270}}								
+					\draw (\t:1) node [rotate=180+\t, left] {$\footnotesize\t^\circ$};
+					\draw (\t:1.7) node [rotate=180+\t,left] {$\footnotesize\fpeval{\t+360}^\circ$};
+					\draw (\t:2.5) node [rotate=180+\t,left] {$\mathstrut\dots$};		
+					\fill (\t:1) circle(1pt);
+			}	
+			
+			\draw (2,1.5) node {S$^1$};	
+	}
+			
+			
+		\end{tikzpicture}
+	
+	
+		
+	
+	
+
+
+
+
+
+
+
+	
+\end{document}

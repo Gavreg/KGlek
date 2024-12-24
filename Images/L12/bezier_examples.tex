@@ -1,0 +1,92 @@
+\documentclass[tikz]{standalone}
+
+\usepackage{tikz}
+\usepackage[svgnames]{xcolor}
+\usepackage{tikz-3dplot}
+\usepackage{amsmath} %математические формулы
+\usepackage[e]{esvect}  %Красивая стрелочка вектора
+
+
+\usepackage{polyglossia}
+\setdefaultlanguage{russian}
+\setotherlanguage{english}
+%\setkeys{russian}{babelshorthands=true}
+\usepackage{fontspec}
+\setmainfont{Times New Roman} [Script=Cyrillic, Mapping=tex-text,]
+\setsansfont{Arial} [Script=Cyrillic, Mapping=tex-text,]
+\setmonofont{Courier New} [Script=Cyrillic, Mapping=tex-text,]
+
+\usetikzlibrary{calc}
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{angles}
+
+
+
+
+
+\include{../tikzcom.tex}
+
+\begin{document}
+
+
+\begin{tikzpicture}
+	
+	
+	\input{bezier_example_1_tikz.dat}
+	
+	\draw 	(P0) 	node[left] {$P_0$} --
+			(P1) 	node[left] {$P_1$} --
+			(P2) 	node[above] {$P_2$} --
+			(P3) 	node[right] {$P_3$};	
+	
+	\draw [red] plot file{bezier_example_1_curve.dat};
+
+	\foreach \p in {0,...,3}{
+		\fill (P\p) circle(1pt);
+	}	
+
+\end{tikzpicture}
+
+\begin{tikzpicture}
+	
+	\input{bezier_example_2_tikz.dat}
+
+	
+	
+	\draw 	(P0)  	node[left] {$P_0$} --
+	(P1) 	node[above] {$P_1$} --
+	(P2) 	node[right] {$P_2$} --
+	(P3) 	node[left] {$P_3$};	
+	
+	\draw [red] plot file{bezier_example_2_curve.dat};	
+	
+	\foreach \p in {0,...,3}{
+		\fill (P\p) circle(1pt);
+	}
+	
+\end{tikzpicture}
+
+\begin{tikzpicture}
+	
+	\input{bezier_example_3_tikz.dat}
+	
+	
+	
+	\draw 	(P0)  	node[left] {$P_0$} --
+	(P1) 	node[above] {$P_1$} --
+	(P2) 	node[below] {$P_2$} --
+	(P3) 	node[below] {$P_3$};	
+	
+	\draw [red] plot file{bezier_example_3_curve.dat};	
+	
+	\foreach \p in {0,...,3}{
+		\fill (P\p) circle(1pt);
+	}
+	
+\end{tikzpicture}
+
+
+
+
+	
+\end{document}

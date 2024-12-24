@@ -1,0 +1,166 @@
+\documentclass[svgnames, tikz]{standalone}
+
+
+\usepackage{tikz}
+\usepackage{tikz-3dplot}
+\usepackage{amsmath} %математические формулы
+\usepackage[e]{esvect}  %Красивая стрелочка вектора
+\usepackage{unicode-math}
+
+
+\usepackage{polyglossia}
+\setdefaultlanguage{russian}
+\setotherlanguage{english}
+%\setkeys{russian}{babelshorthands=true}
+\usepackage{fontspec}
+\setmainfont{Times New Roman} [Script=Cyrillic, Mapping=tex-text,]
+\setsansfont{Arial} [Script=Cyrillic, Mapping=tex-text,]
+\setmonofont{Courier New} [Script=Cyrillic, Mapping=tex-text,]
+
+\usetikzlibrary{calc}
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{angles}
+
+
+
+\include{../tikzcom.tex}
+
+\begin{document}
+	
+    
+\pgfdeclarelayer{background}
+\pgfdeclarelayer{foreground}
+\pgfsetlayers{background,main,foreground}
+
+
+\foreach \frame in {1,2,3,4,5,6}{
+
+ \begin{tikzpicture}[ scale=0.6]
+ 	
+
+	
+	\clip (-1,-5) rectangle + (9,10); 
+	
+	\VARPOINT{A}{-4}{-2}{0}
+	\VARPOINT{B}{4}{-2}{0}
+	\VARPOINT{C}{4}{2}{0}
+	\VARPOINT{D}{-4}{2}{0}
+	
+	
+	\draw[dashed] ($(A)!-2cm!(B)$) -- ($(B)!-2cm!(A)$) node [above left]{$y_{min}$} ;
+	\draw[dashed] ($(C)!-2cm!(D)$)  -- ($(D)!-2cm!(C)$) node [above right]{$y_{max}$};
+	
+	\draw[dashed] ($(A)!-2cm!(D)$) node [above right]{$x_{min}$} -- ($(D)!-2cm!(A)$);
+	\draw[dashed] ($(C)!-2cm!(B)$) -- ($(B)!-2cm!(C)$) node [above right]{$x_{max}$};
+	
+	\draw[thick] (A) -- (B) -- (C) -- (D) --cycle;
+	
+	
+	
+	\node at (-5,	-3) 	{ {\color{Red}1}{\color{Green}0}{\color{Blue}1}{\color{Fuchsia}0}};
+	\node at (-5,	0) 		{ {\color{Red}1}{\color{Green}0}{\color{Blue}0}{\color{Fuchsia}0}};
+	\node at (-5,	3) 		{ {\color{Red}1}{\color{Green}0}{\color{Blue}0}{\color{Fuchsia}1}};
+	
+	\node at (0,	-3) 	{ {\color{Red}0}{\color{Green}0}{\color{Blue}1}{\color{Fuchsia}0}};
+	\node at (0,	0) 		{ {\color{Red}0}{\color{Green}0}{\color{Blue}0}{\color{Fuchsia}0}};
+	\node at (0,	3) 		{ {\color{Red}0}{\color{Green}0}{\color{Blue}0}{\color{Fuchsia}1}};
+	
+	\node at (5,	-3) 	{ {\color{Red}0}{\color{Green}1}{\color{Blue}1}{\color{Fuchsia}0}};
+	\node at (5,	0) 		{ {\color{Red}0}{\color{Green}1}{\color{Blue}0}{\color{Fuchsia}0}};
+	\node at (5,	3) 		{ {\color{Red}0}{\color{Green}1}{\color{Blue}0}{\color{Fuchsia}1}};
+	
+	
+	\VARPOINT{A1}{5}{2.5}{0}	
+	\VARPOINT{B1}{1.7}{-3.3}{0}
+	
+	
+	\draw (A1)  circle(2pt)[fill]  edge  (B1) node  [right] (a) {$A$} (B1) circle (2pt)[fill] node [left] (b) {$B$};
+	
+	
+	
+
+		
+	\ifthenelse{\frame >1}{
+		\coordinate (P1) at ($(A1)!0.5!(B1)$);
+		\ifthenelse{\frame=2}{\draw[thick] (A1)--(B1);}{}
+		
+		\begin{pgfonlayer}{foreground}
+			\fill[red] (P1) circle(2pt);
+		\end{pgfonlayer}
+		
+		
+		
+	     \draw ($(P1)+(-1,0)$) node [left, text=red] {$P_1$} edge[red] (P1);
+	}
+	{}
+	
+	\ifthenelse{\frame >2}{
+		\coordinate (P2) at ($(A1)!0.5!(P1)$);
+		\ifthenelse{\frame=3}{\draw[thick] (A1)--(P1);}{}
+		
+		\begin{pgfonlayer}{foreground}
+			\fill[red] (P2) circle(2pt);
+		\end{pgfonlayer}
+		
+		
+		
+		\draw ($(P2)+(-1,0)$) node [left, text=red] {$P_2$} edge[red] (P2);
+	}
+	{}
+	
+	\ifthenelse{\frame >3}{
+		\coordinate (P3) at ($(P2)!0.5!(P1)$);
+		\ifthenelse{\frame=4}{\draw[thick] (P1)--(P2);}{}
+		
+		\begin{pgfonlayer}{foreground}
+			\fill[red] (P3) circle(2pt);
+		\end{pgfonlayer}
+		
+		
+		
+		\draw ($(P3)+(-1,0)$) node [left, text=red] {$P_3$} edge[red] (P3);
+	}
+	{}
+	
+	\ifthenelse{\frame >4}{
+		\coordinate (P4) at (intersection of A1--B1 and C--B);
+		\ifthenelse{\frame=5}{\draw[thick] (P2)--(P3);}{}
+		
+		\begin{pgfonlayer}{foreground}
+			\fill[red] (P4) circle(2pt);
+		\end{pgfonlayer}
+		
+		
+		
+		
+		\draw ($(P4)+(2,0)$) node [left, text=red] {$P_4$} edge[red] (P4);
+	}
+	{}
+	
+	\ifthenelse{\frame >5}{
+		\coordinate (P5) at (intersection of A1--B1 and A--B);
+		\ifthenelse{\frame=6}{\draw[very thick] (P5)--(P4);}{}
+		
+		\begin{pgfonlayer}{foreground}
+			\fill[red] (P5) circle(2pt);
+		\end{pgfonlayer}
+		
+		
+		
+		\draw ($(P5)+(-1,1)$) node [left, text=red] {$P_5$} edge[red] (P5);
+	}
+	
+\end{tikzpicture} 
+
+}
+
+
+
+
+
+    
+   
+
+
+	
+\end{document}

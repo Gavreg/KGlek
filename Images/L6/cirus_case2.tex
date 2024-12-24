@@ -1,0 +1,84 @@
+\documentclass[svgnames, tikz]{standalone}
+
+
+\usepackage{tikz}
+\usepackage{tikz-3dplot}
+\usepackage{amsmath} %математические формулы
+\usepackage[e]{esvect}  %Красивая стрелочка вектора
+\usepackage{unicode-math}
+
+
+\usepackage{polyglossia}
+\setdefaultlanguage{russian}
+\setotherlanguage{english}
+%\setkeys{russian}{babelshorthands=true}
+\usepackage{fontspec}
+\setmainfont{Times New Roman} [Script=Cyrillic, Mapping=tex-text,]
+\setsansfont{Arial} [Script=Cyrillic, Mapping=tex-text,]
+\setmonofont{Courier New} [Script=Cyrillic, Mapping=tex-text,]
+
+\usetikzlibrary{calc}
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{angles}
+
+
+
+\include{../tikzcom.tex}
+
+\begin{document}
+	
+    
+\pgfdeclarelayer{background}
+\pgfdeclarelayer{foreground}
+\pgfsetlayers{background,main,foreground}
+
+
+\foreach \frame in {1}{
+
+ \begin{tikzpicture}[ scale=1]
+ 	
+
+	\coordinate (B) at (0,3);
+	\coordinate (A) at (0,0);
+	\coordinate (ABm) at ($(A)!0.5!(B)$) ;
+	\coordinate (C) at (-0.5,1);
+	\coordinate (D) at ($(C)!2cm!(ABm)$);
+	
+	\draw [thick] (A) -- (B);
+	\fill (A) circle(1pt) (B) circle(1pt);
+	
+	\fill (C) circle(1pt) node [left]{$A$}  (D) circle(1pt) node[right] {$B$};
+	
+	\draw[dashed,thick] (B) -- +(45:1);
+	\draw[dashed, thick] (A) -- +(-45:1);
+	
+	\draw (B) node[below right] {$f_i$};
+	
+	\draw [-Latex]  (ABm) -- ($(ABm)!1!-90:(B)$) node [above] {$\vv n_i$};
+	\draw[-Latex] (C) -- (D);
+	
+	\begin{pgfonlayer}{background}
+			\draw ($(ABm)+(right:10pt)$) arc (0:45:10pt) node [right, midway] {$\alpha$};
+		
+		\draw[double] ($(ABm)+(right:8pt)$) arc (0:-135:8pt) node [below] {$\beta$};
+	\end{pgfonlayer}
+	
+
+
+	
+	
+	
+\end{tikzpicture} 
+
+}
+
+
+
+
+
+    
+   
+
+
+	
+\end{document}

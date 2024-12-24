@@ -1,0 +1,314 @@
+\documentclass[10pt]{beamer}
+%\documentclass[10pt, handout]{beamer}
+\setbeameroption{show notes}
+
+%\documentclass[10pt, a4paper]{article}
+%\usepackage{beamerarticle}
+
+\input{preambule.tex}
+
+\graphicspath{{Images/}{Images/\jobname/}}
+
+\date{\today}
+
+
+
+\renewcommand{\LectionNumber}{8}
+\renewcommand{\LectionTheme}{Отсечение невыдимых граней}
+\title{Лекция \lecdni \\ \LectionTheme}
+\subtitle{Компьютерная графика}
+
+
+
+%\usepackage{standalone}
+
+\setbeamersize
+{
+	text margin left=0.5cm,
+	text margin right=0.5cm
+}
+
+\usepackage{comment}
+
+
+%	\transduration{2}
+%   \transfade
+
+ \begin{document}
+ 		 
+\input{template.tex}
+
+\newcommand \abs[1] {\left| #1 \right|}
+
+\everymath{\displaystyle}
+
+    
+    \QRFRAME	
+	
+
+	\frame{\maketitle}
+
+	
+	\begin{frame}{План лекции}
+		\tableofcontents
+	\end{frame}
+	
+
+	
+	\begin{frame}{Алгоритмы удаления невидимых граней и поверхностей}
+		
+		\begin{enumerate}
+			\item Работающие в пространстве экрана
+			\item Работающие в пространстве объектов
+			\item Комбинированные варианты
+			
+		\end{enumerate}
+		
+	\end{frame}
+	
+	
+	
+	\section{Метод плавающего горизонта}
+	
+	\begin{frame}{Метод плавающего горизонта}
+		\centering%
+		\includegraphics[width=0.8\textwidth]{CreateSurfacePlotExample_01.png}
+	\end{frame}
+	
+	\begin{frame}{Метод плавающего горизонта}
+		\TC{0.5}
+		{
+			\begin{enumerate}
+				\item \includegraphics[width=0.8\textwidth]{mpg_1.png}
+				\item \includegraphics[width=0.9\textwidth]{mpg_2.png}
+			\end{enumerate}
+		}
+		{
+			\begin{enumerate}
+				\setcounter{enumi}{2}
+				\item \includegraphics[width=0.9\textwidth]{mpg_3.png}
+				\item \includegraphics[width=0.9\textwidth]{mpg_4.png}
+			\end{enumerate}
+			
+		}
+		
+	\end{frame}
+	
+	\begin{frame}{Примеры}
+		
+		\TC{0.5}
+		{
+			\centering%
+			Пример хорошей отрисовки
+			
+			\fbox{\animategraphics[autoplay,loop, nomouse, width=0.85\textwidth]{5}{Images/\jobname/nikulin_good_draw/nikulin_good_draw-}{0}{69}}
+		}
+		{
+			\centering%
+			Пример плохой отрисовки
+			\fbox{\animategraphics[autoplay,loop, nomouse, width=0.85\textwidth]{5}{Images/\jobname/nikulin_bad_draw/nikulin_bad_draw-}{0}{44}}
+		}
+		
+		~
+		
+		\HREF{https://grafika.me/node/1093}{Демонстрация}
+		
+		
+		
+	\end{frame}
+	
+
+	
+		
+	\section{Отсечение нелицевых граней}
+	
+	
+	\begin{frame}{Отсечение нелицевых граней}
+		
+	
+			
+			%\draw[very thin] (-5,-5) grid[step=0.5] (5,5);
+%			\fill [red] circle (5pt);
+%			\foreach \t in {-5,...,5}
+%				{
+%					\draw (\t,0) node {\t};
+%					\draw (0,\t) node {\t};
+%				}
+
+			\TC{0.4}
+			{
+			\centering%
+			\begin{tikzpicture}
+						\coordinate (A) at (0,0);
+			\coordinate (B) at (2,-1);
+			\coordinate (C) at (3,0.2);
+			\coordinate (D) at (0.9, 2);
+			
+			\draw (A) -- (B) -- (C) -- cycle;
+			\draw (A) -- (D);
+			\draw (B) -- (D);
+			\draw (C) -- (D);
+			
+			\coordinate (G1) at (1,0.5);
+			
+			\draw [rotate=80, shift=(G1)]  circle[x radius = 0.3, y radius = 0.2];
+			\draw[-Latex] (G1) -- +(170:1);
+			
+			\coordinate (G2) at (2,0.5);
+			
+			\draw [rotate=130, shift=(G2)]  circle[x radius = 0.3, y radius = 0.2];
+			\draw[-Latex] (G2) -- +(20:1);
+			
+			\coordinate (G3) at (1.5,-0.3);
+			
+			\draw [rotate=0, shift=(G3),dashed]  circle[x radius = 0.3, y radius = 0.2];
+			\draw[-Latex] (G3) -- +(-90:1);
+			
+			
+			\coordinate (G4) at (1.2,1.1);
+			
+			\draw [rotate=0, shift=(G4),dashed]  circle[x radius = 0.25, y radius = 0.3];
+			\draw[-Latex] (G4) -- +(120:0.7);
+			
+			\end{tikzpicture}
+		}
+		{
+			
+				\textbf{Для параллельной проекции}
+				
+					Для каждой грани $f$ необходимо проверить знак $\vv n \cdot \vv v$. 
+					
+					
+					$\vv n \perp f$, $\vv v$ - вектор на наблюдателя ($\perp$ к плоскости проецирования)
+				
+				~
+				
+				
+				\textbf{Для центральной проекции}
+				
+				Для каждой грани $f$ необходимо проверить знак $\VV n \cdot \VV{(c-p)}$. 
+				
+				$p \in f$, $c$ --- центр проекции.
+	
+		}
+				
+
+		
+	\end{frame}
+	
+	\section{Алгоритм Робертса}
+	
+	\begin{frame}{Алгоритм Робертса}
+		\centering%
+		\includegraphics[width=0.9\textwidth]{roberts.png}
+	\end{frame}
+	
+		\begin{frame}{Оптимизация алгоритма Робертса}
+		\centering%
+		\includegraphics[width=0.9\textwidth]{roberts_opt2.png}
+	\end{frame}
+	
+		\begin{frame}{Оптимизация алгоритма Робертса}
+		\centering%
+		\includegraphics[width=0.9\textwidth]{roberts_opt.png}
+	\end{frame}
+	
+	
+	\section{Алгоритм Уорнока}
+	
+	\begin{frame}{Алгоритм Уорнока}
+		\TC{0.45}
+		{
+			\centering%
+			\includegraphics[width=1\textwidth]{varnak.png}	
+		}
+		{
+			Случаи, когда можно легко определить видимость:
+			\begin{itemize}				
+			
+			\item окне нет ни одной грани, в этом случае ничего рисовать не нужно;
+			\item в окне ровно одна грань, в этом случае достаточно отобразить эту
+			грань;
+			\item размеры окна равны размерам одного пиксела, в этом случае из
+			граней выбирается ближайшая;
+			\item ближайшая грань охватывает всё окно, в этом случае она заслоняет все остальные грани.
+			
+			\end{itemize}
+		}
+		
+		Алгоритм можно разделить на следующие элементарные задачи:\\
+		- определение, в какие части окна попадает грань;\\
+		- определение, что грань охватывает окно;\\
+		- определение, что грань является ближайшей.
+	\end{frame}
+	
+	\begin{frame}{Разделение окна вдоль общего ребра двух граней}
+		\centering%
+		\includegraphics[width=0.7\textwidth]{varnak2.png}	
+	\end{frame}
+	
+	\section{Алгоритм Z-буфера}
+	
+	\begin{frame}{Алгоритм Z-буфера}
+		\TC{0.65}
+		{
+			\centering\includegraphics[width=0.95\textwidth]{zbuffermatrix.png}
+		}
+		{
+			\centering\includegraphics[width=0.95\textwidth]{Z-buffer_example.jpg}
+		}
+	\end{frame}
+	
+	\section{Алгоритм художника}
+	
+	\begin{frame}{Алгоритм художника}
+		\TC{0.7}		
+		{\centering\includegraphics[width=\textwidth]{artist.png}}		
+		{\centering\includegraphics[width=\textwidth]{artist2.png}}
+		
+	\end{frame}
+	
+	
+		\begin{frame}{Алгоритм художника}
+	\centering\includegraphics[width=0.9\textwidth]{artist3.png}		
+	
+		
+	\end{frame}
+	
+	\section{Алгоритм трассировки лучей}
+	
+	\begin{frame}{Алгоритм трассировки лучей}
+		\centering\includegraphics[width=0.9\textwidth]{raytrace.png}		
+		
+		
+	\end{frame}
+	
+	\section{Алгоритм построчного сканирования}
+	
+	\begin{frame}{Алгоритм построчного сканирования}
+		\centering\includegraphics[width=0.9\textwidth]{string.png}			
+		
+	\end{frame}
+	
+	\section{Алгоритм S-буфера}
+	
+	\begin{frame}{Алгоритм S-буфера}
+		\centering\includegraphics[width=0.9\textwidth]{sbuffer1.png}		
+	\end{frame}
+	
+	\begin{frame}{Разбиение отрезков}
+		\centering\includegraphics[width=0.9\textwidth]{sbuffer2.png}		
+	\end{frame}
+	
+	
+	
+
+	
+ 
+ 
+\begin{comment}
+	
+\end{comment}
+ 
+
+\end{document}

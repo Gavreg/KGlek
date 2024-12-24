@@ -1,0 +1,146 @@
+\documentclass[tikz]{standalone}
+
+\usepackage{tikz}
+\usepackage{tikz-3dplot}
+\usepackage{amsmath} %математические формулы
+\usepackage[e]{esvect}  %Красивая стрелочка вектора
+
+
+\usepackage{polyglossia}
+\setdefaultlanguage{russian}
+\setotherlanguage{english}
+%\setkeys{russian}{babelshorthands=true}
+\usepackage{fontspec}
+\setmainfont{Times New Roman} [Script=Cyrillic, Mapping=tex-text,]
+\setsansfont{Arial} [Script=Cyrillic, Mapping=tex-text,]
+\setmonofont{Courier New} [Script=Cyrillic, Mapping=tex-text,]
+
+\usetikzlibrary{calc}
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{angles}
+
+
+
+\include{../tikzcom.tex}
+
+\begin{document}
+	
+    
+     \begin{tikzpicture}[ scale=0.7]
+	
+	
+	
+	\VARPOINT{A}{-4}{-2}{0}
+	\VARPOINT{B}{4}{-2}{0}
+	\VARPOINT{C}{4}{2}{0}
+	\VARPOINT{D}{-4}{2}{0}
+	
+	
+	\draw[dashed] ($(A)!-1cm!(B)$) node [below right]{$y_{min}$} -- ($(B)!-1cm!(A)$);
+	\draw[dashed] ($(C)!-1cm!(D)$)  -- ($(D)!-1cm!(C)$) node [above right]{$y_{max}$};
+	
+	\draw[dashed] ($(A)!-1cm!(D)$) node [above right]{$x_{min}$} -- ($(D)!-1cm!(A)$);
+	\draw[dashed] ($(C)!-1cm!(B)$) -- ($(B)!-1cm!(C)$) node [above left]{$x_{max}$};
+	
+	\draw[thick] (A) -- (B) -- (C) -- (D) --cycle;
+	
+	
+	\VARPOINT{A1}{-2}{-0.5}{0}
+	\VARPOINT{B1}{0}{1.5}{0}	 
+	
+	\draw (A1) -- (B1) node [midway, auto] {1};
+	\fill (A1) circle(1pt);
+	\fill (B1) circle(1pt);
+	
+	
+	\VARPOINT{A1}{0.3}{0.3}{0}
+	\VARPOINT{B1}{2}{2.5}{0}	 
+	
+	\draw (A1) -- (B1) node [midway, auto] {2};
+	\fill (A1) node [below] {$A$} circle(1pt);
+	\fill (B1) node [above] {$B$}  circle(1pt);
+	
+	\fill[red] (intersection of A1--B1 and C--D) node [below right, rotate=-30] {$P(P_x,y_{max})$} circle (2pt);
+	
+		\VARPOINT{A1}{-3}{2.5}{0}
+	\VARPOINT{B1}{0}{2.5}{0}	 
+	\draw (A1) -- (B1) node [midway, auto] {3};
+	\fill (A1) circle(1pt);
+	\fill (B1) circle(1pt);
+	
+	
+	
+\end{tikzpicture} 
+
+
+
+
+
+     \begin{tikzpicture}[ scale=1]
+    
+  	
+  	
+  	\VARPOINT{A}{-4}{-2}{0}
+  	\VARPOINT{B}{4}{-2}{0}
+  	\VARPOINT{C}{4}{2}{0}
+  	\VARPOINT{D}{-4}{2}{0}
+  	
+  	
+  	\draw[dashed] ($(A)!-1cm!(B)$) -- ($(B)!-1cm!(A)$);
+  	\draw[dashed] ($(C)!-1cm!(D)$) -- ($(D)!-1cm!(C)$);
+  	
+  	\draw[dashed] ($(A)!-1cm!(D)$) -- ($(D)!-1cm!(A)$);
+  	\draw[dashed] ($(C)!-1cm!(B)$) -- ($(B)!-1cm!(C)$);
+    	
+    \draw[thick] (A) -- (B) -- (C) -- (D) --cycle;
+    
+    
+    \VARPOINT{A1}{-1}{-0.5}{0}
+    \VARPOINT{B1}{0.8}{1.5}{0}	 
+    
+    \draw (A1) -- (B1) node [midway, auto] {1};
+    \fill (A1) circle(1pt);
+	\fill (B1) circle(1pt);
+	
+	
+	
+	\VARPOINT{A1}{-1.2}{-1}{0}
+	\VARPOINT{B1}{0.2}{-2.5}{0}	 
+	
+	\draw (A1) -- (B1) node [midway, auto] {2};
+	\fill (A1) circle(1pt);
+	\fill (B1) circle(1pt);
+	
+	
+	\VARPOINT{A1}{-2.3}{2.4}{0}
+	\VARPOINT{B1}{1.3}{2.9}{0}	 
+	
+	\draw (A1) -- (B1) node [midway, auto] {3};
+	\fill (A1) circle(1pt);
+	\fill (B1) circle(1pt);
+	
+	\VARPOINT{A1}{1.6}{2.4}{0}
+	\VARPOINT{B1}{3}{-2.5}{0}	 
+	\draw (A1) -- (B1) node [midway, auto] {4};
+	\fill (A1) circle(1pt);
+	\fill (B1) circle(1pt);
+	
+	
+	\VARPOINT{A1}{-4.5}{2.4}{0}
+	\VARPOINT{B1}{-4.5}{-2.5}{0}	 
+	\draw (A1) -- (B1) node [midway, auto] {5};
+	\fill (A1) circle(1pt);
+	\fill (B1) circle(1pt);
+	
+	
+
+
+   	
+    	
+    \end{tikzpicture} 
+    
+   
+
+
+	
+\end{document}

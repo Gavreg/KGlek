@@ -1,0 +1,135 @@
+\documentclass[tikz]{standalone}
+
+\usepackage{fp}
+\usepackage{tikz}
+\usepackage{tikz-3dplot}
+\usepackage{amsmath} %математические формулы
+\usepackage[e]{esvect}  %Красивая стрелочка вектора
+
+
+\usetikzlibrary{calc}
+\usetikzlibrary{arrows.meta}
+
+\include{tikzcom.tex}
+
+\begin{document}
+	
+	
+	\foreach \frame in {0,1,...,359}
+	{
+	\tdplotsetmaincoords{70}{100}
+	\begin{tikzpicture}[scale=1, tdplot_main_coords]
+		
+		
+		%\draw[step=.5cm,black!10,very thin] (-1.5,-1.5) grid (5,5);
+		
+		%\draw[-latex, thick] (-1,0) -- (5,0);
+		%\draw[-latex, thick] (0,-1) -- (0,5);
+		
+		\coordinate (O) at (0,0);
+		
+		\draw (O) node [left,yshift=5pt] {$O$};
+		
+		
+		\coordinate (i) at (1,0,0);
+		\coordinate (j) at (0,1,0);
+		\coordinate (k) at (0,0,1);
+		
+		\draw [-Latex, red] (-4,0,0) -- ($8*(i)$);
+		\draw [-Latex, green] (0,-4,0) -- ($5*(j)$);
+		\draw [-Latex, blue] (0,0,-1) -- ($5*(k)$);
+		
+		
+		%\coordinate (A) at (1,1,3);
+		%\coordinate (B) at (0.5,4,4);
+		%\coordinate (C) at (4,1.5);
+		
+		\VARPOINT{A}{2}{1}{2};  % 2 4 2
+		\VARPOINT{B}{0.5}{4}{4};
+		\VARPOINT{C}{4}{4.5}{2};
+		
+		
+		\VECTOR{A}{B}
+		\VECTOR{A}{C}		
+		
+		\VIPI{vecAC}{vecAB};		
+		
+		\ROTATE{vecAC}{vpvecACvecAB}{\frame * 3.1415 / 180}
+		
+		\VIPI{vecAC}{vecAB}
+		
+		%\coordinate (CC) at ($(A)+(vecAC)$) ;
+		
+		\VARPOINT{CC}{\Ax+\vecACx}{\Ay+\vecACy}{\Az+\vecACz}
+		
+		\fill [black] (A) circle [radius=1pt];
+		\fill [black] (B) circle [radius=1pt];
+		\fill [black] (CC) circle [radius=1pt];
+		
+		
+		
+		\draw[-{Latex[length=7pt]}, thick] (A) -- (B) node [left, midway] {$\vv{b}$};
+		\draw[-{Latex[length=7pt]}, thick] (A) -- ($(A)+(vecAC)$) node [below, midway] {$\vv{a}$};
+		
+		\draw[-{Latex[length=5pt]}, very thick, red] (O) -- (i) node [ left] {$\vv{i}$};
+		\draw[-{Latex[length=5pt]}, very thick, green] (O) -- (j) node [above right] {$\vv{j}$};
+		\draw[-{Latex[length=5pt]}, very thick, blue] (O) -- (k) node [below right] {$\vv{k}$};
+		
+		\draw [dashed, thin] (A) -- (Axy);
+		\draw [dashed, thin] (Axy) -- (Ax);
+		\draw [dashed, thin] (Axy) -- (Ay);
+		
+		\draw [dashed, thin] (B) -- (Bxy);
+		\draw [dashed, thin] (Bxy) -- (Bx);
+		\draw [dashed, thin] (Bxy) -- (By);
+		
+		\fill [black] (Axy) circle [radius=1pt];
+		\fill [black] (Bxy) circle [radius=1pt];
+		
+		\draw [dashed, thin] (CC) -- (CCxy);
+		\draw [dashed, thin] (CCxy) -- (CCx);
+		\draw [dashed, thin] (CCxy) -- (CCy);
+		
+		
+		\fill [black] (Axy) circle [radius=1pt];
+		\fill [black] (Bxy) circle [radius=1pt];
+		\fill [black] (CCxy) circle [radius=1pt];
+		
+		%a = B-A
+		%b = C-A
+		
+			
+		\draw [-{Latex[length=7pt]}, thick] (A) -- ($(A) + (O)!0.3!(vpvecACvecAB)$) node [left, midway] {$\displaystyle\frac{1}{3}\vv{c}$};
+		
+		\coordinate (D) at  ($(A) + (O)!0.3!(vpvecACvecAB)$); %вершина векторного произведения
+		
+		\VARPOINT{AA}{\Ax+\vpvecACvecABx*0.3}{\Ay+\vpvecACvecABy*0.3}{0}
+		
+		\coordinate (tmppoint) at ($ (A)!10pt!(B) + (vpvecACvecAB) $);
+		
+		%\draw  ($(A)!10pt!(B)$) -- ($((A)!10pt!(B)) ! 10pt !  ( tmppoint )  $);
+		
+		
+		%\fill [red] ($(A)!10pt!(B)$) circle [radius=1pt];
+		%\fill [red] ($(A)!10pt!(D)$) circle [radius=1pt];
+		
+		
+		%\draw ($(A)!10pt!(B)$) |- ($(A)!10pt!(D)$);
+		
+		
+		
+		\draw ($ (A)!10pt!(B) $) -- +($(O)!10pt!(vpvecACvecAB)$) -- ($(A)!10pt!(D)$);
+		\draw ($ (A)!10pt!(CC) $) -- +($(O)!10pt!(vpvecACvecAB)$) -- ($(A)!10pt!(D)$);
+		
+	     \node at (0, 4.2, 5) [below right, text width = 120pt] {
+	     $\vv{c} = \vv{a} \times \vv{b} $ \\
+	     $\vv{a} = (\fpeval{round(\vecACx,2)}, \fpeval{round(\vecACy,2)}, \fpeval{round(\vecACz,2)})$\\
+	     $\vv{b} = (\fpeval{round(\vecABx,2)}, \fpeval{round(\vecABy,2)}, \fpeval{round(\vecABz,2)})$ \\
+	     $\vv{c} = (\fpeval{round(\vpvecACvecABx,2)}, \fpeval{round(\vpvecACvecABy,2)}, \fpeval{round(\vpvecACvecABz,2)})$ \\
+	     
+	     };	
+	\end{tikzpicture}
+	
+	}
+	
+\end{document}

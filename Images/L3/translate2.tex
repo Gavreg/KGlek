@@ -1,0 +1,82 @@
+\documentclass[tikz]{standalone}
+
+\usepackage{tikz}
+\usepackage{tikz-3dplot}
+\usepackage{amsmath} %математические формулы
+\usepackage[e]{esvect}  %Красивая стрелочка вектора
+
+
+\usepackage{polyglossia}
+\setdefaultlanguage{russian}
+\setotherlanguage{english}
+%\setkeys{russian}{babelshorthands=true}
+\usepackage{fontspec}
+\setmainfont{Times New Roman} [Script=Cyrillic, Mapping=tex-text,]
+\setsansfont{Arial} [Script=Cyrillic, Mapping=tex-text,]
+\setmonofont{Courier New} [Script=Cyrillic, Mapping=tex-text,]
+
+\usetikzlibrary{calc}
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{angles}
+
+\usepackage{comment}
+
+\include{tikzcom.tex}
+
+\begin{document}
+	
+    
+	
+	\tdplotsetmaincoords{60}{135}
+\begin{tikzpicture}[scale=1, x=0.4cm, y=0.4cm ] %tdplot_main_coords
+		
+	\VARPOINT{O}{0}{0}{0};	
+
+	\VARPOINT{A}{1}{3}{0}
+    \VARPOINT{B}{8}{4}{0}
+    \VARPOINT{C}{2}{7}{0}
+	
+	
+	%\draw[step=.4cm,black!10,very thin] (-1,-1) grid (12,12);	
+	
+	\draw [-Latex] (-1,0) -- (10,0) node [below left] {$x$};	
+	\draw [-Latex] (0,-1) -- (0,10) node [below left] {$y$};
+	
+	\fill [] (A) circle [radius=1pt] node [ below] {$P$};
+	\fill [] (B) circle [radius=1pt] node [ right] {$P'$};
+	\fill [] (C) circle [radius=1pt] node [ above] {$P''$};
+
+	
+	\draw[-Latex, thin] (A) -- (B) node [midway,above] {$\vv{a}$};
+	\draw[-Latex, thin] (B) -- (C)node [midway,above] {$\vv{b}$};
+	
+	
+\end{tikzpicture}
+
+\begin{tikzpicture}[scale=1, x=0.4cm, y=0.4cm ] %tdplot_main_coords
+	
+	\VARPOINT{O}{0}{0}{0};	
+	
+	\VARPOINT{A}{1}{3}{0}
+	
+	%\draw[step=.4cm,black!10,very thin] (-1,-1) grid (12,12);	
+	
+	\draw [-Latex] (-1,0) -- (10,0) node [below left] {$x$};	
+	\draw [-Latex] (0,-1) -- (0,10) node [below left] {$y$};
+	
+	\fill [] (A) circle [radius=1pt] node [ below] {$P$};
+	\fill [] (B) circle [radius=1pt] node [ right] {$P'$};
+	\fill [] (C) circle [radius=1pt] node [ above] {$P''$};
+	
+	
+	\draw[-Latex, thin] (A) -- (B) node [midway,above] {$\vv{a}$};
+	\draw[-Latex, thin] (B) -- (C)node [midway,above] {$\vv{b}$};
+	\draw[-Latex, thin, dashed] (A) -- (C)node [midway,above,sloped] {$\vv{a}+\vv{b}$};
+	
+	
+\end{tikzpicture}
+
+
+
+	
+\end{document}

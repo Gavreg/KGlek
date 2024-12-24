@@ -1,0 +1,80 @@
+\documentclass[tikz]{standalone}
+
+\usepackage{tikz}
+\usepackage[svgnames]{xcolor}
+\usepackage{tikz-3dplot}
+\usepackage{amsmath} %математические формулы
+\usepackage[e]{esvect}  %Красивая стрелочка вектора
+
+
+\usepackage{polyglossia}
+\setdefaultlanguage{russian}
+\setotherlanguage{english}
+%\setkeys{russian}{babelshorthands=true}
+\usepackage{fontspec}
+\setmainfont{Times New Roman} [Script=Cyrillic, Mapping=tex-text,]
+\setsansfont{Arial} [Script=Cyrillic, Mapping=tex-text,]
+\setmonofont{Courier New} [Script=Cyrillic, Mapping=tex-text,]
+
+\usetikzlibrary{calc}
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{angles}
+
+
+
+\include{../tikzcom.tex}
+
+\begin{document}
+	
+    \foreach \frame in {0,...,359}
+    {
+    
+	     \begin{tikzpicture}[ scale=1.5]
+	
+		%\node {Test};
+		
+		
+				
+		\draw[-Latex] (-1.5,0) -- (1.5,0) node [above left] {Re};	
+		\fill (1,0) circle(1pt) node[below right] {$1$};
+		
+		\fill (0,0) circle(1pt) node[below left] {$0$};
+		
+		\draw[thin]  circle (1);
+		
+		\draw[-Latex] (0,-1.5) -- (0,1.5)  node [left] {Im} ;
+
+
+	
+		\coordinate (z) at (\frame:1);
+		\coordinate (zname) at (\frame:1.2);
+	
+		
+		\fill (z) circle(1pt);
+		\draw (0,0) -- (z);
+		
+		\draw (0.2,0) arc (0:\frame:0.2);
+		\draw (\frame / 2:0.3) node {$\varphi$};
+		
+		\draw (zname) node  {$e^{i\varphi}$};
+		
+	
+		
+	
+			
+		
+	    \end{tikzpicture} 
+	}
+	
+	
+	
+	
+
+
+
+
+
+
+
+	
+\end{document}

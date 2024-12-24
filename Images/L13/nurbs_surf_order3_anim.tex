@@ -1,0 +1,79 @@
+\documentclass[tikz]{standalone}
+
+\usepackage{tikz}
+\usepackage[svgnames]{xcolor}
+\usepackage{tikz-3dplot}
+\usepackage{amsmath} %математические формулы
+\usepackage[e]{esvect}  %Красивая стрелочка вектора
+
+
+\usepackage{polyglossia}
+\setdefaultlanguage{russian}
+\setotherlanguage{english}
+%\setkeys{russian}{babelshorthands=true}
+\usepackage{fontspec}
+\setmainfont{Times New Roman} [Script=Cyrillic, Mapping=tex-text,]
+\setsansfont{Arial} [Script=Cyrillic, Mapping=tex-text,]
+\setmonofont{Courier New} [Script=Cyrillic, Mapping=tex-text,]
+
+\usetikzlibrary{calc}
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{angles}
+
+
+
+\include{../tikzcom.tex}
+
+\begin{document}
+
+
+
+
+\foreach \t in {0,5,...,359}{
+\edef\frame{\fpeval{round(\t / 5, 0)}}
+\tdplotsetmaincoords{60}{\t}
+\begin{tikzpicture}[tdplot_main_coords]
+
+\clip[tdplot_screen_coords] (-3,-2.5) rectangle (3,3.1);
+
+\input{nurbs_surf_order3_anim/nurbs_surf_order3_points_frame\frame.tex}
+\input{nurbs_surf_order3_anim/nurbs_surf_order3_skelet_frame\frame.tex}
+
+
+\draw[-latex, red]   (-2.5,0,0) -- (2.5,0,0);	
+\draw[-latex, green] (0,-2.5,0) -- (0,2.5,0);	
+\draw[-latex, blue]  (0,0,-2.5) -- (0,0,2.5);	
+
+\end{tikzpicture}
+}
+
+\foreach \t in {0,5,...,359}{
+	\edef\frame{\fpeval{round(\t / 5, 0)}}
+
+	\begin{tikzpicture}
+		
+		
+		\edef\w{\fpeval{round(5*\frame*\frame/71/71,2)}}
+		\pgfkeys{/pgf/number format/.cd,fixed,fixed zerofill,precision=2}
+		\draw[tdplot_screen_coords] (-3,-2.5) node[below right] {\small$
+			w = \left\{
+			\begin{matrix}
+				1 & 1 & 1 &1 &1\\
+				1 & 1 & \pgfmathprintnumber{\w} &1 &1\\
+				1 & 1 & 1 &1 &1\\
+				1 & 1 & 1 &1 &1\\
+				1 & 1 & 1 &1 &1\\
+			\end{matrix}\right\}$};
+		
+		
+
+		
+	\end{tikzpicture}
+}
+
+
+
+
+
+	
+\end{document}

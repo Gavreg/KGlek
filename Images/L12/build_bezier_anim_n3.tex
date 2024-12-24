@@ -1,0 +1,65 @@
+\documentclass[tikz]{standalone}
+
+\usepackage{tikz}
+\usepackage[svgnames]{xcolor}
+\usepackage{tikz-3dplot}
+\usepackage{amsmath} %математические формулы
+\usepackage[e]{esvect}  %Красивая стрелочка вектора
+
+
+\usepackage{polyglossia}
+\setdefaultlanguage{russian}
+\setotherlanguage{english}
+%\setkeys{russian}{babelshorthands=true}
+\usepackage{fontspec}
+\setmainfont{Times New Roman} [Script=Cyrillic, Mapping=tex-text,]
+\setsansfont{Arial} [Script=Cyrillic, Mapping=tex-text,]
+\setmonofont{Courier New} [Script=Cyrillic, Mapping=tex-text,]
+
+\usetikzlibrary{calc}
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{angles}
+
+
+
+
+
+\include{../tikzcom.tex}
+
+\begin{document}
+	
+	\foreach \frame in {0,...,99,99,99,99,99,99,99,99,99,99,99,99,99,99,99,99}{
+	\begin{tikzpicture}
+		
+		\clip (-0.5,-0.7) rectangle (4.5,4.3);
+
+		\input{build_bezier_anim_n3/tikz.dat}
+		\input{build_bezier_anim_n3/last_point_tikz_frame\frame.dat}
+		
+		\draw 	(P0) 	node[left] {$P_0$} --
+		(P1) 	node[right] {$P_1$} --
+		(P2) 	node[below] {$P_2$};
+
+		
+		
+		
+		\foreach \p in {0,...,2}{
+			\fill (P\p) circle(1pt);
+		}	
+		
+		\draw [red] plot file{build_bezier_anim_n3/frame\frame.dat};
+		\fill[red] (LP) circle(1pt);
+		
+		\pgfkeys{/pgf/number format/.cd,fixed,fixed zerofill,precision=2}
+		\draw (LP) node[right] {$t=\pgfmathprintnumber{\fpeval{\frame/99}}$};
+		
+
+		
+	\end{tikzpicture}}
+	
+
+	
+	
+	
+	
+\end{document}

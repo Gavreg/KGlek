@@ -1,0 +1,74 @@
+\documentclass[tikz]{standalone}
+
+\usepackage{tikz}
+\usepackage{tikz-3dplot}
+\usepackage{amsmath} %математические формулы
+\usepackage[e]{esvect}  %Красивая стрелочка вектора
+
+
+\usepackage{polyglossia}
+\setdefaultlanguage{russian}
+\setotherlanguage{english}
+%\setkeys{russian}{babelshorthands=true}
+\usepackage{fontspec}
+\setmainfont{Times New Roman} [Script=Cyrillic, Mapping=tex-text,]
+\setsansfont{Arial} [Script=Cyrillic, Mapping=tex-text,]
+\setmonofont{Courier New} [Script=Cyrillic, Mapping=tex-text,]
+
+\usetikzlibrary{calc}
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{angles}
+
+
+
+\include{tikzcom.tex}
+
+\begin{document}
+	
+    
+	\def\frame{0}
+	%\foreach \frame in {0,1,...,1}
+	{
+	\tdplotsetmaincoords{60}{135}
+	\begin{tikzpicture}[scale=1, x=0.4cm, y=0.4cm ] %tdplot_main_coords
+		
+	\VARPOINT{O}{0}{0}{0};
+	
+	\VARPOINT{A}{9}{3}{0};
+	\ROTATEPLANAR{AA}{A}{3.1415 / 6};	
+		
+	\draw[step=.4cm,black!10,very thin] (-1,-1) grid (12,12);	
+	
+	\draw [-Latex] (-1,0) -- (12,0) node [below left] {$x$};	
+	\draw [-Latex] (0,-1) -- (0,12) node [below left] {$y$};
+	
+	\fill [] (A) circle [radius=1pt] node [above right] {$A(x,y)$};
+	\fill [] (AA) circle [radius=1pt] node [above right] {$B(x',y')$};	
+	
+	%\draw[very thin, dashed] ({atan2(\Ay,\Ax)-15}:\Ar) arc ({atan2(\Ay,\Ax)-15}:{atan2(\AAy,\AAx)+15}:\Ar) ;
+	
+	\draw [very thin, dashed] (AA) arc [start angle={atan2(\AAy,\AAx)}, delta angle=15, radius=\Ar];
+	\draw [very thin, dashed] (A) arc [start angle={atan2(\Ay,\Ax)}, delta angle=-15, radius=\Ar];
+	
+	\draw[-latex] ({atan2(\Ay,\Ax)}:\Ar) arc ({atan2(\Ay,\Ax)}:{atan2(\AAy,\AAx)}:\Ar) ;
+	
+    \draw[very thin] (0:3) arc (0:{atan2(\Ay,\Ax)}:3) node [midway, right] {$\beta$} ;
+	
+	
+	\draw[very thin] ({atan2(\Ay,\Ax)}:2) arc ({atan2(\Ay,\Ax)}:{atan2(\AAy,\AAx)}:2) node [midway, right, yshift=5pt] {$\alpha$};
+	
+	\draw [] (O) -- (A);
+	\draw (O) -- (AA) node [midway, above] {$r$};	
+	
+	\draw[densely dashed, thin] (Ay) -- (A) -- (Ax);
+	\draw[densely dashed, thin] (AAy) -- (AA) -- (AAx);
+		
+	%\fill [] (CC) circle [radius=1pt] node [below left] {$C'$};	
+	
+
+	
+	
+		
+	\end{tikzpicture}}
+	
+\end{document}

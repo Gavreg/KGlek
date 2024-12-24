@@ -1,0 +1,13 @@
+\noindent \textbf {\Large Лекция 9~---~Закраска объектов и освещение}\setcounter {SEC}{0}\par 
+\noindent \hspace {2ex}\hbox {\large \stepcounter {SEC}\theSEC ~ Модели освещения}\par 
+\noindent \hspace {6ex}\stepcounter {SUB}\theSUB ~ Модель Ламберта\par 
+\noindent \hspace {6ex}\stepcounter {SUB}\theSUB ~ Wrap-around\par 
+\noindent \hspace {6ex}\stepcounter {SUB}\theSUB ~ Модель Фонга\par 
+\noindent \hspace {6ex}\stepcounter {SUB}\theSUB ~ Модель Блинна\par 
+\noindent \hspace {6ex}\stepcounter {SUB}\theSUB ~ Модель Варда\par 
+\noindent \hspace {6ex}\stepcounter {SUB}\theSUB ~ Модель Орена - Наяра\par 
+\noindent \hspace {6ex}\stepcounter {SUB}\theSUB ~ Модель Кука-Торранса\par 
+\noindent \hspace {2ex}\hbox {\large \stepcounter {SEC}\theSEC ~ Модели затенения}\par 
+\noindent \hspace {6ex}\stepcounter {SUB}\theSUB ~ Однотонная закраска\par 
+\noindent \hspace {6ex}\stepcounter {SUB}\theSUB ~ Закраска по Гуро\par 
+\noindent \hspace {6ex}\stepcounter {SUB}\theSUB ~ Закраска по Фонгу\par 

@@ -1,0 +1,89 @@
+\documentclass[tikz]{standalone}
+
+\usepackage{tikz}
+\usepackage{tikz-3dplot}
+\usepackage{amsmath} %математические формулы
+\usepackage[e]{esvect}  %Красивая стрелочка вектора
+
+
+\usepackage{polyglossia}
+\setdefaultlanguage{russian}
+\setotherlanguage{english}
+%\setkeys{russian}{babelshorthands=true}
+\usepackage{fontspec}
+\setmainfont{Times New Roman} [Script=Cyrillic, Mapping=tex-text,]
+\setsansfont{Arial} [Script=Cyrillic, Mapping=tex-text,]
+\setmonofont{Courier New} [Script=Cyrillic, Mapping=tex-text,]
+
+\usetikzlibrary{calc}
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{angles}
+
+\usepackage{comment}
+
+\include{tikzcom.tex}
+
+\begin{document}
+	
+    
+	
+\begin{tikzpicture}[scale=1, x=0.4cm, y=0.4cm ] %tdplot_main_coords
+	
+	\VARPOINT{O}{0}{0}{0};	
+	
+	\VARPOINT{A}{1}{2}{0}
+	\VARPOINT{AB}{6}{1}{0}
+	
+	\POINTCOMPSUM{B}{A}{AB}
+	
+	\VARPOINT{BC}{-2}{1}{0}
+	
+	\POINTCOMPSUM{C}{B}{BC}
+	
+	
+	\VARPOINT{D}{3}{6}{0}
+	\VECTOR{DC}{D}{C}
+	
+	\ROTATEPLANAR{DE}{DC}{3.1415/2}
+	
+	\POINTCOMPSUM{E}{D}{DE}
+	
+	\VARPOINT{F}{1}{6}{0}
+	
+	\draw[step=.4cm,black!10,very thin] (-1,-1) grid (10,10);	
+	
+	\draw [-Latex] (-1,0) -- (10,0) node [below left] {$x$};	
+	\draw [-Latex] (0,-1) -- (0,10) node [below left] {$y$};
+	
+	\fill [] (A) circle [radius=1pt] node [below] {$A$};
+	\fill [] (B) circle [radius=1pt] ;
+	\fill [] (C) circle [radius=1pt] ;
+	\fill [] (D) circle [radius=1pt] node [ below] {$P$};
+	\fill [] (E) circle [radius=1pt] ;
+	\fill [] (F) circle [radius=1pt] node [below] {$A'$};
+	
+	\draw [-Stealth] (A) -- (B) node [midway,below]{$\vv a$};
+	\draw [-Stealth] (B) -- (C)  node [midway,above,xshift=5pt]{$\vv b$};
+	\draw [very thin,dashed] (D) -- (E);
+	\draw [very thin,dashed] (D) -- (C);
+	\draw [-Stealth] (C) arc ({atan2(\DCy,\DCx)}:{atan2(\DEy,\DEx)}:\DEr);
+	\draw [very thin] ($(D)!10pt!(C)$) arc ({atan2(\DCy,\DCx)}:{atan2(\DEy,\DEx)}:10pt) node [midway, right] {$\alpha$};
+	
+	\draw [-Stealth] (E) -- (F)node [midway,above]{$\vv c$};
+	%
+	%\fill [] (A) circle [radius=1pt] node [ below] {$P$};
+	%\fill [] (B) circle [radius=1pt] node [ right] {$P'$};
+	%\fill [] (C) circle [radius=1pt] node [ above] {$P''$};
+	%
+	%
+	%\draw[-Latex, thin] (A) -- (B) node [midway,above] {$\vv{a}$};
+	%\draw[-Latex, thin] (B) -- (C)node [midway,above] {$\vv{b}$};
+	%\draw[-Latex, thin, dashed] (A) -- (C)node [midway,above,sloped] {$\vv{a}+\vv{b}$};
+	
+	
+\end{tikzpicture}
+
+
+
+	
+\end{document}

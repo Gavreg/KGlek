@@ -1,0 +1,222 @@
+\documentclass[tikz]{standalone}
+
+\usepackage{tikz}
+\usepackage{tikz-3dplot}
+\usepackage{amsmath} %математические формулы
+\usepackage[e]{esvect}  %Красивая стрелочка вектора
+
+
+\usepackage{polyglossia}
+\setdefaultlanguage{russian}
+\setotherlanguage{english}
+%\setkeys{russian}{babelshorthands=true}
+\usepackage{fontspec}
+\setmainfont{Times New Roman} [Script=Cyrillic, Mapping=tex-text,]
+\setsansfont{Arial} [Script=Cyrillic, Mapping=tex-text,]
+\setmonofont{Courier New} [Script=Cyrillic, Mapping=tex-text,]
+
+\usetikzlibrary{calc}
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{angles}
+
+
+
+\include{../tikzcom.tex}
+
+\begin{document}
+	
+    
+    \tdplotsetmaincoords{60}{120}
+     \begin{tikzpicture}[ scale=1, tdplot_main_coords]
+    
+  
+    	
+    	
+    	
+    	\VARPOINT{O}{0}{0}{0}		
+    	
+    	
+    	\VARPOINT{i}{1}{0}{0}
+    	\VARPOINT{j}{0}{1}{0}
+    	\VARPOINT{k}{0}{0}{1}
+    	
+    	
+    	
+    	
+    	\draw [-Latex, red] (0,0,0) -- ($3*(i)$) node [left] {$x$};
+    	\draw [-Latex, green] (0,0,0) -- ($3*(j)$) node [right] {$y$};	
+    	\draw [-Latex, blue] (0,0,0) -- ($3.5*(k)$) node [right] {$z$};
+    	
+    	
+    	
+    	\VARPOINT{OR}{1.2}{1.5}{2}
+    	
+    	\renewcommand{\dotsize}{0.3pt}
+    	
+    	%\PROJECTILELINES{OR}{dashed, ultra thin}{black} 			
+    	
+  	
+    
+    	
+    	
+    	\node [above right, rotate=20] [tdplot_screen_coords] at (-3,-1) {
+	    	\tdplotsetmaincoords{60}{60}
+	    	\begin{tikzpicture}[ scale=1, tdplot_main_coords]    			
+	    		\node[rotate=20, xshift=-40pt, yshift=-13pt, opacity=0.3]{\includegraphics{Icon_Camera.eps}};
+	    		\draw [-Latex, red, ] (0,0,0) -- (2,0,0) node [right] {$x^V$};
+	    		\draw [-Latex, blue, ] (0,0.5,0) -- (0,-1,0) node [below] {$z^V$};	
+	    		
+	    		%\draw [thick, -Latex, cyan] (0,0,0) -- (0,2,0)  node [above left] {$\vv f'$}; 
+	    		\draw [thick, -Latex, cyan] (0,0,0) -- (0,1,0)  node [above left] {$\vv f$}; 
+	    		
+	    		\draw [-Latex, green, ] (0,0,0) -- (0,0,2) node [below left] {$y^V$};
+	    		
+	    		\draw [-Latex, orange, thick ] (0,0,0) -- (1,0,0) node [below left] {$\vv r$};
+	    		\draw [-Latex, lime, thick ] (0,0,0) -- (0,0,1) node [below left] {$\vv u$};
+	    		
+	    		\node [fill=white, below left, inner sep=1pt, yshift=-3pt] {$e$};
+	    		\fill (0,0,0) circle (1pt);
+	    		
+	    		
+	    		\fill (0,2,0) circle (1pt) node [right] {$A$};
+	    	\end{tikzpicture}
+    	}; 	
+    	
+    	
+
+
+   	
+    	
+    \end{tikzpicture} 
+    
+    \tdplotsetmaincoords{60}{120}
+    \begin{tikzpicture}[ scale=1, tdplot_main_coords]
+    	
+    	
+    	
+    	
+    	\VARPOINT{O}{0}{0}{0}		
+    	
+    	
+    	\VARPOINT{i}{1}{0}{0}
+    	\VARPOINT{j}{0}{1}{0}
+    	\VARPOINT{k}{0}{0}{1}
+    	
+    	
+    	
+    	
+    	\draw [-Latex, red] (0,0,0) -- ($3*(i)$) node [left] {$x$};
+    	\draw [-Latex, green] (0,0,0) -- ($3*(j)$) node [right] {$y$};	
+    	\draw [-Latex, blue] (0,0,0) -- ($3.5*(k)$) node [right] {$z$};
+    	
+    	
+    	
+    	\VARPOINT{OR}{1.2}{1.5}{2}
+    	
+    	\renewcommand{\dotsize}{0.3pt}
+    	
+    	%\PROJECTILELINES{OR}{dashed, ultra thin}{black} 			
+    	
+    	
+    	
+    	
+    	
+    	\node [above right] [tdplot_screen_coords] at (-3,0) {
+    		\tdplotsetmaincoords{60}{60}
+    		\begin{tikzpicture}[ scale=1, tdplot_main_coords]    			
+    			\node[rotate=20, xshift=-40pt, yshift=-13pt, opacity=0.3]{\includegraphics{Icon_Camera.eps}};
+    			\draw [-Latex, red, ] (0,0,0) -- (2,0,0) node [right] {$x^V$};
+    			\draw [-Latex, blue, ] (0,0,0) -- (0,-1,0) node [below] {$z^V$};	
+    			
+    			\draw [dashed, ->] (0,0,0) -- (0,2,0); 
+
+    			
+    			\draw [-Latex, green, ] (0,0,0) -- (0,0,2) node [below left] {$y^V$};
+    			
+   			
+    			\node [fill=white, below left, inner sep=1pt, yshift=-3pt] {$e$};
+    			\fill (0,0,0) circle (1pt);
+    			
+    			
+    			\fill (0,2,0) circle (1pt) node [right] {$A$};
+    		\end{tikzpicture}
+    	}; 	
+    	
+    	
+    	
+    	
+    	
+    	
+    \end{tikzpicture} 
+    
+    
+
+  
+   	
+   	
+   	\tdplotsetmaincoords{60}{120}
+   	\begin{tikzpicture}[ scale=1, tdplot_main_coords]
+   		
+   		
+   		
+   		
+   		\VARPOINT{O}{0}{0}{0}		
+   		
+   		
+   		\VARPOINT{i}{1}{0}{0}
+   		\VARPOINT{j}{0}{1}{0}
+   		\VARPOINT{k}{0}{0}{1}
+   		
+   		
+   		
+   		
+   		\draw [-Latex, red] (0,0,0) -- ($3*(i)$) node [left] {$x$};
+   		\draw [-Latex, green] (0,0,0) -- ($3*(j)$) node [right] {$y$};	
+   		\draw [-Latex, blue] (0,0,0) -- ($3.5*(k)$) node [right] {$z$};
+   		
+   		
+   		
+   		\VARPOINT{OR}{1.2}{1.5}{2}
+   		
+   		\renewcommand{\dotsize}{0.3pt}
+   		
+   		%\PROJECTILELINES{OR}{dashed, ultra thin}{black} 			
+   		
+   		
+   		
+   		
+   		
+   		\node [above right, rotate=20] [tdplot_screen_coords] at (-3,-1) {
+   			\tdplotsetmaincoords{60}{60}
+   			\begin{tikzpicture}[ scale=1, tdplot_main_coords]    			
+   				\node[rotate=20, xshift=-40pt, yshift=-13pt, opacity=0.3]{\includegraphics{Icon_Camera.eps}};
+   				\draw [-Latex, red, ] (0,0,0) -- (2,0,0) node [right] {$x^V$};
+   				\draw [-Latex, blue, ] (0,0.5,0) -- (0,-1,0) node [below] {$z^V$};	
+   				
+   				\draw [thick, -Latex, cyan] (0,0,0) -- (0,2,0)  node [above left] {$\vv f'$}; 
+   				\draw [thick, -Latex, cyan] (0,0,0) -- (0,1,0)  node [above left] {$\vv f$}; 
+   				
+   				\draw [-Latex, green, ] (0,0,0) -- (0,0,2) node [below left] {$y^V$};
+   				
+   				\draw [-Latex, orange, thick ] (0,0,0) -- (1,0,0) node [below left] {$\vv r$};
+   				\draw [-Latex, lime, thick ] (0,0,0) -- (0,0,1) node [below left] {$\vv u$};
+   				\draw [-Latex, olive, thick, tdplot_screen_coords] (0,0) -- (70:1) node [above] {\underline{$\vv {up}$}};
+   				
+   				\node [fill=white, below left, inner sep=1pt, yshift=-3pt] {\underline {$e$}};
+   				\fill (0,0,0) circle (1pt);
+   				
+   				
+   				\fill (0,2,0) circle (1pt) node [right] {\underline{$A$}};
+   			\end{tikzpicture}
+   		}; 	
+   		
+   		
+   		
+   		
+   		
+   		
+   	\end{tikzpicture} 
+
+
+	
+\end{document}

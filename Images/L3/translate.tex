@@ -1,0 +1,69 @@
+\documentclass[tikz]{standalone}
+
+\usepackage{tikz}
+\usepackage{tikz-3dplot}
+\usepackage{amsmath} %математические формулы
+\usepackage[e]{esvect}  %Красивая стрелочка вектора
+
+
+\usepackage{polyglossia}
+\setdefaultlanguage{russian}
+\setotherlanguage{english}
+%\setkeys{russian}{babelshorthands=true}
+\usepackage{fontspec}
+\setmainfont{Times New Roman} [Script=Cyrillic, Mapping=tex-text,]
+\setsansfont{Arial} [Script=Cyrillic, Mapping=tex-text,]
+\setmonofont{Courier New} [Script=Cyrillic, Mapping=tex-text,]
+
+\usetikzlibrary{calc}
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{angles}
+
+
+
+\include{tikzcom.tex}
+
+\begin{document}
+	
+    
+	\def\frame{0}
+	\foreach \frame in {0,1,...,1}
+	{
+	\tdplotsetmaincoords{60}{135}
+	\begin{tikzpicture}[scale=1, x=1cm, y=1cm ] %tdplot_main_coords
+		
+	\VARPOINT{A}{2}{1}{0};	
+	\VARPOINT{B}{3}{3}{0};
+	\VECTOR{AB}{A}{B};	
+	
+		
+	\draw[step=.5cm,black!10,very thin] (-1,-1) grid (4,4);	
+	
+	\draw [-Latex] (-1,0) -- (4,0) node [below left] {$x$};	
+	\draw [-Latex] (0,-1) -- (0,4) node [below left] {$y$};	
+	
+	\draw [thin,black!70, dashed] (A) -- (Ax);
+	\draw [thin,black!70, dashed] (B) -- (Bx);
+	\draw [thin,black!70, dashed] (A) -- (Ay);
+	\draw [thin,black!70, dashed] (B) -- (By);
+	
+	\fill [] (A) circle [radius=1pt] node [above left] {$A(\Ax,\Ay)$};	
+	\fill [] (B) circle [radius=1pt] node [above] {$B(\Bx,\By)$};		
+	
+	\foreach \x in {1,2,3}{
+		\draw (\x,0) node [below] {\small \x};
+	}
+	
+	\foreach \y in {1,2,3}{
+		\draw (0,\y) node [left ] {\small \y};
+	}
+	
+	\ifthenelse{\frame > 0}{
+		\draw [-stealth, thin] (A) -- ($(B)!1pt!(A)$) node [midway, left] {$\vv{AB}(\ABx,\ABy)$};	
+		
+	}{}
+		
+		
+	\end{tikzpicture}}
+	
+\end{document}

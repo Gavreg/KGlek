@@ -1,0 +1,42 @@
+\documentclass[tikz]{standalone}
+
+\usepackage{tikz}
+\usepackage{tikz-3dplot}
+\usepackage{amsmath} %математические формулы
+\usepackage[e]{esvect}  %Красивая стрелочка вектора
+
+
+\usepackage{polyglossia}
+\setdefaultlanguage{russian}
+\setotherlanguage{english}
+%\setkeys{russian}{babelshorthands=true}
+\usepackage{fontspec}
+\setmainfont{Times New Roman} [Script=Cyrillic, Mapping=tex-text,]
+\setsansfont{Arial} [Script=Cyrillic, Mapping=tex-text,]
+\setmonofont{Courier New} [Script=Cyrillic, Mapping=tex-text,]
+
+\usetikzlibrary{calc}
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{angles}
+
+
+
+%\include{../tikzcom.tex}
+
+\begin{document}
+	
+    
+
+     \begin{tikzpicture}[ scale=1]
+    
+    		\node [above right] {\includegraphics[scale=0.5]{screen.png}};
+    		
+    		\draw (0,0) grid(15,10);   		
+    		
+    		\draw [<->, thick] (0.2,1.5) -- +(0,5.5) node [right, midway] {$h$};
+   		
+   	\end{tikzpicture} 
+
+
+	
+\end{document}

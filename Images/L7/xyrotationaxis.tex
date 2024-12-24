@@ -1,0 +1,136 @@
+\documentclass[tikz]{standalone}
+
+\usepackage{tikz}
+\usepackage{tikz-3dplot}
+\usepackage{amsmath} %математические формулы
+\usepackage[e]{esvect}  %Красивая стрелочка вектора
+
+
+\usepackage{polyglossia}
+\setdefaultlanguage{russian}
+\setotherlanguage{english}
+%\setkeys{russian}{babelshorthands=true}
+\usepackage{fontspec}
+\setmainfont{Times New Roman} [Script=Cyrillic, Mapping=tex-text,]
+\setsansfont{Arial} [Script=Cyrillic, Mapping=tex-text,]
+\setmonofont{Courier New} [Script=Cyrillic, Mapping=tex-text,]
+
+\usetikzlibrary{calc}
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{angles}
+
+
+
+\include{../tikzcom.tex}
+
+
+
+\begin{document}
+	
+    
+		%\foreach \frame in {0,4,...,5}
+		%{
+			\tdplotsetmaincoords{65}{120}
+			\begin{tikzpicture}[ scale=2, tdplot_main_coords]
+			
+			
+			
+			\node{A};
+
+			
+			
+			\end{tikzpicture} 
+		%}
+		
+		
+		\usetikzlibrary {arrows.meta}
+		
+		\tdplotsetmaincoords{60}{125}
+		\begin{tikzpicture}[tdplot_main_coords]
+			
+			\VARPOINT{i}{1}{0}{0}
+			\VARPOINT{j}{0}{1}{0}
+			\VARPOINT{k}{0}{0}{1}
+			
+			
+			
+			
+			\draw [-Latex, red, very thin] (0,0,0) -- ($2*(i)$) node [above] {$x$};
+			\draw [-Latex, green, very thin] (0,0,0) -- ($2*(j)$)  node [above] {$y$};	
+			\draw [-Latex, blue, very thin] (0,0,0) -- ($1.5*(k)$) node [right] {$z$};
+			
+			
+			\edef\RAD{\fpeval{sqrt(1+1.5*1.5)}}
+			\edef\UG{65}
+			
+			\VARPOINT{point}{\RAD*cosd(\UG)}{\RAD*sind(\UG)}{0};
+			
+			\draw [-stealth] (0,0) -- (point);
+			
+			
+			\draw[dashed, very thin]  ($(0,0)!-0.5!(point)$) -- ($(0,0)!1.15!(point)$);
+			
+			\draw[very thin, dashed] (2.1,2) -- (2.1,-1) -- (-1,-1) -- (-1,2.1) -- cycle;
+			
+			\coordinate (pointR) at ($(0,0)!0.5!(point)$);
+			\tdplotsetthetaplanecoords{\fpeval{ atand(\pointy / \pointx)-90 }}
+			\tdplotsetrotatedcoordsorigin{(pointR)};
+							
+			
+						
+			\tdplotdrawarc[tdplot_rotated_coords,<-]{(0,0)}{0.3}{0}{180}{}{}
+			
+		\end{tikzpicture}
+		
+		\foreach \frame in {0,...,15}{
+		
+			\tdplotsetmaincoords{65}{120}
+			\begin{tikzpicture}[tdplot_main_coords]
+				
+				\VARPOINT{i}{1}{0}{0}
+				\VARPOINT{j}{0}{1}{0}
+				\VARPOINT{k}{0}{0}{1}
+				
+				
+				
+				
+				\draw [-Latex, red, very thin] (0,0,0) -- ($2*(i)$) node [above] {$x$};
+				\draw [-Latex, green, very thin] (0,0,0) -- ($2*(j)$)  node [above] {$y$};	
+				\draw [-Latex, blue, very thin] (0,0,0) -- ($1.5*(k)$) node [right] {$w$};
+				
+				
+				\foreach \t in {0,...,\frame}{
+					
+					\edef\RAD{\fpeval{sqrt(1+1.5*1.5)}}
+					\edef\UG{\t*15+65}
+					
+					\VARPOINT{point}{\RAD*cosd(\UG)}{\RAD*sind(\UG)}{0};
+					
+					
+					
+					
+					\draw[densely dashed, very thin]  ($(0,0)!-0.5!(point)$) -- ($(0,0)!0.5!(point)$);
+					
+					\draw[very thin, dashed] (2.1,2) -- (2.1,-1) -- (-1,-1) -- (-1,2.1) -- cycle;
+					
+					\coordinate (pointR) at ($(0,0)!0.5!(point)$);
+					\tdplotsetthetaplanecoords{\fpeval{ atand(\pointy / \pointx)-90 }}
+					\tdplotsetrotatedcoordsorigin{(pointR)};
+					
+					
+					\ifthenelse{\frame=-1}{
+						\draw [-stealth] (0,0) -- (point);	
+						\tdplotdrawarc[tdplot_rotated_coords,<-]{(0,0)}{0.3}{0}{180}{}{}
+					}
+				}
+				
+
+				
+			\end{tikzpicture}
+		
+		}		
+		
+		
+		
+	
+\end{document}

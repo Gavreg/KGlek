@@ -1,0 +1,606 @@
+\documentclass[tikz]{standalone}
+
+\usepackage{tikz}
+\usepackage{tikz-3dplot}
+\usepackage{amsmath} %математические формулы
+\usepackage[e]{esvect}  %Красивая стрелочка вектора
+
+
+\usepackage{polyglossia}
+\setdefaultlanguage{russian}
+\setotherlanguage{english}
+%\setkeys{russian}{babelshorthands=true}
+\usepackage{fontspec}
+\setmainfont{Times New Roman} [Script=Cyrillic, Mapping=tex-text,]
+\setsansfont{Arial} [Script=Cyrillic, Mapping=tex-text,]
+\setmonofont{Courier New} [Script=Cyrillic, Mapping=tex-text,]
+
+\usetikzlibrary{calc}
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{angles}
+
+
+
+\include{../tikzcom.tex}
+
+\begin{document}
+	
+	    \tdplotsetmaincoords{60}{120}
+	    
+	         \begin{tikzpicture}[ scale=1.5, tdplot_main_coords]
+	    	
+	    	
+	    	
+	    	
+	    	\VARPOINT{O}{0}{0}{0}		
+	    	
+	    	
+	    	\VARPOINT{i}{1}{0}{0}
+	    	\VARPOINT{j}{0}{1}{0}
+	    	\VARPOINT{k}{0}{0}{1}
+	    	
+	    	
+	    	
+	    	
+	    	\draw [-Latex, red] (0,0,0) -- ($3*(i)$) ;
+	    	\draw [-Latex, green] (0,0,0) -- ($3*(j)$);	
+	    	\draw [-Latex, blue] (0,0,0) -- ($3.5*(k)$) ;
+	    	
+	    	
+	    	
+	    	\VARPOINT{OR}{1.5}{2}{1.5}
+	    	
+	    	\renewcommand{\dotsize}{0.3pt}
+	    	
+	    	%\PROJECTILELINES{OR}{dashed, ultra thin}{black} 			
+	    	
+	    	%\tdplotsetrotatedcoordsorigin{(OR)}
+	    	
+	    	\tdplotsetrotatedcoords{0}{-0}{0}
+	    	
+	    	\draw [-Latex, red, tdplot_rotated_coords] (0,0,0) -- (1,0,0) node [right] {$x'$};
+	    	\draw [-Latex, green, tdplot_rotated_coords] (0,0,0) -- (0,1,0) node [below] {$y'$};	
+	    	\draw [-Latex, blue, tdplot_rotated_coords] (0,0,0) -- (0,0,1) node [above left] {$z'$};
+	    	
+	    	
+	    	\VARPOINT{A}{0.5}{0.5}{-0.5}
+	    	\VARPOINT{B}{-0.5}{0.5}{-0.5}	
+	    	\VARPOINT{C}{-0.5}{-0.5}{-0.5}	
+	    	\VARPOINT{D}{0.5}{-0.5}{-0.5}
+	    	\VARPOINT{E}{0}{0}{0.5}	
+	    	
+
+	    	
+	    	
+	    	\MATRIXROW{M}{a}{1}{0}{0}{0}
+	    	\MATRIXROW{M}{b}{0}{1}{0}{0}
+	    	\MATRIXROW{M}{c}{0}{0}{1}{0}
+	    	\MATRIXROW{M}{d}{0}{0}{0}{1}
+	    	
+	    	
+	    	
+	    	
+	    	
+	    	
+	    	
+	    	
+	    \end{tikzpicture} 
+	
+
+     \begin{tikzpicture}[ scale=1.5, tdplot_main_coords]
+    	
+    	
+    	
+    	
+    	\VARPOINT{O}{0}{0}{0}		
+    	
+    	
+    	\VARPOINT{i}{1}{0}{0}
+    	\VARPOINT{j}{0}{1}{0}
+    	\VARPOINT{k}{0}{0}{1}
+    	
+    	
+    	
+    	
+    	\draw [-Latex, red] (0,0,0) -- ($3*(i)$) ;
+    	\draw [-Latex, green] (0,0,0) -- ($3*(j)$);	
+    	\draw [-Latex, blue] (0,0,0) -- ($3.5*(k)$) ;
+    	
+    	
+    	
+    	\VARPOINT{OR}{1.5}{2}{1.5}
+    	
+    	\renewcommand{\dotsize}{0.3pt}
+    	
+    	%\PROJECTILELINES{OR}{dashed, ultra thin}{black} 			
+    	
+    	%\tdplotsetrotatedcoordsorigin{(OR)}
+    	
+    	\tdplotsetrotatedcoords{0}{-0}{20}
+    	
+    	\draw [-Latex, red, tdplot_rotated_coords] (0,0,0) -- (1,0,0) node [right] {$x'$};
+    	\draw [-Latex, green, tdplot_rotated_coords] (0,0,0) -- (0,1,0) node [right] {$y'$};	
+    	\draw [-Latex, blue, tdplot_rotated_coords] (0,0,0) -- (0,0,1) node [above left] {$z'$};
+    	
+    	
+    	\VARPOINT{A}{0.5}{0.5}{-0.5}
+    	\VARPOINT{B}{-0.5}{0.5}{-0.5}	
+    	\VARPOINT{C}{-0.5}{-0.5}{-0.5}	
+    	\VARPOINT{D}{0.5}{-0.5}{-0.5}
+    	\VARPOINT{E}{0}{0}{0.5}	
+    	
+    	
+    	\tdplotdefinepoints(0,0,2)(0,-1,2)(0.1,1,2)		
+    	\tdplotdrawpolytopearc[thick, blue, -stealth]{0.4}{below left, }{$\gamma $}
+    	
+    	
+    	\MATRIXROW{M}{a}{1}{0}{0}{0}
+    	\MATRIXROW{M}{b}{0}{1}{0}{0}
+    	\MATRIXROW{M}{c}{0}{0}{1}{0}
+    	\MATRIXROW{M}{d}{0}{0}{0}{1}
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    \end{tikzpicture} 
+    
+    
+           \begin{tikzpicture}[ scale=1.5, tdplot_main_coords]
+    	
+    	
+    	
+    	
+    	\VARPOINT{O}{0}{0}{0}		
+    	
+    	
+    	\VARPOINT{i}{1}{0}{0}
+    	\VARPOINT{j}{0}{1}{0}
+    	\VARPOINT{k}{0}{0}{1}
+    	
+    	
+    	
+    	
+    	\draw [-Latex, red] (0,0,0) -- ($3*(i)$) ;
+    	\draw [-Latex, green] (0,0,0) -- ($3*(j)$);	
+    	\draw [-Latex, blue] (0,0,0) -- ($3.5*(k)$) ;
+    	
+    	
+    	
+    	\VARPOINT{OR}{1.2}{1.2}{3}
+    	
+    	\renewcommand{\dotsize}{0.3pt}
+    	
+    	%\PROJECTILELINES{OR}{dashed, ultra thin}{black} 			
+    	
+    	%\tdplotsetrotatedcoordsorigin{(OR)}
+    	
+    	\tdplotsetrotatedcoords{0}{120}{20}
+    	
+    	\draw [-Latex, red, tdplot_rotated_coords] (0,0,0) -- (1,0,0) node [right] {$x'$};
+    	\draw [-Latex, green, tdplot_rotated_coords] (0,0,0) -- (0,1,0) node [right] {$y'$};	
+    	\draw [-Latex, blue, tdplot_rotated_coords] (0,0,0) -- (0,0,1) node [above left] {$z'$};
+    	
+    	\tdplotdefinepoints(0,2,0)(0,2,-1)(0.1,2,1)		
+    	\tdplotdrawpolytopearc[thick, green, stealth-]{0.4}{below left, }{$\beta $}
+    	
+    	
+    	\VARPOINT{A}{0.5}{0.5}{-0.5}
+    	\VARPOINT{B}{-0.5}{0.5}{-0.5}	
+    	\VARPOINT{C}{-0.5}{-0.5}{-0.5}	
+    	\VARPOINT{D}{0.5}{-0.5}{-0.5}
+    	\VARPOINT{E}{0}{0}{0.5}	
+    	
+    	
+    	
+    	\MATRIXROW{M}{a}{1}{0}{0}{0}
+    	\MATRIXROW{M}{b}{0}{1}{0}{0}
+    	\MATRIXROW{M}{c}{0}{0}{1}{0}
+    	\MATRIXROW{M}{d}{0}{0}{0}{1}
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    \end{tikzpicture} 
+    
+    
+    
+   \begin{tikzpicture}[ scale=1.5, tdplot_main_coords]
+    	
+    	
+    	
+    	
+    	\VARPOINT{O}{0}{0}{0}		
+    	
+    	
+    	\VARPOINT{i}{1}{0}{0}
+    	\VARPOINT{j}{0}{1}{0}
+    	\VARPOINT{k}{0}{0}{1}
+    	
+    	
+    	
+    	
+    	\draw [-Latex, red] (0,0,0) -- ($3*(i)$) ;
+    	\draw [-Latex, green] (0,0,0) -- ($3*(j)$);	
+    	\draw [-Latex, blue] (0,0,0) -- ($3.5*(k)$) ;
+    	
+    	
+    	
+    	\VARPOINT{OR}{1.2}{1.2}{3}
+    	
+    	\renewcommand{\dotsize}{0.3pt}
+    	
+    	%\PROJECTILELINES{OR}{dashed, ultra thin}{black} 			
+    	
+    	\tdplotsetrotatedcoordsorigin{(OR)}
+    	
+    	\tdplotsetrotatedcoords{0}{120}{20}
+    	
+    	\draw [-Latex, red, tdplot_rotated_coords] (0,0,0) -- (1,0,0) node [right] {$x'$};
+    	\draw [-Latex, green, tdplot_rotated_coords] (0,0,0) -- (0,1,0) node [right] {$y'$};	
+    	\draw [-Latex, blue, tdplot_rotated_coords] (0,0,0) -- (0,0,1) node [below left] {$z'$};
+    	
+    	\draw [-Latex] (O) -- (OR) node [midway, right] {$\vv t$};
+    	
+    	
+    	\VARPOINT{A}{0.5}{0.5}{-0.5}
+    	\VARPOINT{B}{-0.5}{0.5}{-0.5}	
+    	\VARPOINT{C}{-0.5}{-0.5}{-0.5}	
+    	\VARPOINT{D}{0.5}{-0.5}{-0.5}
+    	\VARPOINT{E}{0}{0}{0.5}	
+    	
+    	
+    	
+    	\MATRIXROW{M}{a}{1}{0}{0}{0}
+    	\MATRIXROW{M}{b}{0}{1}{0}{0}
+    	\MATRIXROW{M}{c}{0}{0}{1}{0}
+    	\MATRIXROW{M}{d}{0}{0}{0}{1}
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    \end{tikzpicture} 
+    
+    \tdplotsetmaincoords{60}{100}
+     \begin{tikzpicture}[ scale=1.5, tdplot_main_coords]
+    	
+    	
+    	\renewcommand{\dotsize}{0.3pt}
+    	
+    	\VARPOINT{O}{0}{0}{0}		
+    	
+    	
+    	\VARPOINT{i}{1}{0}{0}
+    	\VARPOINT{j}{0}{1}{0}
+    	\VARPOINT{k}{0}{0}{1}
+    	
+    	
+    	
+    	
+    	\draw [-Latex, red] (0,0,0) -- ($3*(i)$) ;
+    	\draw [-Latex, green] (0,0,0) -- ($3*(j)$);	
+    	\draw [-Latex, blue] (0,0,0) -- ($3.5*(k)$) ;
+    	
+    	
+    	
+    	\VARPOINT{OR}{0.5}{1.2}{2}
+    	
+    	\draw [-Latex] (O) -- (OR)  node [pos=0.4, right] {$\vv t$};
+    	
+    	
+    	
+    	
+    	%\PROJECTILELINES{OR}{dashed, ultra thin}{black} 			
+    	
+    	\tdplotsetrotatedcoordsorigin{(OR)}
+    	\PROJECTILELINESXY{OR}{very thin,densely dashed}{very thin,densely dashed}
+    	\draw [very thin, densely dashed] (O) -- (ORxy);
+    	
+    	\tdplotsetrotatedcoords{0}{0}{0}
+    	
+    	\draw [-Latex, red, tdplot_rotated_coords] (0,0,0) -- (1,0,0) node [below] {$x'$};
+    	\draw [-Latex, green, tdplot_rotated_coords] (0,0,0) -- (0,1,0) node [right] {$y'$};	
+    	\draw [-Latex, blue, tdplot_rotated_coords] (0,0,0) -- (0,0,1) node [below left] {$z'$};
+    	
+    	
+    	
+    	\pgfmathsetmacro{\ax}{0.7}
+    	\pgfmathsetmacro{\ay}{0.7}
+    	\pgfmathsetmacro{\az}{0.7}
+    	
+    	
+    	
+    	\tdplottransformrotmain{\ax}{\ay}{\az}
+    	
+    	\VARPOINT{AA}{\tdplotresx+\ORx}{\tdplotresy+\ORy}{\tdplotresz+\ORz}
+    	
+    	
+    	
+    	
+    	\fill [tdplot_rotated_coords] (\ax,\ay,\az) circle [radius=0.7pt] node [right] {$A$};
+    	\draw [tdplot_rotated_coords,very thin,densely dashed] (\ax,\ay,\az) -- (\ax,\ay,0);
+    	\draw [tdplot_rotated_coords,very thin,densely dashed] (\ax,\ay,\az) --  (\ax,0,\az) ;
+    	\draw [tdplot_rotated_coords,very thin,densely dashed] (\ax,\ay,\az) --  (0,\ay,\az);    	
+    	\draw [tdplot_rotated_coords,very thin,densely dashed] (\ax,\ay,0) --  (\ax,0,0)node [above right, inner sep=0, xshift=0pt] {\tiny $A_{x'}$};
+    	\draw [tdplot_rotated_coords,very thin,densely dashed] (\ax,0,0) --  (\ax,0,\az);
+    	\draw [tdplot_rotated_coords,very thin,densely dashed] (\ax,0,\az) --  (0,0,\az) node [above right, inner sep=0, xshift=5pt] {\tiny $A_{z'}$} ;
+    	\draw [tdplot_rotated_coords,very thin,densely dashed] (0,0,\az) --  (0,\ay,\az);
+    	\draw [tdplot_rotated_coords,very thin,densely dashed] (0,\ay,\az) --  (0,\ay,0)node [above right, inner sep=0] {\tiny $A_{y'}$} ;
+    	\draw [tdplot_rotated_coords,very thin,densely dashed] (0,\ay,0) --  (\ax,\ay,0);
+    	\fill [tdplot_rotated_coords] (\ax,\ay,0)  circle [radius=0.3pt];
+    	\fill [tdplot_rotated_coords] (\ax,0,\az)  circle [radius=0.3pt];
+    	\fill [tdplot_rotated_coords] (0,\ay,\az)  circle [radius=0.3pt];
+    	
+    	\PROJECTILELINES{AA}{ultra thin, dashed}{ultra thin, dashed}
+    	\node at (AAx) [above left] {$A_x$};
+    	\node at (AAy) [above right] {$A_y$};
+    	\node at (AAz) [above left] {$A_z$};
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    \end{tikzpicture} 
+    
+    
+        \tdplotsetmaincoords{60}{100}
+    \begin{tikzpicture}[ scale=1.5, tdplot_main_coords]
+    	
+    	
+    	\renewcommand{\dotsize}{0.3pt}
+    	
+    	\VARPOINT{O}{0}{0}{0}		
+    	
+    	
+    	\VARPOINT{i}{1}{0}{0}
+    	\VARPOINT{j}{0}{1}{0}
+    	\VARPOINT{k}{0}{0}{1}
+    	
+    	
+    	
+    	
+    	\draw [-Latex, red] (0,0,0) -- ($3*(i)$) ;
+    	\draw [-Latex, green] (0,0,0) -- ($3*(j)$);	
+    	\draw [-Latex, blue] (0,0,0) -- ($3.5*(k)$) ;
+    	
+    	
+    	
+    	\VARPOINT{OR}{0.5}{1.2}{2}
+    	
+    	\draw [-Latex] (O) -- (OR)  node [pos=0.4, right] {$\vv t$};
+    	
+    	
+    	
+    	
+    	%\PROJECTILELINES{OR}{dashed, ultra thin}{black} 			
+    	
+    	\tdplotsetrotatedcoordsorigin{(OR)}
+    	\PROJECTILELINESXY{OR}{very thin,densely dashed}{very thin,densely dashed}
+    	\draw [very thin, densely dashed] (O) -- (ORxy);
+    	
+    	\tdplotsetrotatedcoords{0}{0}{0}
+    	
+    	\draw [-Latex, red, tdplot_rotated_coords] (0,0,0) -- (1,0,0) node [below] {$x'$};
+    	\draw [-Latex, green, tdplot_rotated_coords] (0,0,0) -- (0,1,0) node [right] {$y'$};	
+    	\draw [-Latex, blue, tdplot_rotated_coords] (0,0,0) -- (0,0,1) node [below left] {$z'$};
+    	
+    	
+    	
+    	\pgfmathsetmacro{\ax}{0.7}
+    	\pgfmathsetmacro{\ay}{0.7}
+    	\pgfmathsetmacro{\az}{0.7}
+    	
+    	
+    	
+    	\tdplottransformrotmain{\ax}{\ay}{\az}
+    	
+    	\VARPOINT{AA}{\tdplotresx+\ORx}{\tdplotresy+\ORy}{\tdplotresz+\ORz}
+    	
+    	
+    	
+    	
+    	\fill [tdplot_rotated_coords] (\ax,\ay,\az) circle [radius=0.7pt] node [right] {$A$};
+    	\draw [tdplot_rotated_coords,very thin,densely dashed] (\ax,\ay,\az) -- (\ax,\ay,0);
+    	\draw [tdplot_rotated_coords,very thin,densely dashed] (\ax,\ay,\az) --  (\ax,0,\az) ;
+    	\draw [tdplot_rotated_coords,very thin,densely dashed] (\ax,\ay,\az) --  (0,\ay,\az);    	
+    	\draw [tdplot_rotated_coords,very thin,densely dashed] (\ax,\ay,0) --  (\ax,0,0)node [above right, inner sep=0, xshift=0pt] {\tiny $A_{x'}$};
+    	\draw [tdplot_rotated_coords,very thin,densely dashed] (\ax,0,0) --  (\ax,0,\az);
+    	\draw [tdplot_rotated_coords,very thin,densely dashed] (\ax,0,\az) --  (0,0,\az) node [above right, inner sep=0, xshift=5pt] {\tiny $A_{z'}$} ;
+    	\draw [tdplot_rotated_coords,very thin,densely dashed] (0,0,\az) --  (0,\ay,\az);
+    	\draw [tdplot_rotated_coords,very thin,densely dashed] (0,\ay,\az) --  (0,\ay,0)node [above right, inner sep=0] {\tiny $A_{y'}$} ;
+    	\draw [tdplot_rotated_coords,very thin,densely dashed] (0,\ay,0) --  (\ax,\ay,0);
+    	\fill [tdplot_rotated_coords] (\ax,\ay,0)  circle [radius=0.3pt];
+    	\fill [tdplot_rotated_coords] (\ax,0,\az)  circle [radius=0.3pt];
+    	\fill [tdplot_rotated_coords] (0,\ay,\az)  circle [radius=0.3pt];
+    	
+    	\PROJECTILELINES{AA}{ultra thin, dashed}{ultra thin, dashed}
+    	\node at (AAx) [above left] {$A_x$};
+    	\node at (AAy) [above right] {$A_y$};
+    	\node at (AAz) [above left] {$A_z$};
+    	
+    	\draw [-latex, cyan, thick] (O) -- (AA);
+    	\draw [-latex, magenta, thick] (OR) -- (AA);
+    	
+    	
+    	
+    	
+    	
+    \end{tikzpicture} 
+    
+    \tdplotsetmaincoords{60}{120}
+     \begin{tikzpicture}[ scale=1.5, tdplot_main_coords]
+    	
+    	
+    	
+    	
+    	\VARPOINT{O}{0}{0}{0}		
+    	
+    	
+    	\VARPOINT{i}{1}{0}{0}
+    	\VARPOINT{j}{0}{1}{0}
+    	\VARPOINT{k}{0}{0}{1}
+    	
+    	
+    	
+    	
+    	\draw [-Latex, red] (0,0,0) -- ($3*(i)$) ;
+    	\draw [-Latex, green] (0,0,0) -- ($3*(j)$);	
+    	\draw [-Latex, blue] (0,0,0) -- ($3.5*(k)$) ;
+    	
+    	
+    	
+    	\VARPOINT{OR}{1.2}{1.2}{3}
+    	
+    	\renewcommand{\dotsize}{0.3pt}
+    	
+    	%\PROJECTILELINES{OR}{dashed, ultra thin}{black} 			
+    	
+    	\tdplotsetrotatedcoordsorigin{(OR)}
+    	
+    	\tdplotsetrotatedcoords{0}{120}{20}
+    	
+    	\draw [-Latex, red, tdplot_rotated_coords] (0,0,0) -- (1,0,0) node [right] {$x'$};
+    	\draw [-Latex, green, tdplot_rotated_coords] (0,0,0) -- (0,1,0) node [right] {$y'$};	
+    	\draw [-Latex, blue, tdplot_rotated_coords] (0,0,0) -- (0,0,1) node [below left] {$z'$};
+    	
+    	
+    	    	
+    	\pgfmathsetmacro{\ax}{0.7}
+    	\pgfmathsetmacro{\ay}{0.7}
+    	\pgfmathsetmacro{\az}{0.7}
+    	
+    	
+    	
+    	\tdplottransformrotmain{\ax}{\ay}{\az}
+    	
+    	\VARPOINT{AA}{\tdplotresx+\ORx}{\tdplotresy+\ORy}{\tdplotresz+\ORz}
+    	
+    
+    	
+    	
+    	\fill [tdplot_rotated_coords] (\ax,\ay,\az) circle [radius=0.7pt] node [right] {$A$};
+    	\draw [tdplot_rotated_coords,very thin,densely dashed] (\ax,\ay,\az) -- (\ax,\ay,0);
+    	\draw [tdplot_rotated_coords,very thin,densely dashed] (\ax,\ay,\az) --  (\ax,0,\az) ;
+    	\draw [tdplot_rotated_coords,very thin,densely dashed] (\ax,\ay,\az) --  (0,\ay,\az);    	
+    	\draw [tdplot_rotated_coords,very thin,densely dashed] (\ax,\ay,0) --  (\ax,0,0)node [above right, inner sep=0, xshift=0pt] {\tiny $A_{x'}$};
+    	\draw [tdplot_rotated_coords,very thin,densely dashed] (\ax,0,0) --  (\ax,0,\az);
+    	\draw [tdplot_rotated_coords,very thin,densely dashed] (\ax,0,\az) --  (0,0,\az) node [above right, inner sep=0, xshift=5pt] {\tiny $A_{z'}$} ;
+    	\draw [tdplot_rotated_coords,very thin,densely dashed] (0,0,\az) --  (0,\ay,\az);
+    	\draw [tdplot_rotated_coords,very thin,densely dashed] (0,\ay,\az) --  (0,\ay,0)node [above , inner sep=0] {\tiny $A_{y'}$} ;
+    	\draw [tdplot_rotated_coords,very thin,densely dashed] (0,\ay,0) --  (\ax,\ay,0);
+    	\fill [tdplot_rotated_coords] (\ax,\ay,0)  circle [radius=0.3pt];
+    	\fill [tdplot_rotated_coords] (\ax,0,\az)  circle [radius=0.3pt];
+    	\fill [tdplot_rotated_coords] (0,\ay,\az)  circle [radius=0.3pt];
+    	
+    	\PROJECTILELINES{AA}{ultra thin, dashed}{ultra thin, dashed}
+    	\node at (AAx) [above left] {$A_x$};
+    	\node at (AAy) [above right] {$A_y$};
+    	\node at (AAz) [above left] {$A_z$};
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    \end{tikzpicture} 
+    
+    
+	\def\frame{0}
+	%\foreach \frame in {1,2,3,4}
+	{
+		
+	
+	
+	
+		
+	\begin{tikzpicture}[ scale=1.5, tdplot_main_coords]
+		
+	
+				
+			
+			\VARPOINT{O}{0}{0}{0}		
+			
+			
+			\VARPOINT{i}{1}{0}{0}
+			\VARPOINT{j}{0}{1}{0}
+			\VARPOINT{k}{0}{0}{1}
+			
+			
+			
+			
+			\draw [-Latex, red] (0,0,0) -- ($3*(i)$) ;
+			\draw [-Latex, green] (0,0,0) -- ($3*(j)$);	
+			\draw [-Latex, blue] (0,0,0) -- ($3.5*(k)$) ;
+			
+			
+			
+			\VARPOINT{OR}{1.5}{0.5}{1.5}
+			
+			\renewcommand{\dotsize}{0.3pt}
+			
+			%\PROJECTILELINES{OR}{dashed, ultra thin}{black} 			
+			
+			%\tdplotsetrotatedcoordsorigin{(OR)}
+			
+			\tdplotsetrotatedcoords{0}{0}{0}
+			
+			\draw [-Latex, red, tdplot_rotated_coords] (0,0,0) -- (1,0,0) node [right] {$x'$};
+			\draw [-Latex, green, tdplot_rotated_coords] (0,0,0) -- (0,1,0) node [left] {$y'$};	
+			\draw [-Latex, blue, tdplot_rotated_coords] (0,0,0) -- (0,0,1) node [above] {$z'$};
+			
+						
+			\VARPOINT{A}{0.5}{0.5}{-0.5}
+			\VARPOINT{B}{-0.5}{0.5}{-0.5}	
+			\VARPOINT{C}{-0.5}{-0.5}{-0.5}	
+			\VARPOINT{D}{0.5}{-0.5}{-0.5}
+			\VARPOINT{E}{0}{0}{0.5}	
+			
+			
+			
+			\MATRIXROW{M}{a}{1}{0}{0}{0}
+			\MATRIXROW{M}{b}{0}{1}{0}{0}
+			\MATRIXROW{M}{c}{0}{0}{1}{0.5}
+			\MATRIXROW{M}{d}{0}{0}{0}{1}
+			
+			\foreach \p in {A,B,C,D,E}{
+				\draw[thin, dashed] (\p) -- (\p xy);
+			}
+			
+			
+
+			
+					
+			
+			\draw [cyan, thick] (A) -- (B);
+			\draw [magenta, thick] (B) -- (C);
+			\draw [orange, thick] (C) -- (D);
+			\draw [olive, thick] (D) -- (A);
+			\draw [ thick] (A) -- (E) (B) -- (E) (C) -- (E) (D) -- (E);
+			
+		    \foreach \p in {A,B,C,D,E}{
+				\draw[thin, dashed] (\p) -- (\p xy);
+			}
+			
+
+		
+		
+	\end{tikzpicture}  }
+
+
+
+	
+\end{document}
