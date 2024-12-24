@@ -16,3 +16,4 @@ foreach($folder in $ImagesFolders)
 
     }
 }
+
