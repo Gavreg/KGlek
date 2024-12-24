@@ -1,9 +1,0 @@
-\noindent \textbf {\Large Лекция 6~---~Отсечение отрезков и растеризация}\setcounter {SEC}{0}\par 
-\noindent \hspace {2ex}\hbox {\large \stepcounter {SEC}\theSEC ~ Отчесение отрезков}\par 
-\noindent \hspace {6ex}\stepcounter {SUB}\theSUB ~ Алгоритм Коэна-Сазерленда\par 
-\noindent \hspace {6ex}\stepcounter {SUB}\theSUB ~ Алгоритм средней точки\par 
-\noindent \hspace {6ex}\stepcounter {SUB}\theSUB ~ Алгоритм Кируса-Бека\par 
-\noindent \hspace {2ex}\hbox {\large \stepcounter {SEC}\theSEC ~ Алгоритмы растеризации}\par 
-\noindent \hspace {6ex}\stepcounter {SUB}\theSUB ~ Цифровой дифференциальный анализатор\par 
-\noindent \hspace {6ex}\stepcounter {SUB}\theSUB ~ Алгоритм Брезенхэма\par 
-\noindent \hspace {6ex}\stepcounter {SUB}\theSUB ~ Прочие алгоритмы\par 
