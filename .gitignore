@@ -6,13 +6,17 @@
 *.nav
 *.out
 *.snm
-
-.vscode/
-
+*.toc
+*.fls
+*synctex*
 
 *.gnuplot
-
+*.table
 *.dat
+
+
+
+.vscode/
 
 *.ilk
 *.exe

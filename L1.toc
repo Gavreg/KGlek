@@ -1,8 +1,0 @@
-\selectlanguage *[]{russian}
-\beamer@sectionintoc {1}{Структура курса}{4}{0}{1}
-\contentsline {subsection}{Первый фрейм}{4}{}%
-\beamer@sectionintoc {2}{История компьютерной графики}{5}{0}{2}
-\beamer@subsectionintoc {2}{1}{Предпосылки}{5}{0}{2}
-\beamer@subsectionintoc {2}{2}{Первые динозвары}{11}{0}{2}
-\beamer@subsectionintoc {2}{3}{Персональные компьютеры и не только}{24}{0}{2}
-\beamer@subsectionintoc {2}{4}{3D в каждый дом!}{34}{0}{2}

@@ -1,5 +1,0 @@
-\selectlanguage *[]{russian}
-\beamer@sectionintoc {1}{Неявное представление кривых}{4}{0}{1}
-\beamer@sectionintoc {2}{Параметрическое представление}{9}{0}{2}
-\beamer@sectionintoc {3}{Кривые Безье}{13}{0}{3}
-\beamer@sectionintoc {4}{Би-сплайны}{29}{0}{4}
