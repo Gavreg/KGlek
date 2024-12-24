@@ -2,6 +2,7 @@
 
 \usepackage{fp}
 \usepackage{tikz}
+\usepackage[svgnames]{xcolor}
 \usepackage{tikz-3dplot}
 \usepackage{amsmath} %математические формулы
 \usepackage[e]{esvect}  %Красивая стрелочка вектора
@@ -11,56 +12,6 @@
 \usetikzlibrary{arrows.meta}
 
 \begin{document}
-	
-	\newcommand{\VARPOINT}[4] 
-	{
-		\coordinate (#1) at (#2,#3,#4);
-		\coordinate (#1xy) at (#2,#3,0);
-		\coordinate (#1xz) at (#2,0,#4);
-		\coordinate (#1yz) at (0,#3,#4);
-		\coordinate (#1x) at (#2,0,0);
-		\coordinate (#1y) at (0,#3,0);
-		\coordinate (#1z) at (0,0,#4);
-		
-		
-		\expandafter\edef\csname #1x\endcsname{#2}
-		\expandafter\edef\csname #1y\endcsname{#3}
-		\expandafter\edef\csname #1z\endcsname{#4}
-		
-	}
-	
-	\newcommand{\VECTOR}[2]
-	{
-		
-		\FPset{\x}{0}
-		\FPset{\y}{0}
-		\FPset{\z}{0}
-		\FPsub{\x}{\csname #2x\endcsname}{\csname #1x\endcsname}
-		\FPsub{\y}{\csname #2y\endcsname}{\csname #1y\endcsname}
-		\FPsub{\z}{\csname #2z\endcsname}{\csname #1z\endcsname}
-		
-		
-		%\expandafter\VARPOINT {vec#1#2}{\csname #1x}{0}{0}
-		\expandafter\VARPOINT {vec#1#2}{\x}{\y}{\z}
-	}
-	
-	\newcommand{\VIPI}[2]
-	{
-		\def\tmpax{\csname#1x\endcsname}
-		\def\tmpay{\csname#1y\endcsname}
-		\def\tmpaz{\csname#1z\endcsname}
-		
-		\def\tmpbx{\csname#2x\endcsname}
-		\def\tmpby{\csname#2y\endcsname}
-		\def\tmpbz{\csname#2z\endcsname}
-		
-		\FPeval{\resultx}{\tmpay * \tmpbz - \tmpaz * \tmpby}
-		\FPeval{\resulty}{\tmpaz * \tmpbx - \tmpax * \tmpbz}
-		\FPeval{\resultz}{\tmpax * \tmpby - \tmpay * \tmpbx}
-		
-		\expandafter\VARPOINT {vp#1#2}{\resultx}{\resulty}{\resultz}	
-		
-	}
 	
 	
 	
@@ -83,7 +34,7 @@
 				\fill (A) circle(1pt);
 				\fill (B) circle(1pt);
 				
-				\draw[-Latex, thick] (A) -- (B);
+				\draw[-Latex, thick, DarkRed] (A) -- (B) node[midway, right] {$\vv B - \vv A = \vv{AB}$};
 				
 				\draw[-Latex, thick] (O) -- (A);
 				\draw[-Latex, thick] (O) -- (B);

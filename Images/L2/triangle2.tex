@@ -11,13 +11,13 @@
 \usetikzlibrary{arrows.meta}
 \usetikzlibrary{angles}
 
-\include{tikzcom.tex}
+\input{../tikzcom.tex}
 
 \begin{document}
 	
     
 	\def\frame{100}
-	\foreach \frame in {0,1,...,1}
+	\foreach \frame in {0,1}
 	{
 	\tdplotsetmaincoords{70}{100}
 	\begin{tikzpicture}[scale=1]
@@ -38,10 +38,10 @@
 		
 		\ifthenelse{\frame>0}{
 				
-				\ROTATEPLANAR{A}{-.3};
-				\ROTATEPLANAR{B}{-0.3};
-				\ROTATEPLANAR{C}{-0.3};
-				\ROTATEPLANAR{Q}{-0.3};
+				\ROTATEPLANAR{A}{A}{-.3};
+				\ROTATEPLANAR{B}{B}{-0.3};
+				\ROTATEPLANAR{C}{C}{-0.3};
+				\ROTATEPLANAR{Q}{Q}{-0.3};
 				
 				\VARPOINT{A}{\Ax+\Tx}{\Ay+\Ty}{0}
 				\VARPOINT{B}{\Bx+\Tx}{\By+\Ty}{0}
@@ -61,16 +61,12 @@
 		\fill [] (Q) circle [radius=1pt];
 		
 		
-		
-		%\ROTATEPLANAR{A}{5*3.1415/180}
-		
-		%\draw [red] (0,0) -- (A);
 
 		
 	\end{tikzpicture}}
 
 
-\foreach \frame in {0,1,...,1}
+\foreach \frame in {0,1}
 {
   \tdplotsetmaincoords{70}{100}
   \begin{tikzpicture}[scale=1]
@@ -91,10 +87,10 @@
 		
 		\ifthenelse{\frame>0}{
 			
-			\ROTATEPLANAR{A}{-.3};
-			\ROTATEPLANAR{B}{-0.3};
-			\ROTATEPLANAR{C}{-0.3};
-			\ROTATEPLANAR{Q}{-0.3};
+			\ROTATEPLANAR{A}{A}{-.3}
+			\ROTATEPLANAR{B}{B}{-0.3}
+			\ROTATEPLANAR{C}{C}{-0.3}
+			\ROTATEPLANAR{Q}{Q}{-0.3}
 			
 			\VARPOINT{A}{\Ax+\Tx}{\Ay+\Ty}{0}
 			\VARPOINT{B}{\Bx+\Tx}{\By+\Ty}{0}
@@ -114,11 +110,7 @@
 		\draw (A) -- (B) -- (C) -- cycle;
 		\fill [] (Q) circle [radius=1pt];
 		
-		
-		
-		%\ROTATEPLANAR{A}{5*3.1415/180}
-		
-		%\draw [red] (0,0) -- (A);
+				
 		
 		
 \end{tikzpicture}}
@@ -144,10 +136,10 @@
 		
 		\ifthenelse{\frame>0}{
 			
-			\ROTATEPLANAR{A}{-.3};
-			\ROTATEPLANAR{B}{-0.3};
-			\ROTATEPLANAR{C}{-0.3};
-			\ROTATEPLANAR{Q}{-0.3};
+			\ROTATEPLANAR{A}{A}{-.3}
+			\ROTATEPLANAR{B}{B}{-0.3}
+			\ROTATEPLANAR{C}{C}{-0.3}
+			\ROTATEPLANAR{Q}{Q}{-0.3}
 			
 			\VARPOINT{A}{\Ax+\Tx}{\Ay+\Ty}{0}
 			\VARPOINT{B}{\Bx+\Tx}{\By+\Ty}{0}
@@ -219,10 +211,7 @@
 		\fill [red] (0.6, 0.1) circle [radius=1pt];
 		\draw (0.6, 0.1) node [below, red] {$Q'$};
 		
-		
-		%\ROTATEPLANAR{A}{5*3.1415/180}
-		
-		%\draw [red] (0,0) -- (A);
+
 		
 		
 \end{tikzpicture}}

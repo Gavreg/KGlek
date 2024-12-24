@@ -10,7 +10,7 @@
 \usetikzlibrary{calc}
 \usetikzlibrary{arrows.meta}
 
-\include{tikzcom.tex}
+\input{../tikzcom.tex}
 
 \begin{document}
 	
@@ -44,22 +44,21 @@
 		%\coordinate (B) at (0.5,4,4);
 		%\coordinate (C) at (4,1.5);
 		
-		\VARPOINT{A}{2}{1}{2};  % 2 4 2
-		\VARPOINT{B}{0.5}{4}{4};
-		\VARPOINT{C}{4}{4.5}{2};
+		\VARPOINT{A}{2}{1}{2}
+		\VARPOINT{B}{0.5}{4}{4}
+		\VARPOINT{C}{4}{4.5}{2}
 		
 		
-		\VECTOR{A}{B}
-		\VECTOR{A}{C}		
+		\VECTOR{vecAB}{A}{B}
+		\VECTOR{vecAC}{A}{C}		
 		
-		\VIPI{vecAC}{vecAB};		
+		\VECPRODUCT{vpvecACvecAB}{vecAC}{vecAB}		
 		
-		\ROTATE{vecAC}{vpvecACvecAB}{\frame * 3.1415 / 180}
+		\ROTATE{vecAC}{vecAC}{vpvecACvecAB}{\frame * 3.1415 / 180}
 		
-		\VIPI{vecAC}{vecAB}
+		\VECPRODUCT{vpvecACvecAB}{vecAC}{vecAB}	
 		
-		%\coordinate (CC) at ($(A)+(vecAC)$) ;
-		
+	
 		\VARPOINT{CC}{\Ax+\vecACx}{\Ay+\vecACy}{\Az+\vecACz}
 		
 		\fill [black] (A) circle [radius=1pt];

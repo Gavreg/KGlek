@@ -10,7 +10,7 @@
 \usetikzlibrary{calc}
 \usetikzlibrary{arrows.meta}
 
-\include{tikzcom.tex}
+\input{../tikzcom.tex}
 
 \begin{document}
 	
@@ -107,11 +107,11 @@
 		
 		
 		
-        \draw (E) node [right] {$\vv{p}$};
-        \draw (P) node [above right] {$\vv{r}$};
-        \draw (T) node [above right] {$\vv{q}$};
+        \draw (E) node [right, inner sep=1pt] {$\vv{p}$};
+        \draw (P) node [above, inner sep=1pt] {$\vv{r}$};
+        \draw (T) node [right, inner sep=1pt] {$\vv{q}$};
                 
-		\draw (C) node [above left] {$\alpha$};	
+		\draw (C) node [above left, yshift=5pt] {$\alpha$};	
 		
 		\draw [dashed, thin] (E) -- (P) -- (T) -- cycle;
 
