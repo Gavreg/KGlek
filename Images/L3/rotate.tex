@@ -1,6 +1,7 @@
 \documentclass[tikz]{standalone}
 
 \usepackage{tikz}
+\usepackage[svgnames]{xcolor}
 \usepackage{tikz-3dplot}
 \usepackage{amsmath} %математические формулы
 \usepackage[e]{esvect}  %Красивая стрелочка вектора
@@ -21,7 +22,7 @@
 
 
 
-\include{tikzcom.tex}
+\input{../tikzcom.tex}
 
 \begin{document}
 	
@@ -32,18 +33,16 @@
 	\tdplotsetmaincoords{60}{135}
 	\begin{tikzpicture}[scale=1, x=0.4cm, y=0.4cm ] %tdplot_main_coords
 		
-	\VARPOINT{O}{0}{0}{0};
+	\VARPOINT{O}{0}{0}{0}
 	
-	\VARPOINT{A}{9}{3}{0};
-	\ROTATEPLANAR{AA}{A}{3.1415 / 6};	
+	\VARPOINT{A}{9}{3}{0}
+	\ROTATEPLANAR{AA}{A}{3.1415 / 6}
 		
 	\draw[step=.4cm,black!10,very thin] (-1,-1) grid (12,12);	
 	
 	\draw [-Latex] (-1,0) -- (12,0) node [below left] {$x$};	
 	\draw [-Latex] (0,-1) -- (0,12) node [below left] {$y$};
 	
-	\fill [] (A) circle [radius=1pt] node [above right] {$A(x,y)$};
-	\fill [] (AA) circle [radius=1pt] node [above right] {$B(x',y')$};	
 	
 	%\draw[very thin, dashed] ({atan2(\Ay,\Ax)-15}:\Ar) arc ({atan2(\Ay,\Ax)-15}:{atan2(\AAy,\AAx)+15}:\Ar) ;
 	
@@ -60,11 +59,14 @@
 	\draw [] (O) -- (A);
 	\draw (O) -- (AA) node [midway, above] {$r$};	
 	
-	\draw[densely dashed, thin] (Ay) -- (A) -- (Ax);
-	\draw[densely dashed, thin] (AAy) -- (AA) -- (AAx);
+	\draw[densely dashed, very thin] (Ay) -- (A) -- (Ax);
+	\draw[densely dashed, very thin] (AAy) -- (AA) -- (AAx);
+
+	\fill [DarkRed] (A) circle [radius=1.3pt] node [above right] {$A(x,y)$};
+	\fill [DarkRed] (AA) circle [radius=1.3pt] node [above right] {$B(x',y')$};	
+	
 		
 	%\fill [] (CC) circle [radius=1pt] node [below left] {$C'$};	
-	
 
 	
 	

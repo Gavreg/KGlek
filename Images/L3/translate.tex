@@ -21,7 +21,7 @@
 
 
 
-\include{tikzcom.tex}
+\input{../tikzcom.tex}
 
 \begin{document}
 	
@@ -32,9 +32,9 @@
 	\tdplotsetmaincoords{60}{135}
 	\begin{tikzpicture}[scale=1, x=1cm, y=1cm ] %tdplot_main_coords
 		
-	\VARPOINT{A}{2}{1}{0};	
-	\VARPOINT{B}{3}{3}{0};
-	\VECTOR{AB}{A}{B};	
+	\VARPOINT{A}{2}{1}{0}
+	\VARPOINT{B}{3}{3}{0}
+	\VECTOR{AB}{A}{B}
 	
 		
 	\draw[step=.5cm,black!10,very thin] (-1,-1) grid (4,4);	
