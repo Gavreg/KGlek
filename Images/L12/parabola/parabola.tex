@@ -22,8 +22,6 @@
 
 
 
-\input{../tikzcom.tex}
-
 \begin{document}
 	
  \foreach \t in {0,...,99}{    
@@ -39,14 +37,7 @@
 		\edef\Yt{(t*t-0.5)}	
 		\edef\U{\fpeval{\t/100*2*3.1415}}	
 		
-		\draw[color=Orange, domain=-1:1, samples=50] plot[id=par, parametric] function{\Xt*cos(\U)-\Yt*sin(\U),\Xt*sin(\U)+\Yt*cos(\U)};	
-
-		
-		
-					
-
-
-			
+		\draw[color=Orange, domain=-1:1, samples=50] plot[id=par_anim, parametric] function{\Xt*cos(\U)-\Yt*sin(\U),\Xt*sin(\U)+\Yt*cos(\U)};	
 			
 		
 	

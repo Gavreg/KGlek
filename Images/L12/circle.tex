@@ -35,10 +35,10 @@
 		\coordinate (O) at (0,0);
 		
 				
-		\edef\Px{\fpeval{cos(\t/100*2*3.1415)}};
-		\edef\Py{\fpeval{sin(\t/100*2*3.1415)}};
+		\edef\Px{\fpeval{cos(\t/100*2*3.1415)}}
+		\edef\Py{\fpeval{sin(\t/100*2*3.1415)}}
 		
-		\edef\curt{\fpeval{\t/100*2*3.1415}};
+		\edef\curt{\fpeval{\t/100*2*3.1415}}
 		
 		\coordinate (P) at (\Px,\Py);
 		
@@ -63,7 +63,7 @@
 	\end{tikzpicture}
 }
 
- \foreach \t in {0,...,99}{    
+ \foreach \t in {0.001,1,2,...,99}{    
 	\begin{tikzpicture}[scale=1]
 		
 		\begin{scope}
@@ -71,10 +71,10 @@
 			\coordinate (O) at (0,0);
 			
 			
-			\edef\Px{\fpeval{cos(\t/100*2*3.1415)}};
-			\edef\Py{\fpeval{sin(\t/100*2*3.1415)}};
+			\edef\Px{\fpeval{cos(\t/100*2*3.1415)}}
+			\edef\Py{\fpeval{sin(\t/100*2*3.1415)}}
 			
-			\edef\curt{\fpeval{\t/100*2*3.1415}};
+			\edef\curt{\fpeval{\t/100*2*3.1415}}
 			
 			\coordinate (P) at (\curt,\Px);
 			
@@ -102,10 +102,10 @@
 			\coordinate (O) at (0,0);
 			
 			
-			\edef\Px{\fpeval{cos(\t/100*2*3.1415)}};
-			\edef\Py{\fpeval{sin(\t/100*2*3.1415)}};
+			\edef\Px{\fpeval{cos(\t/100*2*3.1415)}}
+			\edef\Py{\fpeval{sin(\t/100*2*3.1415)}}
 			
-			\edef\curt{\fpeval{\t/100*2*3.1415}};
+			\edef\curt{\fpeval{\t/100*2*3.1415}}
 			
 			\coordinate (P) at (\curt,\Py);
 			

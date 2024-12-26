@@ -44,18 +44,18 @@ function Build-Files {
 
 
 $ImagesFolders = @(
-#    "Images\L1"    
-#    "Images\L2"
-#    "Images\L3"
-#    "Images\L4"
-#    "Images\L5"
-#    "Images\L6"
-#    "Images\L7"
-#    "Images\L8"
-#    "Images\L9"
-#    "Images\L10"
-#    "Images\L11"
-#    "Images\L12"
+    "Images\L1"    
+    "Images\L2"
+    "Images\L3"
+    "Images\L4"
+    "Images\L5"
+    "Images\L6"
+    "Images\L7"
+    "Images\L8"
+    "Images\L9"
+    "Images\L10"
+    "Images\L11"
+    "Images\L12"
     "Images\L13"
 )
 
@@ -70,8 +70,8 @@ foreach ($folder in $ImagesFolders) {
 
 Build-Files -files $texfiles
 
-#Build-Files -files $lectionsTexFiles
-#Build-Files -files $lectionsTexFiles
+Build-Files -files $lectionsTexFiles
+Build-Files -files $lectionsTexFiles
 
-#Build-Files -files $contentFile
+Build-Files -files $contentFile
 
