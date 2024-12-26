@@ -1,4 +1,5 @@
 *.pdf
+!*.image.pdf
 
 *.log
 *.aux
@@ -9,6 +10,7 @@
 *.toc
 *.fls
 *synctex*
+*.xdv
 
 *.gnuplot
 *.table
