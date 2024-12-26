@@ -27,7 +27,7 @@ Write-Host ""
 
 $jobs = ($texFiles | ForEach-Object -Parallel { 
 
-    cd "$($_.DirectoryName)" 
+    Set-Location "$($_.DirectoryName)" 
     $null = xelatex -synctex=1 -interaction=nonstopmode -halt-on-error --shell-escape -8bit -output-directory="$($_.DirectoryName)" "$($_.FullName)" 
     if ($LastExitCode -ne 0) {
         Write-Host "    !!Ошибка: '$($_.FullName)'. См. лог сборки" -ForegroundColor red
