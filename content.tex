@@ -2,6 +2,7 @@
 \usepackage[left=20mm,right=20mm,top=20mm,bottom=20mm,a4paper]{geometry} %поля
 
 \usepackage{amsmath} %математические формулы
+\usepackage{amsfonts}
 \usepackage{graphicx} %работа с каритнками
 
 %Для XeLatex/+
@@ -12,6 +13,8 @@
 
 
 \usepackage{fontspec}
+
+\usepackage{tikz}
 
 \setmainfont{Times New Roman} [Script=Cyrillic, Mapping=tex-text,]
 \setsansfont{Arial} [Script=Cyrillic, Mapping=tex-text,]
@@ -28,31 +31,11 @@
 	
 \noindent\textbf{\Large Содержание курса лекций}\\[1 em]
 
-\let\\=\relax
+%\let\\=\relax
 
-\input{1.gvr} \\~\\
-
-\input{2.gvr} \\~\\
-
-\input{3.gvr} \\~\\
-
-\input{4.gvr} \\~\\
-
-\input{5.gvr} \\~\\
-
-\input{6.gvr} \\~\\
-
-%\input{7.gvr} \\~\\
-
-\input{8.gvr} \\~\\
-
-\input{9.gvr} \\~\\
-
-\input{10.gvr} \\~\\
-
-\input{11.gvr} \\~\\
-
-\input{12.gvr} \\~\\
-
+\foreach \l in {1,...,13}
+{
+    \input{L\l.gvr}\vspace{2ex}
+}
  
 \end{document}

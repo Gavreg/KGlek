@@ -1,55 +1,77 @@
+function Build-Files {
+    param(
+        $files
+    )
+
+    Write-Host ("Cобираю файлы:");
+    Write-Host ""
+
+    $jobs = @()
+
+    foreach ($file in $files) {
+        $jobs += (Start-Job -ScriptBlock {
+
+                Set-Location "$($input.DirectoryName)" 
+
+                $null = xelatex -synctex=1 -interaction=nonstopmode -halt-on-error --shell-escape -8bit -output-directory="$($using:file.DirectoryName)" "$($using:file.FullName)" 
+                if ($LastExitCode -ne 0) {
+                    Write-Host "    !!Ошибка: '$(
+                $using:file.FullName)'. См. лог сборки" -ForegroundColor red
+                }
+                else {
+                    Write-Host "    Успешно!: '$(
+                $using:file.FullName)'." -ForegroundColor green
+                }
+            } -InputObject $file ) 
+    }
+
+    $total = $jobs.Count
+
+    While ($jobs.Count -ne 0) {
+        $job = ($jobs | Wait-Job -Any)
+        Write-Host "$($total - $jobs.Count + 1)/$total " -NoNewline
+        $job | Receive-Job
+        $jobs = ($jobs | Where-Object { $_ -ne $job })
+    }
+
+
+    Write-Host ""
+    Write-Host ("Завершено!");
+}
+
 
 #Сборка изображений
 
-$PSVersionTable.PSVersion
 
 $ImagesFolders = @(
-    #"Images\L2"
-    "Images\L3"
-    #"Images\L4"
-    #"Images\L5"
+#    "Images\L1"    
+#    "Images\L2"
+#    "Images\L3"
+#    "Images\L4"
+#    "Images\L5"
+#    "Images\L6"
+#    "Images\L7"
+#    "Images\L8"
+#    "Images\L9"
+#    "Images\L10"
+#    "Images\L11"
+#    "Images\L12"
+    "Images\L13"
 )
 
-$texfiles = @();
+$lectionsTexFiles = Get-ChildItem -Filter "L*.tex" 
+
+$contentFile = Get-ChildItem content.tex
+
+$texfiles = @()
 foreach ($folder in $ImagesFolders) {
     $texFiles += Get-ChildItem -Path $folder -Filter "*.tex" -Recurse
 }
 
+Build-Files -files $texfiles
 
-Write-Host ""
-Write-Host ("Файлы на сбор:");
-Write-Host ""
-$texFiles | ForEach-Object {$_.FullName}
+#Build-Files -files $lectionsTexFiles
+#Build-Files -files $lectionsTexFiles
 
-Write-Host ""
-Write-Host ("Cобираю файлы:");
-Write-Host ""
+#Build-Files -files $contentFile
 
-$jobs = ($texFiles | ForEach-Object -Parallel { 
-
-    Set-Location "$($_.DirectoryName)" 
-    $null = xelatex -synctex=1 -interaction=nonstopmode -halt-on-error --shell-escape -8bit -output-directory="$($_.DirectoryName)" "$($_.FullName)" 
-    if ($LastExitCode -ne 0) {
-        Write-Host "    !!Ошибка: '$($_.FullName)'. См. лог сборки" -ForegroundColor red
-    }
-    else {
-        Write-Host "    Успешно!: '$($_.FullName)'." -ForegroundColor green
-    }
-} -AsJob)  
-
-$jobs = $jobs.ChildJobs 
-
-$total = $jobs.Count
-
-While($jobs.Count -ne 0)
-{
-    $job = ($jobs | Wait-Job -Any)
-    Write-Host "$($jobs.Count)/$total " -NoNewline
-    $job | Receive-Job
-    $jobs = ($jobs | Where-Object{$_-ne $job})
-}
-
-
-Write-Host ""
-Write-Host ("Завершено!");
-Write-Host ""

@@ -7,10 +7,10 @@
 \newcommand{\VARPOINT}[4] 
 {
 	
-	\expandafter\xdef\csname #1x\endcsname{\fpeval{#2}}
-	\expandafter\xdef\csname #1y\endcsname{\fpeval{#3}}
-	\expandafter\xdef\csname #1z\endcsname{\fpeval{#4}}
-	
+	\expandafter\xdef\csname #1x\endcsname{\fpeval{#2}}%
+	\expandafter\xdef\csname #1y\endcsname{\fpeval{#3}}%
+	\expandafter\xdef\csname #1z\endcsname{\fpeval{#4}}%
+	%	
 	\coordinate (#1) at (\csname #1x\endcsname,\csname #1y\endcsname,\csname #1z\endcsname );
 	\coordinate (#1xy) at (\csname #1x\endcsname ,\csname #1y\endcsname ,0);
 	\coordinate (#1xz) at (\csname #1x\endcsname ,0,\csname #1z\endcsname );

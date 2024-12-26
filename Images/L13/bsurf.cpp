@@ -154,8 +154,8 @@ int main ()
         }
 
 
-    print(std::string("bsurfpoints.tex"),points);
-    print_skelet(std::string("bsurfpoints_p.tex"),b.P);
+    print(std::string("bsurfpoints.tex.dat"),points);
+    print_skelet(std::string("bsurfpoints_p.tex.dat"),b.P);
 
     NurbsSurf<vector3d> nurbssurf;
     nurbssurf.p = {
@@ -194,8 +194,8 @@ int main ()
                 
     }
 
-    print(std::string("nurbs_surf_order5_points.tex"),points);
-    print_skelet(std::string("nurbs_surf_order5_skelet.tex"),nurbssurf.p);
+    print(std::string("nurbs_surf_order5_points.tex.dat"),points);
+    print_skelet(std::string("nurbs_surf_order5_skelet.tex.dat"),nurbssurf.p);
 
 
 
@@ -220,8 +220,8 @@ int main ()
                 
     }
 
-    print(std::string("nurbs_surf_order4_points.tex"),points);
-    print_skelet(std::string("nurbs_surf_order4_skelet.tex"),nurbssurf.p);
+    print(std::string("nurbs_surf_order4_points.tex.dat"),points);
+    print_skelet(std::string("nurbs_surf_order4_skelet.tex.dat"),nurbssurf.p);
 
 
 
@@ -246,8 +246,8 @@ int main ()
                 
     }
 
-    print(std::string("nurbs_surf_order3_points.tex"),points);
-    print_skelet(std::string("nurbs_surf_order3_skelet.tex"),nurbssurf.p);
+    print(std::string("nurbs_surf_order3_points.tex.dat"),points);
+    print_skelet(std::string("nurbs_surf_order3_skelet.tex.dat"),nurbssurf.p);
     
  
     nurbssurf.U={0,0,1,2,3,4,4};
@@ -271,8 +271,8 @@ int main ()
                 
     }
 
-    print(std::string("nurbs_surf_order2_points.tex"),points);
-    print_skelet(std::string("nurbs_surf_order2_skelet.tex"),nurbssurf.p);
+    print(std::string("nurbs_surf_order2_points.tex.dat"),points);
+    print_skelet(std::string("nurbs_surf_order2_skelet.tex.dat"),nurbssurf.p);
 
 
 
@@ -312,8 +312,8 @@ int main ()
                     
         }
 
-        print(std::string("nurbs_surf_order3_anim//nurbs_surf_order3_points_frame")+std::to_string(frame)+std::string(".tex"),points);
-        print_skelet(std::string("nurbs_surf_order3_anim//nurbs_surf_order3_skelet_frame")+std::to_string(frame)+std::string(".tex"),nurbssurf.p);
+        print(std::string("nurbs_surf_order3_anim//nurbs_surf_order3_points_frame")+std::to_string(frame)+std::string(".tex.dat"),points);
+        print_skelet(std::string("nurbs_surf_order3_anim//nurbs_surf_order3_skelet_frame")+std::to_string(frame)+std::string(".tex.dat"),nurbssurf.p);
     }
 
 
@@ -345,7 +345,7 @@ int main ()
                 
     }
 
-    print(std::string("nurbs_surf_order2-3_points.tex"),points);
-    print_skelet(std::string("nurbs_surf_order2-3_skelet.tex"),nurbssurf.p);
+    print(std::string("nurbs_surf_order2-3_points.tex.dat"),points);
+    print_skelet(std::string("nurbs_surf_order2-3_skelet.tex.dat"),nurbssurf.p);
     
 }

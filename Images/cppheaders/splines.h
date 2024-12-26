@@ -96,7 +96,7 @@ struct BSpline
             double znam2 = x[i + k + 1] - x[i + 1];
             if (znam2 != 0)
             {
-                double n2 = BSpline::N(i + 1, k - 1, t);
+                double n2 = BSpline<>::N(i + 1, k - 1, t);
                 r += n2 * (x[i + k + 1] - t) / znam2;
             }
 

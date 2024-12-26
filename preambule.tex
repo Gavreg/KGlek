@@ -196,19 +196,38 @@
 \AtBeginDocument
 {
 	\newoutputstream{CONTENT}
-	\openoutputfile{\LectionNumber .gvr}{CONTENT}
+	\openoutputfile{\jobname.gvr}{CONTENT}
 	
-	\expandafter\addtostream{CONTENT}{\noindent\textbf{\Large Лекция \LectionNumber~---~\LectionTheme}\unexpanded{\setcounter{SEC}{0}}\par}
+	%\expandafter\addtostream{CONTENT}{\noindent\textbf{\Large Лекция \LectionNumber~---~\LectionTheme}\unexpanded{\setcounter{SEC}{0}}\par}
+	\addtostream{CONTENT}{\protect\noindent%
+						  	\protect\setcounter{SEC}{0}%
+							{%
+							\protect\large% 
+							\protect\bfseries{}%
+							Лекция \LectionNumber~---~\LectionTheme% 
+							}% 
+							\protect\par}
 }
 
 \renewcommand{\section}[1]{
 	\oldsection{#1}
-	\expandafter\addtostream{CONTENT}{\noindent\hspace{2ex}\unexpanded{\hbox{\large\stepcounter{SEC}\theSEC ~ #1}}\par}
+	\addtostream{CONTENT}{%
+			\protect\noindent%
+			\protect\stepcounter{SEC}%
+			\protect\setcounter{SUB}{0}%
+			\protect\hspace{3ex}%
+			\protect\theSEC ~ #1 \protect\par%
+			}
 }
 
 \renewcommand{\subsection}[1]{
 	\oldsubsection{#1}
-	\expandafter\addtostream{CONTENT}{\noindent\hspace{6ex}\unexpanded{\stepcounter{SUB}\theSUB ~ #1}\par}
+	\addtostream{CONTENT}{%
+			\protect\noindent%
+			\protect\stepcounter{SUB}%
+			\protect\hspace{6ex}%
+			\protect\theSEC{}.\protect\theSUB ~ #1 \protect\par%
+			}
 }
 
 
