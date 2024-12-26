@@ -23,7 +23,7 @@
 
 
 
-\include{../tikzcom.tex}
+\input{../tikzcom.tex}
 
 \newcommand{\setcube}[1]{
 	\VARPOINT{#1A}{0.5}{0.5}{-0.5}
@@ -53,15 +53,14 @@
 	
     
 	\def\frame{30}
-	\foreach \frame in {10,11,...,140,139,138,...,10}
+	\foreach \frame in {10,11,...,140}
 	{
 		
 	\tdplotsetmaincoords{60}{\frame}
 	%\tdplotsetmaincoords{90}{0}
 	\begin{tikzpicture}[ scale=1.2, tdplot_main_coords]
 		
-	
-		
+					
 			%\draw[step=.5cm,black!10,very thin] (-1.5,-1.5) grid (5,5);
 			
 			%\draw[-latex, thick] (-1,0) -- (5,0);
@@ -188,7 +187,7 @@
 	\end{tikzpicture}  }
 
 
-    \foreach \frame in {10,11,...,140,139,138,...,10}
+    \foreach \frame in {10,11,...,140}
 	{
 	
 	\tdplotsetmaincoords{60}{\frame}
