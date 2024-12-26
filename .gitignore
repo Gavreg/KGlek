@@ -23,5 +23,6 @@
 *.ilk
 *.exe
 *.pdb
+*.obj
 
 *.gvr
