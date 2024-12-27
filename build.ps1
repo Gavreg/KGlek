@@ -1,3 +1,4 @@
+#Функция построения tex файлов
 function Build-Files {
     param(
         $files
@@ -41,8 +42,7 @@ function Build-Files {
 
 
 #Сборка изображений
-
-
+#папки изображений, можно отключать, коментируя ненужное  #`ой
 $ImagesFolders = @(
     "Images\L1"    
     "Images\L2"
@@ -63,15 +63,21 @@ $lectionsTexFiles = Get-ChildItem -Filter "L*.tex"
 
 $contentFile = Get-ChildItem content.tex
 
-$texfiles = @()
+$imagesTexFiles = @()
 foreach ($folder in $ImagesFolders) {
-    $texFiles += Get-ChildItem -Path $folder -Filter "*.tex" -Recurse
+    $imagesTexFiles += Get-ChildItem -Path $folder -Filter "*.tex" -Recurse
 }
 
-Build-Files -files $texfiles
 
-Build-Files -files $lectionsTexFiles
+#Собираем изображения
+Build-Files -files $imagesTexFiles
+
+#Собираем лекции
 Build-Files -files $lectionsTexFiles
 
+#Еще раз собираем лекции
+Build-Files -files $lectionsTexFiles
+
+#Собираем оглавление
 Build-Files -files $contentFile
 
