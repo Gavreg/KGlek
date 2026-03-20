@@ -44,24 +44,24 @@ function Build-Files {
 #Сборка изображений
 #папки изображений, можно отключать, коментируя ненужное  #`ой
 $ImagesFolders = @(
-    "Images\L1"    
-    "Images\L2"
-    "Images\L3"
-    "Images\L4"
-    "Images\L5"
-    "Images\L6"
+    #"Images\L1"    
+    #"Images\L2"
+    #"Images\L3"
+    #"Images\L4"
+    #"Images\L5"
+    #"Images\L6"
     "Images\L7"
-    "Images\L8"
-    "Images\L9"
-    "Images\L10"
-    "Images\L11"
-    "Images\L12"
-    "Images\L13"
+    #"Images\L8"
+    #"Images\L9"
+    #"Images\L10"
+    #"Images\L11"
+    #"Images\L12"
+    #"Images\L13"
 )
 
-$lectionsTexFiles = Get-ChildItem -Filter "L*.tex" 
+$lectionsTexFiles = Get-ChildItem -Filter "L7.tex" 
 
-$contentFile = Get-ChildItem content.tex
+#$contentFile = Get-ChildItem content.tex
 
 $imagesTexFiles = @()
 foreach ($folder in $ImagesFolders) {

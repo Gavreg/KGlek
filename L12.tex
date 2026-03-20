@@ -596,7 +596,7 @@
 \begin{frame}\frametitle{Би-сплайны (B-spline)}
 	
 	$
-	\vv C(t) = \sum_{i=0}^{n}N_{i,k}(u)\vv P_i, \ \ u\in [u_\text{min}, u_\text{max}], \ \ k=(1,2,\dots{},n-1).
+	\vv C(u) = \sum_{i=0}^{n}N_{i,k}(u)\vv P_i, \ \ u\in [u_\text{min}, u_\text{max}], \ \ k=(1,2,\dots{},n-1).
 	$
 	
 	\vspace{1ex}
@@ -629,13 +629,13 @@
  		
  		Открытый неравномерный вектор узлов:
  		
- 		$U=\{u_0, u_1, \ldots, u_{k+n+2}\}$
+ 		$U=\{u_0, u_1, \ldots, u_{k+n+1}\}$
  		
  				
  		$u_i=
  		\begin{cases}
  			0, & 0 \leq i \leq k-1,\\
- 			i-p, & p \leq n,\\
+ 			i-p, & k \leq i \leq n,\\
  			n-k+1, & \text{иначе}.
  		\end{cases}$
  		

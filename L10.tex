@@ -50,11 +50,13 @@
 	\frame{\maketitle}
 
 	
-	\begin{frame}{План лекции}
+	\begin{frame}\frametitle {План лекции}
 		\tableofcontents
 	\end{frame}
 	
-	\begin{frame}
+	\section{Виды текстур}
+	
+	\begin{frame}		\frametitle {Текстурирование}
 		\TC{0.6}
 		{
 			\IG{widen_1220x0-768x377.jpg}
@@ -66,9 +68,9 @@
 		\IG{watermelon.png}
 	\end{frame}
 	
-	\section{Виды текстур}
 	
-	\begin{frame}{Пример использования различных видов текстур}
+	
+	\begin{frame}\frametitle {Пример использования различных видов текстур}
 		
 	{
 		\centering
@@ -81,14 +83,14 @@
 	
 	\section{Текстурные координаты}
 	
-	\begin{frame} {Текстурные координаты}
+	\begin{frame}\frametitle  {Текстурные координаты}
 		
 		\centering
 		\IG[0.7]{intro2.jpg}
 		
 	\end{frame}
 	
-	\begin{frame}{А что за пределами текстурных координат?}
+	\begin{frame}\frametitle {А что за пределами текстурных координат?}
 		
 		\def\p{0.33}
 		\centering
@@ -100,18 +102,18 @@
 		
 	\end{frame}
 	
-	\begin{frame}{Наложение текстур}
+	\begin{frame}\frametitle {Наложение текстур}
 		
 		\IG{textureoverview.jpg}
 		
 		
 	\end{frame}
 	
-	\begin{frame}{Наложение текстур}
+	\begin{frame}\frametitle {Наложение текстур}
 		\centering\IG[0.8]{Screenshot 2024-09-25 204444.png}		
 	\end{frame}
 	
-     \begin{frame}{Наложение текстур на объекты}
+     \begin{frame}\frametitle {Наложение текстур на объекты}
      	\TC{0.5}
      	{
      		\IG{dice_unity.png}
@@ -122,7 +124,7 @@
      	
      \end{frame}
      
-     \begin{frame}{UV развертка}
+     \begin{frame}\frametitle {UV развертка}
      
      \centering\IG[0.9]{lol_a.jpg}
      	
@@ -130,7 +132,7 @@
      
 	 \section{Фильтрация текстур}
      
-     \begin{frame}{Mip-mapping}
+     \begin{frame}\frametitle {Mip-mapping}
      	
      	\centering{Multum In Parvo — «много в малом»}
      	
@@ -146,7 +148,7 @@
      	
      \end{frame}
      
-     \begin{frame}{Mip-mapping }
+     \begin{frame}\frametitle {Mip-mapping }
      	
      	
      	
@@ -165,7 +167,7 @@
      	
      \end{frame}
      
-     \begin{frame}{Отображение текстуры на экране}
+     \begin{frame}\frametitle {Отображение текстуры на экране}
      	
      	\centering\fbox{\IG[0.8]{c3e96f30ec61cdb9f6f166de3299115c.png}}
      	
@@ -173,7 +175,7 @@
      	
      \end{frame}
      
-     \begin{frame}{Фильтрация текстур}
+     \begin{frame}\frametitle {Фильтрация текстур}
      	
      	
      \centering\IG[0.85]{33065527_8464b3b085d2d9561e4298209210dbff_800.jpg}
@@ -182,7 +184,7 @@
      
 
      
-      \begin{frame}{Point Sample}
+      \begin{frame}\frametitle {Point Sample}
      	
      	\TC{0.6}
      	{
@@ -207,7 +209,7 @@
      \end{frame}	
      	
      	
-      \begin{frame}{Point Sample}
+      \begin{frame}\frametitle {Point Sample}
      		
      		\TC{0.5}
      		{
@@ -217,7 +219,7 @@
      		}
      \end{frame}	
      
-      \begin{frame}{Линейная фильтрация}
+      \begin{frame}\frametitle {Линейная фильтрация}
      	
      	\TC{0.6}
      	{
@@ -244,7 +246,7 @@
      		
      		~
      		
-     		$T_{uv}=\alpha T_{xy}+(1-\alpha)T_{(x+1)y}$
+     		$T_{uv}=(1-\alpha)T_{xy}+\alpha T_{(x+1)y}+$
      		
      		~
      		
@@ -254,7 +256,7 @@
      	
      \end{frame}	
      
-         \begin{frame}{Билинейная фильтрация}
+         \begin{frame}\frametitle {Билинейная фильтрация}
      	
      	\TC{0.6}
      	{
@@ -287,9 +289,9 @@
 	     	$T_{uv}=$
 	     	
      		$\begin{array}{ll}
-     			        &	 {}=\alpha\beta T_{xy} + {} \\
-     					&    {}+(1-\alpha)\beta T_{(x+1)y} + {} \\
-     					&	 {}+\alpha(1-\beta) T_{x(y+1)} + {} \\
+     			        &	 {}=\alpha\beta T_{(x+1)(y+1)} + {} \\
+     					&    {}+(1-\alpha)\beta T_{(x(y+1)} + {} \\
+     					&	 {}+\alpha(1-\beta) T_{(x+1)y+1} + {} \\
      					&	 {}+(1-\alpha)(1-\beta) T_{(x+1)(y+1)}
      		\end{array}$
      		
@@ -302,7 +304,7 @@
      \end{frame}	
      
      
-     \begin{frame}{Билинейная фильтрация}
+     \begin{frame}\frametitle {Билинейная фильтрация}
      	
      	\centering
      	
@@ -313,11 +315,11 @@
      \end{frame}
      
      
-     \begin{frame}{Билинейная фильтрация}
+     \begin{frame}\frametitle {Билинейная фильтрация}
      	\centering\IG[0.5]{Screenshot 2024-09-25 223349}
      \end{frame}
      
-     \begin{frame}{Трилинейная фильтрация}
+     \begin{frame}\frametitle {Трилинейная фильтрация}
      	
      	\centering
      	
@@ -326,7 +328,7 @@
      \end{frame}
      
           
-     \begin{frame}{Трилинейная фильтрация}
+     \begin{frame}\frametitle {Трилинейная фильтрация}
      	
      	\centering
      	
@@ -335,8 +337,12 @@
      \end{frame}
      
      
-     \begin{frame}{Анизотропная фильтрация}
-     	\IG{Mipmap-Filtering}
+     \begin{frame}\frametitle {Анизотропная фильтрация}
+     	\centering
+     	
+     	\IG[0.43]{bdfd80a79c7e87c09ea50517fd283fd107fb30ff4130a55cca91fe79fd20bd35.png}
+     	
+     	\IG[0.8]{Mipmap-Filtering}
      	
      	
      	
@@ -344,7 +350,7 @@
      \end{frame}
      
      
-     \begin{frame} {Анизотропная фильтрация}
+     \begin{frame}\frametitle  {Анизотропная фильтрация}
      	
      	
      	\begin{center}

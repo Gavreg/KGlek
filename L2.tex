@@ -38,8 +38,9 @@
 
 
 \begin{document}
-	 
+
 \input{template.tex}
+
     
     \QRFRAME
 	
@@ -53,8 +54,8 @@
 		\tableofcontents
 	\end{frame}
 	
-	\section{Вектор}
-	\subsection{Вектора на плоскости}
+
+	\section{Вектора на плоскости}
 	
 	\frame{\sectionpage}
 	
@@ -105,8 +106,7 @@
     		
     		то $\vv{b}  = (ka_x, ka_y)$.
     		
-
-    		
+	
     		
     	}
     	
@@ -144,7 +144,7 @@
     }
 \end{frame}
     
-    
+%\end{document}
     
     
    \begin{frame}\frametitle{Cумма векторов}
@@ -209,12 +209,13 @@
     		
     		~
     		
-    		\pause Если $\VV{a} \cdot \VV{b} = 0$, то $\widehat{\VV{a} \, \VV{b}} =$\only<2>{\dots}\pause {$\ 0$} 
+    		\only<2>{Если $\VV{a} \cdot \VV{b} = 0$, то $\VV a \mathbf ? \VV b$}% 
+    		\only<3->{Если $\VV{a} \cdot \VV{b} = 0$, то $\VV a \mathbf \perp \vv b$}% 
     		
     		~
     		
-    		\pause Если $\ABS{\VV{a}},\ABS{\VV{b}} = 0$, то  $\VV{a} \cdot \VV{b} =$\only<4>{\dots}\pause {$\ \cos(\widehat{\VV{a} \, \VV{b}})$} 		
-    	
+    		\only<4>{Если $\ABS{\VV{a}},\ABS{\VV{b}} = 1$, то  $\VV{a} \cdot \VV{b} =$\only<5>{\dots}\pause {$\ \cos(\widehat{\VV{a} \, \VV{b}})$} 	}
+    		
     	
     		
     	}
@@ -226,7 +227,9 @@
 	
 
 
-\subsection{Вектора в пространстве}
+\section{Вектора в пространстве}
+
+\frame{\sectionpage}
 
 \begin{frame}\frametitle{Радиус-вектор}
 {
@@ -337,11 +340,33 @@
 }
 \end{frame}
 
-\section {Элементы аналитической геометрии}
+\begin{frame}\frametitle{Направляющие косинусы}
+	{
+		\TC{0.4}{
+			\includegraphics{cos.pdf}
+		}{
+			Пусть $\vv{p} = (p_1, p_2, p_3)$ и $\widehat{(\vv{p}, OX)} = \alpha_x$, $\widehat{(\vv{p}, OY)} = \alpha_y$, $\widehat{(\vv{p}, OZ)} = \alpha_z$. \\ ~ \\
+			
+			\begin{block}{Направляющие косинусы}
+				$ \displaystyle \cos \alpha_x= \frac{p_1}{\ABS{\vv{p}}}, \; \cos \alpha_y= \frac{p_2}{\ABS{\vv{p}}}, \;  \cos \alpha_z= \frac{p_3}{\ABS{\vv{p}}} $
+			\end{block}
+			
+			$\cos^2 \alpha_x + \cos^2 \alpha_y + \cos^2 \alpha_z =1$ \\ ~ \\
+			
+			$\cos \alpha_x : \cos \alpha_y : \cos \alpha_z = p_1 : p_2 : p_3$ \\ ~ \\
+			
+			Если $\ABS{\vv{p}} = 1$, то $\cos \alpha_x = p_1$, $\cos \alpha_y = p_2$, $\cos \alpha_z = p_3$.
+		}
+	}
+\end{frame}
 
 \frame{\sectionpage}
 
-\subsection{Уравнение прямой}
+
+
+\section{Уравнение прямой}
+
+\frame{\sectionpage}
 
 \begin{frame}\frametitle{Прямая}
 {
@@ -409,16 +434,18 @@
 \end{frame}
 
 
-\subsection{Плоскость}
+\section{Уравнение плоскости}
+
+\frame{\sectionpage}
 
 \begin{frame}\frametitle{Уравнение плоскости по точке и нормали}
 {
 	\TC{0.45}
 	{
 		\MP{
-			\only<1>{\includegraphics[page=1]{plane.pdf}}
-			\only<2>{\includegraphics[page=2]{plane.pdf}}
-			\only<3->{\includegraphics[page=3]{plane.pdf}}
+			\only<1>{\includegraphics[page=1]{plane.pdf}}%
+			\only<2>{\includegraphics[page=2]{plane.pdf}}%
+			\only<3->{\includegraphics[page=3]{plane.pdf}}%
 		}
 		\MA{
 		
@@ -465,7 +492,9 @@
 }
 \end{frame}
 
-\subsection{Поиск длины проекции}
+\section{Типовые задачи}
+
+\frame{\sectionpage}
 
 \begin{frame}\frametitle {Задача: Найти длину проекции}
 {
@@ -496,7 +525,7 @@
 }
 \end{frame}
 
-\subsection{Поиск расстояния до плоскости}
+
 
 \begin{frame}\frametitle {Задача: Расстояние до плоскости}
 {
@@ -532,31 +561,10 @@
 }
 \end{frame}
 
-\subsection{Повороты}
 
-\begin{frame}\frametitle{Направляющие косинусы}
-{
-	\TC{0.4}{
-		\includegraphics{cos.pdf}
-	}{
-		Пусть $\vv{p} = (p_1, p_2, p_3)$ и $\widehat{(\vv{p}, OX)} = \alpha_x$, $\widehat{(\vv{p}, OY)} = \alpha_y$, $\widehat{(\vv{p}, OZ)} = \alpha_z$. \\ ~ \\
-		
-		\begin{block}{Направляющие косинусы}
-					$ \displaystyle \cos \alpha_x= \frac{p_1}{\ABS{\vv{p}}}, \; \cos \alpha_y= \frac{p_2}{\ABS{\vv{p}}}, \;  \cos \alpha_z= \frac{p_3}{\ABS{\vv{p}}} $
-		\end{block}
-		
-		$\cos^2 \alpha_x + \cos^2 \alpha_y + \cos^2 \alpha_z =1$ \\ ~ \\
-		
-		$\cos \alpha_x : \cos \alpha_y : \cos \alpha_z = p_1 : p_2 : p_3$ \\ ~ \\
-		
-		Если $\ABS{\vv{p}} = 1$, то $\cos \alpha_x = p_1$, $\cos \alpha_y = p_2$, $\cos \alpha_z = p_3$.
-	}
-}
-\end{frame}
 
-\subsection{Принадлежность точки треугольнику}
 
-\begin{frame}\frametitle {Задача: Находится ли точка внутри треугольника?}
+\begin{frame}\frametitle {Задача: Находится ли точка внутри треугольника?(1)}
 {
 	\TC{0.35}
 	{
@@ -574,14 +582,15 @@
 }
 \end{frame}
 
-\begin{frame}\frametitle {Задача: Находится ли точка внутри треугольника?}
+\begin{frame}\frametitle {Задача: Находится ли точка внутри треугольника?(2)}
 {
 	\TC{0.55}
 	{
-		\only<1>{ \includegraphics[page=2]{triangle2.pdf} }
-		\only<2>{ \includegraphics[page=1]{triangle2.pdf} }
-		\only<3>{ \includegraphics[page=4]{triangle2.pdf} }
-		\only<4>{ \includegraphics[page=3]{triangle2.pdf} }
+		\centering%
+		\only<1>{Пример 1\\ \includegraphics[page=2]{triangle2.pdf} }%
+		\only<2>{Пример 1\\ \includegraphics[page=1]{triangle2.pdf} }%
+		\only<3>{Пример 2\\ \includegraphics[page=4]{triangle2.pdf} }%
+		\only<4>{Пример 2\\ \includegraphics[page=3]{triangle2.pdf} }%
 	}
 	{
 		Метод 2 \\ ~ \\
@@ -597,7 +606,7 @@
 }
 \end{frame}
 
-\begin{frame}\frametitle {Задача: Находится ли точка внутри треугольника?}
+\begin{frame}\frametitle {Задача: Находится ли точка внутри треугольника?(3)}
 {
 	\TC{0.45}
 	{

@@ -19,6 +19,8 @@ t faktorial(t n)
     return r;
 }
 
+
+
 template <class T>
 struct Bezier
 {
@@ -111,7 +113,7 @@ struct BSpline
 
         for (int i = 0; i < p.size(); ++i)
         {
-            v = v + p[i] * BSpline::N(i, k, t);
+            v = v + p[i] * N(i, k, t);
         }
         return v;
     }
@@ -159,18 +161,28 @@ struct BSpline
 
 std::vector<double> makeKnotsOpen(int k, int n)
 {
-    std::vector<double> r(n + k + 1);
+    std::vector<double> r(n + k + 2);
     for (int i = 0; i <= k; ++i)
     {
         r[i] = 0;
     }
-    for (int i = k + 1; i <= n - 1; ++i)
+    for (int i = k + 1; i <= n; ++i)
     {
         r[i] = i - k;
     }
-    for (int i = n; i <= n + k; ++i)
+    for (int i = n + 1; i <= n + k + 1; ++i)
     {
-        r[i] = n - k;
+        r[i] = n - k + 1;
+    }
+    return r;
+}
+
+std::vector<double> makeKnotsUniform(int k, int n)
+{
+    std::vector<double> r(n + k + 2);
+    for (int i = 0; i < r.size(); ++i)
+    {
+        r[i] = i;
     }
     return r;
 }
@@ -180,16 +192,16 @@ struct Nurbs : public BSpline<T>
 {
     std::vector<double> h;
 
-    double N(int i, int k, double t)
+    double N(int i, int k, double t) const override
     {
         double znam = 0;
         for (int j = 0; j < h.size(); ++j)
         {
-            znam += h[j] * BSpline::N(j, k, t);
+            znam += h[j] * BSpline<T>::N(j, k, t);
         }
         if (!znam)
             return 0;
-        return h[i] * BSpline::N(i, k, t) / znam;
+        return h[i] * BSpline<T>::N(i, k, t) / znam;
     }
 };
 
@@ -207,7 +219,10 @@ struct NurbsSurf
 
         if (k == 0)
         {
-            if (knots[i] <= t && t <= knots[i + 1])
+            if (t >= knots.back()) t=knots.back()-10e-15;
+            if (t<knots.front()) t = knots.front();
+
+            if (knots[i] <= t && t < knots[i + 1])
                 r = 1;
             else
                 r = 0;
@@ -254,6 +269,26 @@ struct NurbsSurf
             return 0;
 
         return N_U(j, n, u) * N_V(i, m, v) * w[i][j] / znam;
+    }
+
+    void getSurface(int p, int q, int countU, int countV, std::vector< std::vector<T> > &points)
+    {
+        double min_u=U.front();
+        double max_u=U.back();
+        double min_v=V.front();
+        double max_v=V.back();
+        double step_u=(max_u-min_u)/countU;
+        double step_v=(max_v-min_v)/countV;
+        
+        points.emplace_back();
+        for(int i=0; i<countU; ++i)
+        {            
+            for(int j=0; j<countV; ++i)
+            {
+                points[i].push_back(this->operator()(min_u+i*step_u,min_v+i*step_v,p,q));
+            }
+        }    
+            
     }
 
     T operator()(double u, double v, int n, int m)

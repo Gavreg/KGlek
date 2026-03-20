@@ -39,6 +39,7 @@
  		 
 \input{template.tex}
 
+
 \newcommand \abs[1] {\left| #1 \right|}
 
 \everymath{\displaystyle}
@@ -50,23 +51,30 @@
 	\frame{\maketitle}
 
 	
-	\begin{frame}{План лекции}
-		\tableofcontents
+	\begin{frame}\frametitle{План лекции}
+
+		\TCT{0.5}
+		{
+			Модели затенения: \\[2ex]
+			
+			\tableofcontents[part=1]
+		}{
+			Виды закраски:  \\[2ex]
+			
+			\tableofcontents[part=2]
+		}
+		
 	\end{frame}
 	
-
 	
-	\begin{frame}{Red Dead Redemption 2 + shading mod}
-		
-		\centering\includegraphics[width=0.95\textwidth]{rdr2}
-		
-	\end{frame}	
+	
+
 	
 	
 	\begin{comment}
 		
 	
-	\begin{frame}{Обозначения}
+	\begin{frame}\frametitle{Обозначения}
 		\TC{0.5}
 		{
 			\includegraphics[page=1]{light.pdf}
@@ -98,9 +106,17 @@
 	
 	\end{comment}
 	
-	\section{Модели освещения}
 	
-	\begin{frame}{Компоненты освещения}
+	\part{Модели освещения}
+	\frame{\partpage}
+	
+	\begin{frame}\frametitle{Red Dead Redemption 2 + shading mod}
+		
+		\centering\includegraphics[width=0.95\textwidth]{rdr2}
+		
+	\end{frame}	
+	
+	\begin{frame}\frametitle{Компоненты освещения}
 		\centering
 		$I=I_a+I_d+I_s$
 		
@@ -109,9 +125,9 @@
 		\includegraphics[width=0.8\textwidth]{components}
 	\end{frame}
 	
-	\subsection{Модель Ламберта}
+	\section[Ламберт]{Модель Ламберта}
 	
-	\begin{frame}{Модель Ламберта}
+	\begin{frame}\frametitle{Модель Ламберта}
 		
 			
 		\TC{0.45}		
@@ -132,14 +148,14 @@
 		}
 		
 	\end{frame}
-\subsection{Wrap-around}
-	\begin{frame}{Wrap-around}
+\section[Wrap-around]{Wrap-around}
+	\begin{frame}\frametitle{Wrap-around}
 		\centering $I=\dfrac{\max\big(0,(\VV l \cdot \VV n)\big)+f}{1+f}$
 		
 		\includegraphics[width=0.4\textwidth]{warp.jpg}~\includegraphics{warp.pdf}
 	\end{frame}
  
- \begin{frame}{Модель Фонга (Phong lightning model)}
+ \begin{frame}\frametitle{Модель Фонга (Phong lightning model)}
  	\TC{0.5}
  	{
  		\centering\includegraphics[page=3]{light.pdf}	
@@ -163,9 +179,9 @@
 
  	
  \end{frame}
- \subsection{Модель Фонга}
+ \section[Фонг]{Модель Фонга}
  
-  \begin{frame}{Модель Фонга (Phong lightning model)}
+  \begin{frame}\frametitle{Модель Фонга (Phong lightning model)}
  	\TC{0.35}
  	{
  		\centering\includegraphics[page=3]{light.pdf}	
@@ -184,9 +200,9 @@
  	}
  	\end{frame}
  	
- 	\subsection{Модель Блинна}
+ 	\section[Блинн]{Модель Блинна}
  
- \begin{frame}{Модель Блинна  (Фонга - Блинна)}
+ \begin{frame}\frametitle{Модель Блинна  (Фонга - Блинна)}
  	
  	\TC{0.5}
  	{
@@ -198,7 +214,7 @@
  		
  		~
  		
- 		$I_s=\max\big(0,(\VV v \cdot \VV h)^k \big)$
+ 		$I_s=\max\big(0,(\VV n \cdot \VV h)^k \big)$
  		
  		~
  		
@@ -207,9 +223,9 @@
  	
  \end{frame}
  
- \subsection{Модель Варда}
+ \section[Вард]{Модель Варда}
  
- \begin{frame}{Модель Варда}
+ \begin{frame}\frametitle{Модель Варда}
  	
  	\TC{0.5}
  	{
@@ -231,7 +247,7 @@
  \end{frame}
  
   
- \begin{frame}{Модель Варда}
+ \begin{frame}\frametitle{Модель Варда}
  	
  	\TC{0.4}
  	{
@@ -256,8 +272,8 @@
  	
  \end{frame}
  
- \subsection{Модель Орена - Наяра}
- \begin{frame}{Модель Орена - Наяра}
+ \section[Орен-Наяр]{Модель Орена - Наяра}
+ \begin{frame}\frametitle{Модель Орена - Наяра}
  	
  	 \small
  	 $L_r = L_1+L_2,$,
@@ -284,7 +300,7 @@
  	
  \end{frame}
  
- \begin{frame}{Модель Орена - Наяра}
+ \begin{frame}\frametitle{Модель Орена - Наяра}
  	\TC{0.45}
  	{
  		\includegraphics[width=0.99\textwidth]{oren3}
@@ -299,9 +315,9 @@
  	
  \end{frame}
  
-  \subsection{Модель Кука-Торранса}
+  \section[Кук-Торранс]{Модель Кука-Торранса}
  
-  \begin{frame}{Модель Кука-Торранса}
+  \begin{frame}\frametitle{Модель Кука-Торранса}
 
 
 		\TC{0.5}
@@ -315,7 +331,7 @@
  	
  \end{frame}
  
- \begin{frame}{Модель Кука-Торранса}
+ \begin{frame}\frametitle{Модель Кука-Торранса}
  	$I=I_d\left(sm_d+(1-s)I_s\right)$
  	
  	$I_s=\dfrac{DGF}{4\left(\VV n \cdot \VV l\right)\left(\VV n \cdot \VV v\right)}$
@@ -334,22 +350,24 @@
  	
  \end{frame}
  
- \section{Модели затенения}
  
- \subsection{Однотонная закраска}
+ \part{Виды закраски}
+ \frame{\partpage}
  
- \begin{frame}{Однотонная закраска}
+ \section[Однотонная]{Однотонная закраска}
+ 
+ \begin{frame}\frametitle{Однотонная закраска}
  	\TC{0.5}
  	{\includegraphics[width=\textwidth]{tone.png}
  	}{\includegraphics[width=\textwidth]{mach.png}
  	}
  \end{frame}
  
-  \subsection{Закраска по Гуро}
+  \section[Гуро]{Закраска по Гуро}
   
 
   
-  \begin{frame}{Закраска по Гуро}
+  \begin{frame}\frametitle{Закраска по Гуро}
   	\begin{tikzpicture}[font=\small]
   		\usetikzlibrary{calc}
   		\coordinate (A) at (0,0);
@@ -383,13 +401,13 @@
   	\end{tikzpicture}
   \end{frame}
   
-     \begin{frame}{Закраска по Гуро}
+     \begin{frame}\frametitle{Закраска по Гуро}
   	\TC{0.5}{\includegraphics[width=\textwidth]{guro}}{\includegraphics[width=\textwidth]{guro1}}
   \end{frame}
   
-   \subsection{Закраска по Фонгу}
+   \section[Фонг]{Закраска по Фонгу}
    
-    \begin{frame} {Закраска по Фонгу}
+    \begin{frame}\frametitle {Закраска по Фонгу}
   		\begin{tikzpicture}[font=\footnotesize]
   			\usetikzlibrary{calc}
   			\coordinate (A) at (0,0);
@@ -437,7 +455,7 @@
   		\end{tikzpicture}   	
    \end{frame}
    
-   \begin{frame}{Закраска по Фонгу}
+   \begin{frame}\frametitle{Закраска по Фонгу}
    	\centering
    	\includegraphics[width=0.8\textwidth]{shadingoptions.png}
    	\includegraphics[width=0.8\textwidth]{fyAFK.jpg}

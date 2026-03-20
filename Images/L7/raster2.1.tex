@@ -72,11 +72,13 @@
 	\xdef\y{\fpeval{ \ys}}
 	
 	\edef\END{\fpeval{\xs+\frame}}
+	
+	
 	\foreach \xi in {\xs,...,\END}{
 		\xdef\err{\fpeval{\err+\deltaerr}}
 		
 		
-		\ifthenelse{\lengthtest{\err pt > 1pt}}{
+		\ifthenelse{\lengthtest{\err pt > 1.0001pt}}{
 			\xdef\y{\fpeval{\y + 1}}
 			\xdef\err{\fpeval{\err - 1}}
 			
@@ -84,7 +86,9 @@
 		
 		\fill [blue,opacity=0.5] (\xi,\y) rectangle({\xi+1},{\y+1});	
 	}
-
+	
+	\node[right, font=\small] at (0,5) {$e=\err$};
+	
 	\draw [thick] (A) -- (B);
 	
 \end{tikzpicture} 

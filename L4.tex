@@ -92,7 +92,7 @@
 			это преобразование, переводящее линейную комбинацию векторов в ту же самую линейную комбинацию преобразованных векторов. \\ ~}
 		
 		\hfil \\ ~ \\
-
+       
 		\pause
 		
 		$
@@ -134,7 +134,7 @@
     
     \frame{\sectionpage}
     
-    \subsection{Перенос объекта}
+    %\subsection{Перенос объекта}
 
 	\begin{frame}{Перенос}
 		
@@ -200,7 +200,7 @@
 		}
 	\end{frame}
 
-	\subsection{Масштабирование объекта}
+	%\subsection{Масштабирование объекта}
 	
 	
 	\begin{frame}{Масштабирование}
@@ -272,7 +272,7 @@
 	\end{frame}
 
 	
-	\subsection{Поворот объекта}	
+	%\subsection{Поворот объекта}	
 	
 	\begin{frame}{Повороты}
 		\TC{0.5}
@@ -400,13 +400,13 @@
 		Преобразуем СК  $x'y'z'$:
 		
 		\begin{enumerate}
-			\item<+-> Повернём на угол $\gamma$ вокруг оси $z$ мировой СК.
-			\item<+-> Повернём на угол $\beta$ вокруг оси $y$ мировой СК.
-			\item<+-> Перенесём на вектор $\vv t$ относительно начала мировой СК.
+			\item Повернём на угол $\gamma$ вокруг оси $z$ мировой СК. \pause
+			\item Повернём на угол $\beta$ вокруг оси $y$ мировой СК. \pause
+			\item Перенесём на вектор $\vv t$ относительно начала мировой СК. 
 		\end{enumerate}
 		
 		\pause
-		
+						
 		Запишем эти преобразования в матричной форме:
 		
 		$\mathbf M = \mathbf T (\vv t) \mathbf R_y (\beta) \mathbf R_z(\gamma)$
@@ -462,7 +462,7 @@
   \frame{\sectionpage}
   
   
-  \subsection{Ортогональная проекция}
+  %\subsection{Ортогональная проекция}
   
   \begin{frame}{Ортогональная проекция}
   	\TC{0.4}
@@ -530,7 +530,7 @@
   \end{frame}
   
   
-  \subsection{Перспективная проекция}
+  %\subsection{Перспективная проекция}
   
 
   
@@ -545,7 +545,7 @@
   			1&0&0&0\\
   			0&1&0&0\\
   			0&0&1&0\\
-  			0&0&1&0
+  			0&0&\mathbf1&0
   		\end{pmatrix}$\\~\\
   		Для всех точек куба:\\
   		$ \textbf P \cdot \textbf A =\textbf A'$ \\ ~ \\
@@ -602,7 +602,7 @@
 \end{frame}
 
 
-  \subsection{Перспективное преобразование}
+  %\subsection{Перспективное преобразование}
   
   	\begin{frame}{Матрица перспективного преобразования}
   	\begin{block}{Матрица перспективного преобразования (одна из множества)}
@@ -714,14 +714,14 @@
 	\centering
 	\textbf{Исходные объекты}
 	
-	\animategraphics[autoplay,loop,viewport=0 0 500 400, width=0.6\framewidth, nomouse, palindrome]{30}{Images/\jobname/cube projective true multiple}{0}{130} 
+	\animategraphics[autoplay,loop,width=0.6\framewidth, nomouse, palindrome]{30}{Images/\jobname/cube projective true multiple}{0}{130} 
 \end{frame}
 
 \begin{frame}{Перспективное преобразование сцены}	  
 	\centering
 	\textbf{Исходные объекты + преобразованные}
 	
-	\animategraphics[autoplay,loop,viewport=0 0 500 400, width=0.6\framewidth, nomouse, palindrome]{30}{Images/\jobname/cube projective true multiple}{131}{261} 
+	\animategraphics[autoplay,loop, width=0.6\framewidth, nomouse, palindrome]{30}{Images/\jobname/cube projective true multiple}{131}{261} 
 \end{frame}
 
 

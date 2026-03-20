@@ -10,8 +10,6 @@
 
 
 
-
-
 template<int _n, int _m>
 struct BezierSurf
 {
@@ -34,7 +32,7 @@ struct BezierSurf
     }
 };
 
-void print(std::string &filename, std::vector<std::vector<vector3d>> &points)
+void print(std::string filename, std::vector<std::vector<vector3d>> &points)
 {
     std::ofstream fout;
 
@@ -83,7 +81,7 @@ void print(std::string &filename, std::vector<std::vector<vector3d>> &points)
 
 }
 
-void print_skelet(std::string &filename, std::vector<std::vector<vector3d>> &points)
+void print_skelet(std::string filename, std::vector<std::vector<vector3d>> &points)
 {
     std::ofstream fout;
 
@@ -173,34 +171,8 @@ int main ()
         {1,1,1,1,1}
     };
 
-    nurbssurf.U={0,0,0,0,0,1,1,1,1,1};
-    nurbssurf.V={0,0,0,0,0,1,1,1,1,1};
-
-    points.clear();
-    h_u = (nurbssurf.U.back() - nurbssurf.U.front())/40;
-    h_v = (nurbssurf.V.back() - nurbssurf.V.front())/40;
-
-    for (int i = 0; i<= 40 ; ++i)
-    {
-            points.emplace_back();
-            double u = i*h_u;
-            u = u > nurbssurf.U.back() ? nurbssurf.U.back()  : u;
-            for (int j = 0; j<=40; ++j)
-            {
-                double v = h_v * j;
-                v = v > nurbssurf.V.back() ? nurbssurf.V.back() :  v;
-                points.back().push_back(nurbssurf(u,v,5,5));
-            }
-                
-    }
-
-    print(std::string("nurbs_surf_order5_points.tex.dat"),points);
-    print_skelet(std::string("nurbs_surf_order5_skelet.tex.dat"),nurbssurf.p);
-
-
-
-    nurbssurf.U={0,0,0,0,1,2,2,2,2};
-    nurbssurf.V={0,0,0,0,1,2,2,2,2};
+    nurbssurf.U=makeKnotsOpen(4,4);
+    nurbssurf.V=makeKnotsOpen(4,4);
 
     points.clear();
     h_u = (nurbssurf.U.back() - nurbssurf.U.front())/40;
@@ -220,13 +192,12 @@ int main ()
                 
     }
 
-    print(std::string("nurbs_surf_order4_points.tex.dat"),points);
-    print_skelet(std::string("nurbs_surf_order4_skelet.tex.dat"),nurbssurf.p);
+    print(std::string("nurbs_surf_order5_points.tex.dat"),points);
+    print_skelet(std::string("nurbs_surf_order5_skelet.tex.dat"),nurbssurf.p);
 
 
 
-    nurbssurf.U={0,0,0,1,2,3,3,3};
-    nurbssurf.V={0,0,0,1,2,3,3,3};
+    nurbssurf.U = nurbssurf.V = makeKnotsOpen(3,4);
 
     points.clear();
     h_u = (nurbssurf.U.back() - nurbssurf.U.front())/40;
@@ -246,12 +217,13 @@ int main ()
                 
     }
 
-    print(std::string("nurbs_surf_order3_points.tex.dat"),points);
-    print_skelet(std::string("nurbs_surf_order3_skelet.tex.dat"),nurbssurf.p);
+    print(std::string("nurbs_surf_order4_points.tex.dat"),points);
+    print_skelet(std::string("nurbs_surf_order4_skelet.tex.dat"),nurbssurf.p);
+
+
+
+    nurbssurf.U=nurbssurf.V=makeKnotsOpen(2,4);
     
- 
-    nurbssurf.U={0,0,1,2,3,4,4};
-    nurbssurf.V={0,0,1,2,3,4,4};
 
     points.clear();
     h_u = (nurbssurf.U.back() - nurbssurf.U.front())/40;
@@ -271,6 +243,30 @@ int main ()
                 
     }
 
+    print(std::string("nurbs_surf_order3_points.tex.dat"),points);
+    print_skelet(std::string("nurbs_surf_order3_skelet.tex.dat"),nurbssurf.p);
+    
+ 
+    nurbssurf.U=nurbssurf.V=makeKnotsOpen(1,4);
+
+    points.clear();
+    h_u = (nurbssurf.U.back() - nurbssurf.U.front())/40;
+    h_v = (nurbssurf.V.back() - nurbssurf.V.front())/40;
+
+    for (int i = 0; i<= 40 ; ++i)
+    {
+            points.emplace_back();
+            double u = i*h_u;
+            u = u > nurbssurf.U.back() ? nurbssurf.U.back()  : u;
+            for (int j = 0; j<=40; ++j)
+            {
+                double v = h_v * j;
+                v = v > nurbssurf.V.back() ? nurbssurf.V.back() :  v;
+                points.back().push_back(nurbssurf(u,v,1,1));
+            }
+                
+    }
+
     print(std::string("nurbs_surf_order2_points.tex.dat"),points);
     print_skelet(std::string("nurbs_surf_order2_skelet.tex.dat"),nurbssurf.p);
 
@@ -280,8 +276,8 @@ int main ()
     system("mkdir nurbs_surf_order3_anim");
     system("del /q nurbs_surf_order3_anim\\*");
 
-    nurbssurf.U={0,0,0,1,2,3,3,3};
-    nurbssurf.V={0,0,0,1,2,3,3,3};
+    nurbssurf.U=nurbssurf.V=makeKnotsOpen(2,4);
+  
 
 
     for (int frame=0; frame<72; ++frame)
@@ -307,7 +303,7 @@ int main ()
                 {
                     double v = h_v * j;
                     v = v > nurbssurf.V.back() ? nurbssurf.V.back() :  v;
-                    points.back().push_back(nurbssurf(u,v,3,3));
+                    points.back().push_back(nurbssurf(u,v,2,2));
                 }
                     
         }
@@ -324,8 +320,8 @@ int main ()
         {1,1,1,1,1},
         {1,1,1,1,1}
     };
-    nurbssurf.U={0,0,0,1,2,3,3,3};
-    nurbssurf.V={0,0,1,2,3,4,4};
+    nurbssurf.U=makeKnotsOpen(2,4);
+    nurbssurf.V=makeKnotsOpen(1,4);
 
     points.clear();
     h_u = (nurbssurf.U.back() - nurbssurf.U.front())/40;
@@ -340,7 +336,7 @@ int main ()
             {
                 double v = h_v * j;
                 v = v > nurbssurf.V.back() ? nurbssurf.V.back() :  v;
-                points.back().push_back(nurbssurf(u,v,3,2));
+                points.back().push_back(nurbssurf(u,v,2,1));
             }
                 
     }

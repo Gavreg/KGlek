@@ -8,16 +8,17 @@
 #include <algorithm>
 #include <array>
 #include <set>
+#include <format>
 
 #include "..\cppheaders\vector2d.h"
 #include "..\cppheaders\splines.h"
 
 template <class T>
-void print(const char *filename, std::vector<T> points)
+void print(const char *filename, const std::vector<T> &points)
 {
     std::ofstream fout;
 
-    fout.open(filename, std::ios::trunc);
+    fout.open(filename, std::ios::out);
 
     for (auto &x : points)
     {
@@ -28,15 +29,15 @@ void print(const char *filename, std::vector<T> points)
 }
 
 template <class T>
-inline void print(const std::string &filename, std::vector<T> points)
+inline void print(const std::string &filename, const std::vector<T> &points)
 {
     print<T>(filename.data(),points);
 }
 
-void printTikzCoords(const char * filename, std::vector<vector2d> points, const char *pointname = "P")
+void printTikzCoords(const char * filename, const std::vector<vector2d> &points, const char *pointname = "P")
 {
     std::ofstream fout;
-    fout.open(filename, std::ios::app);
+    fout.open(filename, std::ios::out);
 
     int i = 0;
     for (auto &x : points)
@@ -66,387 +67,112 @@ int main()
     printTikzCoords("b_spline_tikz_points.dat", b.p);
 
     std::vector<vector2d> curve;
-    for (int k = 5; k >= 1; --k)
+    for (int k:{1,2,3,4,5})
     {
-        std::stringstream ss;
-        ss << "b_spline_k" << k << "_points.dat";
-
-        b.x = makeKnotsOpen(k, 6);
-        curve.clear();
+        b.x = makeKnotsOpen(k, 5);
         b.getCurve(k, 300, curve);
-        print(ss.str().data(), curve);
+        print(std::format("b_spline_k{}_points.dat",k), curve);
+        curve.clear();
 
         for (int i = 0; i <= 5; ++i)
         {
-            curve.clear();
             b.getN(i, k, 300, curve);
-            std::stringstream ss;
-            ss << "N" << i << k << ".dat";
-            print(ss.str().data(), curve);
+            print(std::format("N{}{}.dat",i,k), curve);
+            curve.clear();
         }
     }
 
     //анимация бисплайна второй степени
-    system("mkdir build_bspline_k1_anim");
-    system("del /q build_bspline_k1_anim\\*");
+
+    for(int k:{1,2,3,4,5})
     {
-        std::string dir = "build_bspline_k1_anim\\";
-        std::stringstream ss;
-        int k=1;
-        b.x = makeKnotsOpen(k,6);
-        curve.clear();
-
-        b.getCurve(k,100,curve);
-     
-
-        ss<<dir<<"points_tikz.dat";
-        printTikzCoords(ss.str(),b.p);
-
-        for (int fr = 0; fr <=99; ++fr)
+        system(std::format("mkdir build_bspline_k{}_anim",k).c_str());
+        system(std::format("del /q build_bspline_k{}_anim\\*",k).c_str());
         {
-            std::vector<vector2d> cur_curve;
-            for (int i=0; i<=fr; ++i)
+            std::string dir = std::format("build_bspline_k{}_anim\\",k);
+                       
+            b.x = makeKnotsOpen(k,5);
+            curve.clear();
+    
+            b.getCurve(k,100,curve);
+                
+            printTikzCoords(dir+"points_tikz.dat",b.p);
+    
+            for (int fr = 0; fr <=99; ++fr)
             {
-                cur_curve.push_back(curve[i]);
+                std::vector<vector2d> cur_curve;
+                for (int i=0; i<=fr; ++i)
+                {
+                    cur_curve.push_back(curve[i]);
+                }
+    
+                print(std::format("{}frame{}.dat",dir,fr),cur_curve);
+    
+                std::vector<vector2d> lp {cur_curve.back()};
+                printTikzCoords(std::format("{}lp_tikz_frame{}.dat",dir,fr),lp,"LP");
+    
+                double h = (b.x.back()-b.x.front())/99;
+                double t = b.x.front() + h*fr;
+                if (t>b.x.back()) t = b.x.back();
+    
+                std::set<double> t_set;
+                for (auto _t : b.x)
+                {
+                    if (_t<=t)
+                        t_set.insert(_t);
+                }
+    
+                fout.open(std::format("{}tpoints_latex_frame{}.dat",dir,fr),std::ios::out);
+                fout<<"\\def\\tarr{";
+                for (auto _t :t_set)
+                {
+                   auto p = b(k,_t);
+                   fout<<"("<<p.x<<", "<<p.y<<"), ";
+                }
+                fout.seekp(-2, std::ios::end);
+                fout<<"} ";
+                fout.close();
+    
+                fout.open(std::format("{}t_tex_frame{}.dat",dir,fr),std::ios::out);
+                fout<<std::format("\\edef\\tval{{{}}}",t)<<std::endl;
+                fout.close();
             }
-
-            ss.str("");
-            ss<<dir<<"frame"<<fr<<".dat";
-            print(ss.str(),cur_curve);
-
-            std::vector<vector2d> lp {cur_curve.back()};
-            ss.str("");
-            ss<<dir<<"lp_tikz_frame"<<fr<<".dat";
-            printTikzCoords(ss.str(),lp,"LP");
-
-            double h = (b.x.back()-b.x.front())/99;
-            double t = b.x.front() + h*fr;
-            if (t>b.x.back()) t = b.x.back();
-
-            std::set<double> t_set;
-            for (auto _t : b.x)
-            {
-                if (_t<=t)
-                    t_set.insert(_t);
-            }
-
-            ss.str("");
-            ss<<dir<<"tpoints_latex_frame"<<fr<<".dat";
-            fout.open(ss.str(),std::ios::out);
-            fout<<"\\def\\tarr{";
-            for (auto _t :t_set)
-            {
-               auto p = b(k,_t);
-               fout<<"("<<p.x<<", "<<p.y<<"), ";
-            }
-            fout.seekp(-2, std::ios::end);
-            fout<<"} ";
-            fout.close();
-
-            char buf[128];
-            sprintf(buf,"\\edef\\tval{%f}",t);
-            ss.str("");
-            ss<<dir<<"t_tex_frame"<<fr<<".dat";
-            fout.open(ss.str(),std::ios::app);
-            fout<<buf<<std::endl;
-            fout.close();
-        }
-    }
-
-    //анимация бисплайна второй степени
-    system("mkdir build_bspline_k2_anim");
-    system("del /q build_bspline_k2_anim\\*");
-    {
-        std::string dir = "build_bspline_k2_anim\\";
-        std::stringstream ss;
-        int k=2;
-        b.x = makeKnotsOpen(k,6);
-        curve.clear();
-
-        b.getCurve(k,100,curve);
-     
-
-        ss<<dir<<"points_tikz.dat";
-        printTikzCoords(ss.str(),b.p);
-
-        for (int fr = 0; fr <=99; ++fr)
-        {
-            std::vector<vector2d> cur_curve;
-            for (int i=0; i<=fr; ++i)
-            {
-                cur_curve.push_back(curve[i]);
-            }
-
-            ss.str("");
-            ss<<dir<<"frame"<<fr<<".dat";
-            print(ss.str(),cur_curve);
-
-            std::vector<vector2d> lp {cur_curve.back()};
-            ss.str("");
-            ss<<dir<<"lp_tikz_frame"<<fr<<".dat";
-            printTikzCoords(ss.str(),lp,"LP");
-
-            double h = (b.x.back()-b.x.front())/99;
-            double t = b.x.front() + h*fr;
-            if (t>b.x.back()) t = b.x.back();
-
-            std::set<double> t_set;
-            for (auto _t : b.x)
-            {
-                if (_t<=t)
-                    t_set.insert(_t);
-            }
-
-            ss.str("");
-            ss<<dir<<"tpoints_latex_frame"<<fr<<".dat";
-            fout.open(ss.str(),std::ios::out);
-            fout<<"\\def\\tarr{";
-            for (auto _t :t_set)
-            {
-               auto p = b(k,_t);
-               fout<<"("<<p.x<<", "<<p.y<<"), ";
-            }
-            fout.seekp(-2, std::ios::end);
-            fout<<"} ";
-            fout.close();
-
-            char buf[128];
-            sprintf(buf,"\\edef\\tval{%f}",t);
-            ss.str("");
-            ss<<dir<<"t_tex_frame"<<fr<<".dat";
-            fout.open(ss.str(),std::ios::app);
-            fout<<buf<<std::endl;
-            fout.close();
-        }
-    }
-
-    //анимация бисплайна второй степени
-    system("mkdir build_bspline_k3_anim");
-    system("del /q build_bspline_k3_anim\\*");
-    {
-        std::string dir = "build_bspline_k3_anim\\";
-        std::stringstream ss;
-        int k=3;
-        b.x = makeKnotsOpen(k,6);
-        curve.clear();
-
-        b.getCurve(k,100,curve);
-     
-
-        ss<<dir<<"points_tikz.dat";
-        printTikzCoords(ss.str(),b.p);
-
-        for (int fr = 0; fr <=99; ++fr)
-        {
-            std::vector<vector2d> cur_curve;
-            for (int i=0; i<=fr; ++i)
-            {
-                cur_curve.push_back(curve[i]);
-            }
-
-            ss.str("");
-            ss<<dir<<"frame"<<fr<<".dat";
-            print(ss.str(),cur_curve);
-
-            std::vector<vector2d> lp {cur_curve.back()};
-            ss.str("");
-            ss<<dir<<"lp_tikz_frame"<<fr<<".dat";
-            printTikzCoords(ss.str(),lp,"LP");
-
-            double h = (b.x.back()-b.x.front())/99;
-            double t = b.x.front() + h*fr;
-            if (t>b.x.back()) t = b.x.back();
-
-            std::set<double> t_set;
-            for (auto _t : b.x)
-            {
-                if (_t<=t)
-                    t_set.insert(_t);
-            }
-
-            ss.str("");
-            ss<<dir<<"tpoints_latex_frame"<<fr<<".dat";
-            fout.open(ss.str(),std::ios::out);
-            fout<<"\\def\\tarr{";
-            for (auto _t :t_set)
-            {
-               auto p = b(k,_t);
-               fout<<"("<<p.x<<", "<<p.y<<"), ";
-            }
-            fout.seekp(-2, std::ios::end);
-            fout<<"} ";
-            fout.close();
-
-            char buf[128];
-            sprintf(buf,"\\edef\\tval{%f}",t);
-            ss.str("");
-            ss<<dir<<"t_tex_frame"<<fr<<".dat";
-            fout.open(ss.str(),std::ios::app);
-            fout<<buf<<std::endl;
-            fout.close();
-        }
-    }
-
-    //анимация бисплайна второй степени
-    system("mkdir build_bspline_k4_anim");
-    system("del /q build_bspline_k4_anim\\*");
-    {
-        std::string dir = "build_bspline_k4_anim\\";
-        std::stringstream ss;
-        int k=4;
-        b.x = makeKnotsOpen(k,6);
-        curve.clear();
-
-        b.getCurve(k,100,curve);
-     
-
-        ss<<dir<<"points_tikz.dat";
-        printTikzCoords(ss.str(),b.p);
-
-        for (int fr = 0; fr <=99; ++fr)
-        {
-            std::vector<vector2d> cur_curve;
-            for (int i=0; i<=fr; ++i)
-            {
-                cur_curve.push_back(curve[i]);
-            }
-
-            ss.str("");
-            ss<<dir<<"frame"<<fr<<".dat";
-            print(ss.str(),cur_curve);
-
-            std::vector<vector2d> lp {cur_curve.back()};
-            ss.str("");
-            ss<<dir<<"lp_tikz_frame"<<fr<<".dat";
-            printTikzCoords(ss.str(),lp,"LP");
-
-            double h = (b.x.back()-b.x.front())/99;
-            double t = b.x.front() + h*fr;
-            if (t>b.x.back()) t = b.x.back();
-
-            std::set<double> t_set;
-            for (auto _t : b.x)
-            {
-                if (_t<=t)
-                    t_set.insert(_t);
-            }
-
-            ss.str("");
-            ss<<dir<<"tpoints_latex_frame"<<fr<<".dat";
-            fout.open(ss.str(),std::ios::out);
-            fout<<"\\def\\tarr{";
-            for (auto _t :t_set)
-            {
-               auto p = b(k,_t);
-               fout<<"("<<p.x<<", "<<p.y<<"), ";
-            }
-            fout.seekp(-2, std::ios::end);
-            fout<<"} ";
-            fout.close();
-
-            char buf[128];
-            sprintf(buf,"\\edef\\tval{%f}",t);
-            ss.str("");
-            ss<<dir<<"t_tex_frame"<<fr<<".dat";
-            fout.open(ss.str(),std::ios::app);
-            fout<<buf<<std::endl;
-            fout.close();
-        }
-    }
-
-    //анимация бисплайна второй степени
-    system("mkdir build_bspline_k5_anim");
-    system("del /q build_bspline_k5_anim\\*");
-    {
-        std::string dir = "build_bspline_k5_anim\\";
-        std::stringstream ss;
-        int k=5;
-        b.x = makeKnotsOpen(k,6);
-        curve.clear();
-
-        b.getCurve(k,100,curve);
-     
-
-        ss<<dir<<"points_tikz.dat";
-        printTikzCoords(ss.str(),b.p);
-
-        for (int fr = 0; fr <=99; ++fr)
-        {
-            std::vector<vector2d> cur_curve;
-            for (int i=0; i<=fr; ++i)
-            {
-                cur_curve.push_back(curve[i]);
-            }
-
-            ss.str("");
-            ss<<dir<<"frame"<<fr<<".dat";
-            print(ss.str(),cur_curve);
-
-            std::vector<vector2d> lp {cur_curve.back()};
-            ss.str("");
-            ss<<dir<<"lp_tikz_frame"<<fr<<".dat";
-            printTikzCoords(ss.str(),lp,"LP");
-
-            double h = (b.x.back()-b.x.front())/99;
-            double t = b.x.front() + h*fr;
-            if (t>b.x.back()) t = b.x.back();
-
-            std::set<double> t_set;
-            for (auto _t : b.x)
-            {
-                if (_t<=t)
-                    t_set.insert(_t);
-            }
-
-            ss.str("");
-            ss<<dir<<"tpoints_latex_frame"<<fr<<".dat";
-            fout.open(ss.str(),std::ios::out);
-            fout<<"\\def\\tarr{";
-            for (auto _t :t_set)
-            {
-               auto p = b(k,_t);
-               fout<<"("<<p.x<<", "<<p.y<<"), ";
-            }
-            fout.seekp(-2, std::ios::end);
-            fout<<"} ";
-            fout.close();
-
-            char buf[128];
-            sprintf(buf,"\\edef\\tval{%f}",t);
-            ss.str("");
-            ss<<dir<<"t_tex_frame"<<fr<<".dat";
-            fout.open(ss.str(),std::ios::app);
-            fout<<buf<<std::endl;
-            fout.close();
         }
     }
     
+    vector2d d[]{{1,2},{3,4}};
 
 
 
-   
 
     //Безье
     curve.clear();
+
     Bezier<vector2d> bc;
     bc.p = {{0, 0}, {0.5, 2}, {3, 2.5}, {4, 0}};
     bc.getAllCurve(50, curve);
     print("bezier_example_1_curve.dat", curve);
+    curve.clear();
     printTikzCoords("bezier_example_1_tikz.dat", bc.p);
 
-    curve.clear();
+    
     bc.p = {{0, 0}, {4, 3}, {5, -1}, {2, 0.5}};
     bc.getAllCurve(50, curve);
     print("bezier_example_2_curve.dat", curve);
+    curve.clear();
     printTikzCoords("bezier_example_2_tikz.dat", bc.p);
 
-    curve.clear();
+  
     bc.p = {{0, 0}, {4, 1}, {-1, 2}, {3, 3}};
-    bc.getAllCurve(50, curve);
+    bc.getAllCurve(50, curve);    
     print("bezier_example_3_curve.dat", curve);
+    curve.clear();
     printTikzCoords("bezier_example_3_tikz.dat", bc.p);
 
     // анимация построения кривой
+
+
+
     system("mkdir build_bezier_anim");
     system("del /q build_bezier_anim\\*");
     bc.p = {{0, 0}, {0.5, 2}, {3, 2.5}, {4, 0}};
@@ -471,99 +197,34 @@ int main()
         }
     }
 
-    system("mkdir build_bezier_anim_n2");
-    system("del /q build_bezier_anim_n2\\*");
-    bc.p = {{0, 0}, {4, 4}};
-    printTikzCoords("build_bezier_anim_n2\\tikz.dat", bc.p);
-    curve.clear();
-    bc.getAllCurve(100, curve);
-    {
-        std::vector<vector2d> cur_curve;
-        for (int fr = 0; fr <= 99; ++fr)
-        {
-            std::stringstream ss;
-            ss << "build_bezier_anim_n2\\frame" << fr << ".dat";
-            cur_curve.push_back(curve[fr]);
-            print(ss.str().data(), cur_curve);
-            char buf[64];
-            sprintf(buf, "\\coordinate (LP) at (%f,%f);", cur_curve.back().x, cur_curve.back().y);
-            ss.str(std::string());
-            ss << "build_bezier_anim_n2\\last_point_tikz_frame" << fr << ".dat";
-            fout.open(ss.str(), std::ios::trunc);
-            fout << buf << std::endl;
-            fout.close();
-        }
-    }
+    std::vector<vector2d>  beziers[] {
+        {{0, 0}, {4, 4}},
+        {{0, 0}, {2, 4}, {3.1}},
+        {{0, 0}, {4, 3}, {5, -1}, {2, 0.5}},
+        {{0, 0}, {5, 4}, {6, 1},  {5, 0}, {-2, 3}, {7, 5}}
 
-    system("mkdir build_bezier_anim_n3");
-    system("del /q build_bezier_anim_n3\\*");
-    bc.p = {{0, 0}, {2, 4}, {3.1}};
-    printTikzCoords("build_bezier_anim_n3\\tikz.dat", bc.p);
-    curve.clear();
-    bc.getAllCurve(100, curve);
-    {
-        std::vector<vector2d> cur_curve;
-        for (int fr = 0; fr <= 99; ++fr)
-        {
-            std::stringstream ss;
-            ss << "build_bezier_anim_n3\\frame" << fr << ".dat";
-            cur_curve.push_back(curve[fr]);
-            print(ss.str().data(), cur_curve);
-            char buf[64];
-            sprintf(buf, "\\coordinate (LP) at (%f,%f);", cur_curve.back().x, cur_curve.back().y);
-            ss.str(std::string());
-            ss << "build_bezier_anim_n3\\last_point_tikz_frame" << fr << ".dat";
-            fout.open(ss.str(), std::ios::trunc);
-            fout << buf << std::endl;
-            fout.close();
-        }
-    }
+    };
 
-    system("mkdir build_bezier_anim_n4");
-    system("del /q build_bezier_anim_n4\\*");
-    bc.p = {{0, 0}, {4, 3}, {5, -1}, {2, 0.5}};
-    printTikzCoords("build_bezier_anim_n4\\tikz.dat", bc.p);
-    curve.clear();
-    bc.getAllCurve(100, curve);
+    for (auto &x : beziers)
     {
-        std::vector<vector2d> cur_curve;
-        for (int fr = 0; fr <= 99; ++fr)
-        {
-            std::stringstream ss;
-            ss << "build_bezier_anim_n4\\frame" << fr << ".dat";
-            cur_curve.push_back(curve[fr]);
-            print(ss.str().data(), cur_curve);
-            char buf[64];
-            sprintf(buf, "\\coordinate (LP) at (%f,%f);", cur_curve.back().x, cur_curve.back().y);
-            ss.str(std::string());
-            ss << "build_bezier_anim_n4\\last_point_tikz_frame" << fr << ".dat";
-            fout.open(ss.str(), std::ios::trunc);
-            fout << buf << std::endl;
-            fout.close();
-        }
-    }
+        int n = x.size();
 
-    system("mkdir build_bezier_anim_n6");
-    system("del /q build_bezier_anim_n6\\*");
-    bc.p = {{0, 0}, {5, 4}, {6, 1}, {5, 0}, {-2, 3}, {7, 5}};
-    printTikzCoords("build_bezier_anim_n6\\tikz.dat", bc.p);
-    curve.clear();
-    bc.getAllCurve(100, curve);
-    {
-        std::vector<vector2d> cur_curve;
-        for (int fr = 0; fr <= 99; ++fr)
+        system(std::format("mkdir build_bezier_anim_n{}",n).c_str());
+        system(std::format("del /q build_bezier_anim_n{}\\*",n).c_str());
+        bc.p = x;
+        printTikzCoords(std::format("build_bezier_anim_n{}\\tikz.dat",n), bc.p);
+        curve.clear();
+        bc.getAllCurve(100, curve);
         {
-            std::stringstream ss;
-            ss << "build_bezier_anim_n6\\frame" << fr << ".dat";
-            cur_curve.push_back(curve[fr]);
-            print(ss.str().data(), cur_curve);
-            char buf[64];
-            sprintf(buf, "\\coordinate (LP) at (%f,%f);", cur_curve.back().x, cur_curve.back().y);
-            ss.str(std::string());
-            ss << "build_bezier_anim_n6\\last_point_tikz_frame" << fr << ".dat";
-            fout.open(ss.str(), std::ios::trunc);
-            fout << buf << std::endl;
-            fout.close();
+            std::vector<vector2d> cur_curve;
+            for (int fr = 0; fr <= 99; ++fr)
+            {
+                cur_curve.push_back(curve[fr]);
+                print(std::format("build_bezier_anim_n2\\frame{}.dat",fr), cur_curve);
+                fout.open(std::format("build_bezier_anim_n2\\last_point_tikz_frame{}.dat",fr), std::ios::out);
+                fout << std::format("\\coordinate (LP) at ({},{});", cur_curve.back().x, cur_curve.back().y) << std::endl;
+                fout.close();
+            }
         }
     }
 
@@ -574,7 +235,6 @@ int main()
     curve.clear();
     bc.getAllCurve(100, curve);
     {
-
         for (int fr = 0; fr <= 99; ++fr)
         {
             std::vector<vector2d> cur_curve;
@@ -597,7 +257,6 @@ int main()
     curve.clear();
     bc.getAllCurve(100, curve);
     {
-
         for (int fr = 0; fr <= 99; ++fr)
         {
             std::vector<vector2d> cur_curve;
@@ -649,12 +308,7 @@ int main()
             ss.str("");
             ss<<"recursive_bezier_anim_n3\\curve_frame"<<frame<<".dat";
             print(ss.str(),cur_curve);
-        }
-        
-
-
-
-        
+        }        
     }
 
     {

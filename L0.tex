@@ -1,0 +1,154 @@
+\documentclass[10pt]{beamer}
+%\documentclass[10pt, handout]{beamer}
+%\setbeameroption{show notes}
+
+%\documentclass[10pt, a4paper]{article}
+%\usepackage{beamerarticle}
+
+\input{preambule.tex}
+
+\graphicspath{{Images/}{Images/\jobname/}}
+
+\date{\today}
+
+\renewcommand{\LectionNumber}{0}
+\renewcommand{\LectionTheme}{Компьютерная графика. О курсе}
+\title{Лекция \lecdni \\ \LectionTheme}
+\subtitle{Компьютерная графика}
+
+\begin{document}
+	 
+\input{template.tex}	 	
+	
+\QRFRAME
+	
+\frame{\maketitle}
+	
+\begin{frame}[t]
+	\frametitle{Структура курса}
+	
+	\TCT{0.5}{
+		
+		
+		\textbf{Первый семестр }
+		
+			
+		\begin{itemize}
+			\item 14 лекций
+			\item 5 лабораторных работ  
+			\item 4 семинара
+			\item курсовая \emph{работа} 
+			\item зачёт
+		\end{itemize}
+		
+	}{
+		\textbf{Второй семестр }
+		
+		\begin{itemize}
+			\item 14 лекций
+			\item 3 лабораторные работы  
+			\item экзамен
+		\end{itemize}		
+	}
+	
+	
+	\IG{photo_2025-01-10_19-56-05.jpg}
+		
+\end{frame}
+
+\begin{frame}\frametitle{Преподаватели (текущий семестр)}
+	
+\begin{alertblock}{Лекции, курсовые работы, семинары, ИДБ-24-01 лаб. работы}
+	\textbf{Гаврилов Андрей геннадьевич}	
+	
+	Кандидат технических наук, доцент кафедры ИТиВС
+\end{alertblock}	
+
+	
+\begin{block}{ИДБ-24-02,03 --- лабораторные работы}
+	\textbf{Климаков Максим Андреевич}	
+	
+	Преподаватель кафедры ИТиВС
+\end{block}
+
+\begin{block}{ИДБ-24-04,05 --- лабораторные работы}
+	\textbf{Паничев Никита Александрович}	
+	
+	Преподаватель кафедры ИТиВС
+\end{block}
+	
+	
+\end{frame}
+
+\begin{frame}\frametitle{План на текущий семестр}
+	
+	\TCT{0.5}
+	{
+		\begin{block}{Первый модуль ($M_1$) --- 06.04.2025}
+			\begin{itemize}
+				\item 1, 2 лабораторные работы
+				\item Домашние работы после семинаров
+				\item Летучки на лекциях
+			\end{itemize}
+		\end{block}	
+		
+	}{
+	
+		\begin{block}{Второй модуль ($M_2$) --- 01.06.2025}
+			\begin{itemize}
+				\item 3, 4 лабораторные работы
+				\item Домашние работы после семинаров
+				\item Летучки на лекциях
+			\end{itemize}
+		\end{block}	
+		
+	}
+	
+	\begin{block}{Курсовая работа ($K$)}
+		Собственный проект по материалам изученного за семестр
+	\end{block}	
+	
+	\begin{block}{Зачет ($Z$)}
+		$$Z = \min \left(54, \dfrac{M_1+M_2+K}{3} \right) $$ 
+	\end{block}	
+	
+	
+\end{frame}
+	
+
+
+\begin{frame}[fragile]\frametitle{Будем на связи!}
+	
+	
+	
+	\begin{columns}[onlytextwidth]
+		\edef\colA{0.5}
+		\begin{column}{\colA\linewidth}
+			%Колнка1
+					\centering \textbf{Общий канал}\\
+					\tikz{
+						\node[inner sep=0pt,rounded corners=5mm, clip]{
+							\qrcode[height=0.8\textwidth]{https://t.me/itivs_ag}
+						};
+					}\\
+					{\small\verb|https://t.me/itivs_ag|} \\
+		\end{column}
+		\begin{column}{\fpeval{1-\colA}\linewidth}
+			%Колнка2
+					\centering \textbf{Канал курса}\\
+					\tikz{
+						\node[inner sep=0pt,rounded corners=5mm, clip]{
+							\qrcode[height=0.8\textwidth]{https://t.me/+Ixy4fNtKdGkxMzU6}
+						};
+					}\\
+					{\small\verb|https://t.me/+Ixy4fNtKdGkxMzU6|} \\
+		\end{column}
+	\end{columns}
+
+	
+\end{frame}
+	
+	
+
+	
+\end{document}

@@ -1,5 +1,33 @@
 
 
+%Для XeLatex/+
+%\usepackage{polyglossia}
+%\setdefaultlanguage{russian}
+%\setotherlanguage{english}
+%%\setkeys{russian}{babelshorthands=true} 
+
+\usepackage{polyglossia}
+\setdefaultlanguage{russian}
+
+\setbeamercovered{dynamic}
+
+\usepackage{fontspec}
+
+\setmainfont{Times New Roman} 
+\setsansfont{Arial} 
+\setmonofont{Cascadia Code SemiLight} 
+%\newfontfamily{\cyrillicfonttt}{Courier New}
+
+
+%\usepackage{unicode-math}
+%\setmathfont{TeX Gyre Termes Math}
+
+%\setmainfont{CMU Serif}[Script=Cyrillic, Mapping=tex-text,]
+%\setsansfont{CMU Sans Serif}[Script=Cyrillic, Mapping=tex-text,]
+%\setmonofont{CMU Typewriter Text}[Script=Cyrillic, Mapping=tex-text,]
+
+
+
 
 \mode<article>{
 	
@@ -8,7 +36,9 @@
 }
 \mode<presentation>{
 	
-	\usetheme{Antibes}
+	%\usetheme{Antibes}
+	\usetheme{Berlin}
+	
 	\usefonttheme{professionalfonts} 
 	\usefonttheme{serif} % default family is serif
 	
@@ -16,6 +46,40 @@
 	%\usecolortheme{albatross} %синяя, пхоло виден черный цвет
 	
 }
+
+\newlength{\parskipbackup}
+\setlength{\parskipbackup}{\parskip}
+\newlength{\parindentbackup}
+\setlength{\parindentbackup}{\parindent}
+
+\let\notebackup\note
+\renewcommand{\note}[1]{\notebackup{%
+		\setlength{\parindent}{3ex}%
+		\setlength{\parskip}{0.5ex}%
+		{\small{}#1}%
+		\setlength{\parskip}{\parskipbackup}%
+		\setlength{\parindent}{\parindentbackup}%
+	}%
+}
+
+\mode<presentation>%
+{
+	
+	%\setbeameroption{second mode text on second screen=right}
+	%\setbeameroption{show notes on second screen}
+	%\setbeameroption{show notes}
+	\setbeamertemplate{note page}{
+		
+		%\vspace{1em}\insertframetitle
+		
+		%		\begin{wrapfigure}[12]{l}[0cm]{0.5\textwidth}
+			%			\fbox{ \resizebox{0.45\textwidth}{!}{\insertslideintonotes{1}} }
+			%		\end{wrapfigure}		
+		\insertnote}
+	
+	
+}
+
 
 \newcommand{\MP}[1]{\mode<presentation>{#1} }
 \newcommand{\MA}[1]{\mode<article>{#1} }
@@ -74,27 +138,7 @@
 %\usepackage{multimedia}
 %\usepackage{movie15}
 
-%Для XeLatex/+
-\usepackage{polyglossia}
-\setdefaultlanguage{russian}
-\setotherlanguage{english}
-%\setkeys{russian}{babelshorthands=true} 
 
-
-\usepackage{fontspec}
-
-\setmainfont{Times New Roman} [Script=Cyrillic, Mapping=tex-text,]
-\setsansfont{Arial} [Script=Cyrillic, Mapping=tex-text,]
-%\setmonofont{Courier New} [Script=Cyrillic, Mapping=tex-text,]
-\newfontfamily{\cyrillicfonttt}{Courier New}
-
-
-%\usepackage{unicode-math}
-%\setmathfont{TeX Gyre Termes Math}
-
-%\setmainfont{CMU Serif}[Script=Cyrillic, Mapping=tex-text,]
-%\setsansfont{CMU Sans Serif}[Script=Cyrillic, Mapping=tex-text,]
-%\setmonofont{CMU Typewriter Text}[Script=Cyrillic, Mapping=tex-text,]
 
 
 %-----------------
@@ -209,8 +253,10 @@
 							\protect\par}
 }
 
-\renewcommand{\section}[1]{
-	\oldsection{#1}
+\renewcommand{\section}[2][]{
+	\ifstrempty{#1}%
+	{\oldsection{#2}}%
+	{\oldsection[#1]{#2}}	
 	\addtostream{CONTENT}{%
 			\protect\noindent%
 			\protect\stepcounter{SEC}%
@@ -292,7 +338,7 @@
 
 \NewDocumentCommand{\lecdni}{}{\toDni{\LectionNumber}}
 \author{Гаврилов Андрей Геннадьевич}
-\newcommand{\regals}{кандидат технических наук, доцент}
+\newcommand{\regals}{доцент каф. ИТиВС, кандидат технических наук}
 \institute{Кафедра Информационных технологий и вычислительных систем \\МГТУ~<<СТАНКИН>>}
 \lecture{История компьютерной графики}{kghistory}\subtitle{Компьютерная графика}
 
@@ -327,4 +373,11 @@
 }
 
 \newcommand{\IG}[2][1]{\includegraphics[width=#1\textwidth]{#2}}
+
+
+\def\COVER#1{%
+	\mode<beamer>{%
+		#1%
+	}%
+}
 

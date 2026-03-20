@@ -50,12 +50,14 @@
 	\frame{\maketitle}
 
 	
-	\begin{frame}{План лекции}
-		%\tableofcontents
-	\end{frame}
-	
+%	\begin{frame}\frametitle {План лекции}
+%		%\tableofcontents
+%	\end{frame}
+%	
+%\section{Имитация рельефа}
 
-\begin{frame}{Displacement mapping}
+\section{}
+\begin{frame}\frametitle {Displacement mapping}
 	
 	\TC{0.5}
 	{
@@ -74,7 +76,7 @@
 	
 \end{frame}
 	
-\begin{frame}{Bump mapping}
+\begin{frame}\frametitle {Bump mapping}
 	
 	\TC{0.5}
 	{
@@ -84,29 +86,32 @@
 	}
 \end{frame}	
 
-\begin{frame}{Карта высот}
+\begin{frame}\frametitle {Карта высот}
 	
 	\centering\IG[0.9]{StandardShaderHeightmapTexture.png}
 	
 \end{frame}
 
-\begin{frame}{Рельеф то не настоящий!}
+\begin{frame}\frametitle {Рельеф то не настоящий!}
 	
 	\centering\animategraphics[autoplay,loop, nomouse, width=0.6\textwidth]{20}{Images/\jobname/bump2/bump2}{0001}{0150}
 	
 \end{frame}
 
 
-\begin{frame}{Где "живет" нормаль?}
+\begin{frame}\frametitle {Где "живет" нормаль?}
 	
 	\TC{0.5}
 	{
 		\IG{1493389010153817205.jpg}
 	}{
 		Карта высот --- $f(x,y,z)=\mathrm{const}$.
-		$\vv n_f = \nabla f = \left( \dfrac{\partial f}{\partial x},\dfrac{\partial f}{\partial y},\dfrac{\partial f}{\partial z} \right)$
 		
 		$f(x,y,z) = h(x,y) -z=0$
+		
+		$\vv n_f = \nabla f = \left( \dfrac{\partial f}{\partial x},\dfrac{\partial f}{\partial y},\dfrac{\partial f}{\partial z} \right)$
+		
+		
 		
 		~
 		
@@ -115,9 +120,9 @@
 	$\vv n(x,y) = \left(\dfrac{h(x+1,y)-h(x-1,y) }{2},\dfrac{h(x,y+1)-h(x,y-1) }{2}, -1  \right) $
 \end{frame}
 	
-\begin{frame}{Касательное пространство (tangent space)}
+\begin{frame}\frametitle {Касательное пространство (tangent space)}
 	
-	\TC{0.4}
+	\TC{0.38}
 	{
 		\centering
 		
@@ -204,15 +209,13 @@
 		\pause$
 		\mathbf M_{TBN}=
 		\begin{pmatrix}
-			\vv T\\
-			\vv B\\
-			\vv N\\
+			\vv T & \vv B &	\vv N
 		\end{pmatrix}
 		=
 		\begin{pmatrix}
-			T_x & T_y & T_z\\
-			B_x & B_y & B_z\\
-			N_x & N_y & N_z\\
+			T_x & B_x & N_x\\
+			T_y & B_y & N_y\\
+			T_z & B_z & N_z\\
 		\end{pmatrix}
 		$	
 		
@@ -225,7 +228,7 @@
 	
 \end{frame}	
 
-\begin{frame}{Normal mapping}
+\begin{frame}\frametitle {Normal mapping}
 		
 		\centering
 		
@@ -235,7 +238,7 @@
 
 \end{frame}
 	
-\begin{frame}{Карта нормалей}
+\begin{frame}\frametitle {Карта нормалей}
 	
 	\centering
 	\TC{0.5}
@@ -248,13 +251,13 @@
 	
 \end{frame}
 	
-\begin{frame}{Виды карт нормалей}
+\begin{frame}\frametitle {Виды карт нормалей}
 	
 	\IG{vtf_botw_8tazlodtepbgp0zyvk.png}
 	
 \end{frame}
 
-\begin{frame}{Результат наложения карты нормалей}
+\begin{frame}\frametitle {Результат наложения карты нормалей}
 	\TC{0.5}
 	{
 		\animategraphics[autoplay,loop, nomouse, width=\textwidth]{25}{Images/\jobname/nm_anim/}{0001}{0150}
@@ -266,7 +269,7 @@
 
 
 
-\begin{frame}{Создание карт нормалей}	
+\begin{frame}\frametitle {Создание карт нормалей}	
 	
 	\TC{0.5}
 	{
@@ -280,7 +283,7 @@
 	
 \end{frame}
 
-\begin{frame}{Lowpoly и highpoly модели}
+\begin{frame}\frametitle {Lowpoly и highpoly модели}
 	
 	\IG[0.95]{5b3d7c86fc1fe61040b1b7b0292b24572ecebc6f-1.jpg}
 	
@@ -288,7 +291,7 @@
 \end{frame}
 	
 
-\begin{frame}{Paralax mapping}
+\begin{frame}\frametitle {Paralax mapping}
 	
 	\TC{0.4}
 	{
@@ -302,7 +305,7 @@
 	
 \end{frame}
 
-\begin{frame}{Основная идея}
+\begin{frame}\frametitle {Основная идея}
 	
 	\IG {rwabtldbgzyc-rsarcgipyteab0.png}
 	
@@ -310,7 +313,7 @@
 	
 \end{frame}
 
-\begin{frame}{На основе карты грубин}
+\begin{frame}\frametitle {На основе карты грубин}
 	
 	\IG{oqzry5trs2lyfbwhe6puu0u04y8.png}
 	
@@ -321,7 +324,7 @@
 	
 \end{frame}
 
-\begin{frame}{Что для всего этого нужно}
+\begin{frame}\frametitle {Что для всего этого нужно}
 	
 	\TC{0.5}
 	{
@@ -338,13 +341,13 @@
 
 
 
-\begin{frame}{Трассировка луча}
+\begin{frame}\frametitle {Трассировка луча}
 	
 	\IG{Screenshot 2024-10-02 212545.png}
 	
 \end{frame}
 
-\begin{frame}{Сравнение технологий}
+\begin{frame}\frametitle {Сравнение технологий}
 	
 	\IG{StandardShaderParallaxMap}
 	
