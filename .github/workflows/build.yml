@@ -24,12 +24,11 @@ jobs:
       uses: actions/cache@v4
       with:
         path: cache.tar.gz
-        key: ${{ runner.os }}-latex-temp
+        key: ${{ runner.os }}-latex-temp-${{ github.run_id }}
         restore-keys: |
           ${{ runner.os }}-latex-temp-
     - name: Unpack LaTeX temp archive
-      if: steps.latex-cache.outputs.cache-hit == 'true'
-      run: tar -xzvf cache.tar.gz
+      run: test -f cache.tar.gz && tar -xzvf cache.tar.gz || echo "No cache archive"
     - name: Compiling pdf 
       run: sudo sh build.sh
     - name: Push PDF artifacts to orphan branch
@@ -61,6 +60,6 @@ jobs:
       uses: actions/cache@v4 
       with:
         path: cache.tar.gz
-        key: ${{ runner.os }}-latex-temp
+        key: ${{ runner.os }}-latex-temp-${{ github.run_id }}
         restore-keys: |
           ${{ runner.os }}-latex-temp-
