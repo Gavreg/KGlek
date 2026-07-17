@@ -50,13 +50,13 @@ jobs:
         cd /tmp/pdf-output
         git config user.name "${GIT_AUTHOR_NAME}"
         git config user.email "${GIT_AUTHOR_EMAIL}"
-        find "${{ github.workspace }}" -maxdepth 1 -type f -name '*.pdf' -exec cp -f {} . \;
+        find "${{ github.workspace }}" -maxdepth 1 -type f -name '*.pdf'  -exec cp -f {} . \;
         git add *.pdf
         git commit -m "Update PDF from ${{ github.sha }}"
         git push origin HEAD:pdfs
     - name: Preparing for cache
       run: |
-        find . -type f \( -name  "*.aux" -o -name "*.fdb_latexmk" -o -name "*.xdv" \) -print0 | tar -czvf cache.tar.gz --null -T -
+        find . -type f \( -name  "*.aux" -o -name "*.fdb_latexmk" -o -name "*.xdv" -o -name "*.nav" -o -name "*.out" -o -name "*.toc" -o -name "*.pdf" \) ! -name '*.image.pdf' -print0 | tar -czvf cache.tar.gz --null -T -
     - name: Save LaTeX temp archive to cache
       uses: actions/cache@v4
       with:
