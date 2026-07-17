@@ -7,7 +7,7 @@ export fonts=/usr/share/fonts
 
 export latexcmd="latexmk  -pdfxe -interaction=nonstopmode -halt-on-error -synctex=1 -8bit --shell-escape"
 
-#sudo docker build -t "$teximage" .
+sudo docker build -t "$teximage" .
 
 
 for d in ./Images/CG_*
@@ -36,4 +36,4 @@ do
 done
 
 
-#sudo docker image rm "$teximage"
+sudo docker image rm "$teximage"
