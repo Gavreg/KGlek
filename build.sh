@@ -22,7 +22,7 @@ do
         echo "================="
         echo "Building file  $f"
         echo "================="
-        sudo docker run --rm -v "$dir":"$workdir" -w "$workdir" -e f="$f" -e d="$d" -e latexcmd="$latexcmd" "$teximage" sh -c 'cd "$d"  &&  "$latexcmd $(basename $f)" '
+        sudo docker run --rm -v "$PWD":"$workdir" -w "$workdir" -e f="$f" -e d="$d" -e latexcmd="$latexcmd" "$teximage" sh -c 'cd "$d"  &&  "$latexcmd $(basename $f)" '
         echo ""
     done
 done
