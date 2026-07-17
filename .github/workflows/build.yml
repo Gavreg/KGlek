@@ -21,11 +21,6 @@ jobs:
         persist-credentials: true
     - name: Compiling pdf 
       run: sudo sh build.sh
-    - name: Upload PDF Artifact
-      uses: actions/upload-artifact@v4
-      with:
-        name: pdf-build
-        path: '.'
     - name: Push PDF artifacts to orphan branch
       env:
         GIT_AUTHOR_NAME: github-actions[bot]
