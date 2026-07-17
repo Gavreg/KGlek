@@ -1,0 +1,408 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   viewBox="0 0 50 50"
+   version="1.1"
+   id="svg181"
+   sodipodi:docname="log.svg"
+   width="50"
+   height="50"
+   inkscape:export-filename="..\..\..\..\..\..\..\..\Desktop\log.jpg"
+   inkscape:export-xdpi="210.13232"
+   inkscape:export-ydpi="210.13232"
+   inkscape:version="1.2.1 (9c6d41e410, 2022-07-14)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <sodipodi:namedview
+     id="namedview183"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     showgrid="false"
+     inkscape:zoom="9.3766165"
+     inkscape:cx="29.701545"
+     inkscape:cy="27.8352"
+     inkscape:window-width="1920"
+     inkscape:window-height="1027"
+     inkscape:window-x="1272"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg181" />
+  <defs
+     id="defs46">
+    <style
+       id="style2">.cls-1{isolation:isolate;}.cls-2{fill:#0078cf;}.cls-3{fill:#00cfff;}.cls-4{fill:#324969;}.cls-5{fill:#3a557d;}.cls-6{fill:#3b5479;}.cls-7{opacity:0.8;mix-blend-mode:multiply;}.cls-8{fill:url(#Безымянный_градиент_27);}.cls-9{fill:url(#Безымянный_градиент_20);}.cls-10{fill:url(#Безымянный_градиент_28);}.cls-11{fill:url(#Безымянный_градиент_7);}</style>
+    <linearGradient
+       id="Безымянный_градиент_27"
+       x1="304.72"
+       y1="201.31"
+       x2="337.91"
+       y2="234.5"
+       gradientUnits="userSpaceOnUse">
+      <stop
+         offset="0"
+         stop-color="#0078cf"
+         id="stop4" />
+      <stop
+         offset="0.23"
+         stop-color="#0f6ab1"
+         id="stop6" />
+      <stop
+         offset="0.56"
+         stop-color="#22588a"
+         id="stop8" />
+      <stop
+         offset="0.83"
+         stop-color="#2e4d72"
+         id="stop10" />
+      <stop
+         offset="1"
+         stop-color="#324969"
+         id="stop12" />
+    </linearGradient>
+    <linearGradient
+       id="Безымянный_градиент_20"
+       x1="231.86"
+       y1="201.14"
+       x2="264.37"
+       y2="233.64"
+       gradientUnits="userSpaceOnUse">
+      <stop
+         offset="0"
+         stop-color="#0078cf"
+         id="stop15" />
+      <stop
+         offset="0.27"
+         stop-color="#0177cc"
+         id="stop17" />
+      <stop
+         offset="0.46"
+         stop-color="#0673c3"
+         id="stop19" />
+      <stop
+         offset="0.62"
+         stop-color="#0d6cb4"
+         id="stop21" />
+      <stop
+         offset="0.77"
+         stop-color="#18629e"
+         id="stop23" />
+      <stop
+         offset="0.9"
+         stop-color="#255583"
+         id="stop25" />
+      <stop
+         offset="1"
+         stop-color="#324969"
+         id="stop27" />
+    </linearGradient>
+    <linearGradient
+       id="Безымянный_градиент_28"
+       x1="275.16"
+       y1="215.44"
+       x2="291.85001"
+       y2="232.13"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(-144.58,-150.91)">
+      <stop
+         offset="0"
+         stop-color="#0078cf"
+         id="stop30" />
+      <stop
+         offset="0.17"
+         stop-color="#0474c6"
+         id="stop32" />
+      <stop
+         offset="0.43"
+         stop-color="#1069af"
+         id="stop34" />
+      <stop
+         offset="0.76"
+         stop-color="#225889"
+         id="stop36" />
+      <stop
+         offset="1"
+         stop-color="#324969"
+         id="stop38" />
+    </linearGradient>
+    <linearGradient
+       id="Безымянный_градиент_7"
+       x1="102.25"
+       y1="9.3599997"
+       x2="119.04"
+       y2="26.16"
+       gradientUnits="userSpaceOnUse">
+      <stop
+         offset="0"
+         stop-color="#00cfff"
+         id="stop41" />
+      <stop
+         offset="1"
+         stop-color="#0078cf"
+         id="stop43" />
+    </linearGradient>
+  </defs>
+  <title
+     id="title48">итивс логотип</title>
+  <g
+     id="g682"
+     transform="matrix(0.79453039,0,0,0.86716093,-20.347,-20.865238)">
+    <path
+       class="cls-2"
+       d="m 32.42,48.55 -2,-0.33 v -1.69 c 0,0 0.7,0.16 2,0.33"
+       id="path50"
+       style="isolation:isolate" />
+    <path
+       class="cls-2"
+       d="m 35.42,48.98 c 1,0.12 2.05,0.23 3.05,0.32 v -1.93 c -1.15,0 -2.2,-0.1 -3.14,-0.18 z"
+       id="path52"
+       style="isolation:isolate" />
+    <path
+       class="cls-2"
+       d="m 70.42,38.74 a 46.63,46.63 0 0 0 4,-3.09 v 8.75 a 32,32 0 0 1 -4,1.62"
+       id="path54"
+       style="isolation:isolate" />
+    <path
+       class="cls-2"
+       d="m 68.42,40.09 c -1.32,0.81 -2.66,1.54 -4,2.19 v 5.5 c 1.49,-0.35 2.83,-0.71 4,-1.07 z"
+       id="path56"
+       style="isolation:isolate" />
+    <path
+       class="cls-2"
+       d="m 62.42,43.14 c -1.34,0.57 -2.67,1.07 -4,1.51 v 4.2 c 1.42,-0.2 2.76,-0.44 4,-0.69 z"
+       id="path58"
+       style="isolation:isolate" />
+    <path
+       class="cls-2"
+       d="m 56.42,45.26 c -1,0.28 -2,0.54 -3,0.76 v 3.4 q 1.55,-0.14 3,-0.3 z"
+       id="path60"
+       style="isolation:isolate" />
+    <path
+       class="cls-2"
+       d="m 50.42,46.6 q -1.53,0.26 -3,0.42 v 2.66 c 1,0 2,0 3,-0.08 z"
+       id="path62"
+       style="isolation:isolate" />
+    <path
+       class="cls-2"
+       d="m 44.42,47.29 c -1,0.06 -2,0.09 -2.9,0.11 l 0.05,2.13 q 1.46,0.09 2.85,0.12 z"
+       id="path64"
+       style="isolation:isolate" />
+    <path
+       class="cls-3"
+       d="m 20.22,54.75 h -1.8 v -1.51 h 1.8"
+       id="path66"
+       style="isolation:isolate" />
+    <path
+       class="cls-3"
+       d="m 82.93,48.91 c 1.51,-0.21 3,-0.44 4.49,-0.67 V 59.4 l -4.49,-0.42"
+       id="path68"
+       style="isolation:isolate" />
+    <path
+       class="cls-3"
+       d="m 80.42,49.21 c -1.33,0.22 -2.66,0.42 -4,0.61 v 8.55 l 4,0.42 z"
+       id="path70"
+       style="isolation:isolate" />
+    <path
+       class="cls-3"
+       d="m 74.42,50.09 c -1.34,0.18 -2.67,0.35 -4,0.51 v 7.22 c 1.4,0.13 2.74,0.27 4,0.4 z"
+       id="path72"
+       style="isolation:isolate" />
+    <path
+       class="cls-3"
+       d="m 68.42,50.96 -4,0.42 v 5.71 l 4,0.37 z"
+       id="path74"
+       style="isolation:isolate" />
+    <path
+       class="cls-3"
+       d="m 56.42,52.09 -3,0.21 v 3.79 l 3,0.23 z"
+       id="path76"
+       style="isolation:isolate" />
+    <path
+       class="cls-3"
+       d="m 50.42,52.41 -3,0.16 v 3.22 l 3,0.2 z"
+       id="path78"
+       style="isolation:isolate" />
+    <path
+       class="cls-3"
+       d="m 44.42,52.56 -3,0.12 v 2.9 l 3,0.17 z"
+       id="path80"
+       style="isolation:isolate" />
+    <path
+       class="cls-3"
+       d="m 38.42,52.84 -3,0.06 v 2.35 l 3,0.11 z"
+       id="path82"
+       style="isolation:isolate" />
+    <path
+       class="cls-3"
+       d="m 32.42,52.94 h -2 v 2.15 l 2,0.05 z"
+       id="path84"
+       style="isolation:isolate" />
+    <polygon
+       class="cls-3"
+       points="24.42,53.09 26.42,53.1 26.42,55.09 24.42,55.09 "
+       id="polygon86"
+       style="isolation:isolate" />
+    <path
+       class="cls-3"
+       d="m 62.42,56.81 -4,-0.34 V 52 c 1.32,-0.1 2.66,-0.21 4,-0.34 z"
+       id="path88"
+       style="isolation:isolate" />
+    <path
+       class="cls-4"
+       d="m 58.42,34.22 a 38.55,38.55 0 0 0 4,-3.44 v -6.19 a 26.11,26.11 0 0 1 -4,5.35 z"
+       id="path90"
+       style="isolation:isolate" />
+    <path
+       class="cls-4"
+       d="m 56.42,32.09 a 36.51,36.51 0 0 1 -3,2.36 v 3.46 c 1.09,-0.64 2.09,-1.29 3,-1.92 z"
+       id="path92"
+       style="isolation:isolate" />
+    <path
+       class="cls-4"
+       d="m 50.42,36.24 c -1,0.6 -2,1.15 -3,1.64 v 3.05 c 1.05,-0.44 2.05,-0.91 3,-1.39 z"
+       id="path94"
+       style="isolation:isolate" />
+    <path
+       class="cls-4"
+       d="m 41.42,40.34 c 0.94,-0.34 1.94,-0.74 3,-1.19 v 3.06 q -1.45,0.49 -3,0.9 z"
+       id="path96"
+       style="isolation:isolate" />
+    <path
+       class="cls-4"
+       d="m 58.42,74 a 38.55,38.55 0 0 1 4,3.44 v 6.19 a 26.39,26.39 0 0 0 -4,-5.35 z"
+       id="path98"
+       style="isolation:isolate" />
+    <path
+       class="cls-4"
+       d="m 56.42,76.18 a 34.62,34.62 0 0 0 -3,-2.37 v -3.46 c 1.09,0.64 2.09,1.29 3,1.92 z"
+       id="path100"
+       style="isolation:isolate" />
+    <path
+       class="cls-4"
+       d="m 50.42,71.98 c -1,-0.6 -2,-1.15 -3,-1.64 v -3.05 c 1.05,0.44 2.05,0.91 3,1.39 z"
+       id="path102"
+       style="isolation:isolate" />
+    <path
+       class="cls-4"
+       d="m 41.42,67.89 c 0.94,0.34 1.94,0.73 3,1.18 v -3.06 q -1.45,-0.49 -3,-0.9 z"
+       id="path104"
+       style="isolation:isolate" />
+    <path
+       class="cls-2"
+       d="m 32.42,59.92 -2,0.33 v 1.69 c 0,0 0.7,-0.15 2,-0.33"
+       id="path106"
+       style="isolation:isolate" />
+    <path
+       class="cls-2"
+       d="m 35.42,59.49 c 1,-0.12 2.05,-0.23 3.05,-0.32 v 1.92 c -1.15,0 -2.2,0.1 -3.14,0.18 z"
+       id="path108"
+       style="isolation:isolate" />
+    <path
+       class="cls-2"
+       d="m 70.42,69.73 a 44.84,44.84 0 0 1 4,3.1 v -8.74 a 34.1,34.1 0 0 0 -4,-1.62"
+       id="path110"
+       style="isolation:isolate" />
+    <path
+       class="cls-2"
+       d="m 68.42,68.43 a 43.57,43.57 0 0 0 -4,-2.18 v -5.51 c 1.49,0.35 2.83,0.71 4,1.07 z"
+       id="path112"
+       style="isolation:isolate" />
+    <path
+       class="cls-2"
+       d="m 62.42,65.33 c -1.34,-0.57 -2.67,-1.07 -4,-1.5 v -4.21 c 1.42,0.2 2.76,0.44 4,0.69 z"
+       id="path114"
+       style="isolation:isolate" />
+    <path
+       class="cls-2"
+       d="m 56.42,63.21 q -1.51,-0.42 -3,-0.75 v -3.37 c 1,0.08 2,0.18 3,0.29 z"
+       id="path116"
+       style="isolation:isolate" />
+    <path
+       class="cls-2"
+       d="m 50.42,61.87 c -1,-0.17 -2,-0.3 -3,-0.41 v -2.67 c 1,0 2,0 3,0.08 z"
+       id="path118"
+       style="isolation:isolate" />
+    <path
+       class="cls-2"
+       d="m 44.42,61.19 c -1,-0.07 -2,-0.1 -2.9,-0.12 l 0.05,-2.13 2.85,-0.12 z"
+       id="path120"
+       style="isolation:isolate" />
+    <path
+       class="cls-5"
+       d="m 62.42,34.78 q -2.07,1.86 -4,3.28 v 3.26 c 1.45,-0.68 2.79,-1.39 4,-2.07 z"
+       id="path122"
+       style="isolation:isolate" />
+    <path
+       class="cls-5"
+       d="m 56.42,39.45 c -1,0.68 -2,1.26 -3,1.77 v 2.18 c 1,-0.36 2,-0.76 3,-1.18 z"
+       id="path124"
+       style="isolation:isolate" />
+    <path
+       class="cls-5"
+       d="m 50.42,42.6 a 25.8,25.8 0 0 1 -3,1 v 1.49 c 1,-0.18 2,-0.42 3,-0.69 z"
+       id="path126"
+       style="isolation:isolate" />
+    <path
+       class="cls-5"
+       d="m 44.42,44.09 a 19.11,19.11 0 0 1 -3,0 v 1.44 a 24.79,24.79 0 0 0 3,-0.06 z"
+       id="path128"
+       style="isolation:isolate" />
+    <path
+       class="cls-5"
+       d="m 38.55,45.14 a 17.21,17.21 0 0 1 -3.13,-1 v -1.9 l 0.14,0.09 a 10.33,10.33 0 0 0 3,1.26"
+       id="path130"
+       style="isolation:isolate" />
+    <path
+       class="cls-5"
+       d="m 64.42,32.89 q 2,-1.92 4,-4.27 v 6.84 c 0,0 -1.52,1.13 -4,2.63"
+       id="path132"
+       style="isolation:isolate" />
+    <path
+       class="cls-5"
+       d="m 62.42,73.52 q -2.07,-1.86 -4,-3.28 v -3.26 c 1.45,0.69 2.79,1.39 4,2.07 z"
+       id="path134"
+       style="isolation:isolate" />
+    <path
+       class="cls-5"
+       d="m 56.42,68.85 c -1,-0.68 -2,-1.26 -3,-1.77 V 64.9 c 1,0.37 2,0.76 3,1.18 z"
+       id="path136"
+       style="isolation:isolate" />
+    <path
+       class="cls-5"
+       d="m 50.42,65.7 a 25.8,25.8 0 0 0 -3,-1 v -1.5 c 1,0.18 2,0.42 3,0.69 z"
+       id="path138"
+       style="isolation:isolate" />
+    <path
+       class="cls-5"
+       d="m 44.42,64.26 a 18,18 0 0 0 -3,-0.06 v -1.44 a 24.79,24.79 0 0 1 3,0.06 z"
+       id="path140"
+       style="isolation:isolate" />
+    <path
+       class="cls-5"
+       d="m 38.55,63.16 a 17.21,17.21 0 0 0 -3.13,1 v 1.93 l 0.14,-0.1 a 10.33,10.33 0 0 1 3,-1.26"
+       id="path142"
+       style="isolation:isolate" />
+    <path
+       class="cls-5"
+       d="m 64.42,75.41 q 2,1.92 4,4.27 v -6.84 c 0,0 -1.52,-1.13 -4,-2.63"
+       id="path144"
+       style="isolation:isolate" />
+  </g>
+  <metadata
+     id="metadata684">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:title>итивс логотип</dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+</svg>
