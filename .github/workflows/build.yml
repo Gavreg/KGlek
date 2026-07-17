@@ -19,6 +19,17 @@ jobs:
       with:
         fetch-depth: 0
         persist-credentials: true
+    - name: Restore LaTeX temp archive from cache
+      id: latex-cache
+      uses: actions/cache@v4
+      with:
+        path: cache.tar.gz
+        key: ${{ runner.os }}-latex-temp
+        restore-keys: |
+          ${{ runner.os }}-latex-temp-
+    - name: Unpack LaTeX temp archive
+      if: steps.latex-cache.outputs.cache-hit == 'true'
+      run: tar -xzvf cache.tar.gz
     - name: Compiling pdf 
       run: sudo sh build.sh
     - name: Push PDF artifacts to orphan branch
@@ -43,3 +54,13 @@ jobs:
         git add *.pdf
         git commit -m "Update PDF from ${{ github.sha }}"
         git push origin HEAD:pdfs
+    - name: Preparing for cache
+      run: |
+        find . -type f \( -name  "*.aux" -o -name "*.fdb_latexmk" -o -name "*.xdv" \) -print0 | tar -czvf cache.tar.gz --null -T -
+    - name: Save LaTeX temp archive to cache
+      uses: actions/cache@v4
+      with:
+        path: cache.tar.gz
+        key: ${{ runner.os }}-latex-temp
+        restore-keys: |
+          ${{ runner.os }}-latex-temp-
