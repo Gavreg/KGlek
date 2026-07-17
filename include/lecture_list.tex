@@ -1,0 +1,59 @@
+\makeatletter
+\newcounter{lec@number}
+\newcounter{lec@globalnumber}
+\newcounter{lec@partnumber}
+
+\setcounter{lec@number}{1}
+\setcounter{lec@globalnumber}{1}
+\setcounter{lec@partnumber}{1}
+
+\edef\@curpart{}
+
+% #1  -  файл лекции
+% #2  -  наименование лекци
+\NewDocumentCommand{\lec}{smm}{
+	\expandafter\edef\csname lec@#2@title\endcsname{#3}
+	\expandafter\edef\csname lec@#2@part\endcsname{\@curpart}
+	\expandafter\edef\csname lec@#2@partnumber\endcsname{\thelec@partnumber}
+	\expandafter\edef\csname lec@#2@number\endcsname{\thelec@number}
+	\expandafter\edef\csname lec@#2@globalnumber\endcsname{\thelec@globalnumber}
+	\IfBooleanF{#1}
+	{
+		\stepcounter{lec@number}
+		\stepcounter{lec@globalnumber}
+	}
+
+}
+
+\NewDocumentCommand{\lecpart}{sm}{
+	\edef\@curpart{#2}	
+	\setcounter{lec@number}{0}
+	\IfBooleanF{#1}
+	{
+		\stepcounter{lec@partnumber}
+	}
+	
+}
+\NewDocumentCommand{\lecturename}{}{
+	\csname lec@\jobname @title\endcsname
+}
+\NewDocumentCommand{\lecturepart}{}{
+	\csname lec@\jobname @part\endcsname
+}
+
+\NewDocumentCommand{\lecturenumber}{}{
+	\csname lec@\jobname @number\endcsname
+}
+
+\NewDocumentCommand{\lecturegnumber}{}{
+	\csname lec@\jobname @globalnumber\endcsname
+}
+
+\makeatother
+
+
+\lecpart{Вводный раздел}
+\lec{CG_intro}{Введение в курс}
+\lec*{CG_history}{История компьютерной графики. Основные вехи}
+\lec{CG_vectors}{Математические основы компьютерной графики}
+\lec{CG_matrices}{Преобразования точек на плоскости}
