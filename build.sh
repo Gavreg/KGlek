@@ -5,7 +5,7 @@ export teximage="teximage"
 export workdir=/data
 export fonts=/usr/share/fonts
 
-export latexcmd="latexmk -g -pdfxe -interaction=batchmode -halt-on-error -synctex=1 -8bit --shell-escape"
+export latexcmd="latexmk  -pdfxe -interaction=batchmode -halt-on-error -synctex=1 -8bit --shell-escape"
 
 sudo docker build -t "$teximage" .
 
@@ -22,7 +22,7 @@ do
         echo "================="
         echo "Building file  $f"
         echo "================="
-        sudo docker run --rm -v "$PWD":"$workdir" -w "$workdir" -e f="$f" -e d="$d" -e latexcmd="$latexcmd" "$teximage" sh -c 'cd "$d"  &&  "$latexcmd $(basename $f)" '
+        sudo docker run --rm -v "$PWD":"$workdir" -w "$workdir" -e f="$f" -e d="$d" -e latexcmd="$latexcmd" "$teximage" sh -c 'cd "$d"  &&  pwd && ls  && echo "compiling $f" && eval "$latexcmd $(basename $f)" '
         echo ""
     done
 done
