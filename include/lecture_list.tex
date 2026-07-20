@@ -34,19 +34,35 @@
 	}
 	
 }
-\NewDocumentCommand{\lecturename}{}{
-	\csname lec@\jobname @title\endcsname
+\NewDocumentCommand{\lecturename}{}{%
+	\ifcsname lec@\jobname @title\endcsname
+		\csname lec@\jobname @title\endcsname
+	\else
+		---%
+	\fi
 }
-\NewDocumentCommand{\lecturepart}{}{
-	\csname lec@\jobname @part\endcsname
+\NewDocumentCommand{\lecturepart}{}{%
+	\ifcsname lec@\jobname @part\endcsname
+		\csname lec@\jobname @part\endcsname
+	\else
+		---%
+	\fi
 }
 
-\NewDocumentCommand{\lecturenumber}{}{
-	\csname lec@\jobname @number\endcsname
+\NewDocumentCommand{\lecturenumber}{}{%
+	\ifcsname lec@\jobname @number\endcsname
+		\csname lec@\jobname @number\endcsname
+	\else
+		---%
+	\fi
 }
 
-\NewDocumentCommand{\lecturegnumber}{}{
-	\csname lec@\jobname @globalnumber\endcsname
+\NewDocumentCommand{\lecturegnumber}{}{%
+	\ifcsname lec@\jobname @globalnumber\endcsname
+		\csname lec@\jobname @globalnumber\endcsname
+	\else
+		---%
+	\fi
 }
 
 \makeatother
@@ -60,3 +76,4 @@
 \lec{CG_matrices_3d}{Преобразования точек в пространстве}
 \lec{CG_rotations}{Вращение пространства}
 \lec{CG_pipeline_vertex}{Вершинные операции в графическом конвейере}
+\lec{CG_clipping_rasterization}{Отсечение отрезков и растеризация}
