@@ -14,13 +14,13 @@ jobs:
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v4
+      uses: actions/checkout@v7
       with:
         fetch-depth: 0
         persist-credentials: true
     - name: Restore LaTeX temp archive from cache
       id: latex-cache
-      uses: actions/cache@v4
+      uses: actions/cache@v6
       with:
         path: cache.tar.gz
         key: ${{ runner.os }}-latex-temp-${{ github.run_id }}
@@ -59,7 +59,7 @@ jobs:
       run: |
         find . -type f \( -name  "*.aux" -o -name "*.fdb_latexmk" -o -name "*.xdv" -o -name "*.nav" -o -name "*.out" -o -name "*.toc" -o -name "*.pdf" \) ! -name '*.image.pdf' -print0 | tar -czvf cache.tar.gz --null -T -
     - name: Save LaTeX temp archive to cache
-      uses: actions/cache@v4 
+      uses: actions/cache@v6
       with:
         path: cache.tar.gz
         key: ${{ runner.os }}-latex-temp-${{ github.run_id }}
