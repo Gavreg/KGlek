@@ -63,5 +63,3 @@ jobs:
       with:
         path: cache.tar.gz
         key: ${{ runner.os }}-latex-temp-${{ github.run_id }}
-        restore-keys: |
-          ${{ runner.os }}-latex-temp-
