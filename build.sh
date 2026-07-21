@@ -3,7 +3,7 @@ set -e
 
 export latexcmd="latexmk  -pdfxe -interaction=nonstopmode -halt-on-error -synctex=1 -8bit --shell-escape"
 
-workdir=$(pwd)
+workdir=$PWD
 
 for f in ./Images/CG_*/*.tex
 do
@@ -14,11 +14,16 @@ do
     echo "!==================================!"
     
     texfile=$(basename "$f")
-    texfiledir=&(dirname "$f")
+    texfiledir=$(dirname "$f")
     
+    echo "$f"
+    echo "$texfile"
+    echo "$texfiledir"
+
     cd "$texfiledir"
     
-    echo "$latexcmd \"\$(basename \"\$f\")\""
+    pwd
+    eval "$latexcmd \"\$texfile\""
     
     echo ""
     
@@ -33,5 +38,5 @@ do
     echo "Building file  $f"
     echo "!==================================!"
     
-    echo $latexcmd "$f"
+    eval $latexcmd "\"\$f\""
 done
