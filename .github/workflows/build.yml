@@ -31,7 +31,7 @@ jobs:
     - name: Compiling pdf 
       run: |
           sudo docker build -t teximage .
-          sudo docker run --rm -v "$PWD":/data sh build.sh
+          sudo docker run --rm -v "$PWD":/data teximage sh build.sh 
           sudo docker image rm teximage
     - name: Push PDF artifacts to orphan branch
       env:
