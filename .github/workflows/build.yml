@@ -29,9 +29,11 @@ jobs:
     - name: Unpack LaTeX temp archive
       run: test -f cache.tar.gz && tar -xzvf cache.tar.gz || echo "No cache archive"
     - name: Compiling pdf 
+      id: compile
+      continue-on-error: true
       run: |
           sudo docker build -t teximage .
-          sudo docker run --rm -v "$PWD":/data teximage sh build.sh 
+          sudo docker run --rm -v "$PWD":/data teximage sh -lc 'sh build.sh 2>&1 | tee /data/build.log'
           sudo docker image rm teximage
     - name: Push PDF artifacts to orphan branch
       env:

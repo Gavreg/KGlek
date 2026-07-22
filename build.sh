@@ -1,42 +1,29 @@
-#!/bin/sh
+#!/bin/bash
 set -e
 
-export latexcmd="latexmk  -pdfxe -interaction=nonstopmode -halt-on-error -synctex=1 -8bit --shell-escape"
+export latexcmd="latexmk -g -pdfxe -interaction=nonstopmode -halt-on-error -synctex=1 -8bit --shell-escape"
+export NPROC=$(nproc || echo 4)  
 
-workdir=$PWD
+export workdir=$PWD
 
-for f in ./Images/CG_*/*.tex
-do
-    [ -f "$f" ] || continue
-    
-    echo "!==================================!"
-    echo "Building file  $f"
-    echo "!==================================!"
-    
+compile_tex() {
+    f="$1"
     texfile=$(basename "$f")
     texfiledir=$(dirname "$f")
     
-    echo "$f"
-    echo "$texfile"
-    echo "$texfiledir"
-
-    cd "$texfiledir"
-    
-    pwd
-    eval "$latexcmd \"\$texfile\""
-    
-    echo ""
-    
-    cd "$workdir"
-done
-
-
-for f in CG_*.tex
-do
-    [ -f "$f" ] || continue
     echo "!==================================!"
     echo "Building file  $f"
     echo "!==================================!"
-    
-    eval $latexcmd "\"\$f\""
-done
+
+    cd "$texfiledir"
+    eval "$latexcmd \"$texfile\""
+}
+
+export -f  compile_tex
+
+find ./Images/CG_*/*.tex CG_*.tex -type f -print0 2>/dev/null | \
+    xargs -P "$NPROC" -0 -I {} bash -c 'compile_tex "$@"' _ {}
+
+
+find  CG_*.tex -type f -print0 2>/dev/null | \
+    xargs -P "$NPROC" -0 -I {} bash -c 'compile_tex "$@"' _ {}
