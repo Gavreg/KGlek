@@ -12,6 +12,10 @@ jobs:
   build-ubuntu:
     runs-on: ubuntu-latest
     steps:
+    - name: Installing workflow dependencies
+      run:  apt update && apt install -y parallel tree
+    - name: Building TexLive image
+      run: sudo docker build -t teximage .
     - name: Checkout repository
       uses: actions/checkout@v7
       with:
@@ -26,16 +30,11 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-latex-temp-
     - name: Unpack LaTeX temp archive
-      run: | 
-        test -f cache.tar.gz && tar -xzvf cache.tar.gz  || echo "No cache archive"
+      run: test -f cache.tar.gz && tar -xzvf cache.tar.gz  || echo "No cache archive"
     - name: Compiling pdf 
-      run: |
-          tree
-          sudo docker build -t teximage .
-          sudo docker run --rm -v "$PWD":/data teximage bash build.sh 
-          sudo docker image rm teximage
+      run: sudo bash build.sh
     - name: Collect logs on failure
-      if: failure()  
+      if: failure() 
       run: |
         mkdir -p error_logs
         find . -type f -name "*.log" -exec cp --parents {} error_logs/ \;      
