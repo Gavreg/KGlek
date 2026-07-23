@@ -26,21 +26,20 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-latex-temp-
     - name: Unpack LaTeX temp archive
-      run: test -f cache.tar.gz && tar -xzvf cache.tar.gz || echo "No cache archive"
+      run: | 
+        test -f cache.tar.gz && tar -xzvf cache.tar.gz  || echo "No cache archive"
     - name: Compiling pdf 
       run: |
+          tree
           sudo docker build -t teximage .
           sudo docker run --rm -v "$PWD":/data teximage bash build.sh 
           sudo docker image rm teximage
     - name: Collect logs on failure
       if: failure()  
       run: |
-        find . -type f -name "*.log"
         mkdir -p error_logs
         find . -type f -name "*.log" -exec cp --parents {} error_logs/ \;      
         echo "Logs saved to: error_logs/"
-        ls -la error_logs/        
-        tree
     - name: Upload error logs as artifacts
       if: failure()  
       uses: actions/upload-artifact@v7
@@ -77,6 +76,7 @@ jobs:
       if: always()
       run: |
         find . -type f \( -name  "*.aux" -o -name "*.fdb_latexmk" -o -name "*.xdv" -o -name "*.nav" -o -name "*.out" -o -name "*.toc" -o -name "*.pdf" \) ! -name '*.image.pdf' -print0 | tar -czvf cache.tar.gz --null -T -
+        tree
     - name: Save LaTeX temp archive to cache
       if: always()
       uses: actions/cache/save@v5
