@@ -1,21 +1,11 @@
 \documentclass[10pt]{beamer}
-%\documentclass[10pt, handout]{beamer}
-%\setbeameroption{show notes}
-
-%\documentclass[10pt, a4paper]{article}
-%\usepackage{beamerarticle}
 
 \input{include/preambule.tex}
 \input{include/lecture_list.tex}
 
-\graphicspath{{Images/}{Images/\jobname/}}
-
-\date{\today}
-
-\renewcommand{\LectionNumber}{0}
-\renewcommand{\LectionTheme}{Компьютерная графика. О курсе}
-\title{Лекция \lecdni \\ \LectionTheme}
-\subtitle{Компьютерная графика}
+\NewDocumentCommand{\lecdni}{}{\toDni{\lecturegnumber}}
+\title{Лекция \lecdni \\ \lecturename}
+\subtitle{Компьютерная графика} 
 
 \begin{document}
 	 
