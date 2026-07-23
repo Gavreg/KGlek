@@ -29,12 +29,24 @@ jobs:
     - name: Unpack LaTeX temp archive
       run: test -f cache.tar.gz && tar -xzvf cache.tar.gz || echo "No cache archive"
     - name: Compiling pdf 
-      id: compile
-      continue-on-error: true
       run: |
           sudo docker build -t teximage .
-          sudo docker run --rm -v "$PWD":/data teximage sh -lc 'sh build.sh 2>&1 | tee /data/build.log'
+          sudo docker run --rm -v "$PWD":/data teximage sh build.sh 
           sudo docker image rm teximage
+    - name: Collect logs on failure
+      if: failure()  
+      run: |
+        mkdir -p error_logs
+        find . -type f -name "*.log" -exec cp --parents {} error_logs \;      
+        echo "Logs saved to: error_logs_*/"
+        ls -la error_logs_*/        
+    - name: Upload error logs as artifacts
+      if: failure()  
+      uses: actions/upload-artifact@v4
+      with:
+        name: error-logs-${{ github.run_id }}
+        path: error_logs/*
+        retention-days: 7  
     - name: Push PDF artifacts to orphan branch
       env:
         GIT_AUTHOR_NAME: github-actions[bot]

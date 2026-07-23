@@ -1,29 +1,55 @@
 #!/bin/bash
 set -e
+set -o pipefail
 
-export latexcmd="latexmk -g -pdfxe -interaction=nonstopmode -halt-on-error -synctex=1 -8bit --shell-escape"
 export NPROC=$(nproc || echo 4)  
+#export NPROC=4
 
-export workdir=$PWD
+
+
+
+rm -rf errors || true
 
 compile_tex() {
-    f="$1"
+
+    set -o pipefail
+    set -e
+
+    f="$@"
+
+    workdir=$PWD
+
     texfile=$(basename "$f")
     texfiledir=$(dirname "$f")
-    
-    echo "!==================================!"
-    echo "Building file  $f"
-    echo "!==================================!"
+    texfilename=$(basename "$texfile" .tex) 
+
 
     cd "$texfiledir"
-    eval "$latexcmd \"$texfile\""
+
+    
+    # echo "!==================================!"
+    # echo "Building file  $f"
+    # echo "!==================================!"
+
+    
+
+    if latexmk  -pdfxe  -interaction=nonstopmode  -recorder- -halt-on-error  -8bit --shell-escape -cd "$texfile"  > /dev/null 2>&1 ; then #| tee "$workdir"/errors/"$texfile".log  
+        true
+    else
+        find . -type f -name "$texfilename.*" ! -name "$texfilename.tex" ! -name "$texfilename.log" -delete
+        exit 255
+    fi
+
 }
 
 export -f  compile_tex
 
-find ./Images/CG_*/*.tex CG_*.tex -type f -print0 2>/dev/null | \
-    xargs -P "$NPROC" -0 -I {} bash -c 'compile_tex "$@"' _ {}
+rm -rf errors || true
+mkdir  errors || true
 
+find ./Images/CG_*/*.tex -type f -print0 | \
+    parallel -0 -j $NPROC --halt-on-error now,fail=1 --verbose --eta 'compile_tex {}'
 
-find  CG_*.tex -type f -print0 2>/dev/null | \
-    xargs -P "$NPROC" -0 -I {} bash -c 'compile_tex "$@"' _ {}
+find  . -name CG_*.tex -type f -print0 | \
+    parallel -0 -j $NPROC --halt-on-error now,fail=1 --verbose --eta 'compile_tex {}'
+
