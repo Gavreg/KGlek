@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Installing workflow dependencies
-      run:  apt update && apt install -y parallel tree
+      run:  sudo apt update && sudo apt install -y parallel tree
     - name: Building TexLive image
       run: sudo docker build -t teximage .
     - name: Checkout repository
