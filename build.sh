@@ -22,9 +22,9 @@ compile_tex() {
     cd "$texfiledir"
 
     if latexmk  -pdfxe  -interaction=nonstopmode  -recorder- -halt-on-error  -8bit --shell-escape -synctex=0  "$texfile" > /dev/null 2>&1; then #| tee "$workdir"/errors/"$texfile".log  
-        true
+        rm -f "$texfilename".log || true
     else
-        #find . -type f -name "$texfilename.*" ! -name "$texfilename.tex" ! -name "$texfilename.log" -delete
+        find . -type f -name "$texfilename.*" ! -name "$texfilename.tex" ! -name "$texfilename.log" ! -name "$texfilename.pdf"  -delete
         exit 255
     fi
 
