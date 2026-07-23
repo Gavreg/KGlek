@@ -38,6 +38,6 @@ mkdir  errors || true
 find ./Images/CG_*/*.tex -type f -print0 | \
     parallel -0 -j $NPROC --halt-on-error soon,fail=1 --verbose 'compile_tex {}'
 
-find  . -name CG_*.tex -type f -print0 | \
+find  . -name "CG_*.tex" -type f -print0 | \
     parallel -0 -j $NPROC --halt-on-error soon,fail=1 --verbose 'compile_tex {}'
 
