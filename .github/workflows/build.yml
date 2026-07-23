@@ -14,13 +14,13 @@ jobs:
     steps:
     - name: Installing workflow dependencies
       run:  sudo apt update && sudo apt install -y parallel tree
-    - name: Building TexLive image
-      run: sudo docker build -t teximage .
     - name: Checkout repository
       uses: actions/checkout@v7
       with:
         fetch-depth: 0
         persist-credentials: true
+    - name: Building TexLive image from dockerfile
+      run: sudo docker build -t teximage .
     - name: Restore LaTeX temp archive from cache
       id: latex-cache
       uses: actions/cache/restore@v5
