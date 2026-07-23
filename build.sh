@@ -6,10 +6,6 @@ export NPROC=$(nproc || echo 4)
 #export NPROC=4
 
 
-
-
-rm -rf errors || true
-
 compile_tex() {
 
     set -o pipefail
@@ -22,16 +18,8 @@ compile_tex() {
     texfile=$(basename "$f")
     texfiledir=$(dirname "$f")
     texfilename=$(basename "$texfile" .tex) 
-
-
+    
     cd "$texfiledir"
-
-    
-    # echo "!==================================!"
-    # echo "Building file  $f"
-    # echo "!==================================!"
-
-    
 
     if latexmk  -pdfxe  -interaction=nonstopmode  -recorder- -halt-on-error  -8bit --shell-escape -cd "$texfile"  > /dev/null 2>&1 ; then #| tee "$workdir"/errors/"$texfile".log  
         true
