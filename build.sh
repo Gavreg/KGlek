@@ -24,7 +24,7 @@ compile_tex() {
     if latexmk  -pdfxe  -interaction=nonstopmode  -recorder- -halt-on-error  -8bit --shell-escape -cd "$texfile"  > /dev/null 2>&1 ; then #| tee "$workdir"/errors/"$texfile".log  
         true
     else
-        find . -type f -name "$texfilename.*" ! -name "$texfilename.tex" ! -name "$texfilename.log" -delete
+        #find . -type f -name "$texfilename.*" ! -name "$texfilename.tex" ! -name "$texfilename.log" -delete
         exit 255
     fi
 
