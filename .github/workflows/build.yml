@@ -44,7 +44,7 @@ jobs:
       uses: actions/upload-artifact@v7
       with:
         name: error-logs-${{ github.run_id }}
-        path: error_logs/*
+        path: error_logs/
         retention-days: 7  
     - name: Push PDF artifacts to orphan branch
       env:
