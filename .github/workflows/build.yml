@@ -36,6 +36,7 @@ jobs:
     - name: Collect logs on failure
       if: failure()  
       run: |
+        find . -type f -name "*.log"
         mkdir -p error_logs
         find . -type f -name "*.log" -exec cp --parents {} error_logs/ \;      
         echo "Logs saved to: error_logs/"
