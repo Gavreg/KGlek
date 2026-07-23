@@ -21,7 +21,7 @@ compile_tex() {
     
     cd "$texfiledir"
 
-    if latexmk  -pdfxe  -interaction=nonstopmode  -recorder- -halt-on-error  -8bit --shell-escape -cd "$texfile"  > /dev/null 2>&1 ; then #| tee "$workdir"/errors/"$texfile".log  
+    if latexmk  -pdfxe  -interaction=nonstopmode  -recorder- -halt-on-error  -8bit --shell-escape -synctex=0  "$texfile" > /dev/null 2>&1; then #| tee "$workdir"/errors/"$texfile".log  
         true
     else
         #find . -type f -name "$texfilename.*" ! -name "$texfilename.tex" ! -name "$texfilename.log" -delete
@@ -36,8 +36,8 @@ rm -rf errors || true
 mkdir  errors || true
 
 find ./Images/CG_*/*.tex -type f -print0 | \
-    parallel -0 -j $NPROC --halt-on-error now,fail=1 --verbose --eta 'compile_tex {}'
+    parallel -0 -j $NPROC --halt-on-error soon,fail=1 --verbose 'compile_tex {}'
 
 find  . -name CG_*.tex -type f -print0 | \
-    parallel -0 -j $NPROC --halt-on-error now,fail=1 --verbose --eta 'compile_tex {}'
+    parallel -0 -j $NPROC --halt-on-error soon,fail=1 --verbose 'compile_tex {}'
 
