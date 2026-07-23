@@ -1,0 +1,172 @@
+\documentclass[10pt]{beamer}
+
+%\documentclass[10pt, handout]{beamer}
+\setbeameroption{show notes}
+
+%\documentclass[10pt, a4paper]{article}
+%\usepackage{beamerarticle}
+
+\input{preambule.tex}
+
+
+\usepackage{media9}
+
+\graphicspath{{Images/}{Images/\jobname/}}
+
+\date{\today}
+
+
+\renewcommand{\LectionNumber}{15}
+\renewcommand{\LectionTheme}{Тени исчезают в полдень}
+\title{Лекция \lecdni \\ \LectionTheme}
+\subtitle{Компьютерная графика}
+
+
+
+%\usepackage{standalone}
+
+\setbeamersize
+{
+	text margin left=0.5cm,
+	text margin right=0.5cm
+}
+
+\usepackage{comment}
+
+\usepackage{adjustbox}
+
+
+%	\transduration{2}
+%   \transfade
+
+\begin{document}
+ 		 
+\input{template.tex}
+
+\newcommand \abs[1] {\left| #1 \right|}
+
+\everymath{\displaystyle}
+
+    
+\begin{comment}
+\end{comment}
+
+
+    
+    
+    \QRFRAME	
+	
+
+	\frame{\maketitle}
+
+	
+	%\begin{frame}\frametitle{План лекции}
+		%\tableofcontents
+	%\end{frame}
+	
+	\begin{frame}\frametitle{В живописи}
+		
+		\centering\IG[0.8]{18570@2x.jpg}
+		
+	\end{frame}
+	
+	\begin{frame}\frametitle{В фотографии}
+		
+		\centering\IG[0.5]{Screenshot 2025-11-27 223905.png}
+		
+	\end{frame}
+	
+	\begin{frame}\frametitle{В архитектуре}
+		
+	
+		\centering
+		\IG[0.4]{Screenshot 2025-11-27 222857.png}%	
+		\IG[0.6]{Screenshot 2025-11-27 223154.png}
+		
+		
+	\end{frame}
+
+	\begin{frame}\COVER{\frametitle{Структура тени}}
+		
+		\TCT{0.5}
+		{
+			\centering
+			\textbf{Ожидание} 
+			
+			\IG{Screenshot 2025-11-12 231344.png}
+		}
+		{
+			\centering
+			\textbf{Реальность} 
+			
+			\IG{Screenshot 2025-11-12 231404.png}
+			
+			Тень (\textit{umbra}, лат.)
+			
+			Полутень (\textit{penumbra, paene} --- почти, лат.)
+		}
+		
+	\end{frame}
+
+	\begin{frame}\COVER{\frametitle{Тени в космосе}}
+	\setbeamercovered{invisible}
+	\centering
+	
+	\uncover<.->{\resizebox{!}{3cm}{\IG[0.35]{08f2e3322f5549d9bb8db83ed68f678f.max-2500x1500.jpg}}} \pause
+	\uncover<.->{\resizebox{!}{3cm}{\IG[0.6]{unnamed.png}} }
+	
+	\pause
+	\uncover<.->{\IG[0.5]{Press File (long-en)-5.jpg}}
+	
+	\setbeamercovered{dynamic}	
+	\end{frame}
+	
+	\begin{frame}\frametitle{Тени в 2D}
+		
+		\TC{0.5}
+		{
+			\centering\IG[0.95]{5b5000dbae6b130843475a08a25b5dfa.png}
+			
+			Winter Gold
+		}{
+			\centering\IG[0.95]{d3cbc1082cb636530704c4f00198accc.png}
+			
+			MDK 
+		}		
+		
+	\end{frame}
+	
+	
+	\begin{frame}\frametitle{Blob-тени}
+		
+		\centering
+		\IG[0.85]{54cff55a4c1e39530423438b44fe2820.jpg}
+		
+		Super Mario 64
+		
+	\end{frame}
+	
+	\begin{frame}\frametitle{Проекционные тени}
+		
+		\centering\IG[0.5]{Screenshot 2025-11-27 225634.png}%
+		\IG[0.5]{Screenshot 2025-11-27 225851.png}
+		
+	\end{frame}
+	
+	\begin{frame}\frametitle{Вершинные тени}
+		
+
+		
+	\end{frame}
+	
+	
+	
+	\begin{frame}\frametitle{Shadow Mapping}
+		
+		\centering\IG[0.6]{1b6c10916166cd0d4d64e56c25e232b9.png}
+		
+	\end{frame}
+
+\end{document}
+
+

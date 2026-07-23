@@ -41,6 +41,7 @@ jobs:
         find . -type f -name "*.log" -exec cp --parents {} error_logs/ \;      
         echo "Logs saved to: error_logs/"
         ls -la error_logs/        
+        tree
     - name: Upload error logs as artifacts
       if: failure()  
       uses: actions/upload-artifact@v4
