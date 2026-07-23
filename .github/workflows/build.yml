@@ -36,15 +36,15 @@ jobs:
     - name: Collect logs on failure
       if: failure() 
       run: |
-        mkdir -p error_logs
-        find . -type f -name "*.log" -exec cp --parents {} error_logs/ \;      
-        echo "Logs saved to: error_logs/"
+        mkdir -p /tmp/error_logs
+        find . -type f -name "*.log" -exec cp --parents {} /tmp/error_logs/ \;      
+        echo "Logs saved to: /tmp/error_logs/"
     - name: Upload error logs as artifacts
       if: failure()  
       uses: actions/upload-artifact@v7
       with:
         name: error-logs-${{ github.run_id }}
-        path: error_logs/
+        path: /tmp/error_logs/
         retention-days: 7  
     - name: Push PDF artifacts to orphan branch
       env:
