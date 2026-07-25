@@ -1,5 +1,5 @@
 #ifndef SPLINESH
-#define SPLINESh
+#define SPLINESH
 
 #include <cmath>
 #include <vector>

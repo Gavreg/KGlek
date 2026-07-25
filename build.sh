@@ -5,7 +5,36 @@ set -o pipefail
 export NPROC=$(nproc || echo 4)  
 #export NPROC=1
 
+
+
+for arg in $@; do 
+    [ $arg = "cpp" ] && buildcpp=true
+done
+
+
+
 export workdir="$PWD"
+
+compile_and_run_cpp() {
+    set -o pipefail
+    set -e
+
+    f="$1"
+
+    cd "$cppfiledir"
+    
+    sudo docker run --rm -v "$workdir":/data teximage bash -c " \
+        set -o pipefail; \
+        set -e; \
+        cppfile=\$(basename "$f"); \
+        cppfiledir=\$(dirname "$f"); \
+        cppfilename=\$(basename "\$cppfile" .cpp); \
+        cd \"\$cppfiledir\"; \
+        clang++ -std=c++20 -o \"\$cppfilename\" \"\$cppfile\"; \
+        ./\"\$cppfilename\" > /dev/null \
+    "
+}
+export -f  compile_and_run_cpp
 
 compile_tex() {
 
@@ -31,68 +60,19 @@ compile_tex() {
         mv "$texfilename".log.tmp  "$texfilename".log  || true
         exit 255
     fi
-
 }
-
 export -f  compile_tex
 
-rm -rf errors || true
-mkdir  errors || true
+[ $buildcpp ] && find . -type f -name "*.cpp" -print0 | \
+    parallel -0 -j $NPROC --halt-on-error soon,fail=1 --verbose 'compile_and_run_cpp {}'
 
-find ./Images/CG_*/*.tex -type f -print0 | \
+find . -type d -name "CG_*" -path "./Images*" -exec find {} -name "*.tex" -print0 \;  | \
     parallel -0 -j $NPROC --halt-on-error soon,fail=1 --verbose 'compile_tex {}'
 
 find  . -name "CG_*.tex" -type f -print0 | \
     parallel -0 -j $NPROC --halt-on-error soon,fail=1 --verbose 'compile_tex {}'
 
 
-
-
-
-# #!/bin/bash
-# set -e
-# set -o pipefail
-
-# export NPROC=$(nproc || echo 4)  
-# #export NPROC=4
-
-
-# compile_tex() {
-
-#     set -o pipefail
-#     set -e
-
-#     f="$@"
-
-#     workdir=$PWD
-
-#     texfile=$(basename "$f")
-#     texfiledir=$(dirname "$f")
-#     texfilename=$(basename "$texfile" .tex) 
-    
-#     cd "$texfiledir"
-
-#     if latexmk  -pdfxe  -interaction=nonstopmode  -recorder- -halt-on-error  -8bit --shell-escape -synctex=0  "$texfile" > /dev/null 2>&1; then #| tee "$workdir"/errors/"$texfile".log  
-#         rm -f "$texfilename".log || true
-#     else
-#         mv "$texfilename".log "$texfilename".log.tmp
-#         latexmk -C "$texfile"
-#         mv "$texfilename".log.tmp "$texfilename".log
-#         exit 255
-#     fi
-
-# }
-
-# export -f  compile_tex
-
-# rm -rf errors || true
-# mkdir  errors || true
-
-# find ./Images/CG_*/*.tex -type f -print0 | \
-#     parallel -0 -j $NPROC --halt-on-error soon,fail=1 --verbose 'compile_tex {}'
-
-# find  . -name "CG_*.tex" -type f -print0 | \
-#     parallel -0 -j $NPROC --halt-on-error soon,fail=1 --verbose 'compile_tex {}'
 
 
 

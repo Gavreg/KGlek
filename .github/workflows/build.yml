@@ -14,13 +14,16 @@ jobs:
     steps:
     - name: Installing workflow dependencies
       run:  sudo apt update && sudo apt install -y parallel tree
+
     - name: Checkout repository
       uses: actions/checkout@v7
       with:
         fetch-depth: 0
         persist-credentials: true
+
     - name: Building TexLive image from dockerfile
       run: sudo docker build -t teximage .
+
     - name: Restore LaTeX temp archive from cache
       id: latex-cache
       uses: actions/cache/restore@v5
@@ -29,16 +32,34 @@ jobs:
         key: ${{ runner.os }}-latex-temp-${{ github.run_id }}
         restore-keys: |
           ${{ runner.os }}-latex-temp-
+
     - name: Unpack LaTeX temp archive
       run: test -f cache.tar.gz && tar -xzvf cache.tar.gz  || echo "No cache archive"
+
+    - name: Resore images *.dat files from cache
+      uses: actions/cache@v6
+      with:
+        path: datfiles.tar.gz
+        key: ${{ runner.os }}-datfiles-${{ hashFiles('**/*.cpp', '**/*.cpp') }}
+    
+    - name: Unpack dat files
+      run: test -f datfiles.tar.gz && tar -xzf datfiles.tar.gz || echo "No cache archive with dat files"
+
     - name: Compiling pdf 
-      run: sudo bash build.sh
+      run: |
+        if test -f datfiles.tar.gz; then  
+          sudo bash build.sh cpp
+        else
+          sudo bash build.sh 
+        fi
+
     - name: Collect logs on failure
       if: failure() 
       run: |
         mkdir -p /tmp/error_logs
         find . -type f -name "*.log" -exec cp --parents {} /tmp/error_logs/ \;      
         echo "Logs saved to: /tmp/error_logs/"
+
     - name: Upload error logs as artifacts
       if: failure()  
       uses: actions/upload-artifact@v7
@@ -46,6 +67,7 @@ jobs:
         name: error-logs-${{ github.run_id }}
         path: /tmp/error_logs/
         retention-days: 7  
+        
     - name: Push PDF artifacts to orphan branch
       env:
         GIT_AUTHOR_NAME: github-actions[bot]
@@ -71,14 +93,23 @@ jobs:
         git add README.md
         git commit -m "Update PDF from ${{ github.sha }}" || true
         git push origin HEAD:pdfs || true
-    - name: Preparing for cache
+
+    - name: Preparing for cache latex tmp files
       if: always()
       run: |
         find . -type f \( -name  "*.aux" -o -name "*.fdb_latexmk" -o -name "*.xdv" -o -name "*.nav" -o -name "*.out" -o -name "*.toc" -o -name "*.pdf" \) ! -name '*.image.pdf' -print0 | tar -czvf cache.tar.gz --null -T -
-        tree
+
+    - name: Preparing for cache image *.dat files
+      run: |
+        find . -type f  -name '*.image.pdf' -print0 | tar -czf datfiles.tar.gz --null -T -
+
     - name: Save LaTeX temp archive to cache
       if: always()
       uses: actions/cache/save@v5
       with: 
         path: cache.tar.gz
         key: ${{ runner.os }}-latex-temp-${{ github.run_id }}
+
+    - name: Print rezult tree
+      if: always()
+      run: tree

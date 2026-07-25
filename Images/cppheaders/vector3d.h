@@ -1,4 +1,3 @@
-
 #ifndef VECTOR3D
 #define VECTOR3D
 
