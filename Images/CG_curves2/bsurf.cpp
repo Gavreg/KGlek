@@ -235,9 +235,11 @@ int main ()
                 
     }
 
+    print(std::string("nurbs_surf_order4_points.tex.dat"),points);
+    print_skelet(std::string("nurbs_surf_order4_skelet.tex.dat"),nurbssurf.p);
 
 
-    prepare_directory("nurbs_surf_order4_points.tex.dat");
+    //prepare_directory("nurbs_surf_order4_points.tex.dat");
     
     nurbssurf.U=nurbssurf.V=makeKnotsOpen(2,4);
 
