@@ -48,11 +48,10 @@ jobs:
     - name: Compiling pdf 
       run: |
         if test -f datfiles.tar.gz; then  
-          sudo bash build.sh cpp
-        else
           sudo bash build.sh 
+        else
+          sudo bash build.sh cpp
         fi
-
     - name: Collect logs on failure
       if: failure() 
       run: |
