@@ -92,7 +92,7 @@ int main()
     printTikzCoords("b_spline_tikz_points.dat", b.p);
 
     std::vector<vector2d> curve;
-    for (int k:{1,2,3,4,5})
+    for (int k:{0,1,2,3,4,5})
     {
         b.x = makeKnotsOpen(k, 5);
         b.getCurve(k, 300, curve);
