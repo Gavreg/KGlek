@@ -204,110 +204,110 @@
 
 
 
-\begin{tikzpicture}	
+% \begin{tikzpicture}	
 			
-			\draw [Cyan, line width=0.5pt] plot file{spline4_6.dat};
-			\draw [Magenta, line width=0.5pt] plot file{spline4_5.dat};
-			\draw [Orange, line width=0.5pt] plot file{spline4_4.dat};
-			\draw [blue, line width=0.5pt] plot file{spline4_3.dat};
-			\draw [ForestGreen, line width=0.5pt] plot file{spline4_2.dat};
-			\draw [red, line width=0.5pt] plot file{spline4_1.dat};	
-			\draw[ultra thin] plot[mark=*] file{points.dat};
+% 			\draw [Cyan, line width=0.5pt] plot file{spline4_6.dat};
+% 			\draw [Magenta, line width=0.5pt] plot file{spline4_5.dat};
+% 			\draw [Orange, line width=0.5pt] plot file{spline4_4.dat};
+% 			\draw [blue, line width=0.5pt] plot file{spline4_3.dat};
+% 			\draw [ForestGreen, line width=0.5pt] plot file{spline4_2.dat};
+% 			\draw [red, line width=0.5pt] plot file{spline4_1.dat};	
+% 			\draw[ultra thin] plot[mark=*] file{points.dat};
 	
-\end{tikzpicture}
+% \end{tikzpicture}
 
-\begin{tikzpicture}
+% \begin{tikzpicture}
 	
 	
-	\usetikzlibrary{plotmarks}
+% 	\usetikzlibrary{plotmarks}
 
-	\draw [Orange, line width=0.5pt] plot file{spline4_7.dat};
-	\draw [red, draw=none, mark=star] plot file{spline4_7_in_knots.dat};
+% 	\draw [Orange, line width=0.5pt] plot file{spline4_7.dat};
+% 	\draw [red, draw=none, mark=star] plot file{spline4_7_in_knots.dat};
 	
-	\draw node [above] {$(0,0)$};
+% 	\draw node [above] {$(0,0)$};
 	
-	\draw[ultra thin] plot[mark=*] file{points.dat};
+% 	\draw[ultra thin] plot[mark=*] file{points.dat};
 	
-\end{tikzpicture}
-
-
-
-
-\begin{tikzpicture}[scale=1.5]
-	
-	\draw[step={(0.25,0.25)}, ultra thin, gray] (0,0) grid (7,1);
-	
-	\draw [red] plot file{spline4_5_N71.dat};	
-	\draw [ForestGreen] plot file{spline4_5_N72.dat};
-	\draw [blue] plot file{spline4_5_N73.dat};
-	\draw [Orange] plot file{spline4_5_N74.dat};
-	\draw [Magenta] plot file{spline4_5_N75.dat};
-	
-	
-	\draw[-latex] (0,0) -- (0,1.1) node [right] {$N(3,i)$};
-	\draw[-latex] (0,0) -- (7.1,0) node [above] {$t$};
-	
-	\draw (1,0) node [below] {1};
-	\draw (2,0) node [below] {2};
-	\draw (3,0) node [below] {3};
-	\draw (4,0) node [below] {4};
-	\draw (5,0) node [below] {5};
-	\draw (6,0) node [below] {6};
-	\draw (7,0) node [below] {7};
-	\draw (0,1) node [left]  {1};
-	
-\end{tikzpicture}
+% \end{tikzpicture}
 
 
 
 
+% \begin{tikzpicture}[scale=1.5]
+	
+% 	\draw[step={(0.25,0.25)}, ultra thin, gray] (0,0) grid (7,1);
+	
+% 	\draw [red] plot file{spline4_5_N71.dat};	
+% 	\draw [ForestGreen] plot file{spline4_5_N72.dat};
+% 	\draw [blue] plot file{spline4_5_N73.dat};
+% 	\draw [Orange] plot file{spline4_5_N74.dat};
+% 	\draw [Magenta] plot file{spline4_5_N75.dat};
+	
+	
+% 	\draw[-latex] (0,0) -- (0,1.1) node [right] {$N(3,i)$};
+% 	\draw[-latex] (0,0) -- (7.1,0) node [above] {$t$};
+	
+% 	\draw (1,0) node [below] {1};
+% 	\draw (2,0) node [below] {2};
+% 	\draw (3,0) node [below] {3};
+% 	\draw (4,0) node [below] {4};
+% 	\draw (5,0) node [below] {5};
+% 	\draw (6,0) node [below] {6};
+% 	\draw (7,0) node [below] {7};
+% 	\draw (0,1) node [left]  {1};
+	
+% \end{tikzpicture}
 
-\begin{tikzpicture}
+
+
+
+
+% \begin{tikzpicture}
 	
-	\draw plot[mark=*] file{points.dat};
+% 	\draw plot[mark=*] file{points.dat};
 	
 
 	
-	\draw (2, 1) node[left]{$B_0$};
-	\draw (1, 4) node[left]{$B_1$};
-	\draw (5, 5) node[below]{$B_2$};
-	\draw (3, 3) node[left]{$B_3$};
-	\draw (5, 1) node[left]{$B_4$};
+% 	\draw (2, 1) node[left]{$B_0$};
+% 	\draw (1, 4) node[left]{$B_1$};
+% 	\draw (5, 5) node[below]{$B_2$};
+% 	\draw (3, 3) node[left]{$B_3$};
+% 	\draw (5, 1) node[left]{$B_4$};
 	
 	
-	\draw [red] plot file{spline3.dat};
+% 	\draw [red] plot file{spline3.dat};
 	
 	
-\end{tikzpicture}
+% \end{tikzpicture}
 
-\begin{tikzpicture}
+% \begin{tikzpicture}
 	
-	\draw plot[mark=*, draw=none] file{points.dat};
+% 	\draw plot[mark=*, draw=none] file{points.dat};
 	
-	\draw (2, 1) node[left]{$B_0$};
-	\draw (1, 4) node[left]{$B_1$};
-	\draw (5, 5) node[below]{$B_2$};
-	\draw (3, 3) node[left]{$B_3$};
-	\draw (5, 1) node[left]{$B_4$};
+% 	\draw (2, 1) node[left]{$B_0$};
+% 	\draw (1, 4) node[left]{$B_1$};
+% 	\draw (5, 5) node[below]{$B_2$};
+% 	\draw (3, 3) node[left]{$B_3$};
+% 	\draw (5, 1) node[left]{$B_4$};
 	
-	\draw [ForestGreen] plot file{spline2.dat};
+% 	\draw [ForestGreen] plot file{spline2.dat};
 	
 	
-\end{tikzpicture}
+% \end{tikzpicture}
 
-\begin{tikzpicture}
+% \begin{tikzpicture}
 	
-	\draw plot[mark=*, draw=none] file{points.dat};
+% 	\draw plot[mark=*, draw=none] file{points.dat};
 	
-	\draw (2, 1) node[left]{$B_0$};
-	\draw (1, 4) node[left]{$B_1$};
-	\draw (5, 5) node[below]{$B_2$};
-	\draw (3, 3) node[left]{$B_3$};
-	\draw (5, 1) node[left]{$B_4$};
+% 	\draw (2, 1) node[left]{$B_0$};
+% 	\draw (1, 4) node[left]{$B_1$};
+% 	\draw (5, 5) node[below]{$B_2$};
+% 	\draw (3, 3) node[left]{$B_3$};
+% 	\draw (5, 1) node[left]{$B_4$};
 	
-	\draw [Magenta] plot file{spline0.dat};
+% 	\draw [Magenta] plot file{spline0.dat};
 	
 	
-\end{tikzpicture}
+% \end{tikzpicture}
 
 \end{document}
