@@ -47,7 +47,7 @@ jobs:
           echo "Не собираем!"
         else
           echo "Собираем!"
-          echo "BUILD_REQUIRED='true'" >> $GITHUB_ENV   # <-- ИСПРАВЛЕНО
+          echo "BUILD_REQUIRED=true" >> $GITHUB_ENV   
         fi
 
 
