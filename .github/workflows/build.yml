@@ -2,10 +2,10 @@ name: Build
 on:
   push:
     branches:
-      - 'testTexCache'
+      - 'exp/testTexCache'
   pull_request:
     branches:
-      - 'testTexCache'
+      - 'exp/testTexCache'
 permissions:
   contents: write
 jobs:
