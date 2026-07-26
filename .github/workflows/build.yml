@@ -29,7 +29,7 @@ jobs:
     - name: Restore *.texfiles hash from cache
       uses: actions/cache@v6
       with:
-        path: texfiles.cache
+        path: texfiles.hash
         key: ${{ runner.os }}-latex-hash-${{ env.TEX_HASH }}
 
     - name: Check if compilation is required 
