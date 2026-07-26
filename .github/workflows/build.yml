@@ -12,8 +12,10 @@ jobs:
   build-ubuntu:
     runs-on: ubuntu-latest
     steps:
-    # - name: Installing workflow dependencies
-    #   run:  sudo apt update && sudo apt install -y parallel tree
+
+
+    - name: Installing workflow dependencies
+      run:  sudo apt update && sudo apt install -y parallel tree
 
     - name: Checkout repository
       uses: actions/checkout@v7
@@ -21,16 +23,21 @@ jobs:
         fetch-depth: 0
         persist-credentials: true
 
+
+
     - name: Caclulate tex files hash
       run: |
-        hash=$(echo ${{ hashFiles('**/*.tex') }})
+        hash=$(echo ${{ hashFiles('**/*.tex', '**/*.cpp', '**/*.h') }})
         echo "TEX_HASH=$hash" >> $GITHUB_ENV 
+
     
     - name: Restore *.texfiles hash from cache
       uses: actions/cache@v6
       with:
         path: texfiles.hash
         key: ${{ runner.os }}-latex-hash-${{ env.TEX_HASH }}
+
+
 
     - name: Check if compilation is required 
       run: |
@@ -43,9 +50,13 @@ jobs:
           echo "BUILD_REQUARIED=true" >> $GITHUB_ENV 
         fi
 
+
+
     - name: Building TexLive image from dockerfile
       if: env.BUILD_REQUIRED == 'true'
       run: sudo docker build -t teximage .
+
+
 
     - name: Restore LaTeX temp archive from cache
       if: env.BUILD_REQUIRED == 'true'
@@ -57,9 +68,13 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-latex-temp-
 
+
+
     - name: Unpack LaTeX temp archive
       if: env.BUILD_REQUIRED == 'true'
       run: test -f cache.tar.gz && tar -xzvf cache.tar.gz  || echo "No cache archive"
+
+
 
     - name: Resore images *.dat files from cache
       if: env.BUILD_REQUIRED == 'true'
@@ -67,9 +82,14 @@ jobs:
       with:
         path: datfiles.tar.gz
         key: ${{ runner.os }}-datfiles-${{ hashFiles('**/*.cpp', '**/*.cpp') }}
+
+
     
     - name: Unpack dat files
+      if: env.BUILD_REQUIRED == 'true'
       run: test -f datfiles.tar.gz && tar -xzf datfiles.tar.gz || echo "No cache archive with dat files"
+
+
 
     - name: Compiling pdf 
       if: env.BUILD_REQUIRED == 'true' 
@@ -80,12 +100,17 @@ jobs:
           sudo bash build.sh cpp
         fi
         echo "${{ env.TEX_HASH }}" > texfiles.hash
+
+
+
     - name: Collect logs on failure
       if: failure() 
       run: |
         mkdir -p /tmp/error_logs
         find . -type f -name "*.log" -exec cp --parents {} /tmp/error_logs/ \;      
         echo "Logs saved to: /tmp/error_logs/"
+
+
 
     - name: Upload error logs as artifacts
       if: failure()  && env.BUILD_REQUIRED == 'true'
