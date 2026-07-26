@@ -33,7 +33,7 @@ jobs:
         key: ${{ runner.os }}-latex-cache-${{ env.TEX_HASH }}
     - name: Check if compilation is required 
       run: |
-        if test -f texfiles.cache && test "${{ env.TEX_HASH }}" = "&(cat texfiles.cache)""; then
+        if test -f texfiles.cache && test "${{ env.TEX_HASH }}" = "&(cat texfiles.cache)"; then
           echo "Не собираем!"
         else
           echo "Собираем!"
