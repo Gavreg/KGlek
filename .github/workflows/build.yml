@@ -30,19 +30,20 @@ jobs:
       uses: actions/cache@v6
       with:
         path: texfiles.cache
-        key: ${{ runner.os }}-latex-cache-${{ env.TEX_HASH }}
+        key: ${{ runner.os }}-latex-hash-${{ env.TEX_HASH }}
 
     - name: Check if compilation is required 
       run: |
-        cat texfiles.cache
-        if test -f texfiles.cache && test "${{ env.TEX_HASH }}" == "$(cat texfiles.cache)"; then
+        echo "Old hash $(cat texfiles.hash)"
+        echo "Curent hash ${{ env.TEX_HASH }}"
+        if test -f texfiles.hash && test "${{ env.TEX_HASH }}" == "$(cat texfiles.hash)"; then
           echo "Не собираем!"
         else
           echo "Собираем!"
         fi
 
     - name: Write tex files hash to file
-      run: echo "${{ env.TEX_HASH }}" > texfiles.cache
+      run: echo "${{ env.TEX_HASH }}" > texfiles.hash
 
 
     # - name: Building TexLive image from dockerfile
