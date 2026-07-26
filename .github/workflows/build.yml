@@ -47,19 +47,19 @@ jobs:
           echo "Не собираем!"
         else
           echo "Собираем!"
-          echo "BUILD_REQUARIED=true" >> $GITHUB_ENV 
+          echo "BUILD_REQUIRED='true'" >> $GITHUB_ENV   # <-- ИСПРАВЛЕНО
         fi
 
 
 
     - name: Building TexLive image from dockerfile
-      if: env.BUILD_REQUIRED == 'true'
+      if: ${{ env.BUILD_REQUIRED == 'true' }}   
       run: sudo docker build -t teximage .
 
 
 
     - name: Restore LaTeX temp archive from cache
-      if: env.BUILD_REQUIRED == 'true'
+      if: ${{ env.BUILD_REQUIRED == 'true' }}   
       id: latex-cache
       uses: actions/cache/restore@v5
       with:
@@ -71,13 +71,13 @@ jobs:
 
 
     - name: Unpack LaTeX temp archive
-      if: env.BUILD_REQUIRED == 'true'
+      if: ${{ env.BUILD_REQUIRED == 'true' }}  
       run: test -f cache.tar.gz && tar -xzvf cache.tar.gz  || echo "No cache archive"
 
 
 
     - name: Resore images *.dat files from cache
-      if: env.BUILD_REQUIRED == 'true'
+      if: ${{ env.BUILD_REQUIRED == 'true' }}   
       uses: actions/cache@v6
       with:
         path: datfiles.tar.gz
@@ -86,13 +86,13 @@ jobs:
 
     
     - name: Unpack dat files
-      if: env.BUILD_REQUIRED == 'true'
+      if: ${{ env.BUILD_REQUIRED == 'true' }}   
       run: test -f datfiles.tar.gz && tar -xzf datfiles.tar.gz || echo "No cache archive with dat files"
 
 
 
     - name: Compiling pdf 
-      if: env.BUILD_REQUIRED == 'true' 
+      if: ${{ env.BUILD_REQUIRED == 'true' }}   
       run: |
         if test -f datfiles.tar.gz; then  
           sudo bash build.sh 
@@ -104,7 +104,7 @@ jobs:
 
 
     - name: Collect logs on failure
-      if: failure() 
+      if: ${{ failure() }}   
       run: |
         mkdir -p /tmp/error_logs
         find . -type f -name "*.log" -exec cp --parents {} /tmp/error_logs/ \;      
@@ -113,7 +113,7 @@ jobs:
 
 
     - name: Upload error logs as artifacts
-      if: failure()  && env.BUILD_REQUIRED == 'true'
+      if: ${{ failure() && env.BUILD_REQUIRED == 'true' }}  
       uses: actions/upload-artifact@v7
       with:
         name: error-logs-${{ github.run_id }}
@@ -148,21 +148,22 @@ jobs:
     
     
     - name: Preparing for cache latex tmp files
-      if: always()
+      if: ${{ always() && env.BUILD_REQUIRED == 'true' }}   
       run: |
         find . -type f \( -name  "*.aux" -o -name "*.fdb_latexmk" -o -name "*.xdv" -o -name "*.nav" -o -name "*.out" -o -name "*.toc" -o -name "*.pdf" \) ! -name '*.image.pdf' -print0 | tar -czvf cache.tar.gz --null -T -
 
     - name: Preparing for cache image *.dat files
+      if: ${{ env.BUILD_REQUIRED == 'true' }}   
       run: |
         find . -type f  -name '*.dat' -print0 | tar -czf datfiles.tar.gz --null -T -
 
     - name: Save LaTeX temp archive to cache
-      if: always()
+      if: ${{ always() && env.BUILD_REQUIRED == 'true' }}   
       uses: actions/cache/save@v5
       with: 
         path: cache.tar.gz
         key: ${{ runner.os }}-latex-temp-${{ github.run_id }}
 
     - name: Print rezult tree
-      if: always()
+      if: ${{ always() }}   
       run: tree
