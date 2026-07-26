@@ -100,7 +100,7 @@ jobs:
 
     - name: Preparing for cache image *.dat files
       run: |
-        find . -type f  -name '*.image.pdf' -print0 | tar -czf datfiles.tar.gz --null -T -
+        find . -type f  -name '*.dat' -print0 | tar -czf datfiles.tar.gz --null -T -
 
     - name: Save LaTeX temp archive to cache
       if: always()
