@@ -2,7 +2,7 @@
 set -e
 set -o pipefail
 
-export NPROC=$(nproc || echo 4)  
+export NPROC=$(( ( $(nproc || echo 4) ) * 2 ))
 #export NPROC=1
 
 

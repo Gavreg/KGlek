@@ -2,18 +2,18 @@ name: Build
 on:
   push:
     branches:
-      - 'main'
+      - 'testTexCache'
   pull_request:
     branches:
-      - 'main'
+      - 'testTexCache'
 permissions:
   contents: write
 jobs:
   build-ubuntu:
     runs-on: ubuntu-latest
     steps:
-    - name: Installing workflow dependencies
-      run:  sudo apt update && sudo apt install -y parallel tree
+    # - name: Installing workflow dependencies
+    #   run:  sudo apt update && sudo apt install -y parallel tree
 
     - name: Checkout repository
       uses: actions/checkout@v7
@@ -21,94 +21,113 @@ jobs:
         fetch-depth: 0
         persist-credentials: true
 
-    - name: Building TexLive image from dockerfile
-      run: sudo docker build -t teximage .
-
-    - name: Restore LaTeX temp archive from cache
-      id: latex-cache
+    - name: Caclulate tex files hash
+      run: |
+        hash=$(echo ${{ hashFiles('**/*.tex') }})
+        echo "TEX_HASH=$hash" >> $GITHUB_ENV 
+    
+    - name: Restore *.texfiles hash from cache
       uses: actions/cache/restore@v5
       with:
-        path: cache.tar.gz
-        key: ${{ runner.os }}-latex-temp-${{ github.run_id }}
-        restore-keys: |
-          ${{ runner.os }}-latex-temp-
+        path: texfiles.cache
+        key: ${{ runner.os }}-latex-cache-${{ env.TEX_HASH }}
+    - name: Check if compilation is required 
+      run: |
+        if test -f texfiles.cache && test "${{ env.TEX_HASH }}" = "&(cat texfiles.cache)""; then
+          echo "Не собираем!"
+        else
+          echo "Собираем!"
+        fi
 
-    - name: Unpack LaTeX temp archive
-      run: test -f cache.tar.gz && tar -xzvf cache.tar.gz  || echo "No cache archive"
+    # - name: Building TexLive image from dockerfile
+    #   run: sudo docker build -t teximage .
 
-    - name: Resore images *.dat files from cache
-      uses: actions/cache@v6
-      with:
-        path: datfiles.tar.gz
-        key: ${{ runner.os }}-datfiles-${{ hashFiles('**/*.cpp', '**/*.cpp') }}
+    # - name: Restore LaTeX temp archive from cache
+    #   id: latex-cache
+    #   uses: actions/cache/restore@v5
+    #   with:
+    #     path: cache.tar.gz
+    #     key: ${{ runner.os }}-latex-temp-${{ github.run_id }}
+    #     restore-keys: |
+    #       ${{ runner.os }}-latex-temp-
+
+    # - name: Unpack LaTeX temp archive
+    #   run: test -f cache.tar.gz && tar -xzvf cache.tar.gz  || echo "No cache archive"
+
+    # - name: Resore images *.dat files from cache
+    #   uses: actions/cache@v6
+    #   with:
+    #     path: datfiles.tar.gz
+    #     key: ${{ runner.os }}-datfiles-${{ hashFiles('**/*.cpp', '**/*.cpp') }}
     
-    - name: Unpack dat files
-      run: test -f datfiles.tar.gz && tar -xzf datfiles.tar.gz || echo "No cache archive with dat files"
+    # - name: Unpack dat files
+    #   run: test -f datfiles.tar.gz && tar -xzf datfiles.tar.gz || echo "No cache archive with dat files"
 
-    - name: Compiling pdf 
-      run: |
-        if test -f datfiles.tar.gz; then  
-          sudo bash build.sh 
-        else
-          sudo bash build.sh cpp
-        fi
-    - name: Collect logs on failure
-      if: failure() 
-      run: |
-        mkdir -p /tmp/error_logs
-        find . -type f -name "*.log" -exec cp --parents {} /tmp/error_logs/ \;      
-        echo "Logs saved to: /tmp/error_logs/"
+    # - name: Compiling pdf 
+    #   run: |
+    #     if test -f datfiles.tar.gz; then  
+    #       sudo bash build.sh 
+    #     else
+    #       sudo bash build.sh cpp
+    #     fi
+    # - name: Collect logs on failure
+    #   if: failure() 
+    #   run: |
+    #     mkdir -p /tmp/error_logs
+    #     find . -type f -name "*.log" -exec cp --parents {} /tmp/error_logs/ \;      
+    #     echo "Logs saved to: /tmp/error_logs/"
 
-    - name: Upload error logs as artifacts
-      if: failure()  
-      uses: actions/upload-artifact@v7
-      with:
-        name: error-logs-${{ github.run_id }}
-        path: /tmp/error_logs/
-        retention-days: 7  
+    # - name: Upload error logs as artifacts
+    #   if: failure()  
+    #   uses: actions/upload-artifact@v7
+    #   with:
+    #     name: error-logs-${{ github.run_id }}
+    #     path: /tmp/error_logs/
+    #     retention-days: 7  
         
-    - name: Push PDF artifacts to orphan branch
-      env:
-        GIT_AUTHOR_NAME: github-actions[bot]
-        GIT_AUTHOR_EMAIL: github-actions[bot]@users.noreply.github.com
-        GIT_COMMITTER_NAME: github-actions[bot]
-        GIT_COMMITTER_EMAIL: github-actions[bot]@users.noreply.github.com
-      run: |
-        if git ls-remote --exit-code --heads "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git" pdfs >/dev/null 2>&1; then
-          git clone --branch pdfs --single-branch "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git" /tmp/pdf-output
-        else
-          git init /tmp/pdf-output
-          cd /tmp/pdf-output
-          git remote add origin "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git"
-          git checkout --orphan pdfs
-        fi
-        cd /tmp/pdf-output
-        git config user.name "${GIT_AUTHOR_NAME}"
-        git config user.email "${GIT_AUTHOR_EMAIL}"
-        find "${{ github.workspace }}" -maxdepth 1 -type f -name '*.pdf'  -exec cp -f {} . \;
-        cp -f "${{ github.workspace }}"/README_pdf.md .
-        mv README_pdf.md README.md
-        git add *.pdf
-        git add README.md
-        git commit -m "Update PDF from ${{ github.sha }}" || true
-        git push origin HEAD:pdfs || true
+    # - name: Push PDF artifacts to orphan branch
+    #   env:
+    #     GIT_AUTHOR_NAME: github-actions[bot]
+    #     GIT_AUTHOR_EMAIL: github-actions[bot]@users.noreply.github.com
+    #     GIT_COMMITTER_NAME: github-actions[bot]
+    #     GIT_COMMITTER_EMAIL: github-actions[bot]@users.noreply.github.com
+    #   run: |
+    #     if git ls-remote --exit-code --heads "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git" pdfs >/dev/null 2>&1; then
+    #       git clone --branch pdfs --single-branch "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git" /tmp/pdf-output
+    #     else
+    #       git init /tmp/pdf-output
+    #       cd /tmp/pdf-output
+    #       git remote add origin "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git"
+    #       git checkout --orphan pdfs
+    #     fi
+    #     cd /tmp/pdf-output
+    #     git config user.name "${GIT_AUTHOR_NAME}"
+    #     git config user.email "${GIT_AUTHOR_EMAIL}"
+    #     find "${{ github.workspace }}" -maxdepth 1 -type f -name '*.pdf'  -exec cp -f {} . \;
+    #     cp -f "${{ github.workspace }}"/README_pdf.md .
+    #     mv README_pdf.md README.md
+    #     git add *.pdf
+    #     git add README.md
+    #     git commit -m "Update PDF from ${{ github.sha }}" || true
+    #     git push origin HEAD:pdfs || true
+    
+    
+    # - name: Preparing for cache latex tmp files
+    #   if: always()
+    #   run: |
+    #     find . -type f \( -name  "*.aux" -o -name "*.fdb_latexmk" -o -name "*.xdv" -o -name "*.nav" -o -name "*.out" -o -name "*.toc" -o -name "*.pdf" \) ! -name '*.image.pdf' -print0 | tar -czvf cache.tar.gz --null -T -
 
-    - name: Preparing for cache latex tmp files
-      if: always()
-      run: |
-        find . -type f \( -name  "*.aux" -o -name "*.fdb_latexmk" -o -name "*.xdv" -o -name "*.nav" -o -name "*.out" -o -name "*.toc" -o -name "*.pdf" \) ! -name '*.image.pdf' -print0 | tar -czvf cache.tar.gz --null -T -
+    # - name: Preparing for cache image *.dat files
+    #   run: |
+    #     find . -type f  -name '*.dat' -print0 | tar -czf datfiles.tar.gz --null -T -
 
-    - name: Preparing for cache image *.dat files
-      run: |
-        find . -type f  -name '*.dat' -print0 | tar -czf datfiles.tar.gz --null -T -
+    # - name: Save LaTeX temp archive to cache
+    #   if: always()
+    #   uses: actions/cache/save@v5
+    #   with: 
+    #     path: cache.tar.gz
+    #     key: ${{ runner.os }}-latex-temp-${{ github.run_id }}
 
-    - name: Save LaTeX temp archive to cache
-      if: always()
-      uses: actions/cache/save@v5
-      with: 
-        path: cache.tar.gz
-        key: ${{ runner.os }}-latex-temp-${{ github.run_id }}
-
-    - name: Print rezult tree
-      if: always()
-      run: tree
+    # - name: Print rezult tree
+    #   if: always()
+    #   run: tree
