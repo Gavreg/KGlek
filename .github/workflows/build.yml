@@ -35,7 +35,7 @@ jobs:
     - name: Check if compilation is required 
       run: |
         cat texfiles.cache
-        if test -f texfiles.cache && test "${{ env.TEX_HASH }}" == "&(cat texfiles.cache)"; then
+        if test -f texfiles.cache && test "${{ env.TEX_HASH }}" == "$(cat texfiles.cache)"; then
           echo "Не собираем!"
         else
           echo "Собираем!"
