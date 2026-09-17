@@ -127,7 +127,7 @@ jobs:
         GIT_COMMITTER_NAME: github-actions[bot]
         GIT_COMMITTER_EMAIL: github-actions[bot]@users.noreply.github.com
       run: |
-        if git ls-remote --exit-code --heads "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git" pdfs >/dev/null 2>&1; then
+        if git ls-remote --exit-code --heads "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git" pdfs/${{github.ref_name}} >/dev/null 2>&1; then
           git clone --branch pdfs/${{github.ref_name}} --single-branch "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git" /tmp/pdf-output
         else
           git init /tmp/pdf-output
@@ -144,10 +144,10 @@ jobs:
         git add *.pdf
         git add README.md
         git commit -m "Update PDF from ${{ github.sha }}" || true
-        git push origin HEAD:pdfs/${{github.ref_name}} || true
+        git push origin HEAD:pdfs/${{github.ref_name}}  || true
     
     
-    - name: Preparing for cache latex tmp files
+    - name: Preparing for cache latex tmp files 
       if: ${{ always() && env.BUILD_REQUIRED == 'true' }}   
       run: |
         find . -type f \( -name  "*.aux" -o -name "*.fdb_latexmk" -o -name "*.xdv" -o -name "*.nav" -o -name "*.out" -o -name "*.toc" -o -name "*.pdf" \) ! -name '*.image.pdf' -print0 | tar -czvf cache.tar.gz --null -T -
