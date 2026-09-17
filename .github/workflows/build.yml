@@ -59,7 +59,7 @@ jobs:
 
 
     - name: Restore LaTeX temp archive from cache
-      if: ${{ env.BUILD_REQUIRED == 'true' }}   
+      #if: ${{ env.BUILD_REQUIRED == 'true' }}   
       id: latex-cache
       uses: actions/cache/restore@v5
       with:
@@ -71,7 +71,7 @@ jobs:
 
 
     - name: Unpack LaTeX temp archive
-      if: ${{ env.BUILD_REQUIRED == 'true' }}  
+      #if: ${{ env.BUILD_REQUIRED == 'true' }}  
       run: test -f cache.tar.gz && tar -xzvf cache.tar.gz  || echo "No cache archive"
 
 
