@@ -28,6 +28,7 @@
 %	
 %\section{Имитация рельефа}
 
+
 \section{}
 \begin{frame}\frametitle {Displacement mapping}
 	
@@ -73,23 +74,30 @@
 
 \begin{frame}\frametitle {Где "живет" нормаль?}
 	
-	\TC{0.5}
+	\TC{0.45}
 	{
 		\IG{1493389010153817205.jpg}
 	}{
-		Карта высот --- $f(x,y,z)=\mathrm{const}$.
+		Возьмём произвольную поверхность $f(x,y,z)=\text{const}$.
 		
-		$f(x,y,z) = h(x,y) -z=0$
+		\medskip\pause
 		
-		$\vv n_f = \nabla f = \left( \dfrac{\partial f}{\partial x},\dfrac{\partial f}{\partial y},\dfrac{\partial f}{\partial z} \right)$
+		$f(x,y,z)=\text{const} \Leftrightarrow  z = h(x,y)\Leftrightarrow$\\
+		$\Leftrightarrow h(x,y)-z=0 $.
 		
+		\medskip\pause
 		
+		$\vv n_f = \nabla f = \left( \dfrac{\partial f}{\partial x},\dfrac{\partial f}{\partial y},\dfrac{\partial f}{\partial z} \right)$.
 		
-		~
+		\medskip\pause
 		
-		$\vv n(x,y) = \left( \dfrac{\partial f}{\partial x},\dfrac{\partial f}{\partial y},-1 \right)$
+		$\vv n(x,y) = \left( \dfrac{\partial h}{\partial x},\dfrac{\partial h}{\partial y},-1 \right)$.
 	}
-	$\vv n(x,y) = \left(\dfrac{h(x+1,y)-h(x-1,y) }{2},\dfrac{h(x,y+1)-h(x,y-1) }{2}, -1  \right) $
+	
+	\medskip\pause
+	
+	$\vv n(x,y) = \left(\dfrac{h(x+1,y)-h(x-1,y) }{2},\dfrac{h(x,y+1)-h(x,y-1) }{2}, -1  \right) $.
+	
 \end{frame}
 	
 \begin{frame}\frametitle {Касательное пространство (tangent space)}
